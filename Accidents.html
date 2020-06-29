@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html style='width:100%; height:100%;'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<style>
+
+</style>
+
+
+
+<html>
+
+
+    <head>
+        <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script>  
+      
+        <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+
+    </head>
+
+    <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+
+        <div id="toolbar_app">
+            <v-app>
+                <v-app-bar
+                color="blue lighten-1"
+                dense
+                dark
+                id="myTitle"
+                >
+
+                
+                    <v-select
+                    v-model ="RANK"
+                    :items="RANK_items"
+                    label="חומרת תאונה"
+                    multiple
+                    flat
+                    hide-no-data
+                    hide-details
+                    append-icon=""
+                    @change="rankChanged()"
+                    ></v-select>
+
+
+                    <v-toolbar-title v-model = "titleEl" class="white--text" style="text-align: center; width:50%">{{title}}</v-toolbar-title>
+
+                    <v-select
+                    v-model = "YEAR"
+                    :items="YEAR_items"
+                    label="שנה"
+                    multiple
+                    flat
+                    hide-no-data
+                    hide-details
+                    append-icon=""
+                    @change="yearChanged()"
+                    ></v-select>
+
+
+                </v-app-bar>
+
+
+                
+
+            	<form name="form" style='height: 100%;' scrolling='no'> 
+                    <div id="map_div" style="width: 100%; height: 100%; float:left">
+                            
+                            
+                    </div> 			
+                </form>
+
+
+
+
+            </v-app>
+        </div>
+
+
+
+
+    
+    
+    </body>
+
+
+    <script>
+
+        var json_accidents = "Accidents.json"
+        var accident_features = [];
+        var wkts_all = [];
+        var names_all = [];
+        var bubbleHTMLParameters_all = [];
+        var heatmap_features = [];
+        var symbols_all = [];
+
+
+        
+        function isInArray(value, array) {
+            return array.indexOf(value) > -1;
+        }
+
+
+
+       function addLayers(data)
+        {
+            var xys = [];
+            for (i = 0; i < data.length; i++)
+            {
+                            //console.log(i);
+
+                            wkts_all.push("POINT(("+data[i].X+" "+data[i].Y+"))");
+                            names_all.push(data[i].SUB_TYPE);
+
+
+                            bubbleHTMLParameters_all.push(["סוג תאונה: " + data[i].SUB_TYPE + "<br />" + "חומרת תאונה: " + data[i].RANK, "מועד התאונה: " + data[i].MONTH + " " + data[i].YEAR ]);
+
+                            // SET HEATMAP!!!
+                            val_farsh = 1000;
+                            if (data[i].RANK  && data[i].TYPE== "תאונת דרכים")
+                            {
+                                xys.push(data[i].X+" "+data[i].Y);
+                                var count = xys.filter(function(f) {
+								    return f == data[i].X+" "+data[i].Y;			
+	                            }).length;
+
+                                if (data[i].RANK == "קלה")
+                                {
+                                    val1 = 300 * count;
+                                    val2 = 500 * count;
+                                    symbols_all.push({  
+                                        //url:'https://govmap.gov.il/sites/O1.png',  
+                                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                        width:15,  
+                                        height:15  
+                                    })
+                                }
+                                if (data[i].RANK == "קשה")
+                                {
+                                    val1 = 500 * count;
+                                    val2 =1000 * count;
+                                    symbols_all.push({  
+                                        //url:'https://govmap.gov.il/sites/O1.png',  
+                                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                        width:20,  
+                                        height:20  
+                                    })
+                                }
+                                if (data[i].RANK == "קטלנית")
+                                {
+                                    val1 = 1000 * count;
+                                    val2 = 5000 * count;
+                                    symbols_all.push({  
+                                        //url:'https://govmap.gov.il/sites/O1.png',  
+                                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                        width:30,  
+                                        height:30  
+                                    })
+                                }
+                                    //val0 = 500;
+                            }
+                            else{
+                                val1 = 5;
+                                val2 = 500;
+                                symbols_all.push({  
+                                        //url:'https://govmap.gov.il/sites/O1.png',  
+                                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                        width:10,  
+                                        height:10  
+                                    })
+                            }
+                            val2 = 500;
+                            heatmap_features.push({ point: { x: data[i].X, y:data[i].Y }, attributes: { val1, val2 } });
+            }
+
+
+            
+            govmap.setHeatLayer({  
+                    points: heatmap_features 
+                    ,options: { valueField: 'val1' }  
+                });  
+
+
+            //Add Points
+            data_all = {  
+                    wkts: wkts_all,  
+                    names: names_all,  
+                    geometryType: govmap.drawType.Point,  
+                    defaultSymbol:  
+                    {  
+                        //url:'https://govmap.gov.il/sites/O1.png',  
+                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                        width:15,  
+                        height:15  
+                    },   
+                    symbols: symbols_all,  
+                    clearExisting: true,  
+                    data: {  
+                            tooltips: [],  
+                            headers: names_all,
+                            bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                            bubbleHTMLParameters:bubbleHTMLParameters_all
+                        }  
+            }; 
+            AddUserPoints(data_all);
+        }
+
+        function getJsonData(json_accidents){
+            $.ajax({
+                dataType: 'json',
+                beforeSend : function() {;
+                },
+                success: function(json_data) {
+                    {
+                        var xys = [];
+                        for (i = 0; i < json_data.length; i++)
+                        {
+                            //console.log(i);
+                            accident_features.push(json_data[i]);
+
+                            wkts_all.push("POINT(("+json_data[i].X+" "+json_data[i].Y+"))");
+                            names_all.push(json_data[i].SUB_TYPE);
+
+
+                            bubbleHTMLParameters_all.push(["סוג תאונה: " + json_data[i].SUB_TYPE + "<br />" + "חומרת תאונה: " + json_data[i].RANK, "מועד התאונה: " + json_data[i].MONTH + " " + json_data[i].YEAR ]);
+
+                            // SET HEATMAP!!!
+                            val_farsh = 1000;
+                            if (accident_features[i].RANK  && accident_features[i].TYPE== "תאונת דרכים")
+                            {
+                                xys.push(json_data[i].X+" "+json_data[i].Y);
+                                var count = xys.filter(function(f) {
+								    return f == json_data[i].X+" "+json_data[i].Y;			
+	                            }).length;
+
+                                if (accident_features[i].RANK == "קלה")
+                                {
+                                    val1 = 300 * count;
+                                    val2 = 500 * count;
+                                    symbols_all.push({  
+                                        //url:'https://govmap.gov.il/sites/O1.png',  
+                                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                        width:15,  
+                                        height:15  
+                                    })
+                                }
+                                if (accident_features[i].RANK == "קשה")
+                                {
+                                    val1 = 500 * count;
+                                    val2 =1000 * count;
+                                    symbols_all.push({  
+                                        //url:'https://govmap.gov.il/sites/O1.png',  
+                                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                        width:20,  
+                                        height:20  
+                                    })
+                                }
+                                if (accident_features[i].RANK == "קטלנית")
+                                {
+                                    val1 = 1000 * count;
+                                    val2 = 5000 * count;
+                                    symbols_all.push({  
+                                        //url:'https://govmap.gov.il/sites/O1.png',  
+                                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                        width:30,  
+                                        height:30  
+                                    })
+                                }
+                                    //val0 = 500;
+                            }
+                            else{
+                                val1 = 5;
+                                val2 = 500;
+                                symbols_all.push({  
+                                        //url:'https://govmap.gov.il/sites/O1.png',  
+                                        url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                        width:10,  
+                                        height:10  
+                                    })
+                            }
+                            val2 = 500;
+                            heatmap_features.push({ point: { x: json_data[i].X, y:json_data[i].Y }, attributes: { val1, val2 } });
+                        }	
+                    }
+
+                    govmap.setHeatLayer({  
+						points: heatmap_features 
+						,options: { valueField: 'val1' }  
+					});  
+
+
+                    //Add Points
+                    data_all = {  
+                            wkts: wkts_all,  
+                            names: names_all,  
+                            geometryType: govmap.drawType.Point,  
+                            defaultSymbol:  
+                            {  
+                                //url:'https://govmap.gov.il/sites/O1.png',  
+                                url:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png',
+                                width:15,  
+                                height:15  
+                            },   
+                            symbols: symbols_all,  
+                            clearExisting: true,  
+                            data: {  
+                                    tooltips: [],  
+                                    headers: names_all,
+                                    bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                                    bubbleHTMLParameters:bubbleHTMLParameters_all
+                                }  
+                    }; 
+                    AddUserPoints(data_all);
+
+
+                    console.log("Loaded!")
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error occurred: " + errorThrown);
+
+                },
+                url: json_accidents
+            });
+        }
+
+        function AddUserPoints(data_all)
+        {
+            govmap.displayGeometries(data_all).then(function (response)  
+            {  
+                //console.log(response.data);
+            });
+        }
+
+
+        function ClearUserPoints(){
+
+            var bubbleContent = "";
+                var data = {  
+                wkts: [],  
+                names: [],  
+                geometryType: govmap.drawType.Point,  
+                defaultSymbol:  
+                {  
+                    url:'https://govmap.gov.il/sites/O1.png',  
+                    width:20,  
+                    height:20  
+                },   
+                symbols: [],  
+                clearExisting: true,  
+                data: {  
+                        tooltips: [],  
+                        headers: [],
+                        bubbleHTML: bubbleContent,
+                        bubbleHTMLParameters:[]
+                    }  
+                };  
+                        
+                govmap.displayGeometries(data).then(function (response)  
+                {  
+                //console.log(response.data);
+                }); 
+
+            }
+
+        $(document).ready(function(){
+            //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            $(function () {
+                    govmap.createMap('map_div', {
+                        token: my_token,
+                        visibleLayers: ["abc"],
+                        layers:['NEIGHBORHOODS_AREA'],  
+                        showXY: true,
+                        identifyOnClick: true,
+                        layersMode: 4,
+                        level: 5,
+                        center: {x: 159000, y: 619000}
+
+                    });
+                        
+            });
+
+            getJsonData(json_accidents);
+        });
+
+
+        var appVue = new Vue({
+            el:"#toolbar_app",
+            vuetify: new Vuetify(),
+                data () {
+                    return {
+
+                        RANK_items: ["קלה", "קשה", "קטלנית"],
+                        RANK: [],
+                        YEAR_items: [2016, 2017, 2018, 2019, 2020],
+                        YEAR: [],
+                        title: this.getTitle(),
+                        titleEl: true
+
+
+
+                    }
+                },
+                methods: {
+                    yearChanged()
+                    {
+                        console.log(this.YEAR);
+                        govmap.removeHeatLayer();
+
+                        wkts_all = [];
+                        names_all = [];
+                        bubbleHTMLParameters_all = [];
+                        heatmap_features = [];
+
+                        var accidents = accident_features.filter(function(f) {
+							return isInArray(f.YEAR, appVue.YEAR);		
+	                    })
+
+
+                        addLayers(accidents);
+                        
+
+                    },
+                    rankChanged()
+                    {
+                        console.log(this.RANK);
+                        govmap.removeHeatLayer();
+
+                        wkts_all = [];
+                        names_all = [];
+                        bubbleHTMLParameters_all = [];
+                        heatmap_features= [];
+
+                        ClearUserPoints();
+                        var accidents = accident_features.filter(function(f) {
+                            return isInArray(f.RANK, appVue.RANK);	
+	                    })
+
+
+                        addLayers(accidents);
+                    },
+
+                    getTitle()
+                    {
+                        var text = "";
+                        var isMobile = {
+                            Android: function() {
+                                return navigator.userAgent.match(/Android/i);
+                            },
+
+                            BlackBerry: function() {
+                                return navigator.userAgent.match(/BlackBerry/i);
+                            },
+                            iOS: function() {
+                                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                            },
+                            Opera: function() {
+                                return navigator.userAgent.match(/Opera Mini/i);
+                            },
+                            Windows: function() {
+                                return navigator.userAgent.match(/IEMobile/i);
+                            },
+                            any: function() {
+                                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+                            }
+                        };
+                        if( isMobile.any() ) {
+
+                            text = "";
+                            this.titleEl = false;
+                        } 
+                        else {
+                            text =  "נתוני תאונות באשקלון";
+                        }
+
+                        return text;
+
+                    }
+
+                }
+        });
+        
+    </script>
+
+
+
+</html>
