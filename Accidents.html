@@ -44,53 +44,119 @@
 
     </head>
 
-    <body style='width:100%; height:95%;' scrolling='no'>
+    <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
 
-        <div id="toolbar_app">
+        <div id="toolbar_app" right >
             <v-app>
-                <v-app-bar
-                color="blue lighten-1"
+                <v-app-bar dir="rtl"
+                color="light-blue lighten-4"
+
                 dense
-                dark
                 id="myTitle"
                 >   
+
+
+         
+            
                 
                 
+
+
+                                            
+            <div class="text-right" style="text-align:right; width: 35%">
+                <v-menu
+
+                
+                    :close-on-content-click="false"
                     
+                    offset-x
+                >
+                    <template v-slot:activator="{ on }">
+                    <v-btn text
+                    class="ma-2" 
+                        color="white--text"
+
+                        v-on="on"
+                    >
+                    <v-icon right right>menu</v-icon>
+                        
+                    </v-btn>
+                    </template>
+            
+                    <v-card id="myMenu">
+
+            
+                    <v-list right>
 
 
-                    <v-select
-                    v-model ="RANK"
-                    :items="RANK_items"
-                    label="חומרת התאונה"
-                    multiple
-                    flat
-                    hide-no-data
-                    hide-details
-                    append-icon=""
-                    @change="Changed()"
-                    ></v-select>
+
+                            <v-list-item>
+                                <v-select
+                                v-model ="RANK"
+                                :items="RANK_items"
+                                label="חומרת התאונה"
+                                multiple
+                                flat
+                                hide-no-data
+                                hide-details
+                                append-icon=""
+                                ></v-select>            
+                            </v-list-item>
+                
+                            <v-list-item>
+                                <v-select
+                                v-model = "YEAR"
+                                :items="YEAR_items"
+                                label="שנה"
+                                multiple
+                                flat
+                                hide-no-data
+                                hide-details
+                                append-icon=""
+                                ></v-select>
+      
+                            </v-list-item>
+
+                            <v-list-item>
+                                <div class="my-2">
+                                    <v-btn text color="success" id="changed_button"  class="d-flex" @click="Changed()" >בצע בחירה </v-btn>
+                                </div>        
+                                <div class="my-2">
+                                    <v-btn text color="error" id="cancel_button"  class="d-flex" @click="Cancel()" >ביטול בחירה </v-btn>
+                                </div>
+                            </v-list-item>
 
 
-                    <v-toolbar-title v-model = "titleEl" class="white--text" style="text-align: center; width:50%">{{title}}</v-toolbar-title>
 
-                    <v-select
-                    v-model = "YEAR"
-                    :items="YEAR_items"
-                    label="שנה"
-                    multiple
-                    flat
-                    hide-no-data
-                    hide-details
-                    append-icon=""
-                    @change="Changed()"
-                    ></v-select>
+
+
+                    </v-list>
+
+                    </v-card>
+                </v-menu>
+                </div>
+
+
+                <v-divider vertical></v-divider>
+
+                <v-toolbar-title v-model = "titleEl" style="text-align: center; width:30%">{{title}}</v-toolbar-title>
+                
+                <v-divider vertical></v-divider>
+                
+                <div style="width: 35%;">
+
+                    <v-checkbox style="margin-top: 25px;" v-model="HeatMapSwitch" color="red" :label="heatText" class="font-weight-bold" elevation=24  @change="Changed()"> </v-checkbox>
+
+                </div>
+
+
+
+           
+
+   
                 </v-app-bar>
 
-                <v-switch dir="rtl" v-model="HeatMapSwitch" color="red" :label="heatText" class="heat_button_watermark font-weight-bold"  @change="Changed()">
-
-
-                </v-switch>
+                
 
 
                 <form name="form" style='height: 100%;' scrolling='no'> 
@@ -112,7 +178,7 @@
 
     <script>
 
-        var json_accidents = "Accidents.json"
+        var json_accidents = "https://yovavsanders.github.io/govmap/Accidents.json"
         var accident_features = [];
         var wkts_all = [];
         var names_all = [];
@@ -312,8 +378,8 @@
 
         $(document).ready(function(){
             //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
-            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
             $(function () {
                     govmap.createMap('map_div', {
                         token: my_token,
@@ -353,6 +419,26 @@
                     }
                 },
                 methods: {
+                    Cancel()
+                    {
+
+                        if (this.HeatMapSwitch == false)
+                        {
+                            this.heatText = "הצגת מפת חום";
+                        }
+                        else
+                        {
+                            govmap.removeHeatLayer();
+                            this.heatText = "כיבוי מפת חום";
+                        }
+                        
+                        this.RANK = [];
+                        this.YEAR = [];
+                        this.HeatMapSwitch = false
+
+                        ClearUserPoints();
+                    },
+
                     Changed()
                     {
                         console.log(this.RANK);
