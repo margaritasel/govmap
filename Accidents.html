@@ -9,14 +9,7 @@
 
 <style>
 
-.heat_button_watermark
-{
-	position: fixed;
-	left: 10px!important;
-    top: 230px!important;
-	display: inline-block;
-    z-index:99;
-}
+
 
 </style>
 
@@ -45,52 +38,70 @@
     </head>
 
     <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
-
         <div id="toolbar_app" right >
             <v-app>
-                <v-app-bar dir="rtl"
-                color="light-blue lighten-4"
 
-                dense
-                id="myTitle"
-                >   
+                <v-container class="grey lighten-5">
 
-
-         
-            
-                
-                
-
-
-                                            
-            <div class="text-right" style="text-align:right; width: 35%">
-                <v-menu
-
-                
-                    :close-on-content-click="false"
-                    
-                    offset-x
-                >
-                    <template v-slot:activator="{ on }">
-                    <v-btn text
-                    class="ma-2" 
-                        color="white--text"
-
-                        v-on="on"
+                    <v-card
+                    outlined
+                    tile
                     >
-                    <v-icon right right>menu</v-icon>
-                        
-                    </v-btn>
-                    </template>
-            
-                    <v-card id="myMenu">
+                        <v-row no-gutters>
 
-            
-                    <v-list right>
+                            <v-col
+                            cols="12"
+                            sm="0"
+                            md="0"
+                            lg="2"
+                            xl="2"               
+                            >
+
+                            <v-img max-height="45"  style="text-align: center; margin-top: 3px;" src="https://upload.wikimedia.org/wikipedia/he/e/e8/%D7%94%D7%A8%D7%A9%D7%95%D7%AA_%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA_%D7%9C%D7%91%D7%98%D7%99%D7%97%D7%95%D7%AA_%D7%91%D7%93%D7%A8%D7%9B%D7%99%D7%9D.png" aspect-ratio="1.7" contain></v-img>
+                            </v-col>
+
+                            <v-col
+                                cols="12"
+                                sm="5"
+                                md="5"
+                                lg="8"
+                                xl="8"
+                            >
+                                <v-toolbar-title style="text-align: center; margin-top: 20px;">{{title}}</v-toolbar-title>
+                            </v-col>
+
+                            <v-col
+                                cols="12"
+                                sm="12"
+                                md="12"
+                                lg="2"
+                                xl="2"
+                                >
+                                <v-checkbox style="margin-top: 20px;"  v-model="HeatMapSwitch" color="red" :label="heatText" class="font-weight-bold" elevation=24  @change="Changed()"> </v-checkbox>
+
+                            </v-col>
 
 
+                        </v-row>
+                    </v-card>
 
-                            <v-list-item>
+
+    
+
+                    <v-row no-gutters id="menu_row">
+
+                        <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                        lg="5"
+                        xl="5"
+                        >
+                            <v-card
+                                class="pa-2"
+                                outlined
+                                tile
+                            >
                                 <v-select
                                 v-model ="RANK"
                                 :items="RANK_items"
@@ -100,10 +111,22 @@
                                 hide-no-data
                                 hide-details
                                 append-icon=""
-                                ></v-select>            
-                            </v-list-item>
-                
-                            <v-list-item>
+                                ></v-select>  
+                            </v-card>
+                        </v-col>
+
+                        <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                        lg="5"
+                        xl="5"
+                        >
+                            <v-card
+                            class="pa-2"
+                            outlined
+                            tile
+                            >
                                 <v-select
                                 v-model = "YEAR"
                                 :items="YEAR_items"
@@ -114,65 +137,44 @@
                                 hide-details
                                 append-icon=""
                                 ></v-select>
-      
-                            </v-list-item>
+                            </v-card>
+                        </v-col>
 
-                            <v-list-item>
-                                <div class="my-2">
-                                    <v-btn text color="success" id="changed_button"  class="d-flex" @click="Changed()" >בצע בחירה </v-btn>
-                                </div>        
-                                <div class="my-2">
-                                    <v-btn text color="error" id="cancel_button"  class="d-flex" @click="Cancel()" >ביטול בחירה </v-btn>
-                                </div>
-                            </v-list-item>
+                        <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                        lg="2"
+                        xl="2"
+                        >
+                            <v-card
+                                class="pa-2" style="height: 66px;"
+                                outlined
+                                tile
+                                model= "select_btn"
+                            >
+                                <v-btn block color="success" dark id="changed_button" style="height: 50px;"  @click="Changed()" >בצע בחירה </v-btn>
+                            </v-card>
+                        </v-col>
+                    </v-row>
 
+                    <v-card
+                    outlined
+                    tile
+                    class="mx-auto"
+                    >
+                        <div id="map_div" style="padding: 1em;
+                        background: darkkhaki;
+                        border: 0;
+                        color: white;
+                        grid-column: span 2;">
 
-
-
-
-                    </v-list>
-
+                        </div>
                     </v-card>
-                </v-menu>
-                </div>
 
-
-                <v-divider vertical></v-divider>
-
-                <v-toolbar-title v-model = "titleEl" style="text-align: center; width:30%">{{title}}</v-toolbar-title>
-                
-                <v-divider vertical></v-divider>
-                
-                <div style="width: 35%;">
-
-                    <v-checkbox style="margin-top: 25px;" v-model="HeatMapSwitch" color="red" :label="heatText" class="font-weight-bold" elevation=24  @change="Changed()"> </v-checkbox>
-
-                </div>
-
-
-
-           
-
-   
-                </v-app-bar>
-
-                
-
-
-                <form name="form" style='height: 100%;' scrolling='no'> 
-                    <div id="map_div" style="width: 100%; height: 100%; float:left">
-                            
-                            
-                    </div> 			
-                </form>
+                  </v-container>
             </v-app>
         </div>
-
-
-
-
-    
-    
     </body>
 
 
@@ -190,6 +192,42 @@
         
         function isInArray(value, array) {
             return array.indexOf(value) > -1;
+        }
+
+
+        function setMapHeight()
+        {
+
+
+            var h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.3;
+            var isMobile = {
+                            Android: function() {
+                                return navigator.userAgent.match(/Android/i);
+                            },
+
+                            BlackBerry: function() {
+                                return navigator.userAgent.match(/BlackBerry/i);
+                            },
+                            iOS: function() {
+                                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                            },
+                            Opera: function() {
+                                return navigator.userAgent.match(/Opera Mini/i);
+                            },
+                            Windows: function() {
+                                return navigator.userAgent.match(/IEMobile/i);
+                            },
+                            any: function() {
+                                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+                            }
+                        };
+                        if( isMobile.any() ) {
+
+                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 2
+                            this.titleEl = false;
+                        } 
+                        console.log(h);
+                        return h;
         }
 
 
@@ -377,9 +415,10 @@
         }
 
         $(document).ready(function(){
+            $(document.getElementById('map_div')).height(setMapHeight);
             //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
-            var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-            //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
             $(function () {
                     govmap.createMap('map_div', {
                         token: my_token,
@@ -409,10 +448,11 @@
                         RANK: ["קשה", "קטלנית"],
                         YEAR_items: [2016, 2017, 2018, 2019, 2020],
                         YEAR: [2019, 2020],
-                        title: this.getTitle(),
-                        titleEl: true,
+                        title: "נתוני תאונות באשקלון",
                         HeatMapSwitch: false,
-                        heatText: "הצג מפת חום"
+                        heatText: "הצג מפת חום",
+                        cancel_btn: false,
+                        select_btn: true
 
 
 
@@ -467,11 +507,12 @@
 
 
                         addLayers(accidents);
-                    },
+                    }
 
-                    getTitle()
+                },
+                getImageHeight()
                     {
-                        var text = "";
+                        var h = 50;
                         var isMobile = {
                             Android: function() {
                                 return navigator.userAgent.match(/Android/i);
@@ -495,18 +536,13 @@
                         };
                         if( isMobile.any() ) {
 
-                            text = "";
+                            h = 10
                             this.titleEl = false;
                         } 
-                        else {
-                            text =  "נתוני תאונות באשקלון";
-                        }
-
-                        return text;
+                        console.log(h);
+                        return h;
 
                     }
-
-                }
         });
         
     </script>
