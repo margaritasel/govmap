@@ -35,15 +35,12 @@
     <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
         <div id="toolbar_app" right >
             <v-app>
-
                 <v-container class="grey lighten-5">
-
                     <v-card
                     outlined
                     tile
                     >
                         <v-row no-gutters>
-
                             <v-col
                             cols="12"
                             sm="2"
@@ -73,22 +70,16 @@
                                 >
                                 <v-checkbox style="margin-top: 20px;"  v-model="HeatMapSwitch" color="red" :label="heatText" class="font-weight-bold shrink mr-2" elevation=24  @change="Changed()"> </v-checkbox>
                             </v-col>
-
-
                         </v-row>
                     </v-card>
 
-
-    
-
                     <v-row no-gutters id="menu_row">
-
                         <v-col
                         cols="12"
                         sm="12"
                         md="12"
-                        lg="5"
-                        xl="5"
+                        lg="3"
+                        xl="3"
                         >
                             <v-card
                                 class="pa-2"
@@ -99,7 +90,7 @@
                                 v-model ="RANK"
                                 :items="RANK_items"
                                 label="חומרת התאונה"
-                                multiple
+                                multiple small-chips
                                 flat
                                 hide-no-data
                                 hide-details
@@ -113,8 +104,43 @@
                         cols="12"
                         sm="12"
                         md="12"
-                        lg="5"
-                        xl="5"
+                        lg="3"
+                        xl="3"
+                        >
+                            <v-card
+                                class="pa-2"
+                                outlined
+                                tile
+                            >                        
+                                <v-select
+                                v-model="SUB_TYPE"
+                                :items="SUB_TYPE_items"
+                                label="סוג התאונה"
+                                multiple small-chips
+                                :menu-props="{ top: true, offsetY: true }"
+                              >
+                                <template v-slot:selection="{ item, index }">
+                                  <v-chip small v-if="index < 2">
+                                    <span>{{ item }}</span>
+                                  </v-chip>
+                                  <span
+                                    v-if="index === 2"
+                                    class="grey--text caption"
+                                  >(+{{ SUB_TYPE.length - 1 }} אחרים)</span>
+                                </template>
+                              </v-select>
+
+
+
+                            </v-card>
+                        </v-col>
+
+                        <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                        lg="3"
+                        xl="3"
                         >
                             <v-card
                             class="pa-2"
@@ -131,6 +157,7 @@
                                 hide-details
                                 append-icon=""
                                 :menu-props="{ top: true, offsetY: true }"
+                                small-chips
                                 ></v-select>
                             </v-card>
                         </v-col>
@@ -139,8 +166,8 @@
                         cols="12"
                         sm="12"
                         md="12"
-                        lg="2"
-                        xl="2"
+                        lg="3"
+                        xl="3"
                         >
                             <v-card
                                 class="pa-2" style="height: 66px;"
@@ -163,7 +190,6 @@
                         border: 0;
                         color: white;
                         grid-column: span 2;">
-
                         </div>
                     </v-card>
 
@@ -182,8 +208,6 @@
         var bubbleHTMLParameters_all = [];
         var heatmap_features = [];
         var symbols_all = [];
-
-
         
         function isInArray(value, array) {
             return array.indexOf(value) > -1;
@@ -192,8 +216,6 @@
 
         function setMapHeight()
         {
-
-
             var h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.3;
             var isMobile = {
                             Android: function() {
@@ -232,12 +254,9 @@
             var xys = [];
             for (i = 0; i < data.length; i++)
             {
-                //console.log(i);
 
                 wkts_all.push("POINT(("+data[i].X+" "+data[i].Y+"))");
                 names_all.push(data[i].SUB_TYPE);
-
-
                 bubbleHTMLParameters_all.push(["סוג תאונה: " + data[i].SUB_TYPE + "<br />" + "חומרת תאונה: " + data[i].RANK, "מועד התאונה: " + data[i].MONTH + " " + data[i].YEAR ]);
 
                 // SET HEATMAP!!!
@@ -412,8 +431,8 @@
         $(document).ready(function(){
             $(document.getElementById('map_div')).height(setMapHeight);
             //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
-            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
             $(function () {
                     govmap.createMap('map_div', {
                         token: my_token,
@@ -428,7 +447,6 @@
                     });
                         
             });
-
             getJsonData(json_accidents);
         });
 
@@ -441,6 +459,41 @@
 
                         RANK_items: ["קלה", "קשה", "קטלנית"],
                         RANK: ["קשה", "קטלנית"],
+                        SUB_TYPE_items: [
+                                    "החלקה",
+                                    "התהפכות",
+                                    "התנגשות אחור אל חזית",
+                                    "התנגשות אחור אל צד",
+                                    "התנגשות חזית אל חזית",
+                                    "התנגשות חזית אל צד",
+                                    "התנגשות חזית באחור",
+                                    "התנגשות עם בעל חיים",
+                                    "התנגשות עם עצם דומם",
+                                    "התנגשות עם רכב חונה",
+                                    "התנגשות עם רכב שנעצר ללא חניה",
+                                    "התנגשות צד בצד",
+                                    "ירידה מהכביש או עלייה למדרכה",
+                                    "נפילה ברכב נע",
+                                    "פגיעה בהולך רגל",
+                                    "פגיעה בנוסע בתוך כלי רכב",
+                                    "פגיעה ממטען של רכב" , "אחר"],
+                        SUB_TYPE: [ "החלקה",
+                                    "התהפכות",
+                                    "התנגשות אחור אל חזית",
+                                    "התנגשות אחור אל צד",
+                                    "התנגשות חזית אל חזית",
+                                    "התנגשות חזית אל צד",
+                                    "התנגשות חזית באחור",
+                                    "התנגשות עם בעל חיים",
+                                    "התנגשות עם עצם דומם",
+                                    "התנגשות עם רכב חונה",
+                                    "התנגשות עם רכב שנעצר ללא חניה",
+                                    "התנגשות צד בצד",
+                                    "ירידה מהכביש או עלייה למדרכה",
+                                    "נפילה ברכב נע",
+                                    "פגיעה בהולך רגל",
+                                    "פגיעה בנוסע בתוך כלי רכב",
+                                    "פגיעה ממטען של רכב" , "אחר"],
                         YEAR_items: [2016, 2017, 2018, 2019, 2020],
                         YEAR: [2019, 2020],
                         title: "נתוני תאונות באשקלון",
@@ -448,9 +501,6 @@
                         heatText: "הצג מפת חום",
                         cancel_btn: false,
                         select_btn: true
-
-
-
                     }
                 },
                 methods: {
@@ -466,11 +516,9 @@
                             govmap.removeHeatLayer();
                             this.heatText = "כיבוי מפת חום";
                         }
-                        
                         this.RANK = [];
                         this.YEAR = [];
                         this.HeatMapSwitch = false
-
                         ClearUserPoints();
                     },
 
@@ -497,7 +545,7 @@
 
                         ClearUserPoints();
                         var accidents = accident_features.filter(function(f) {
-                            return (isInArray(f.RANK, appVue.RANK) &&  isInArray(f.YEAR, appVue.YEAR));	
+                            return (isInArray(f.RANK, appVue.RANK) &&  isInArray(f.YEAR, appVue.YEAR) && isInArray(f.SUB_TYPE, appVue.SUB_TYPE) );	
 	                    })
 
 
@@ -512,7 +560,6 @@
                             Android: function() {
                                 return navigator.userAgent.match(/Android/i);
                             },
-
                             BlackBerry: function() {
                                 return navigator.userAgent.match(/BlackBerry/i);
                             },
