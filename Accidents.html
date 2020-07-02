@@ -128,6 +128,21 @@
                                     class="grey--text caption"
                                   >(+{{ SUB_TYPE.length - 1 }} אחרים)</span>
                                 </template>
+
+                                <template v-slot:prepend-item>
+                                    <v-list-item
+                                      ripple
+                                      @click="toggle"
+                                    >
+                                      <v-list-item-action>
+                                        <v-icon :color="SUB_TYPE.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                                      </v-list-item-action>
+                                      <v-list-item-content>
+                                        <v-list-item-title>בחר הכל</v-list-item-title>
+                                      </v-list-item-content>
+                                    </v-list-item>
+                                    <v-divider class="mt-2"></v-divider>
+                                  </template>
                               </v-select>
 
 
@@ -503,7 +518,31 @@
                         select_btn: true
                     }
                 },
+                computed: {
+                    All () {
+                        return this.SUB_TYPE.length === this.SUB_TYPE_items.length
+                    },
+                    Some () {
+                        return this.SUB_TYPE.length > 0 && !this.All
+                    },
+                    icon () {
+                        if (this.All) return 'mdi-close-box'
+                        if (this.Some) return 'mdi-minus-box'
+                        return 'mdi-checkbox-blank-outline'
+                    },
+                },
                 methods: {
+
+                    toggle () {
+                        this.$nextTick(() => {
+                        if (this.All) {
+                            this.SUB_TYPE = []
+                        } else {
+                            this.SUB_TYPE = this.SUB_TYPE_items.slice()
+                        }
+                        })
+                    },
+
                     Cancel()
                     {
 
