@@ -6,14 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
 <style>
 
-
-
 </style>
-
-
 
 <html>
 
@@ -33,7 +28,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-        <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+        <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script>
 
     </head>
 
@@ -51,34 +46,32 @@
 
                             <v-col
                             cols="12"
-                            sm="0"
-                            md="0"
+                            sm="2"
+                            md="2"
                             lg="2"
                             xl="2"               
                             >
-
-                            <v-img max-height="45"  style="text-align: center; margin-top: 3px;" src="https://upload.wikimedia.org/wikipedia/he/e/e8/%D7%94%D7%A8%D7%A9%D7%95%D7%AA_%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA_%D7%9C%D7%91%D7%98%D7%99%D7%97%D7%95%D7%AA_%D7%91%D7%93%D7%A8%D7%9B%D7%99%D7%9D.png" aspect-ratio="1.7" contain></v-img>
+                                <v-img max-height="35"  style="text-align: center; margin-top: 15px;" src="https://upload.wikimedia.org/wikipedia/he/e/e8/%D7%94%D7%A8%D7%A9%D7%95%D7%AA_%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA_%D7%9C%D7%91%D7%98%D7%99%D7%97%D7%95%D7%AA_%D7%91%D7%93%D7%A8%D7%9B%D7%99%D7%9D.png" aspect-ratio="1.7" contain></v-img>
                             </v-col>
 
                             <v-col
                                 cols="12"
-                                sm="5"
-                                md="5"
+                                sm="8"
+                                md="8"
                                 lg="8"
                                 xl="8"
                             >
-                                <v-toolbar-title style="text-align: center; margin-top: 20px;">{{title}}</v-toolbar-title>
+                                <h4 style="text-align: center; margin-top: 20px;">{{title}}</h4>
                             </v-col>
 
                             <v-col
                                 cols="12"
-                                sm="12"
-                                md="12"
+                                sm="2"
+                                md="2"
                                 lg="2"
                                 xl="2"
                                 >
-                                <v-checkbox style="margin-top: 20px;"  v-model="HeatMapSwitch" color="red" :label="heatText" class="font-weight-bold" elevation=24  @change="Changed()"> </v-checkbox>
-
+                                <v-checkbox style="margin-top: 20px;"  v-model="HeatMapSwitch" color="red" :label="heatText" class="font-weight-bold shrink mr-2" elevation=24  @change="Changed()"> </v-checkbox>
                             </v-col>
 
 
@@ -153,7 +146,7 @@
                                 tile
                                 model= "select_btn"
                             >
-                                <v-btn block color="success" dark id="changed_button" style="height: 50px;"  @click="Changed()" >בצע בחירה </v-btn>
+                                <v-btn block color="success" dark id="changed_button" style="height: 40px;"  @click="Changed()" >בצע בחירה </v-btn>
                             </v-card>
                         </v-col>
                     </v-row>
@@ -163,8 +156,8 @@
                     tile
                     class="mx-auto"
                     >
-                        <div id="map_div" style="padding: 1em;
-                        background: darkkhaki;
+                        <div id="map_div" style="padding: 0.5em;
+                        background:#64B5F6;
                         border: 0;
                         color: white;
                         grid-column: span 2;">
@@ -223,7 +216,7 @@
                         };
                         if( isMobile.any() ) {
 
-                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 2
+                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.5
                             this.titleEl = false;
                         } 
                         console.log(h);
