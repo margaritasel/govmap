@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html style='width:100%; height:100%;'>
 <head>
@@ -43,32 +44,106 @@
                         <v-row no-gutters>
                             <v-col
                             cols="12"
-                            sm="2"
-                            md="2"
-                            lg="2"
-                            xl="2"               
+                            sm="12"
+                            md="12"
+                            lg="4"
+                            xl="4"               
                             >
                                 <v-img max-height="35"  style="text-align: center; margin-top: 15px;" src="https://upload.wikimedia.org/wikipedia/he/e/e8/%D7%94%D7%A8%D7%A9%D7%95%D7%AA_%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA_%D7%9C%D7%91%D7%98%D7%99%D7%97%D7%95%D7%AA_%D7%91%D7%93%D7%A8%D7%9B%D7%99%D7%9D.png" aspect-ratio="1.7" contain></v-img>
                             </v-col>
 
                             <v-col
                                 cols="12"
-                                sm="8"
-                                md="8"
-                                lg="8"
-                                xl="8"
+                                sm="12"
+                                md="12"
+                                lg="4"
+                                xl="4"
                             >
                                 <h4 style="text-align: center; margin-top: 20px;">{{title}}</h4>
+
+    
                             </v-col>
 
                             <v-col
                                 cols="12"
-                                sm="2"
-                                md="2"
-                                lg="2"
-                                xl="2"
+                                sm="12"
+                                md="12"
+                                lg="4"
+                                xl="4"
                                 >
-                                <v-checkbox style="margin-top: 20px;"  v-model="HeatMapSwitch" color="red" :label="heatText" class="font-weight-bold shrink mr-2" elevation=24  @change="Changed()"> </v-checkbox>
+                                <v-row no-gutters>
+                                                               <v-col
+                                cols="6"
+                                sm="6"
+                                md="6"
+                                lg="6"
+                                xl="6"
+                                >
+                                <v-checkbox small style="margin-top: 20px;"  v-model="HeatMapSwitch" color="red" :label="heatText" class="font-weight-bold shrink mr-2" elevation=24  @change="Changed()"> </v-checkbox>
+                                </v-col>
+
+
+                                <v-col
+                                cols="6"
+                                sm="6"
+                                md="6"
+                                lg="6"
+                                xl="6"
+                                >
+                                <v-dialog
+                                v-model="dialog"
+                                width="300"
+                              >
+                                <template v-slot:activator="{ on, attrs }">
+                                  <v-btn block style="margin-top: 18px; margin-left: 10px;"
+                                    v-bind="attrs"
+                                    v-on="on"
+                                  >
+                                    מקרא
+                                  </v-btn>
+                                </template>
+                          
+                                <v-card class="d-inline-block mx-auto">
+                                  <v-container>
+                                      <v-simple-table dense>
+                                      <template v-slot:default>
+                                        <tbody>
+                                          <tr>
+                                            <td>
+                                                <v-img
+                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png"
+                                                width="10"
+                                                ></v-img>
+                                            </td>
+                                            <td>תאונה קלה</td>
+                                          </tr>
+                                          <tr>
+                                              <td>                                                <v-img
+                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png"
+                                                width="20"
+                                                ></v-img></td>
+                                              <td>תאונה קשה</td>
+                                          </tr>
+                                          <tr>
+                                              <td>                                                <v-img
+                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Red_circle.svg/200px-Red_circle.svg.png"
+                                                width="30"
+                                                ></v-img></td>
+                                              <td>תאונה קטלנית</td>
+                                          </tr>
+                                        </tbody>
+                                      </template>
+                                    </v-simple-table>
+                                  </v-container>
+                              </v-card>
+                              </v-dialog>
+                                </v-col>
+
+                                </v-row>
+                                
+
+
+                               
                             </v-col>
                         </v-row>
                     </v-card>
@@ -446,8 +521,8 @@
         $(document).ready(function(){
             $(document.getElementById('map_div')).height(setMapHeight);
             //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
-            var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-            //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
             $(function () {
                     govmap.createMap('map_div', {
                         token: my_token,
@@ -471,7 +546,8 @@
             vuetify: new Vuetify(),
                 data () {
                     return {
-
+                        dialog: false,
+                        alert: false,
                         RANK_items: ["קלה", "קשה", "קטלנית"],
                         RANK: ["קשה", "קטלנית"],
                         SUB_TYPE_items: [
