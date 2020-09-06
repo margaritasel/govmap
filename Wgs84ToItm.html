@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Coodrinate Converter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+
+		//var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; // localhost
+    		var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+
+
+
+
+    function degreesToRadians(degrees) {
+      return degrees * Math.PI / 180;
+    }
+
+    function pow2(x) {
+      return x*x;
+    }
+
+    function pow3(x) {
+      return x*x*x;
+    }
+
+    function pow4(x) {
+      return x*x*x*x;
+    }
+
+    function ITMLocation(easting, northing) {
+      this.easting = easting;
+      this.northing = northing;
+      this.eastingInOldGrid = function() {
+        return easting - 50000;
+      }
+      this.northingInOldGrid = function() {
+        var retval = northing - 500000;
+        if (retval<0) {
+          retval += 1000000;
+        }
+        return retval;
+      }
+    }
+    
+    function Wgs84ToIsraeLtm(lat_lon_pair)
+    {
+                longitude = lat_lon_pair[0];
+                latitude =  lat_lon_pair[1];
+                longitude = degreesToRadians(longitude);
+                latitude = degreesToRadians(latitude);
+                // Projection parameters
+                var centralMeridian = degreesToRadians(35.2045169444444);  // central meridian of ITM projection
+                var k0 = 1.0000067;  // scale factor
+
+                // Ellipsoid constants (WGS 80 datum)
+                var a = 6378137;  // equatorial radius
+                var b = 6356752.3141; // polar radius
+                var e = Math.sqrt(1 - b*b/a/a);  // eccentricity
+                var e1sq = e*e/(1-e*e);
+                var n = (a-b)/(a+b);
+
+                // Curvature at specified location
+                var tmp = e*Math.sin(latitude);
+                var nu = a/Math.sqrt(1 - tmp*tmp);
+
+                // Meridional arc length
+                var n3 = pow3(n);
+                var n4 = pow4(n);
+                var A0 = a*(1-n+(5*n*n/4)*(1-n) +(81*n4/64)*(1-n));
+                var B0 = (3*a*n/2)*(1 - n - (7*n*n/8)*(1-n) + 55*n4/64);
+                var C0 = (15*a*n*n/16)*(1 - n +(3*n*n/4)*(1-n));
+                var D0 = (35*a*n3/48)*(1 - n + 11*n*n/16);
+                var E0 = (315*a*n4/51)*(1-n);
+                var S = A0*latitude - B0*Math.sin(2*latitude) + C0*Math.sin(4*latitude)
+                - D0*Math.sin(6*latitude) + E0*Math.sin(8*latitude);
+
+                // Coefficients for ITM coordinates
+                var p = longitude-centralMeridian;
+                var Ki = S*k0;
+                var Kii = nu*Math.sin(latitude)*Math.cos(latitude)*k0/2;
+                var Kiii = ((nu*Math.sin(latitude)*pow3(Math.cos(latitude)))/24)*(5-pow2(Math.tan(latitude))+9*e1sq*pow2(Math.cos(latitude))+4*e1sq*e1sq*pow4(Math.cos(latitude)))*k0;
+                var Kiv = nu*Math.cos(latitude)*k0;
+                var Kv = pow3(Math.cos(latitude))*(nu/6)*(1-pow2(Math.tan(latitude))+e1sq*pow2(Math.cos(latitude)))*k0;
+
+                var x = Math.round(219529.58+ Kiv*p+Kv*pow3(p) - 60);
+                var y = Math.round(Ki+Kii*p*p+Kiii*pow4(p) - 3512424.41+ 626907.39 - 45);
+                var xy_pair = [x, y];
+                return xy_pair;
+    }
+
+		//var token = "34280469-d493-4041-95e5-664f7fec6daf";
+		var reader = new FileReader();
+		var li = [];
+        var x_index;
+        var y_index;
+
+        var fields = [];
+		function readText(that){
+
+			if(that.files && that.files[0]){
+				var reader = new FileReader();
+				reader.onload = function (e) {  
+					var output=e.target.result;
+				
+					//process text to show only lines with "@":				
+					//output=output.split("\n").filter(/./.test, /\@/).join("\n");
+					var output=output.split("\n");
+					
+					for (i in output)
+					{
+						li.push(output[i]);
+                        if (i==0)
+                        {
+                            
+                            for (ii=0; ii<output[i].split(",").length; ii++)
+                            {
+                                console.log(output[i].split(",")[ii]);
+                                fields.push(output[i].split(",")[ii].trim());
+                            }
+
+                            var element1 = document.getElementById("dropdownMenu1");
+                            var element2 = document.getElementById("dropdownMenu2");
+                            fields.forEach(field => {
+                                element1.innerHTML += '<li><a href="#">'+field.trim()+'</a></li>';
+                                element2.innerHTML += '<li><a href="#">'+field.trim()+'</a></li>';
+                            })
+
+                            $('#dropdownMenu1 li').on('click', function() {
+                                $('#dropdown_title1').html($(this).find('a').html());
+                                val1 = $(this).find('a').html();
+                                x_index = -1;
+                                for (i = 0 ; i < fields.length; i++)
+                                {
+                                    if (fields[i] == val1.trimEnd())
+                                    {
+                                        x_index = i;
+                                    }
+
+                                }
+
+                                
+                            });
+
+                            $('#dropdownMenu2 li').on('click', function() {
+                                $('#dropdown_title2').html($(this).find('a').html());
+                                val2 = $(this).find('a').html();
+
+                            
+                                //alert(val);
+                                y_index = -1;
+                                for (i = 0 ; i < fields.length; i++)
+                                {
+                                    if (fields[i] == val2.trimEnd())
+                                    {
+                                        y_index = i;
+                                    }
+
+                                }
+
+                            });
+
+
+                        
+                        }
+					}
+
+					//document.getElementById('main').innerHTML= output;
+				};//end onload()
+				reader.readAsText(that.files[0]);
+			}//end if html5 filelist support
+		} 
+		
+			var a=0;
+			var addr = "";
+			var res;
+			var status = true;
+            var temp = 0;
+			function Geocoding()
+			{
+                if (li.length > 0 && x_index > -1 && x_index > -1)
+                {
+				var table = document.getElementById("myTable");
+				if (a < li.length)
+				{
+                    a++;
+                    if (li[a])
+                    {
+                        vals = li[a].split(",");
+                        console.log(vals[x_index]);
+                        var table = document.getElementById("myTable");
+
+                        if (vals.length == fields.length)
+                        {
+                            var row = table.insertRow(-1);
+                            var cell1 = row.insertCell(0);
+                            cell1.innerHTML = a;
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            var cell4 = row.insertCell(3);
+                            var cell5 = row.insertCell(4);
+                            temp = 0;
+                            cell2.innerHTML = vals[x_index];
+                            cell3.innerHTML = vals[y_index];
+                            itm =  Wgs84ToIsraeLtm([vals[x_index], vals[y_index]]);
+                            cell4.innerHTML = itm[0];
+                            cell5.innerHTML = itm[1];
+                        }
+                        else
+                        {
+                            temp = vals.length + vals.length;
+                            if (temp == fields.length)
+                            {
+                                var row = table.insertRow(-1);
+                                var cell1 = row.insertCell(0);
+                                cell1.innerHTML = a;
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+                                var cell4 = row.insertCell(3);
+                                var cell5 = row.insertCell(4);
+                            }
+
+                        }
+                    }
+
+
+                    Geocoding();
+							
+						
+							
+				}
+                if (a == (li.length))
+                {
+                    fnExcelReport();
+                }
+                }
+						
+			}
+			
+			
+			
+			function fnExcelReport()
+			{
+				var tab_text="<table><tr>";
+				var textRange; var j=0;
+				tab = document.getElementById('myTable'); // id of table
+
+				for(j = 0 ; j < tab.rows.length ; j++)
+				{
+					tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+					//tab_text=tab_text+"</tr>";
+				}
+
+				tab_text=tab_text+"</table>";
+				tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+				tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+				tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+				var ua = window.navigator.userAgent;
+				var msie = ua.indexOf("MSIE ");
+
+				if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+				{
+					txtArea1.document.open("txt/html","replace");
+					txtArea1.document.write(tab_text);
+					txtArea1.document.close();
+					txtArea1.focus();
+					sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+				}
+				else                 //other browser not tested on IE 11
+					sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+				return (sa);
+			}
+			
+			
+</script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WGS84 Coodinates Converter</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><input type="file" class="btn btn-default btn-file" type="file" name="foo" accept=".csv"  onchange='readText(this)' /></li>
+      
+    <div class="row">
+        <div class="col-lg-4 col-sm-4 col-xs-4">
+            <ul class="nav nav-pills left">
+                <li class="dropdown active span8">
+                    <a class="dropdown-toggle" id="inp_impact1" data-toggle="dropdown">
+                        <span id="dropdown_title1">X Field</span><span class="caret"></span>
+                    </a>
+                    <ul id="dropdownMenu1"class="dropdown-menu">
+                            
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-lg-4 col-sm-4 col-xs-4">
+            <ul class="nav nav-pills left">
+                <li class="dropdown active span8">
+                    <a class="dropdown-toggle" id="inp_impact1" data-toggle="dropdown">
+                        <span id="dropdown_title2">Y Field</span><span class="caret"></span>
+                    </a>
+                    <ul id="dropdownMenu2"class="dropdown-menu">
+                            
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+      <li><input id="button" type="button" class="btn btn-success" value="Convert My CSV Coords!" OnClick="setTimeout(Geocoding(), 10000);"></a></li>
+    </ul>
+
+
+
+  </div>
+</nav>
+
+  
+<div class="container">
+		 <div name="form" id="map_div"> 
+		 </div> 
+		 <table id="myTable", class="table table-bordered">
+          <tr style="font-weight:bold">
+            <td>ID</td>
+			<td>X_WGS84</td>
+			<td>Y_WGS84</td>
+            <td>X</td>
+            <td>Y</td>
+		  </tr>
+		</table>
+		<br>
+</div>
+
+</body>
+</html>
