@@ -1,7 +1,6 @@
 
 
 
-
 <html style='width:100%; height:100%;'>
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
@@ -55,7 +54,7 @@
                 <v-app>
             
                 <v-app-bar style="text-align: center; max-height: 48px;"
-                color="blue"
+                color="blue lighten-1"
                 dense
                 dark
                 id="myTitle"
@@ -95,7 +94,7 @@
                 </v-app-bar>
     
                 <v-app-bar
-                color="blue"
+                color="blue lighten-1"
                 dense
                 dark
                 id="myTitleMobile"
@@ -174,18 +173,11 @@
             var url = 'https://yovavsanders.github.io/govmap/KidumKehilati'
     
 
-            var gmila_phizit_data = []
-            var s_wkts1 = [];
-            var s_names1 = [];
-            var s_symbols1 = [];
-            var bubbleHTMLParameters_all1 = [];
-
-
-            var hemshech_data = []
-            var s_wkts2 = [];
-            var s_names2 = [];
-            var s_symbols2 = [];
-            var bubbleHTMLParameters_all2 = [];
+            var kidum_data = []
+            var s_wkts = [];
+            var s_names = [];
+            var s_symbols = [];
+            var bubbleHTMLParameters_all = [];
 
     
                 Number.prototype.between = function(a, b) {
@@ -196,7 +188,7 @@
     
     
     
-            var setlnames = [];
+            var names = [];
     
             //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
             var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
@@ -215,8 +207,8 @@
                     identifyOnClick: true
                 });
 
-                // get no. 1
-                var gmila_phizit_json = url + "/data/gmila_phizit.json";
+                // get all
+                var kidum_json = url + "/data/KidumKehilati.json";
                 $.ajax({
                     dataType: 'json',
                     beforeSend : function() {
@@ -228,47 +220,67 @@
                     },
                     success: function(data) {
                             //console.log(iso_data);
-                            gmila_phizit_data = data;
-                            console.log(gmila_phizit_data);
-                            for (i in gmila_phizit_data)
+                            kidum_data = data;
+                            console.log(kidum_data);
+                            for (i in kidum_data)
                             {
-                                s_wkts1.push("POINT(("+gmila_phizit_data[i].X+" "+gmila_phizit_data[i].Y+"))");
-                                s_names1.push(gmila_phizit_data[i].NAME);
-                                if (gmila_phizit_data[i].NAME != "")
-                                {
-                                    appVue.items.push(gmila_phizit_data[i].NAME);
-                                }
-                                bubbleHTMLParameters_all1.push([
 
-                                "סוג המוסד: " + gmila_phizit_data[i].TYPE
-                                 + "<br />"  + "כתובת: " + gmila_phizit_data[i].ADDR
-                                 + "<br />" + "פקס: " + gmila_phizit_data[i].FAX
-                                 + "<br />" + "מייל: " + gmila_phizit_data[i].MAIL1
-                                 + "<br />" + "מייל: " + gmila_phizit_data[i].MAIL2
-                                 + "<br />" + "מספר טלפון: " + gmila_phizit_data[i].PHONE  
-                                 , "הערות: " + gmila_phizit_data[i].REMARKS]);
+                                s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
+                                s_names.push(kidum_data[i].NAME);
+                                if (kidum_data[i].NAME != "")
+                                {
+                                    names.push(kidum_data[i].NAME);
+                                }
+                                layer = kidum_data[i].LAYER;
+                                if (layer == "הגמילה הפיזית מסמים")
+                                {
+                                    bubbleHTMLParameters_all.push([
+
+                                    "סוג המוסד: " + kidum_data[i].TYPE
+                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                    + "<br />" + "פקס: " + kidum_data[i].FAX
+                                    + "<br />" + "מייל: " + kidum_data[i].MAIL1
+                                    + "<br />" + "מייל: " + kidum_data[i].MAIL2
+                                    + "<br />" + "מספר טלפון: " + kidum_data[i].PHONE  
+                                    , "הערות: " + kidum_data[i].REMARKS]);
+                                    symbol_url =url + '/icons/blue.png'
+                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                }
+                                if (layer == "טיפול המשך בנפגעי סמים")
+                                {
+                                    bubbleHTMLParameters_all.push([
+                                    "סוג המוסד: " + kidum_data[i].TYPE
+                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                    + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
+                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE,
+                                    "אוכלוסיית יעד: " + kidum_data[i].POP_TYPE ])
+                                    symbol_url =url + '/icons/red.png'
+                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                }
 
                             }
 
 
                             var data = {  
-                            wkts: s_wkts1,  
-                            names: s_names1,  
+                            wkts: s_wkts,  
+                            names: s_names,  
                             showBubble: true,
                             geometryType: govmap.drawType.Point,  
                             defaultSymbol:  
                             {  
-                                url: url + '/icons/blue.png',  
+                                url: url + '/icons/brown.png',  
                                 width:20,  
                                 height:20  
                             },   
-                            symbols: [],  
+                            symbols: s_symbols,  
                             clearExisting: false,  
                             data: {  
-                                    tooltips: s_names1,  
-                                    headers: s_names1,
+                                    tooltips: s_names,  
+                                    headers: s_names,
                                     bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
-                                    bubbleHTMLParameters:bubbleHTMLParameters_all1
+                                    bubbleHTMLParameters:bubbleHTMLParameters_all
                                 }  
                             };
 
@@ -278,78 +290,8 @@
                                 console.log(response.data);
                             });
 
-                            
-    
-    
-                    },
-                    error : function(jqXHR, textStatus, errorThrown) {
-                        alert("Error occurred: " + errorThrown);
-                    },
-                    url: gmila_phizit_json
-                });
-
-
-                // get no.2  
-                 var hemshech_json = url + "/data/hemshech.json";
-                $.ajax({
-                    dataType: 'json',
-                    beforeSend : function() {
-                        console.log('Before Ajax Request Starts !!');
-    
-    
-    
-    
-                    },
-                    success: function(data) {
-                            //console.log(iso_data);
-                            hemshech_data = data;
-                            console.log(hemshech_data);
-                            for (i in hemshech_data)
-                            {
-                                s_wkts2.push("POINT(("+hemshech_data[i].X+" "+hemshech_data[i].Y+"))");
-                                s_names2.push(hemshech_data[i].NAME);
-                                if (hemshech_data[i].NAME != "")
-                                {
-                                    appVue.items.push(hemshech_data[i].NAME);
-                                }
-                                bubbleHTMLParameters_all2.push([
-
-                                "סוג המוסד: " + hemshech_data[i].TYPE
-                                 + "<br />"  + "תחום: " + hemshech_data[i].LAYER
-                                 + "<br />"  + "מחוז: " + hemshech_data[i].MACHOZ
-                                 + "<br />"  + "מנהל/ת: " + hemshech_data[i].MANAGER
-                                 + "<br />"  + "טלפון: " + hemshech_data[i].PHONE,
-                                "אוכלוסיית יעד: " + hemshech_data[i].POP_TYPE ])
-
-                            }
-
-
-                            var data = {  
-                            wkts: s_wkts2,  
-                            names: s_names2,  
-                            showBubble: true,
-                            geometryType: govmap.drawType.Point,  
-                            defaultSymbol:  
-                            {  
-                                url: url + '/icons/red.png',  
-                                width:20,  
-                                height:20  
-                            },   
-                            symbols: [],  
-                            clearExisting: false,  
-                            data: {  
-                                    tooltips: s_names2,  
-                                    headers: s_names2,
-                                    bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
-                                    bubbleHTMLParameters:bubbleHTMLParameters_all2
-                                }  
-                            };
-
-
-                            govmap.displayGeometries(data).then(function (response)  
-                            {  
-                                console.log(response.data);
-                            });
+                            s_names.sort();
+                            appVue.items = s_names;
 
                             
     
@@ -358,8 +300,9 @@
                     error : function(jqXHR, textStatus, errorThrown) {
                         alert("Error occurred: " + errorThrown);
                     },
-                    url: hemshech_json
+                    url: kidum_json
                 });
+
             });
     
             
@@ -416,17 +359,15 @@
                 },
                 zoom(name)
                 {
-                   layers = [gmila_phizit_data, hemshech_data];
-                   for (i in layers)
-                   {
-                        s_features = layers[i].filter(function(f) {
-                                return f.NAME == name;		
-                        });
-                        if (s_features.length > 0)
-                        {
-                            govmap.zoomToXY({ x: s_features[0].X, y: s_features[0].Y, level: 7, marker: false });
-                        }
-                   }
+    
+                    s_features = kidum_data.filter(function(f) {
+                            return f.NAME == name;		
+                    });
+                    if (s_features.length > 0)
+                    {
+                        govmap.zoomToXY({ x: s_features[0].X, y: s_features[0].Y, level: 7, marker: false });
+                    }
+
                 }
     
     
