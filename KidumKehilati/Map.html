@@ -1,1 +1,444 @@
 
+
+
+
+<html style='width:100%; height:100%;'>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .v-sheet--offset {
+        top: -24px;
+        position: relative;
+      }
+    
+      @media (max-width: 600px) {
+        #myTitle {
+          display: none;
+        }
+    
+      }
+    
+       @media (min-width: 600px) {
+        #myTitleMobile {
+          display: none;
+        }
+       }
+    </style>
+    <head>
+    <title>מוקדי קידום קהילתי</title>
+    
+    <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    
+    
+    
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+    
+    <script src="https://unpkg.com/terraformer@1.0.8"></script>
+    <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+    
+    
+    </head>
+        <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+            <div id="isolation_app">
+                <v-app>
+            
+                <v-app-bar style="text-align: center; max-height: 48px;"
+                color="blue lighten-1"
+                dense
+                dark
+                id="myTitle"
+                >
+    
+                
+                <div class="text-right" style="width:25%; text-align:right;">
+                    <v-autocomplete
+                    v-model="select"
+                    :loading="loading"
+                    :items="items"
+                    :search-input.sync="search"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="שם מוסד"
+                    solo-inverted
+                    @change='zoom'
+                  ></v-autocomplete>
+                </div>
+        
+                <v-divider vertical></v-divider>
+    
+                <v-spacer></v-spacer>
+                <v-toolbar-title class="white--text" style="text-align: center; max-height: 48px;">מוקדי קידום קהילתי</v-toolbar-title>
+                <v-spacer></v-spacer>
+    
+                <div class="text-right" style="width:25%; text-align:right;">
+                </div>
+    
+    
+    
+    
+        
+                </v-app-bar>
+    
+                <v-app-bar
+                color="blue lighten-1"
+                dense
+                dark
+                id="myTitleMobile"
+                >
+    
+                
+                <div class="text-right" style="width:100%; text-align:right;">
+                    <v-autocomplete
+                    v-model="select"
+                    :loading="loading_mobile"
+                    :items="items"
+                    :search-input.sync="search_mobile"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="שם מוסד"
+                    solo-inverted
+                    @change='zoom'
+                  ></v-autocomplete>
+                </div>
+        
+    
+    
+    
+    
+    
+        
+                </v-app-bar>
+            
+                <form name="form" style='height: 100%;' scrolling='no'> 
+                        
+                        <div id="map_div" style="width: 100%; height: 100%; float:left">
+                                
+                                
+                        </div> 			
+                </form>
+    
+    
+    
+            
+    
+    
+            </v-app>
+        </div>
+        
+        
+    <script>
+    
+    
+    
+    
+    
+            function isInArray(value, array) {
+                return array.indexOf(value) > -1;
+            }
+    
+            function getDates(startDate, stopDate) {
+                var dateArray = new Array();
+                var currentDate = startDate;
+                while (currentDate <= stopDate) {
+                    dateArray.push(new Date (currentDate));
+                    currentDate = currentDate.addDays(1);
+                }
+                return dateArray;
+            }
+    
+        
+    
+           
+    
+            var intersect_res;
+    
+    
+            var url = 'https://yovavsanders.github.io/govmap/KidumKehilati'
+    
+
+            var gmila_phizit_data = []
+            var s_wkts1 = [];
+            var s_names1 = [];
+            var s_symbols1 = [];
+            var bubbleHTMLParameters_all1 = [];
+
+
+            var hemshech_data = []
+            var s_wkts2 = [];
+            var s_names2 = [];
+            var s_symbols2 = [];
+            var bubbleHTMLParameters_all2 = [];
+
+    
+                Number.prototype.between = function(a, b) {
+                var min = Math.min.apply(Math, [a, b]),
+                    max = Math.max.apply(Math, [a, b]);
+                    return this >= min && this < max;
+                };
+    
+    
+    
+            var setlnames = [];
+    
+            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+            $(document).ready(function ()
+            {
+    
+                govmap.createMap('map_div', {
+                    token: my_token,
+                    visibleLayers: [],
+                    layers:["SCHOOL","KIDS_G"], 
+                    layersMode: 4, 
+                    showXY: true,
+                    level: 1,
+                    center: {x: 186000, y: 658000},
+                    identifyOnClick: true
+                });
+
+                // get no. 1
+                var gmila_phizit_json = url + "/data/gmila_phizit.json";
+                $.ajax({
+                    dataType: 'json',
+                    beforeSend : function() {
+                        console.log('Before Ajax Request Starts !!');
+    
+    
+    
+    
+                    },
+                    success: function(data) {
+                            //console.log(iso_data);
+                            gmila_phizit_data = data;
+                            console.log(gmila_phizit_data);
+                            for (i in gmila_phizit_data)
+                            {
+                                s_wkts1.push("POINT(("+gmila_phizit_data[i].X+" "+gmila_phizit_data[i].Y+"))");
+                                s_names1.push(gmila_phizit_data[i].NAME);
+                                if (gmila_phizit_data[i].NAME != "")
+                                {
+                                    appVue.items.push(gmila_phizit_data[i].NAME);
+                                }
+                                bubbleHTMLParameters_all1.push([
+
+                                "סוג המוסד: " + gmila_phizit_data[i].TYPE
+                                 + "<br />"  + "כתובת: " + gmila_phizit_data[i].ADDR
+                                 + "<br />" + "פקס: " + gmila_phizit_data[i].FAX
+                                 + "<br />" + "מייל: " + gmila_phizit_data[i].MAIL1
+                                 + "<br />" + "מייל: " + gmila_phizit_data[i].MAIL2
+                                 + "<br />" + "מספר טלפון: " + gmila_phizit_data[i].PHONE  
+                                 , "הערות: " + gmila_phizit_data[i].REMARKS]);
+
+                            }
+
+
+                            var data = {  
+                            wkts: s_wkts1,  
+                            names: s_names1,  
+                            showBubble: true,
+                            geometryType: govmap.drawType.Point,  
+                            defaultSymbol:  
+                            {  
+                                url: url + '/icons/blue.png',  
+                                width:20,  
+                                height:20  
+                            },   
+                            symbols: [],  
+                            clearExisting: false,  
+                            data: {  
+                                    tooltips: s_names1,  
+                                    headers: s_names1,
+                                    bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                                    bubbleHTMLParameters:bubbleHTMLParameters_all1
+                                }  
+                            };
+
+
+                            govmap.displayGeometries(data).then(function (response)  
+                            {  
+                                console.log(response.data);
+                            });
+
+                            
+    
+    
+                    },
+                    error : function(jqXHR, textStatus, errorThrown) {
+                        alert("Error occurred: " + errorThrown);
+                    },
+                    url: gmila_phizit_json
+                });
+
+
+                // get no.2  
+                 var hemshech_json = url + "/data/hemshech.json";
+                $.ajax({
+                    dataType: 'json',
+                    beforeSend : function() {
+                        console.log('Before Ajax Request Starts !!');
+    
+    
+    
+    
+                    },
+                    success: function(data) {
+                            //console.log(iso_data);
+                            hemshech_data = data;
+                            console.log(hemshech_data);
+                            for (i in hemshech_data)
+                            {
+                                s_wkts2.push("POINT(("+hemshech_data[i].X+" "+hemshech_data[i].Y+"))");
+                                s_names2.push(hemshech_data[i].NAME);
+                                if (hemshech_data[i].NAME != "")
+                                {
+                                    appVue.items.push(hemshech_data[i].NAME);
+                                }
+                                bubbleHTMLParameters_all2.push([
+
+                                "סוג המוסד: " + hemshech_data[i].TYPE
+                                 + "<br />"  + "תחום: " + hemshech_data[i].LAYER
+                                 + "<br />"  + "מחוז: " + hemshech_data[i].MACHOZ
+                                 + "<br />"  + "מנהל/ת: " + hemshech_data[i].MANAGER
+                                 + "<br />"  + "טלפון: " + hemshech_data[i].PHONE,
+                                "אוכלוסיית יעד: " + hemshech_data[i].POP_TYPE ])
+
+                            }
+
+
+                            var data = {  
+                            wkts: s_wkts2,  
+                            names: s_names2,  
+                            showBubble: true,
+                            geometryType: govmap.drawType.Point,  
+                            defaultSymbol:  
+                            {  
+                                url: url + '/icons/red.png',  
+                                width:20,  
+                                height:20  
+                            },   
+                            symbols: [],  
+                            clearExisting: false,  
+                            data: {  
+                                    tooltips: s_names2,  
+                                    headers: s_names2,
+                                    bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                                    bubbleHTMLParameters:bubbleHTMLParameters_all2
+                                }  
+                            };
+
+
+                            govmap.displayGeometries(data).then(function (response)  
+                            {  
+                                console.log(response.data);
+                            });
+
+                            
+    
+    
+                    },
+                    error : function(jqXHR, textStatus, errorThrown) {
+                        alert("Error occurred: " + errorThrown);
+                    },
+                    url: hemshech_json
+                });
+            });
+    
+            
+        var appVue = new Vue({
+            el:"#isolation_app",
+            vuetify: new Vuetify(),
+            data () {
+                return {
+                
+                    loading: false,
+                    items: [],
+                    search: null,
+                    search_mobile: null,
+                    loading_mobile: null,
+                    select: null,
+                    select_mobile: null,
+                    setl_names: [],
+                }
+            },
+            watch: {
+                search (val) {
+                    val && val !== this.select && this.querySelections(val)
+                },
+            },
+            computed: {
+                currentTitle () {
+                    switch (this.step) {
+                    case 1: return 'כפר סבא'
+                    case 2: return 'Create a password'
+                    default: return 'Account created'
+                    }
+                },
+    
+                avg () {
+                    const sum = this.points.reduce((acc, cur) => acc + cur, 0)
+                    const length = this.points.length
+    
+                    if (!sum && !length) return 0
+    
+                    return Math.ceil(sum / length)
+                },
+            },
+    
+            methods: {
+                querySelections (v) {
+                    this.loading = true
+                    // Simulated ajax query
+                    setTimeout(() => {
+                    this.items = this.setl_names.filter(e => {
+                        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                    })
+                    this.loading = false
+                    }, 500)
+                },
+                zoom(name)
+                {
+                   layers = [gmila_phizit_data, hemshech_data];
+                   for (i in layers)
+                   {
+                        s_features = layers[i].filter(function(f) {
+                                return f.NAME == name;		
+                        });
+                        if (s_features.length > 0)
+                        {
+                            govmap.zoomToXY({ x: s_features[0].X, y: s_features[0].Y, level: 7, marker: false });
+                        }
+                   }
+                }
+    
+    
+    
+            },
+        });
+        
+        
+        </script>
+    <body>
+    
+    
+       
+    </html>
+    
