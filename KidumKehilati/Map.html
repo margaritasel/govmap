@@ -259,6 +259,68 @@
                                     symbol_url =url + '/icons/red.png'
                                     s_symbols.push({url:symbol_url, width:30,  height:30  });
                                 }
+                                if (layer == "מסלול תרופתי לטיפול ממושך")
+                                {
+                                    bubbleHTMLParameters_all.push([
+                                    "סוג המוסד: " + kidum_data[i].TYPE
+                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                    + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
+                                    + "<br />"  + "מרפאה: " + kidum_data[i].CLINIC
+                                    + "<br />"  + "בית מרקחת: " + kidum_data[i].PHARM
+                                    + "<br />"  + "רופא/ה: " + kidum_data[i].DOCTOR
+                                    + "<br />"  + "רוקח/ת: " + kidum_data[i].PHARMASIST
+                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                    + "<br />" + "פקס: " + kidum_data[i].FAX
+                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE,
+                                    "מייל: " + kidum_data[i].MAIL1])
+                                    symbol_url =url + '/icons/green.png'
+                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                }
+                                if (layer == "טיפול גמילה אמבולטורי מהתמכרות למשככי כאבים")
+                                {
+                                    bubbleHTMLParameters_all.push([
+                                    "סוג המוסד: " + kidum_data[i].TYPE
+                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                    + "<br />"  + "מרפאה: " + kidum_data[i].CLINIC
+                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                    + "<br />"  + "אוכלוסיית יעד: " + kidum_data[i].POP_TYPE
+                                    , "הערות: " + kidum_data[i].REMARKS]);
+                                    symbol_url =url + '/icons/orange.png'
+                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                }
+                                if (layer == "טיפול בנפגעי אלכוהול")
+                                {
+                                    bubbleHTMLParameters_all.push([
+                                    "סוג המוסד: " + kidum_data[i].TYPE
+                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                    + "<br />" + "פקס: " + kidum_data[i].FAX
+                                    , "הערות: " + kidum_data[i].REMARKS]);
+                                    symbol_url =url + '/icons/ocean.png'
+                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                }
+                                if (layer == "אוכלוסיות מיוחדות")
+                                {
+                                    bubbleHTMLParameters_all.push([
+                                    "סוג המוסד: " + kidum_data[i].TYPE
+                                    + "<br />"  +"תת סוג מוסד: " + kidum_data[i].SUB_TYPE
+                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                    + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
+                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                    + "<br />"  + "שעות פתיחה: " + kidum_data[i].OPENING_TIME
+                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                    + "<br />" + "פקס: " + kidum_data[i].FAX
+                                    , "הערות: " + kidum_data[i].REMARKS]);
+                                    symbol_url =url + '/icons/light blue.png'
+                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                }
+
 
                             }
 
