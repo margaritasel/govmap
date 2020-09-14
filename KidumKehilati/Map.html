@@ -221,119 +221,178 @@
                             //console.log(iso_data);
                             kidum_data = data;
                             console.log(kidum_data);
-                            for (i in kidum_data)
+                            for (i=0; i < kidum_data.length; i++)
                             {
+                                if (kidum_data[i].X != "" && kidum_data[i].Y != "")
+                                {
 
-                                s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
-                                s_names.push(kidum_data[i].NAME);
-                                if (kidum_data[i].NAME != "")
-                                {
-                                    names.push(kidum_data[i].NAME);
-                                }
-                                layer = kidum_data[i].LAYER;
-                                if (layer == "הגמילה הפיזית מסמים")
-                                {
-                                    bubbleHTMLParameters_all.push([
+                                    layer = kidum_data[i].LAYER;
+                                    if (layer == "הגמילה הפיזית מסמים")
+                                    {
+                                        s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
+                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
+                                        {
+                                            s_names.push(kidum_data[i].NAME);
+                                        }
+                                        else{
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                        }
+                                        bubbleHTMLParameters_all.push([
 
-                                    "סוג המוסד: " + kidum_data[i].TYPE
-                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
-                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
-                                    + "<br />" + "פקס: " + kidum_data[i].FAX
-                                    + "<br />" + "מייל: " + kidum_data[i].MAIL1
-                                    + "<br />" + "מייל: " + kidum_data[i].MAIL2
-                                    + "<br />" + "מספר טלפון: " + kidum_data[i].PHONE  
-                                    , "הערות: " + kidum_data[i].REMARKS]);
-                                    symbol_url =url + '/icons/blue.png'
-                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
-                                }
-                                if (layer == "טיפול המשך בנפגעי סמים")
-                                {
-                                    bubbleHTMLParameters_all.push([
-                                    "סוג המוסד: " + kidum_data[i].TYPE
-                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
-                                    + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
-                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
-                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE,
-                                    "אוכלוסיית יעד: " + kidum_data[i].POP_TYPE ])
-                                    symbol_url =url + '/icons/red.png'
-                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
-                                }
-                                if (layer == "מסלול תרופתי לטיפול ממושך")
-                                {
-                                    bubbleHTMLParameters_all.push([
-                                    "סוג המוסד: " + kidum_data[i].TYPE
-                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
-                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
-                                    + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
-                                    + "<br />"  + "מרפאה: " + kidum_data[i].CLINIC
-                                    + "<br />"  + "בית מרקחת: " + kidum_data[i].PHARM
-                                    + "<br />"  + "רופא/ה: " + kidum_data[i].DOCTOR
-                                    + "<br />"  + "רוקח/ת: " + kidum_data[i].PHARMASIST
-                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
-                                    + "<br />" + "פקס: " + kidum_data[i].FAX
-                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE,
-                                    "מייל: " + kidum_data[i].MAIL1])
-                                    symbol_url =url + '/icons/green.png'
-                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
-                                }
-                                if (layer == "טיפול גמילה אמבולטורי מהתמכרות למשככי כאבים")
-                                {
-                                    bubbleHTMLParameters_all.push([
-                                    "סוג המוסד: " + kidum_data[i].TYPE
-                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
-                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
-                                    + "<br />"  + "מרפאה: " + kidum_data[i].CLINIC
-                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
-                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE
-                                    + "<br />"  + "אוכלוסיית יעד: " + kidum_data[i].POP_TYPE
-                                    , "הערות: " + kidum_data[i].REMARKS]);
-                                    symbol_url =url + '/icons/orange.png'
-                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
-                                }
-                                if (layer == "טיפול בנפגעי אלכוהול")
-                                {
-                                    bubbleHTMLParameters_all.push([
-                                    "סוג המוסד: " + kidum_data[i].TYPE
-                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
-                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
-                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
-                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE
-                                    + "<br />" + "פקס: " + kidum_data[i].FAX
-                                    , "הערות: " + kidum_data[i].REMARKS]);
-                                    symbol_url =url + '/icons/ocean.png'
-                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
-                                }
-                                if (layer == "אוכלוסיות מיוחדות")
-                                {
-                                    bubbleHTMLParameters_all.push([
-                                    "סוג המוסד: " + kidum_data[i].TYPE
-                                    + "<br />"  +"תת סוג מוסד: " + kidum_data[i].SUB_TYPE
-                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
-                                    + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
-                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
-                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
-                                    + "<br />"  + "שעות פתיחה: " + kidum_data[i].OPENING_TIME
-                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE
-                                    + "<br />" + "פקס: " + kidum_data[i].FAX
-                                    , "הערות: " + kidum_data[i].REMARKS]);
-                                    symbol_url =url + '/icons/light blue.png'
-                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
-                                }
-                                if (layer == "נספחים")
-                                {
-                                    bubbleHTMLParameters_all.push([
-                                    "סוג המוסד: " + kidum_data[i].TYPE
-                                    + "<br />"  +"שם ישוב: " + kidum_data[i].SETL_NAME
-                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
-                                    + "<br />"  + "מעבדה: " + kidum_data[i].LAB
-                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
-                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE
-                                    + "<br />"  + "טלפון נוסף: " + kidum_data[i].PHONE2
-                                    + "<br />" + "פקס: " + kidum_data[i].FAX
-                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER                       
-                                    , "מייל: " + kidum_data[i].MAIL]);
-                                    symbol_url =url + '/icons/gold.png'
-                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                        "סוג המוסד: " + kidum_data[i].TYPE
+                                        + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                        + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                        + "<br />" + "פקס: " + kidum_data[i].FAX
+                                        + "<br />" + "מייל: " + kidum_data[i].MAIL1
+                                        + "<br />" + "מייל: " + kidum_data[i].MAIL2
+                                        + "<br />" + "מספר טלפון: " + kidum_data[i].PHONE  
+                                        , "הערות: " + kidum_data[i].REMARKS]);
+                                        symbol_url =url + '/icons/blue.png'
+                                        s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                    }
+                                    if (layer == "טיפול המשך בנפגעי סמים")
+                                    {
+                                        s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
+                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
+                                        {
+                                            s_names.push(kidum_data[i].NAME);
+                                        }
+                                        else{
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                        }
+                                        bubbleHTMLParameters_all.push([
+                                        "סוג המוסד: " + kidum_data[i].TYPE
+                                        + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                        + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
+                                        + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                        + "<br />"  + "טלפון: " + kidum_data[i].PHONE,
+                                        "אוכלוסיית יעד: " + kidum_data[i].POP_TYPE ])
+                                        symbol_url =url + '/icons/red.png'
+                                        s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                    }
+                                    if (layer == "מסלול תרופתי לטיפול ממושך")
+                                    {
+                                        s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
+                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
+                                        {
+                                            s_names.push(kidum_data[i].NAME);
+                                        }
+                                        else{
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                        }
+                                        bubbleHTMLParameters_all.push([
+                                        "סוג המוסד: " + kidum_data[i].TYPE
+                                        + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                        + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                        + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
+                                        + "<br />"  + "מרפאה: " + kidum_data[i].CLINIC
+                                        + "<br />"  + "בית מרקחת: " + kidum_data[i].PHARM
+                                        + "<br />"  + "רופא/ה: " + kidum_data[i].DOCTOR
+                                        + "<br />"  + "רוקח/ת: " + kidum_data[i].PHARMASIST
+                                        + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                        + "<br />" + "פקס: " + kidum_data[i].FAX
+                                        + "<br />"  + "טלפון: " + kidum_data[i].PHONE,
+                                        "מייל: " + kidum_data[i].MAIL1])
+                                        symbol_url =url + '/icons/green.png'
+                                        s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                    }
+                                    if (layer == "טיפול גמילה אמבולטורי מהתמכרות למשככי כאבים")
+                                    {
+                                        s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
+                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
+                                        {
+                                            s_names.push(kidum_data[i].NAME);
+                                        }
+                                        else{
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                        }
+                                        bubbleHTMLParameters_all.push([
+                                        "סוג המוסד: " + kidum_data[i].TYPE
+                                        + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                        + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                        + "<br />"  + "מרפאה: " + kidum_data[i].CLINIC
+                                        + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                        + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                        + "<br />"  + "אוכלוסיית יעד: " + kidum_data[i].POP_TYPE
+                                        , "הערות: " + kidum_data[i].REMARKS]);
+                                        symbol_url =url + '/icons/orange.png'
+                                        s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                    }
+                                    if (layer == "טיפול בנפגעי אלכוהול")
+                                    {
+                                        s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
+                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
+                                        {
+                                            s_names.push(kidum_data[i].NAME);
+                                        }
+                                        else{
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                        }
+                                        bubbleHTMLParameters_all.push([
+                                        "סוג המוסד: " + kidum_data[i].TYPE
+                                        + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                        + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                        + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                        + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                        + "<br />" + "פקס: " + kidum_data[i].FAX
+                                        , "הערות: " + kidum_data[i].REMARKS]);
+                                        symbol_url =url + '/icons/ocean.png'
+                                        s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                    }
+                                    if (layer == "אוכלוסיות מיוחדות")
+                                    {
+                                        s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
+                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
+                                        {
+                                            s_names.push(kidum_data[i].NAME);
+                                        }
+                                        else{
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                        }
+                                        bubbleHTMLParameters_all.push([
+                                        "סוג המוסד: " + kidum_data[i].TYPE
+                                        + "<br />"  +"תת סוג מוסד: " + kidum_data[i].SUB_TYPE
+                                        + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                        + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
+                                        + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                        + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
+                                        + "<br />"  + "שעות פתיחה: " + kidum_data[i].OPENING_TIME
+                                        + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                        + "<br />" + "פקס: " + kidum_data[i].FAX
+                                        , "הערות: " + kidum_data[i].REMARKS]);
+                                        symbol_url =url + '/icons/light blue.png'
+                                        s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                    }
+                                    if (layer == "נספחים")
+                                    {
+                                        s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
+                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
+                                        {
+                                            s_names.push(kidum_data[i].NAME);
+                                        }
+                                        else{
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].SETL_NAME);
+                                        }
+                                        bubbleHTMLParameters_all.push([
+                                        "סוג המוסד: " + kidum_data[i].TYPE
+                                        + "<br />"  +"שם ישוב: " + kidum_data[i].SETL_NAME
+                                        + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                        + "<br />"  + "מעבדה: " + kidum_data[i].LAB
+                                        + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                        + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                        + "<br />"  + "טלפון נוסף: " + kidum_data[i].PHONE2
+                                        + "<br />" + "פקס: " + kidum_data[i].FAX
+                                        + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER                       
+                                        , "מייל: " + kidum_data[i].MAIL]);
+                                        symbol_url =url + '/icons/gold.png'
+                                        s_symbols.push({url:symbol_url, width:30,  height:30  });
+
+                                    }
+                                    if (!isInArray(s_names[s_names.length - 1], names))
+                                    {
+                                        names.push(s_names[s_names.length - 1])
+                                    }
+;
                                 }
                             }
 
@@ -362,11 +421,11 @@
 
                             govmap.displayGeometries(data).then(function (response)  
                             {  
-                                console.log(response.data);
+                                console.log(response);
                             });
 
-                            s_names.sort();
-                            appVue.items = s_names;
+                            names.sort();
+                            appVue.items = names;
 
                             
     
@@ -434,12 +493,14 @@
                 },
                 zoom(name)
                 {
-    
-                    s_features = kidum_data.filter(function(f) {
+                    console.log(name);
+                    var s_features = kidum_data.filter(function(f) {
                             return f.NAME == name;		
                     });
+                    console.log(s_features);
                     if (s_features.length > 0)
                     {
+                        console.log( s_features[0]);
                         govmap.zoomToXY({ x: s_features[0].X, y: s_features[0].Y, level: 7, marker: false });
                     }
 
