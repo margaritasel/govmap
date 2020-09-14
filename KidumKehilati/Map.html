@@ -1,6 +1,5 @@
 
 
-
 <html style='width:100%; height:100%;'>
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
@@ -45,7 +44,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+
     
     
     </head>
@@ -198,8 +197,8 @@
     
                 govmap.createMap('map_div', {
                     token: my_token,
-                    visibleLayers: [],
-                    layers:["SCHOOL","KIDS_G"], 
+                    visibleLayers: ["LOCALITY_210410"],
+                    layers:["LOCALITY_210410"], 
                     layersMode: 4, 
                     showXY: true,
                     level: 1,
@@ -320,8 +319,22 @@
                                     symbol_url =url + '/icons/light blue.png'
                                     s_symbols.push({url:symbol_url, width:30,  height:30  });
                                 }
-
-
+                                if (layer == "נספחים")
+                                {
+                                    bubbleHTMLParameters_all.push([
+                                    "סוג המוסד: " + kidum_data[i].TYPE
+                                    + "<br />"  +"שם ישוב: " + kidum_data[i].SETL_NAME
+                                    + "<br />"  + "תחום: " + kidum_data[i].LAYER
+                                    + "<br />"  + "מעבדה: " + kidum_data[i].LAB
+                                    + "<br />"  + "כתובת: " + kidum_data[i].ADDR
+                                    + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                    + "<br />"  + "טלפון נוסף: " + kidum_data[i].PHONE2
+                                    + "<br />" + "פקס: " + kidum_data[i].FAX
+                                    + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER                       
+                                    , "מייל: " + kidum_data[i].MAIL]);
+                                    symbol_url =url + '/icons/gold.png'
+                                    s_symbols.push({url:symbol_url, width:30,  height:30  });
+                                }
                             }
 
 
@@ -444,4 +457,3 @@
     
        
     </html>
-    
