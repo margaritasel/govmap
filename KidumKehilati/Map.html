@@ -7,6 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+
+        .v-data-table__mobile-row__header {
+
+width: 49.5%;	
+text-align: right;
+  direction: rtl;
+
+}
+
+.v-data-table__mobile-row__cell {
+  width: 49.5%;
+  text-align: right;
+  direction: rtl;
+  }
+  
     .v-sheet--offset {
         top: -24px;
         position: relative;
@@ -45,13 +60,16 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 
+    <script src="https://unpkg.com/terraformer@1.0.8"></script>
+    <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+
     
     
     </head>
         <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
             <div id="isolation_app">
                 <v-app>
-            
+                    <form style='height: 5%;' scrolling='no'> 
                 <v-app-bar style="text-align: center; max-height: 48px;"
                 color="indigo"
                 dense
@@ -60,8 +78,9 @@
                 >
     
                 
-                <div class="text-right" style="width:25%; text-align:right;">
+                <div class="text-right" style="width:25%; text-align:right;" id="mosad">
                     <v-autocomplete
+                    clearable
                     v-model="select"
                     :loading="loading"
                     :items="items"
@@ -76,15 +95,60 @@
                     @change='zoom'
                   ></v-autocomplete>
                 </div>
+
+                <div class="text-right" style="width:25%; text-align:right;" id="setl">
+                    <v-autocomplete
+                    clearable
+                    v-model="s_select"
+                    :loading="s_loading"
+                    :items="s_items"
+                    :search-input.sync="s_search"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="שם ישוב"
+                    solo-inverted
+                    @change='zoom'
+                  ></v-autocomplete>
+                </div>
         
                 <v-divider vertical></v-divider>
     
                 <v-spacer></v-spacer>
                 <v-toolbar-title class="white--text" style="text-align: center; max-height: 48px;">מוקדי קידום קהילתי</v-toolbar-title>
                 <v-spacer></v-spacer>
-    
-                <div class="text-right" style="width:25%; text-align:right;">
-                </div>
+
+                <v-divider vertical></v-divider>
+
+                <div class="text-right" style="width:25%; text-align:right; padding-right: 30px; position: relative; margin: 0 auto;" > 
+                    <v-dialog right
+                    v-model="dialog"
+                    width="300"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn tile block outlined color="white"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        שכבות
+                      </v-btn>
+                    </template>
+              
+                    <v-card class="d-inline-block">
+  
+                            <v-radio-group v-model="radios" :mandatory="false">
+                                                 
+                                   
+                               <v-radio label="חיפוש לפי שם מוסד"  color="indigo" @change="byName" value="radio-1"></v-radio>
+                                                     
+                                 
+                              <v-radio label="חיפוש לפי שם ישוב" color="indigo" @change="bySetl" value="radio-2"></v-radio>
+                          </v-radio-group>
+                  </v-card>
+                  </v-dialog>
+                  </div>
     
     
     
@@ -92,16 +156,18 @@
         
                 </v-app-bar>
     
-                <v-app-bar
-                color="indigo"
-                dense
+ 
+                <v-toolbar
                 dark
+                color="indigo"
                 id="myTitleMobile"
-                >
-    
+                style='height: 50px;'
+              >
+              <v-row style='height: 55px;'>
                 
-                <div class="text-right" style="width:100%; text-align:right;">
+                <div class="text-right" style="width:75%; text-align:right;" id="mosad_mobile">
                     <v-autocomplete
+                    clearable
                     v-model="select"
                     :loading="loading_mobile"
                     :items="items"
@@ -116,14 +182,57 @@
                     @change='zoom'
                   ></v-autocomplete>
                 </div>
-        
-    
-    
-    
-    
-    
-        
-                </v-app-bar>
+
+                <div div class="text-right" style="width:75%; text-align:right;" id="setl_mobile">
+                    <v-autocomplete
+                    clearable
+                    v-model="s_select"
+                    :loading="s_loading_mobile"
+                    :items="s_items"
+                    :search-input.sync="s_search_mobile"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="שם ישוב"
+                    solo-inverted
+                    @change='zoom'
+                  ></v-autocomplete>
+                </div>
+
+                
+                <div div class="text-right" style="width:25%; text-align:right; margin-top: 6px;" > 
+                    <v-dialog right
+                    v-model="dialog"
+                    width="300"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn tile block outlined color="white"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        שכבות
+                      </v-btn>
+                    </template>
+              
+                    <v-card class="d-inline-block">
+  
+                            <v-radio-group v-model="radios" :mandatory="false">
+                                                 
+                                   
+                               <v-radio label="חיפוש לפי שם מוסד"  color="indigo" @change="byName" value="radio-1"></v-radio>
+                                                     
+                                 
+                              <v-radio label="חיפוש לפי שם ישוב" color="indigo" @change="bySetl" value="radio-2"></v-radio>
+                          </v-radio-group>
+                        </v-card>
+                    </v-dialog>
+                    </div>      
+                      </v-row>
+                        </v-toolbar>
+
+            </form>
             
                 <form name="form" style='height: 100%;' scrolling='no'> 
                         
@@ -132,6 +241,108 @@
                                 
                         </div> 			
                 </form>
+
+
+                <div class="text-center">
+                    <v-bottom-sheet v-model="sheet">
+                      <template v-slot:activator="{ on }">
+                        <v-btn
+                          block 
+                          color="#1A237E"
+                          dark
+                          dense
+                          v-on="on"
+                          @click="sheet = false"
+                        >
+            
+                        <v-badge
+                        color="green"
+                        :content="desserts.length"
+                        :value="desserts.length"
+                      >
+                      הצגת טבלה
+                      </v-badge>
+                        </v-btn>
+                      </template>
+            
+                        <v-layout id="table-v-layout" column style="max-height: 60vh">       
+                              <v-flex style="overflow: auto;">
+                                <v-card style="bottom: 0; ">
+                                <v-card-title>
+            
+                                    <v-divider vertical></v-divider>
+            
+            
+                                        <p class="text-subtitle-1" style="width:auto; margin-top: 30px; margin-right: 20px; margin-left: 10px;">
+                                            <v-badge left
+                                            color="green"
+                                            :content="desserts.length"
+                                            :value="desserts.length">קידום קהילתי
+                                        </v-badge></p>
+                                    
+            
+                                    <v-divider vertical></v-divider>
+            
+                                    <v-text-field
+                                      v-model="tsearch"
+                                      append-icon="mdi-magnify"
+                                      placeholder="חיפוש בתוצאות"
+                                      single-line
+                                      hide-details
+                                      style="width: 30%; margin-left: 10px;  margin-right: 10px;"
+                                    ></v-text-field>
+                                
+            
+                                    <v-divider vertical></v-divider>
+            
+                                    
+            
+                                    <v-tooltip right>
+                                        <template v-slot:activator="{ on }">
+                                            <v-btn class="ma-2" color="green" dark style="width: 5%;" v-on="on"  @click="fnExcelReport">
+                                                <v-icon dark>mdi-file-excel</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>יצוא לקובץ אקסל</span>
+                                    </v-tooltip>
+                                    <v-divider vertical></v-divider>
+            
+                                  </v-card-title>   
+            
+                                <v-data-table id="mytable"
+                                :headers="headers"
+                                :items="desserts"
+                                :height="height"
+                                item-key="NAME"
+                                :search="tsearch"
+                                class="elevation-1"
+                                fixed-header
+                                >
+            
+            
+                                <template v-slot:item.action="{ item }">
+                                    <v-icon
+                                      color="blue"
+                                      @click="zoomItem(item)"
+                                    >
+                                    mdi-map-marker-radius
+                                    </v-icon>
+                                  </template>
+            
+            
+     
+                               
+            
+            
+                                  
+                
+                                
+                                </v-data-table>
+                                </v-card>
+                            </v-flex>
+                        </v-layout>
+                    </v-bottom-sheet>
+                  </div>
     
     
     
@@ -161,6 +372,37 @@
                 }
                 return dateArray;
             }
+
+            var lo_el;
+            function getHeight()
+            {
+                var height =  $(document).height()/2.7;
+                if (isMobile())
+                {
+                    console.log("mobile");
+                    height =  $(document).height() / 1.8;
+                    lo_el = document.getElementById("table-v-layout");
+                    lo_el.style.maxHeight = "90vh";
+
+                }
+                return height;
+            }
+
+            function isMobile() {
+                var match = window.matchMedia || window.msMatchMedia;
+                if(match) {
+                    var mq = match("(pointer:coarse)");
+                    return mq.matches;
+                }
+                return false;
+            }
+
+            function getNum(val) {
+                if (isNaN(val)) {
+                    return 0;
+                }
+                return val;
+            }
     
         
     
@@ -169,10 +411,13 @@
             var intersect_res;
     
     
-            var url = 'https://yovavsanders.github.io/govmap/KidumKehilati'
+            var url = 'https://yovavsanders.github.io/govmap/KidumKehilati';
+            var setl_url = url + "/data/SETL_AREA_kidum.geojson";
+            var setlnames = [];
     
 
-            var kidum_data = []
+            var kidum_data = [];
+            var setl_data;
             var s_wkts = [];
             var s_names = [];
             var s_symbols = [];
@@ -197,8 +442,8 @@
     
                 govmap.createMap('map_div', {
                     token: my_token,
-                    visibleLayers: ["LOCALITY_210410"],
-                    layers:["LOCALITY_210410"], 
+                    visibleLayers: [],
+                    layers:[], 
                     layersMode: 4, 
                     showXY: true,
                     level: 1,
@@ -211,11 +456,23 @@
                 $.ajax({
                     dataType: 'json',
                     beforeSend : function() {
+
+
+                        $.get(setl_url).then(function (data) {
+                            console.log(data);
+                            setl_data = data.features;
+
+
+                            
+                            setlnames = [];
+                            for (i = 0; i < setl_data.length; i++)
+                            {
+                                setlnames.push(setl_data[i].properties.SETL_NAME)
+                            }
+                            setlnames.sort();
+                            appVue.s_items = setlnames;
+                        });
                         console.log('Before Ajax Request Starts !!');
-    
-    
-    
-    
                     },
                     success: function(data) {
                             //console.log(iso_data);
@@ -390,9 +647,8 @@
                                     }
                                     if (!isInArray(s_names[s_names.length - 1], names))
                                     {
-                                        names.push(s_names[s_names.length - 1])
+                                        names.push(s_names[s_names.length - 1]);
                                     }
-;
                                 }
                             }
 
@@ -427,6 +683,7 @@
                             names.sort();
                             appVue.items = names;
 
+
                             
     
     
@@ -437,6 +694,15 @@
                     url: kidum_json
                 });
 
+
+
+
+
+                o = document.getElementById("setl");
+                o.hidden = true;
+                om = document.getElementById("setl_mobile");
+                om.hidden = true;
+
             });
     
             
@@ -445,40 +711,60 @@
             vuetify: new Vuetify(),
             data () {
                 return {
+
+                    radios: 'radio-1',
+                    checkbox: true,
+                    dialog: false,
+
+                    height: getHeight(),
                 
+
+
                     loading: false,
                     items: [],
-                    search: null,
+                    search: "",
                     search_mobile: null,
                     loading_mobile: null,
                     select: null,
                     select_mobile: null,
+
+                    s_loading: false,
+                    s_items: [],
+                    s_search: null,
+                    s_search_mobile: null,
+                    s_loading_mobile: null,
+                    s_select: null,
+                    s_select_mobile: null,
+
                     setl_names: [],
+
+
+
+
+
+
+                    sheet: false,
+                    headers: [
+                    {
+                        text: 'שם המוסד',
+                        align: 'right',
+                        value: 'NAME',
+                    },
+                    { text: 'תחום', value: 'LAYER' },
+                    { text: 'סוג מתחם', value: 'TYPE' },
+                    { text: 'כתובת', value: 'ADDR' },
+                    { text: 'מנהל/ת', value: 'MANAGER' },
+                    { text: 'טלפון', value: 'PHONE' },
+                    {text: 'התמקדות', value: 'action'},
+                    ],
+                    desserts: [
+                
+                    ],
+                    expanded: [],
+                    tsearch: ""
                 }
             },
-            watch: {
-                search (val) {
-                    val && val !== this.select && this.querySelections(val)
-                },
-            },
-            computed: {
-                currentTitle () {
-                    switch (this.step) {
-                    case 1: return 'כפר סבא'
-                    case 2: return 'Create a password'
-                    default: return 'Account created'
-                    }
-                },
-    
-                avg () {
-                    const sum = this.points.reduce((acc, cur) => acc + cur, 0)
-                    const length = this.points.length
-    
-                    if (!sum && !length) return 0
-    
-                    return Math.ceil(sum / length)
-                },
-            },
+
     
             methods: {
                 querySelections (v) {
@@ -491,20 +777,241 @@
                     this.loading = false
                     }, 500)
                 },
+
                 zoom(name)
                 {
-                    console.log(name);
-                    var s_features = kidum_data.filter(function(f) {
-                            return f.NAME == name;		
-                    });
-                    console.log(s_features);
-                    if (s_features.length > 0)
+
+
+
+
+                    if (this.radios=='radio-1')
                     {
-                        console.log( s_features[0]);
-                        govmap.zoomToXY({ x: s_features[0].X, y: s_features[0].Y, level: 7, marker: false });
+                        console.log(name);
+                        var s_features = kidum_data.filter(function(f) {
+                                return f.NAME == name;		
+                        });
+                        console.log(s_features);
+                        if (s_features.length > 0)
+                        {
+                            console.log( s_features[0]);
+                            govmap.zoomToXY({ x: s_features[0].X, y: s_features[0].Y, level: 7, marker: false });
+                        }
+        
+        
+                        // govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='X'", 'zoomToExtent': false});
+                    }
+                    if (this.radios=='radio-2')
+                    {
+                        console.log(name);
+                        var s_features = setl_data.filter(function(f) {
+                                return f.properties.SETL_NAME== name;		
+                        });
+                        if (s_features.length > 0)
+                        {
+      
+                            var feat = s_features[0];
+                            wkt_polygon = feat.geometry;
+                            var polygon = new Terraformer.Primitive(wkt_polygon);
+                            var results = [];
+                            for (ii = 0; ii < kidum_data.length; ii++)
+                            {
+
+                                pt_json = {
+                                            "type": "Point",
+                                            "coordinates": [kidum_data[ii].X, kidum_data[ii].Y]
+                                        };
+
+                                var point = new Terraformer.Primitive(pt_json);
+                                //console.log(point);
+                                if (point.within(polygon))
+                                {
+                                    results.push(kidum_data[ii]);
+                                    console.log(kidum_data[ii]);
+                                }
+                        
+                                
+                            }
+
+
+                            var data = {  
+										wkts: [Terraformer.WKT.convert(wkt_polygon)],  
+										names: ['p1'],  
+										showBubble: true,
+										geometryType: govmap.drawType.Polygon,  
+										defaultSymbol:  
+										{  
+											'outlineColor': [0, 0, 255, 1],
+											'outlineWidth': 3,
+											'fillColor': [255, 255, 255, 0.5]
+										},    
+										symbols: [],  
+										'clearExisting': false,
+										data: {  
+			
+										} 
+									}
+							govmap.displayGeometries(data).then(function (response)
+                            {
+                                console.log(response)
+                            });
+                        
+                            x_min  = Terraformer.Tools.calculateEnvelope(wkt_polygon).x
+                            y_min = Terraformer.Tools.calculateEnvelope(wkt_polygon).y
+                            h = Terraformer.Tools.calculateEnvelope(wkt_polygon).h
+                            w = Terraformer.Tools.calculateEnvelope(wkt_polygon).w
+                            y_center = y_min + (h/2)
+                            x_center = x_min + (w/2)
+                            govmap.zoomToXY({ x: x_center, y: y_center, level: 5, marker: false });
+
+
+
+
+
+                            appVue.desserts = results;
+                            appVue.sheet = true;
+
+                        }
                     }
 
-                }
+
+
+
+
+ 
+
+                },
+                SearchSelected(){
+
+                    appVue.desserts = [];
+                    tableData = []
+                    appVue.desserts = tableData;
+
+                },
+
+                ClearSearch(){
+
+
+
+                },
+
+                ClearFilter(){
+
+   
+
+
+                },
+
+                cancelClick()
+                {
+                    appVue.desserts = [];
+                    tableData = [];
+ 
+                },
+
+
+                zoomItem(item)
+                {
+                    console.log(item);
+                    var name = item.NAME;
+                    govmap.zoomToXY({ x: item.X, y: item.Y, level: 7, marker: false });
+                },
+
+                byName()
+                {
+                  console.log("mosad");
+                  r = document.getElementById("mosad");
+                  r.hidden = false;
+                  rm = document.getElementById("mosad_mobile");
+                  rm.hidden = false;
+
+
+                  o = document.getElementById("setl");
+                  o.hidden = true;
+                  om = document.getElementById("setl_mobile");
+                  om.hidden = true;
+                },
+
+                bySetl(){
+                  console.log("setl");
+
+                  r = document.getElementById("mosad");
+                  r.hidden = true;
+                  rm = document.getElementById("mosad_mobile");
+                  rm.hidden = true;
+
+
+                  o = document.getElementById("setl");
+                  o.hidden = false;
+                  om = document.getElementById("setl_mobile");
+                  om.hidden = false;
+                },
+
+                fnExcelReport()
+                {
+
+
+
+                    var col = [];
+                    for (var i = 0; i < this.desserts.length; i++) {
+                        for (var key in this.desserts[i]) {
+                            if (col.indexOf(key) === -1) {
+                                col.push(key);
+                            }
+                        }
+                    }
+
+                    var table = document.createElement("table");
+
+                    var tr = table.insertRow(-1);                   // TABLE ROW.
+
+                    for (var i = 0; i < col.length; i++) {
+                        var th = document.createElement("th");      // TABLE HEADER.
+                        th.innerHTML = col[i];
+                        tr.appendChild(th);
+                    }
+
+                    // ADD JSON DATA TO THE TABLE AS ROWS.
+                    for (var i = 0; i < this.desserts.length; i++) {
+
+                        tr = table.insertRow(-1);
+
+                        for (var j = 0; j < col.length; j++) {
+                            var tabCell = tr.insertCell(-1);
+                            tabCell.innerHTML = this.desserts[i][col[j]];
+                        }
+                    }
+
+                    var tab_text="<table><tr>";
+                    var textRange; var j=0;
+                    var tab = table;
+                    
+                    for(j = 0 ; j < tab.rows.length ; j++)
+                    {
+                        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+                        //tab_text=tab_text+"</tr>";
+                    }
+
+                    tab_text=tab_text+"</table>";
+                    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+                    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+                    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+                    var ua = window.navigator.userAgent;
+                    var msie = ua.indexOf("MSIE ");
+
+                    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+                    {
+                        txtArea1.document.open("txt/html","replace");
+                        txtArea1.document.write(tab_text);
+                        txtArea1.document.close();
+                        txtArea1.focus();
+                        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+                    }
+                    else                 //other browser not tested on IE 11
+                        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+                    return (sa);
+                },
     
     
     
