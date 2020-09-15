@@ -66,6 +66,9 @@ text-align: right;
         <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
             <div id="isolation_app">
                 <v-app>
+
+
+
                     <form style='height: 5%;' scrolling='no'> 
                 <v-app-bar style="text-align: center; max-height: 48px;"
                 color="indigo"
@@ -111,6 +114,25 @@ text-align: right;
                   ></v-autocomplete>
                 </div>
 
+
+                <div class="text-right" style="width:25%; text-align:right;" id="layer">
+                    <v-autocomplete
+                    clearable
+                    v-model="l_select"
+                    :loading="l_loading"
+                    :items="l_items"
+                    :search-input.sync="l_search"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="שכבה"
+                    solo-inverted
+                    @change='zoom'
+                  ></v-autocomplete>
+                </div>
+
         
                 <v-divider vertical></v-divider>
     
@@ -134,24 +156,9 @@ text-align: right;
                       </v-btn>
                     </template>
               
-                    <v-card class="d-inline-block">
-  
-                            <v-radio-group v-model="radios" :mandatory="false">
-                                                 
-                                   
-                               <v-radio label="חיפוש לפי שם מוסד"  color="indigo" @change="byName" value="radio-1"></v-radio>
-                                                     
-                                 
-                              <v-radio label="חיפוש לפי שם ישוב" color="indigo" @change="bySetl" value="radio-2"></v-radio>
-                          </v-radio-group>
-                  </v-card>
                   </v-dialog>
                   </div>
     
-    
-    
-    
-        
                 </v-app-bar>
     
  
@@ -199,6 +206,24 @@ text-align: right;
                   ></v-autocomplete>
                 </div>
 
+                <div div class="text-right" style="width:75%; text-align:right;" id="layer_mobile">
+                    <v-autocomplete
+                    clearable
+                    v-model="l_select"
+                    :loading="l_loading_mobile"
+                    :items="l_items"
+                    :search-input.sync="l_search_mobile"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="חיפוש לפי שם שכבה"
+                    solo-inverted
+                    @change='zoom'
+                  ></v-autocomplete>
+                </div>
+
                 
                 <div div class="text-right" style="width:25%; text-align:right; margin-top: 6px;" > 
                     <v-dialog right
@@ -217,12 +242,15 @@ text-align: right;
                     <v-card class="d-inline-block">
   
                             <v-radio-group v-model="radios" :mandatory="false">
-                                                 
-                                   
-                               <v-radio label="חיפוש לפי שם מוסד"  color="indigo" @change="byName" value="radio-1"></v-radio>
+                                                
                                                      
                                  
                               <v-radio label="חיפוש לפי שם ישוב" color="indigo" @change="bySetl" value="radio-2"></v-radio>
+
+                              <v-radio label="חיפוש לפי שם מוסד"  color="indigo" @change="byName" value="radio-1"></v-radio>
+
+                              <v-radio label="חיפוש לפי שם שכבה" color="indigo" @change="byLayer" value="radio-3"></v-radio>
+
                           </v-radio-group>
                         </v-card>
                     </v-dialog>
@@ -353,7 +381,267 @@ text-align: right;
         
     <script>
     
-    
+            var s_wkts_layer = [];
+            var s_names_layer = [];
+            var bubbleHTMLParameters_all_layer = [];
+            var s_symbols_layer = [];
+
+                
+            function ClearUserPoints(){
+
+                var bubbleContent = "";
+                var data = {  
+                    wkts: [], 
+                    showBubble: true, 
+                    names: [],  
+                    geometryType: govmap.drawType.Point,  
+                    defaultSymbol:  
+                    {  
+                        url:'https://govmap.gov.il/sites/O1.png',  
+                        width:20,  
+                        height:20  
+                    },   
+                    symbols: [],  
+                    clearExisting: true,  
+                    data: {  
+                            tooltips: [],  
+                            headers: [],
+                            bubbleHTML: bubbleContent,
+                            bubbleHTMLParameters:[]
+                        }  
+                };  
+                        
+                govmap.displayGeometries(data).then(function (response)  
+                {  
+                //console.log(response.data);
+                }); 
+
+            }
+
+
+            function showLayers()
+            {
+                var data = {  
+                            wkts: s_wkts,  
+                            names: s_names,  
+                            showBubble: true,
+                            geometryType: govmap.drawType.Point,  
+                            defaultSymbol:  
+                            {  
+                                url: url + '/icons/brown.png',  
+                                width:20,  
+                                height:20  
+                            },   
+                            symbols: s_symbols,  
+                            clearExisting: true,  
+                            data: {  
+                                    tooltips: s_names,  
+                                    headers: s_names,
+                                    bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                                    bubbleHTMLParameters:bubbleHTMLParameters_all
+                                }  
+                            };
+
+
+                            govmap.displayGeometries(data).then(function (response)  
+                            {  
+                                console.log(response);
+                            });
+            }
+
+            function filterLayer(layer_name)
+            {
+                ClearUserPoints();
+
+
+                    
+                s_wkts_layer = [];
+                s_names_layer = [];
+                bubbleHTMLParameters_all_layer = [];
+                s_symbols_layer = [];
+
+                console.log(layer_name);
+                var s_features = kidum_data.filter(function(f) {
+                                return f.LAYER == layer_name;		
+                });
+                for (i=0; i < s_features.length; i++)
+                {
+                    if (s_features[i].X != "" && s_features[i].Y != "")
+                    {
+                        if (layer_name == "הגמילה הפיזית מסמים")
+                        {
+                            s_wkts_layer.push("POINT(("+s_features[i].X+" "+s_features[i].Y+"))");
+                            if (s_features[i].NAME != "" && s_features[i].NAME != null)
+                            {
+                                s_names_layer.push(s_features[i].NAME);
+                            }
+                            bubbleHTMLParameters_all_layer.push([
+
+                            "סוג המוסד: " + s_features[i].TYPE
+                            + "<br />"  + "תחום: " + s_features[i].LAYER
+                            + "<br />"  + "כתובת: " + s_features[i].ADDR
+                            + "<br />" + "פקס: " + s_features[i].FAX
+                            + "<br />" + "מייל: " + s_features[i].MAIL1
+                            + "<br />" + "מייל: " + s_features[i].MAIL2
+                            + "<br />" + "מספר טלפון: " + s_features[i].PHONE  
+                            , "הערות: " + s_features[i].REMARKS]);
+                            symbol_url =url + '/icons/blue.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+                        }
+                        if (layer_name == "טיפול המשך בנפגעי סמים")
+                        {
+                            console.log("טיפול המשך בנפגעי סמים");
+                            s_wkts_layer.push("POINT(("+s_features[i].X+" "+s_features[i].Y+"))");
+                            if (s_features[i].NAME != "" && s_features[i].NAME != null)
+                            {
+                                s_names_layer.push(s_features[i].NAME);
+                            }
+                            bubbleHTMLParameters_all_layer.push([
+                            "סוג המוסד: " + s_features[i].TYPE
+                            + "<br />"  + "תחום: " + s_features[i].LAYER
+                            + "<br />"  + "מחוז: " + s_features[i].MACHOZ
+                            + "<br />"  + "מנהל/ת: " + s_features[i].MANAGER
+                            + "<br />"  + "טלפון: " + s_features[i].PHONE
+                            ,"אוכלוסיית יעד: " + s_features[i].POP_TYPE ])
+                            symbol_url =url + '/icons/red.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+                        }
+                        if (layer_name == "מסלול תרופתי לטיפול ממושך")
+                        {
+                            s_wkts_layer.push("POINT(("+s_features[i].X+" "+s_features[i].Y+"))");
+                            if (s_features[i].NAME != "" && s_features[i].NAME != null)
+                            {
+                                s_names_layer.push(s_features[i].NAME);
+                            }
+                            bubbleHTMLParameters_all_layer.push([
+                            "סוג המוסד: " + s_features[i].TYPE
+                            + "<br />"  + "תחום: " + s_features[i].LAYER
+                            + "<br />"  + "כתובת: " + s_features[i].ADDR
+                            + "<br />"  + "מחוז: " + s_features[i].MACHOZ
+                            + "<br />"  + "מרפאה: " + s_features[i].CLINIC
+                            + "<br />"  + "בית מרקחת: " + s_features[i].PHARM
+                            + "<br />"  + "רופא/ה: " + s_features[i].DOCTOR
+                            + "<br />"  + "רוקח/ת: " + s_features[i].PHARMASIST
+                            + "<br />"  + "מנהל/ת: " + s_features[i].MANAGER
+                            + "<br />" + "פקס: " + s_features[i].FAX
+                            + "<br />"  + "טלפון: " + s_features[i].PHONE,
+                            "מייל: " + s_features[i].MAIL1])
+                            symbol_url =url + '/icons/green.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+                        }
+                        if (layer_name == "טיפול גמילה אמבולטורי מהתמכרות למשככי כאבים")
+                        {
+                            s_wkts_layer.push("POINT(("+s_features[i].X+" "+s_features[i].Y+"))");
+                            if (s_features[i].NAME != "" && s_features[i].NAME != null)
+                            {
+                                s_names_layer.push(s_features[i].NAME);
+                            }
+                            bubbleHTMLParameters_all_layer.push([
+                            "סוג המוסד: " + s_features[i].TYPE
+                            + "<br />"  + "תחום: " + s_features[i].LAYER
+                            + "<br />"  + "כתובת: " + s_features[i].ADDR
+                            + "<br />"  + "מרפאה: " + s_features[i].CLINIC
+                            + "<br />"  + "מנהל/ת: " + s_features[i].MANAGER
+                            + "<br />"  + "טלפון: " + s_features[i].PHONE
+                            + "<br />"  + "אוכלוסיית יעד: " + s_features[i].POP_TYPE
+                            , "הערות: " + s_features[i].REMARKS]);
+                            symbol_url =url + '/icons/orange.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+                        }
+                        if (layer_name == "טיפול בנפגעי אלכוהול")
+                        {
+                            s_wkts_layer.push("POINT(("+s_features[i].X+" "+s_features[i].Y+"))");
+                            if (s_features[i].NAME != "" && s_features[i].NAME != null)
+                            {
+                                s_names_layer.push(s_features[i].NAME);
+                            }
+
+                            bubbleHTMLParameters_all_layer.push([
+                            "סוג המוסד: " + s_features[i].TYPE
+                            + "<br />"  + "תחום: " + s_features[i].LAYER
+                            + "<br />"  + "כתובת: " + s_features[i].ADDR
+                            + "<br />"  + "מנהל/ת: " + s_features[i].MANAGER
+                            + "<br />"  + "טלפון: " + s_features[i].PHONE
+                            + "<br />" + "פקס: " + s_features[i].FAX
+                            , "הערות: " + s_features[i].REMARKS]);
+                            symbol_url =url + '/icons/ocean.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+                        }
+                        if (layer_name == "אוכלוסיות מיוחדות")
+                        {
+                            s_wkts_layer.push("POINT(("+s_features[i].X+" "+s_features[i].Y+"))");
+                            if (s_features[i].NAME != "" && s_features[i].NAME != null && s_features[i].TYPE != s_features[i].NAME)
+                            {
+                                s_names_layer.push(s_features[i].NAME);
+                            }
+                            bubbleHTMLParameters_all_layer.push([
+                            "סוג המוסד: " + s_features[i].TYPE
+                            + "<br />"  +"תת סוג מוסד: " + s_features[i].SUB_TYPE
+                            + "<br />"  + "תחום: " + s_features[i].LAYER
+                            + "<br />"  + "מחוז: " + s_features[i].MACHOZ
+                            + "<br />"  + "כתובת: " + s_features[i].ADDR
+                            + "<br />"  + "מנהל/ת: " + s_features[i].MANAGER
+                            + "<br />"  + "שעות פתיחה: " + s_features[i].OPENING_TIME
+                            + "<br />"  + "טלפון: " + s_features[i].PHONE
+                            + "<br />" + "פקס: " + s_features[i].FAX
+                            , "הערות: " + s_features[i].REMARKS]);
+                            symbol_url =url + '/icons/light blue.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+                        }
+                        if (layer_name == "נספחים")
+                        {
+                            s_wkts_layer.push("POINT(("+s_features[i].X+" "+s_features[i].Y+"))");
+                            if (s_features[i].NAME != "" && s_features[i].NAME != null)
+                            {
+                                s_names_layer.push(s_features[i].NAME);
+                            }
+                            bubbleHTMLParameters_all_layer.push([
+                            "סוג המוסד: " + s_features[i].TYPE
+                            + "<br />"  +"שם ישוב: " + s_features[i].SETL_NAME
+                            + "<br />"  + "תחום: " + s_features[i].LAYER
+                            + "<br />"  + "מעבדה: " + s_features[i].LAB
+                            + "<br />"  + "כתובת: " + s_features[i].ADDR
+                            + "<br />"  + "טלפון: " + s_features[i].PHONE
+                            + "<br />"  + "טלפון נוסף: " + s_features[i].PHONE2
+                            + "<br />" + "פקס: " + s_features[i].FAX
+                            + "<br />"  + "מנהל/ת: " + s_features[i].MANAGER                       
+                            , "מייל: " + s_features[i].MAIL]);
+                            symbol_url =url + '/icons/gold.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+
+                        }
+                    }
+                }
+
+
+                var data = {  
+                wkts: s_wkts_layer,  
+                names: s_names_layer,  
+                showBubble: true,
+                geometryType: govmap.drawType.Point,  
+                defaultSymbol:  
+                {  
+                    url: url + '/icons/brown.png',  
+                    width:20,  
+                    height:20  
+                },   
+                symbols: s_symbols_layer,  
+                clearExisting: true,  
+                data: {  
+                        tooltips: s_names_layer,  
+                        headers: s_names_layer,
+                        bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                        bubbleHTMLParameters:bubbleHTMLParameters_all_layer
+                    }  
+                };
+
+
+                govmap.displayGeometries(data).then(function (response)  
+                {  
+                    console.log(response);
+                });
+
+            }
     
     
     
@@ -712,6 +1000,11 @@ text-align: right;
                 om = document.getElementById("mosad_mobile");
                 om.hidden = true;
 
+                l = document.getElementById("layer");
+                l.hidden = true;
+                lm = document.getElementById("layer_mobile");
+                lm.hidden = true;
+
             });
     
             
@@ -720,6 +1013,7 @@ text-align: right;
             vuetify: new Vuetify(),
             data () {
                 return {
+   
 
                     radios: 'radio-2',
                     checkbox: true,
@@ -744,6 +1038,20 @@ text-align: right;
                     s_loading_mobile: null,
                     s_select: null,
                     s_select_mobile: null,
+
+                    l_loading: false,
+                    l_items: [                   "הגמילה הפיזית מסמים",
+                        "טיפול המשך בנפגעי סמים",
+                        "מסלול תרופתי לטיפול ממושך",
+                        "טיפול גמילה אמבולטורי מהתמכרות למשככי כאבים",
+                        "טיפול בנפגעי אלכוהול",
+                        "אוכלוסיות מיוחדות",
+                        "נספחים"],
+                    l_search: null,
+                    l_search_mobile: null,
+                    l_loading_mobile: null,
+                    l_select: null,
+                    l_select_mobile: null,
 
                     setl_names: [],
 
@@ -783,7 +1091,7 @@ text-align: right;
                 {
 
 
-
+                    
 
                     if (this.radios=='radio-1')
                     {
@@ -799,11 +1107,6 @@ text-align: right;
                             appVue.desserts = s_features;
                             appVue.sheet = true;
                         }
-
-                        
-
-        
-        
                         // govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='X'", 'zoomToExtent': false});
                     }
                     if (this.radios=='radio-2')
@@ -877,6 +1180,31 @@ text-align: right;
                             appVue.sheet = true;
 
                         }
+                        
+                    }
+                    if (this.radios=='radio-3')
+                    {
+                        console.log(name);
+                        var s_features = kidum_data.filter(function(f) {
+                                return f.LAYER == name;		
+                        });
+                        console.log(s_features);
+                        if (s_features.length > 0)
+                        {
+                            console.log( s_features[0]);
+                            //govmap.zoomToXY({ x: s_features[0].X, y: s_features[0].Y, level: 7, marker: false });
+                            appVue.desserts = s_features;
+                            appVue.sheet = true;
+
+
+                            filterLayer(name);
+                        }
+
+                        
+
+        
+        
+                        // govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='X'", 'zoomToExtent': false});
                     }
 
 
@@ -924,6 +1252,7 @@ text-align: right;
 
                 byName()
                 {
+                  showLayers();
                   console.log("mosad");
                   r = document.getElementById("mosad");
                   r.hidden = false;
@@ -935,15 +1264,29 @@ text-align: right;
                   o.hidden = true;
                   om = document.getElementById("setl_mobile");
                   om.hidden = true;
+
+                                             
+                  l = document.getElementById("layer");
+                  l.hidden = true;
+                  lm = document.getElementById("layer_mobile");
+                  lm.hidden = true;
                 },
 
                 bySetl(){
+
+                  showLayers();
                   console.log("setl");
 
                   r = document.getElementById("mosad");
                   r.hidden = true;
                   rm = document.getElementById("mosad_mobile");
                   rm.hidden = true;
+
+                                
+                  l = document.getElementById("layer");
+                  l.hidden = true;
+                  lm = document.getElementById("layer_mobile");
+                  lm.hidden = true;
 
 
                   o = document.getElementById("setl");
@@ -952,6 +1295,29 @@ text-align: right;
                   om.hidden = false;
                 },
 
+
+                byLayer(){
+
+                    console.log("layer");
+
+                    r = document.getElementById("mosad");
+                    r.hidden = true;
+                    rm = document.getElementById("mosad_mobile");
+                    rm.hidden = true;
+
+
+                    o = document.getElementById("setl");
+                    o.hidden = true;
+                    om = document.getElementById("setl_mobile");
+                    om.hidden = true;
+
+                    
+                    l = document.getElementById("layer");
+                    l.hidden = false;
+                    lm = document.getElementById("layer_mobile");
+                    lm.hidden = false;
+
+                },
                 fnExcelReport()
                 {
 
