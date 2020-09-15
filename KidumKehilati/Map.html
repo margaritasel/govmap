@@ -54,9 +54,6 @@ text-align: right;
     <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
     <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
     
-    <script src="https://unpkg.com/terraformer@1.0.8"></script>
-    <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 
@@ -113,6 +110,7 @@ text-align: right;
                     @change='zoom'
                   ></v-autocomplete>
                 </div>
+
         
                 <v-divider vertical></v-divider>
     
@@ -313,7 +311,7 @@ text-align: right;
                                 :headers="headers"
                                 :items="desserts"
                                 :height="height"
-                                item-key="NAME"
+                                item-key="ID"
                                 :search="tsearch"
                                 class="elevation-1"
                                 fixed-header
@@ -480,6 +478,7 @@ text-align: right;
                             console.log(kidum_data);
                             for (i=0; i < kidum_data.length; i++)
                             {
+                                kidum_data[i].ID = i;
                                 if (kidum_data[i].X != "" && kidum_data[i].Y != "")
                                 {
 
@@ -492,7 +491,8 @@ text-align: right;
                                             s_names.push(kidum_data[i].NAME);
                                         }
                                         else{
-                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE + " " + i);
+                                            kidum_data[i].NAME = kidum_data[i].LAYER + " " + kidum_data[i].TYPE + " " + i;
                                         }
                                         bubbleHTMLParameters_all.push([
 
@@ -509,21 +509,23 @@ text-align: right;
                                     }
                                     if (layer == "טיפול המשך בנפגעי סמים")
                                     {
+                                        console.log("טיפול המשך בנפגעי סמים");
                                         s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
                                         if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
                                         {
                                             s_names.push(kidum_data[i].NAME);
                                         }
                                         else{
-                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].SETL_NAME + " " + i);
+                                            kidum_data[i].NAME = kidum_data[i].LAYER + " " + kidum_data[i].SETL_NAME + " " + i;
                                         }
                                         bubbleHTMLParameters_all.push([
                                         "סוג המוסד: " + kidum_data[i].TYPE
                                         + "<br />"  + "תחום: " + kidum_data[i].LAYER
                                         + "<br />"  + "מחוז: " + kidum_data[i].MACHOZ
                                         + "<br />"  + "מנהל/ת: " + kidum_data[i].MANAGER
-                                        + "<br />"  + "טלפון: " + kidum_data[i].PHONE,
-                                        "אוכלוסיית יעד: " + kidum_data[i].POP_TYPE ])
+                                        + "<br />"  + "טלפון: " + kidum_data[i].PHONE
+                                        ,"אוכלוסיית יעד: " + kidum_data[i].POP_TYPE ])
                                         symbol_url =url + '/icons/red.png'
                                         s_symbols.push({url:symbol_url, width:30,  height:30  });
                                     }
@@ -535,7 +537,10 @@ text-align: right;
                                             s_names.push(kidum_data[i].NAME);
                                         }
                                         else{
-                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE + " " + i);
+                                            kidum_data[i].NAME = kidum_data[i].LAYER + " " + kidum_data[i].TYPE + " " + i;
+                                            
+
                                         }
                                         bubbleHTMLParameters_all.push([
                                         "סוג המוסד: " + kidum_data[i].TYPE
@@ -561,7 +566,8 @@ text-align: right;
                                             s_names.push(kidum_data[i].NAME);
                                         }
                                         else{
-                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE  + " " + i);
+                                            kidum_data[i].NAME = kidum_data[i].LAYER + " " + kidum_data[i].TYPE + " " + i;
                                         }
                                         bubbleHTMLParameters_all.push([
                                         "סוג המוסד: " + kidum_data[i].TYPE
@@ -583,7 +589,8 @@ text-align: right;
                                             s_names.push(kidum_data[i].NAME);
                                         }
                                         else{
-                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE  + " " + i);
+                                            kidum_data[i].NAME = kidum_data[i].LAYER + " " + kidum_data[i].TYPE + " " + i;
                                         }
                                         bubbleHTMLParameters_all.push([
                                         "סוג המוסד: " + kidum_data[i].TYPE
@@ -599,12 +606,13 @@ text-align: right;
                                     if (layer == "אוכלוסיות מיוחדות")
                                     {
                                         s_wkts.push("POINT(("+kidum_data[i].X+" "+kidum_data[i].Y+"))");
-                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null)
+                                        if (kidum_data[i].NAME != "" && kidum_data[i].NAME != null && kidum_data[i].TYPE != kidum_data[i].NAME)
                                         {
                                             s_names.push(kidum_data[i].NAME);
                                         }
                                         else{
-                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE);
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE  + " " + i);
+                                            kidum_data[i].NAME = kidum_data[i].LAYER + " " + kidum_data[i].TYPE + " " + i;
                                         }
                                         bubbleHTMLParameters_all.push([
                                         "סוג המוסד: " + kidum_data[i].TYPE
@@ -628,7 +636,8 @@ text-align: right;
                                             s_names.push(kidum_data[i].NAME);
                                         }
                                         else{
-                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].SETL_NAME);
+                                            s_names.push(kidum_data[i].LAYER + " " + kidum_data[i].TYPE  + " " + i);
+                                            kidum_data[i].NAME = kidum_data[i].LAYER + " " + kidum_data[i].TYPE + " " + i;
                                         }
                                         bubbleHTMLParameters_all.push([
                                         "סוג המוסד: " + kidum_data[i].TYPE
@@ -698,9 +707,9 @@ text-align: right;
 
 
 
-                o = document.getElementById("setl");
+                o = document.getElementById("mosad");
                 o.hidden = true;
-                om = document.getElementById("setl_mobile");
+                om = document.getElementById("mosad_mobile");
                 om.hidden = true;
 
             });
@@ -712,7 +721,7 @@ text-align: right;
             data () {
                 return {
 
-                    radios: 'radio-1',
+                    radios: 'radio-2',
                     checkbox: true,
                     dialog: false,
 
@@ -745,6 +754,7 @@ text-align: right;
 
                     sheet: false,
                     headers: [
+                    { text: 'מספר', value: 'ID' },
                     {
                         text: 'שם המוסד',
                         align: 'right',
@@ -767,16 +777,7 @@ text-align: right;
 
     
             methods: {
-                querySelections (v) {
-                    this.loading = true
-                    // Simulated ajax query
-                    setTimeout(() => {
-                    this.items = this.setl_names.filter(e => {
-                        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-                    })
-                    this.loading = false
-                    }, 500)
-                },
+
 
                 zoom(name)
                 {
@@ -795,7 +796,12 @@ text-align: right;
                         {
                             console.log( s_features[0]);
                             govmap.zoomToXY({ x: s_features[0].X, y: s_features[0].Y, level: 7, marker: false });
+                            appVue.desserts = s_features;
+                            appVue.sheet = true;
                         }
+
+                        
+
         
         
                         // govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='X'", 'zoomToExtent': false});
