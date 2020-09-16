@@ -7,41 +7,235 @@
     <style>
 
 
-        table.v-table {
-            max-width: none;
-        }
 
-        .v-data-table__mobile-row__header {
+.v-data-table__mobile-row__header {
 
-            width: 49.5%;	
-            text-align: right;
-            direction: rtl;
+width: 49.5%;	
+text-align: right;
+  direction: rtl;
 
-        }
+}
 
-        .v-data-table__mobile-row__cell {
-            width: 49.5%;
-            text-align: right;
-            direction: rtl;
-        }
+.v-data-table__mobile-row__cell {
+  width: 49.5%;
+  text-align: right;
+  direction: rtl;
+  }
 
-        .v-sheet--offset {
-            top: -24px;
-            position: relative;
-        }
+  
 
-         @media (max-width: 600px) {
-            #myTitle {
-                display: none;
-            }
 
-        }
-    
-        @media (min-width: 600px) {
-            #myTitleMobile {
-                display: none;
-            }
-        }
+
+
+
+ .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 600px) {
+    #myTitle {
+      display: none;
+    }
+	#myMenu{
+      display: none;
+    }
+  }
+
+   @media (min-width: 600px) {
+    #myTitleMobile {
+      display: none;
+    }
+	#myMenuMobile{
+      display: none;
+    }
+  }
+
+
+
+
+  
+.list__tile__title {
+    text-align: right;
+}
+
+.toolbar__title {
+    margin-right: 16px;
+}
+
+.input-group--text-field label {
+    position: absolute;
+    top: 18px;
+    right: 0;
+}
+
+.input-group label {
+    text-align: right;
+    -webkit-transform-origin: top right;
+    transform-origin: top right;
+}
+.input-group.input-group--selection-controls label{
+    right: 32px;
+    left: auto;
+}
+.input-group.input-group--selection-controls .icon--selection-control {
+    left: auto;
+    right: 0;
+}
+.input-group--selection-controls__ripple {
+    -webkit-transform: translate3d(12px,-52%,0);
+    transform: translate3d(12px,-52%,0);
+    left: auto;
+    right: 0;
+}
+
+.mot_watermark
+{
+    position:fixed;
+    right: 150px!important;
+    bottom: 45px!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+.watermark
+{
+    position:fixed;
+    right: 100px!important;
+    bottom: 45px!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.select_map_watermark
+{
+    position: absolute;
+    right: 0%!important;
+    bottom: 50%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.add_layer_watermark
+{
+    position: absolute;
+    right: 0%!important;
+    bottom: 40%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.measure_watermark
+{
+    position: absolute;
+    right: 0%!important;
+    bottom: 30%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+.info_watermark
+{
+    position: absolute;
+    left: 0%!important;
+    bottom: 50%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.search_watermark
+{
+    position: absolute;
+    left: 0%!important;
+    bottom: 40%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.filter_watermark
+{
+    position: absolute;
+    left: 0%!important;
+    bottom: 30%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.share_watermark
+{
+    position: absolute;
+    left: 0%!important;
+    bottom: 20%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+
+#create .v-speed-dial {
+    position: absolute;
+  }
+
+  #create .v-btn--floating {
+    position: relative;
+  }
+
 
     </style>
 
@@ -252,7 +446,7 @@
                         <v-layout id="table-v-layout" column style="max-height: 60vh">       
                               <v-flex style="overflow: auto;">
                                 <v-card style="bottom: 0; ">
-                                <v-card-title  style="max-height: 10%">
+                                <v-card-title>
             
                                     <v-divider vertical></v-divider>
             
@@ -302,6 +496,7 @@
                                 class="elevation-1"
                                 fixed-header
                                 >
+            
             
             
                                 <template v-slot:item.action="{ item }">
