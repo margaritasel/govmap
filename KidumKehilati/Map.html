@@ -1,298 +1,231 @@
 
 <html style='width:100%; height:100%;'>
-    <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 
+
+        table.v-table {
+            max-width: none;
+        }
+
         .v-data-table__mobile-row__header {
 
-width: 49.5%;	
-text-align: right;
-  direction: rtl;
+            width: 49.5%;	
+            text-align: right;
+            direction: rtl;
 
-}
+        }
 
-.v-data-table__mobile-row__cell {
-  width: 49.5%;
-  text-align: right;
-  direction: rtl;
-  }
-  
-    .v-sheet--offset {
-        top: -24px;
-        position: relative;
-      }
-    
-      @media (max-width: 600px) {
-        #myTitle {
-          display: none;
+        .v-data-table__mobile-row__cell {
+            width: 49.5%;
+            text-align: right;
+            direction: rtl;
+        }
+
+        .v-sheet--offset {
+            top: -24px;
+            position: relative;
+        }
+
+         @media (max-width: 600px) {
+            #myTitle {
+                display: none;
+            }
+
         }
     
-      }
-    
-       @media (min-width: 600px) {
-        #myTitleMobile {
-          display: none;
+        @media (min-width: 600px) {
+            #myTitleMobile {
+                display: none;
+            }
         }
-       }
+
     </style>
+
     <head>
-    <title>מוקדי קידום קהילתי</title>
-    
-    <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    
-    
-    
-    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-    <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-
-    <script src="https://unpkg.com/terraformer@1.0.8"></script>
-    <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
-
-    
-    
+        <title>מוקדי קידום קהילתי</title>
+        <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">   
+        <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+        <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        <script src="https://unpkg.com/terraformer@1.0.8"></script>
+        <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>    
     </head>
-        <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
-            <div id="isolation_app">
-                <v-app>
 
+    <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+        <div id="isolation_app">
+            <v-app>
+                <form style='height: 5%;' scrolling='no'> 
 
+                    <v-app-bar style="text-align: center; max-height: 48px;"
+                    color="indigo"
+                    dense
+                    dark
+                    id="myTitle">
 
-                    <form style='height: 5%;' scrolling='no'> 
-                <v-app-bar style="text-align: center; max-height: 48px;"
-                color="indigo"
-                dense
-                dark
-                id="myTitle"
-                >
-    
-                
-                <div class="text-right" style="width:25%; text-align:right;" id="mosad">
-                    <v-autocomplete
-                    clearable
-                    v-model="select"
-                    :loading="loading"
-                    :items="items"
-                    :search-input.sync="search"
-                    cache-items
-                    class="mx-4"
-                    flat
-                    hide-no-data
-                    hide-details
-                    placeholder="שם מוסד"
-                    solo-inverted
-                    @change='zoom'
-                  ></v-autocomplete>
-                </div>
+                        <div class="text-right" style="width:25%; text-align:right;" id="mosad">
+                            <v-autocomplete
+                            clearable
+                            v-model="select"
+                            :loading="loading"
+                            :items="items"
+                            :search-input.sync="search"
+                            cache-items
+                            class="mx-4"
+                            flat
+                            hide-no-data
+                            hide-details
+                            placeholder="שם מוסד"
+                            solo-inverted
+                            @change='zoom'
+                            ></v-autocomplete>
+                        </div>
 
-                <div class="text-right" style="width:25%; text-align:right;" id="setl">
-                    <v-autocomplete
-                    clearable
-                    v-model="s_select"
-                    :loading="s_loading"
-                    :items="s_items"
-                    :search-input.sync="s_search"
-                    cache-items
-                    class="mx-4"
-                    flat
-                    hide-no-data
-                    hide-details
-                    placeholder="שם ישוב"
-                    solo-inverted
-                    @change='zoom'
-                  ></v-autocomplete>
-                </div>
+                        <div class="text-right" style="width:25%; text-align:right;" id="setl">
+                            <v-autocomplete
+                            clearable
+                            v-model="s_select"
+                            :loading="s_loading"
+                            :items="s_items"
+                            :search-input.sync="s_search"
+                            cache-items
+                            class="mx-4"
+                            flat
+                            hide-no-data
+                            hide-details
+                            placeholder="שם ישוב"
+                            solo-inverted
+                            @change='zoom'
+                            ></v-autocomplete>
+                        </div>
 
+                        <div class="text-right" style="width:25%; text-align:right;"  id="layer">
+                            <v-autocomplete :items="l_items" placeholder="שכבה" clearable flat solo-inverted hide-details hide-no-data v-model="l_select" @change='zoom'
+                            :loading="l_loading"
+                            :search-input.sync="l_search"
+                            item-text="name"
+                            cache-items>
+                                <template v-slot:item="{ item }">
+                                <img :src="item.image">
+                                <span>{{ item.name }}</span>
+                                </template>
+                            </v-autocomplete>
+                        </div>
 
-                <!-- <div class="text-right" style="width:25%; text-align:right;" id="layer">
-                    <v-autocomplete
-                    clearable
-                    v-model="l_select"
-                    :loading="l_loading"
-                    :items="l_items"
-                    :search-input.sync="l_search"
-                    cache-items
-                    class="mx-4"
-                    flat
-                    hide-no-data
-                    hide-details
-                    placeholder="שכבה"
-                    solo-inverted
-                    @change='zoom'
-                  ></v-autocomplete>
-                </div> -->
-
-                <div class="text-right" style="width:25%; text-align:right;"  id="layer">
-                    <v-autocomplete :items="l_items" placeholder="שכבה" clearable flat solo-inverted hide-details hide-no-data v-model="l_select" @change='zoom'
-                    :loading="l_loading"
-                    :search-input.sync="l_search"
-                    item-text="name"
-                    cache-items>
-                        <template v-slot:item="{ item }">
-                        <img :src="item.image">
-                        <span>{{ item.name }}</span>
-                        </template>
-                    </v-autocomplete>
-                </div>
-
+            
+                        <v-divider vertical></v-divider>
         
-                <v-divider vertical></v-divider>
-    
-                <v-spacer></v-spacer>
-                <v-toolbar-title class="white--text" style="text-align: center; max-height: 48px;">מוקדי קידום קהילתי</v-toolbar-title>
-                <v-spacer></v-spacer>
+                        <v-spacer></v-spacer>
+                        <v-toolbar-title class="white--text" style="text-align: center; max-height: 48px;">מוקדי קידום קהילתי</v-toolbar-title>
+                        <v-spacer></v-spacer>
 
-                <v-divider vertical></v-divider>
+                        <v-divider vertical></v-divider>
 
-                <div class="text-right" style="width:25%; text-align:right; padding-right: 30px; position: relative; margin: 0 auto;" > 
-                    <v-dialog right
-                    v-model="dialog"
-                    width="300"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn tile block outlined color="white"
-                        v-bind="attrs"
-                        v-on="on"
-                      >
-                        סוג חיפוש
-                      </v-btn>
-                    </template>
-              
-                  </v-dialog>
-                  </div>
-    
-                </v-app-bar>
-    
- 
-                <v-toolbar
-                dark
-                color="indigo"
-                id="myTitleMobile"
-                style='height: 50px;'
-              >
-              <v-row style='height: 55px;'>
-                
-                <div class="text-right" style="width:75%; text-align:right;" id="mosad_mobile">
-                    <v-autocomplete
-                    clearable
-                    v-model="select"
-                    :loading="loading_mobile"
-                    :items="items"
-                    :search-input.sync="search_mobile"
-                    cache-items
-                    class="mx-4"
-                    flat
-                    hide-no-data
-                    hide-details
-                    placeholder="חיפוש לפי שם מוסד"
-                    solo-inverted
-                    @change='zoom'
-                  ></v-autocomplete>
-                </div>
+                        <div class="text-right" style="width:25%; text-align:right; padding-right: 30px; position: relative; margin: 0 auto;" > 
+                            <v-dialog right
+                            v-model="dialog"
+                            width="300">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn tile block outlined color="white"
+                                        v-bind="attrs"
+                                        v-on="on">
+                                        סוג חיפוש
+                                    </v-btn>
+                                </template>
+                            </v-dialog>
+                        </div>
+        
+                    </v-app-bar>
 
-                <div div class="text-right" style="width:75%; text-align:right;" id="setl_mobile">
-                    <v-autocomplete
-                    clearable
-                    v-model="s_select"
-                    :loading="s_loading_mobile"
-                    :items="s_items"
-                    :search-input.sync="s_search_mobile"
-                    cache-items
-                    class="mx-4"
-                    flat
-                    hide-no-data
-                    hide-details
-                    placeholder="חיפוש לפי שם ישוב"
-                    solo-inverted
-                    @change='zoom'
-                  ></v-autocomplete>
-                </div>
-<!-- 
-                <div div class="text-right" style="width:75%; text-align:right;" id="layer_mobile">
-                    <v-autocomplete
-                    clearable
-                    v-model="l_select"
-                    :loading="l_loading_mobile"
-                    :items="l_items"
-                    :search-input.sync="l_search_mobile"
-                    cache-items
-                    class="mx-4"
-                    flat
-                    hide-no-data
-                    hide-details
-                    placeholder="חיפוש לפי שם שכבה"
-                    solo-inverted
-                    @change='zoom'
-                  ></v-autocomplete>
-                </div> -->
+                    <v-toolbar dark color="indigo" id="myTitleMobile" style='height: 50px;'>
+                        <v-row style='height: 55px;'>
+                            <div class="text-right" style="width:75%; text-align:right;" id="mosad_mobile">
+                                <v-autocomplete
+                                clearable
+                                v-model="select"
+                                :loading="loading_mobile"
+                                :items="items"
+                                :search-input.sync="search_mobile"
+                                cache-items
+                                class="mx-4"
+                                flat
+                                hide-no-data
+                                hide-details
+                                placeholder="חיפוש לפי שם מוסד"
+                                solo-inverted
+                                @change='zoom'
+                                >
+                                </v-autocomplete>
+                            </div>
 
-                <div div class="text-right" style="width:75%; text-align:right;" id="layer_mobile">
-                    <v-autocomplete :items="l_items" placeholder="חיפוש לפי שם שכבה" clearable flat solo-inverted hide-details hide-no-data v-model="l_select" @change='zoom'
-                    :loading="l_loading_mobile"
-                    :search-input.sync="l_search_mobile"
-                    item-text="name"
-                    cache-items>
-                        <template v-slot:item="{ item }">
-                        <img :src="item.image">
-                        <span>{{ item.name }}</span>
-                        </template>
-                    </v-autocomplete>
-                </div>
+                            <div div class="text-right" style="width:75%; text-align:right;" id="setl_mobile">
+                                <v-autocomplete
+                                clearable
+                                v-model="s_select"
+                                :loading="s_loading_mobile"
+                                :items="s_items"
+                                :search-input.sync="s_search_mobile"
+                                cache-items
+                                class="mx-4"
+                                flat
+                                hide-no-data
+                                hide-details
+                                placeholder="חיפוש לפי שם ישוב"
+                                solo-inverted
+                                @change='zoom'>
+                                </v-autocomplete>
+                            </div>
 
-                
-                <div div class="text-right" style="width:25%; text-align:right; margin-top: 6px;" > 
-                    <v-dialog right
-                    v-model="dialog"
-                    width="300"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn tile block outlined color="white"
-                        v-bind="attrs"
-                        v-on="on"
-                      >
-                        סוג חיפוש
-                      </v-btn>
-                    </template>
-              
-                    <v-card class="d-inline-block">
-  
-                            <v-radio-group v-model="radios" :mandatory="false">
-                                                
-                                                     
-                                 
-                              <v-radio label="חיפוש לפי שם ישוב" color="indigo" @change="bySetl" value="radio-2"></v-radio>
+                            <div div class="text-right" style="width:75%; text-align:right;" id="layer_mobile">
+                                <v-autocomplete :items="l_items" placeholder="חיפוש לפי שם שכבה" clearable flat solo-inverted hide-details hide-no-data v-model="l_select" @change='zoom'
+                                :loading="l_loading_mobile"
+                                :search-input.sync="l_search_mobile"
+                                item-text="name"
+                                cache-items>
+                                    <template v-slot:item="{ item }">
+                                        <img :src="item.image">
+                                        <span>{{ item.name }}</span>
+                                    </template>
+                                </v-autocomplete>
+                            </div>
 
-                              <v-radio label="חיפוש לפי שם מוסד"  color="indigo" @change="byName" value="radio-1"></v-radio>
+                            
+                            <div div class="text-right" style="width:25%; text-align:right; margin-top: 6px;" > 
+                                <v-dialog right
+                                v-model="dialog"
+                                width="300">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn tile block outlined color="white" v-bind="attrs" v-on="on">
+                                        סוג חיפוש
+                                    </v-btn>
+                                </template>
+                        
+                                <v-card class="d-inline-block">
+                                    <v-radio-group v-model="radios" :mandatory="false">  
+                                        <v-radio label="חיפוש לפי שם ישוב" color="indigo" @change="bySetl" value="radio-2"></v-radio>
+                                        <v-radio label="חיפוש לפי שם מוסד"  color="indigo" @change="byName" value="radio-1"></v-radio>
+                                        <v-radio label="חיפוש לפי שם שכבה" color="indigo" @change="byLayer" value="radio-3"></v-radio>
+                                    </v-radio-group>
+                                </v-card>
 
-                              <v-radio label="חיפוש לפי שם שכבה" color="indigo" @change="byLayer" value="radio-3"></v-radio>
-
-                          </v-radio-group>
-                        </v-card>
-                    </v-dialog>
-                    </div>      
-                      </v-row>
-                        </v-toolbar>
-
-            </form>
+                                </v-dialog>
+                            </div>      
+                        </v-row>
+                    </v-toolbar>
+                </form>
             
                 <form name="form" style='height: 100%;' scrolling='no'> 
-                        
                         <div id="map_div" style="width: 100%; height: 100%; float:left">
-                                
-                                
                         </div> 			
                 </form>
-
 
                 <div class="text-center">
                     <v-bottom-sheet v-model="sheet">
@@ -319,7 +252,7 @@ text-align: right;
                         <v-layout id="table-v-layout" column style="max-height: 60vh">       
                               <v-flex style="overflow: auto;">
                                 <v-card style="bottom: 0; ">
-                                <v-card-title  style="max-height: 10vh">
+                                <v-card-title  style="max-height: 10%">
             
                                     <v-divider vertical></v-divider>
             
@@ -379,13 +312,6 @@ text-align: right;
                                     mdi-map-marker-radius
                                     </v-icon>
                                   </template>
-            
-            
-     
-                               
-            
-            
-                                  
                 
                                 
                                 </v-data-table>
@@ -393,7 +319,7 @@ text-align: right;
                             </v-flex>
                         </v-layout>
                     </v-bottom-sheet>
-                  </div>
+                </div>
     
     
     
