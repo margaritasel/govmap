@@ -70,16 +70,10 @@ text-align: right;
     #myTitle {
       display: none;
     }
-	#myMenu{
-      display: none;
-    }
   }
 
    @media (min-width: 600px) {
     #myTitleMobile {
-      display: none;
-    }
-	#myMenuMobile{
       display: none;
     }
   }
@@ -121,121 +115,6 @@ text-align: right;
     left: auto;
     right: 0;
 }
-
-.mot_watermark
-{
-    position:fixed;
-    right: 150px!important;
-    bottom: 45px!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-.watermark
-{
-    position:fixed;
-    right: 100px!important;
-    bottom: 45px!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-
-.select_map_watermark
-{
-    position: absolute;
-    right: 0%!important;
-    bottom: 50%!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-
-.add_layer_watermark
-{
-    position: absolute;
-    right: 0%!important;
-    bottom: 40%!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-
-.measure_watermark
-{
-    position: absolute;
-    right: 0%!important;
-    bottom: 30%!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-.info_watermark
-{
-    position: absolute;
-    left: 0%!important;
-    bottom: 50%!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-
-.search_watermark
-{
-    position: absolute;
-    left: 0%!important;
-    bottom: 40%!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-
-.filter_watermark
-{
-    position: absolute;
-    left: 0%!important;
-    bottom: 30%!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-
-.share_watermark
-{
-    position: absolute;
-    left: 0%!important;
-    bottom: 20%!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-}
-
-
-#create .v-speed-dial {
-    position: absolute;
-  }
-
-  #create .v-btn--floating {
-    position: relative;
-  }
 
 
     </style>
@@ -456,7 +335,7 @@ text-align: right;
                                             <v-badge left
                                             color="green"
                                             :content="desserts.length"
-                                            :value="desserts.length">מתחמי דיור
+                                            :value="desserts.length">קידום קהילתי
                                         </v-badge></p>
                                     
             
@@ -492,19 +371,12 @@ text-align: right;
                                 :headers="headers"
                                 :items="desserts"
                                 :height="height"
-                                :single-expand="true"
-                                :expanded.sync="expanded"
-                                item-key="POLYGON_NAME"
-                                show-expand
+                                item-key="ID"
                                 :search="search"
                                 class="elevation-1"
                                 fixed-header
                                 >
-            
-            
-                                <template v-slot:item.flat_number="{ item }">
-                                    <v-chip :color='getColor(item["flat_number"])' dark>{{ item.flat_number }}</v-chip>
-                                </template>
+          
             
                                 <template v-slot:item.action="{ item }">
                                     <v-icon
