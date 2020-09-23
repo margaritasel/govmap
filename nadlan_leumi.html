@@ -48,6 +48,10 @@
         <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
         <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script>
 
+        <script src="https://unpkg.com/terraformer@1.0.8"></script>
+        <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+      
+
     </head>
 
     <title>שכבת מדדי הנדל"ן הלאומית</title>
@@ -172,8 +176,6 @@ vertical
                     <v-container fluid grid-list-md dir="rtl">
                                     <v-data-iterator
                                       :items="items"
-                                      :items-per-page.sync="itemsPerPage"
-                                      :footer-props="{ itemsPerPageOptions }"
                                       id="myTable"
                                     >
                                       <template v-slot:default="props">
@@ -483,12 +485,6 @@ function WgsToIsrael(latitude, longitude)
                         return h;
         }
 
-
-
-
-
-
-
        
 
         $(document).ready(function(){
@@ -513,39 +509,42 @@ function WgsToIsrael(latitude, longitude)
                     govmap.onEvent(govmap.events.CLICK).progress(function (e)  
 				    //govmap.draw(govmap.drawType.Point).progress(function (e)  
 				    {	
+                        
 					    click_result = e;
 					    console.log(click_result)
 
                         x_ = click_result.mapPoint.x;
                         y_ = click_result.mapPoint.y;
 
-                        govmap.zoomToXY({ x: x_, y: y_, level: 6, marker: true });
+                        govmap.zoomToXY({ x: x_, y: y_, level: 8, marker: true });
 
                         getData(x_,y_);
 
                         var data = {
-                                    'circleGeometries': [{ x: x_, y: y_, radius:100 }],
-                                    'geomData': [{ 'name': 'test1', 'aaa': 1 }],
-                                    'showBubble': false,
-                                    'names': ['p1'],
-                                    'geometryType': 4,
-                                    'defaultSymbol':
-                                        {
-                                            'outlineColor': [192, 0, 0, 1],
-                                            'outlineWidth': 1,
-                                            'fillColor': [255, 192, 203, 0.5]
-                                        },
-                                    'symbols': [],
-                                    'clearExisting': true,
-                                    'data': {
+                                'circleGeometries': [{ x: x_, y: y_, radius:100 }],
+                                'geomData': [{ 'name': 'test1', 'aaa': 1 }],
+                                'showBubble': false,
+                                'names': ['p1'],
+                                'geometryType': 4,
+                                'defaultSymbol':
+                                    {
+                                        'outlineColor': [192, 0, 0, 1],
+                                        'outlineWidth': 2,
+                                        'fillColor': [255, 192, 203, 0.5]
+                                    },
+                                'symbols': [],
+                                'clearExisting': false,
+                                'data': {
 
-                                    }
-                                };
-                        govmap.displayGeometries(data).then(function (e)
-                        {
-                            console.log(data);
-                            
-                        });
+                                }
+                            };
+                            govmap.displayGeometries(data).then(function (e)
+                            {
+                                console.log(data);
+                                
+                            });
+
+
 
 
 				    });  
@@ -576,6 +575,141 @@ function WgsToIsrael(latitude, longitude)
 		}
 
 
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+
+
+		function getCenterCoord(wkts)
+		{
+			x_list = [];
+			y_list = [];
+			for (g = 0; g < wkts.length; g++)
+			{
+				if (wkts[g].includes("POLYGON"))
+				{
+					var geojson = Terraformer.WKT.parse(wkts[g]);
+					for (i = 0; i < geojson.coordinates.length; i++)
+					{
+						for (ii = 0; ii < geojson.coordinates[i].length; ii++)
+						{
+							x = geojson.coordinates[i][ii][0];
+							y = geojson.coordinates[i][ii][1];
+							//console.log(x,y);
+							x_list.push(x);
+							y_list.push(y);
+
+						}
+					}
+					console.log(geojson);
+				}
+				if (wkts[g].includes("POINT"))
+				{
+				
+					x_list.push(parseFloat(wkts[i].split(" ")[0].replace(/\D/g, "")));
+					y_list.push(parseFloat(wkts[i].split(" ")[1].replace(/\D/g, "")));
+				}
+			
+				if (wkts[g].includes("LINESTRING"))
+				{
+				
+					console.log("...");
+				}
+			}
+			max_x = Math.max.apply(Math, x_list);
+			min_x = Math.min.apply(Math, x_list);
+			max_y = Math.max.apply(Math, y_list);
+			min_y = Math.min.apply(Math, y_list);
+			d_x = max_x - min_x;
+			d_y = max_y - min_y;
+			radius = Math.floor(Math.max.apply(Math, [d_x, d_y]))
+			console.log(radius);
+			lvl = 1;
+			if (radius <= 100)
+			{
+				lvl = 8
+			}
+			if (radius > 100 && radius <= 2500)
+			{
+				lvl = 7
+			}
+			if (radius > 2500 && radius <= 5000)
+			{
+				lvl = 6
+			}
+			if (radius > 5000 && radius <= 7500)
+			{
+				lvl = 5
+			}
+			if (radius > 7500 && radius <= 10000)
+			{
+				lvl = 4
+			}
+			if (radius > 10000 && radius <= 25000)
+			{
+				lvl = 3
+			}
+			if (radius > 25000 && radius <= 50000)
+			{
+				lvl = 2
+			}
+			if (radius > 50000 && radius <= 100000)
+			{
+				lvl = 1
+			}   
+			if (radius > 100000)
+			{
+				lvl = 0
+			}
+			console.log(lvl);
+					
+			center_x = min_x + ((max_x - min_x)  / 2);
+			center_y = min_y + ((max_y - min_y)  / 2);
+
+			govmap.zoomToXY({ x: center_x, y: center_y, level: lvl, marker: false });
+		}
+
+
+
+        function ClearUserPoints(){
+
+            var bubbleContent = "";
+                var data = {  
+                wkts: [], 
+                showBubble: true, 
+                names: [],  
+                geometryType: govmap.drawType.Point,  
+                defaultSymbol:  
+                {  
+                    url:'https://govmap.gov.il/sites/O1.png',  
+                    width:20,  
+                    height:20  
+                },   
+                symbols: [],  
+                clearExisting: true,  
+                data: {  
+                        tooltips: [],  
+                        headers: [],
+                        bubbleHTML: bubbleContent,
+                        bubbleHTMLParameters:[]
+                    }  
+                };  
+                        
+                govmap.displayGeometries(data).then(function (response)  
+                {  
+                //console.log(response.data);
+                }); 
+
+        }
+
+
+                        
+        var s_wkts = [];
+        var s_names = [];
+        var s_symbols = [];
+
+        
         var myData = {};
         var aliasses = ["שם שכונה/אזור","מחיר חציוני לדירת 3 חד' בשכונה","מחיר חציוני לדירת 3 חד' בישוב","מחיר חציוני לדירת 3 חד' בארץ","שכירות חציונית לדירת 3 חד' בשכונה","שכירות חציונית לדירת 3 חד' בישוב","שכירות חציונית לדירת 3 חד' בארץ","מחיר חציוני לדירת 4 חד' בשכונה","מחיר חציוני לדירת 4 חד' בישוב","מחיר חציוני לדירת 4 חד' בארץ","שכירות חציונית לדירת 4 חד' בשכונה","שכירות חציונית לדירת 4 חד' בישוב","שכירות חציונית לדירת 4 חד' בארץ","מחיר חציוני לדירת 5 חד' בשכונה","מחיר חציוני לדירת 5 חד' בישוב","מחיר חציוני לדירת 5 חד' בארץ","שכירות חציונית לדירת 5 חד' בשכונה","שכירות חציונית לדירת 5 חד' בישוב","שכירות חציונית לדירת 5 חד' בארץ"]
   
@@ -586,25 +720,47 @@ function WgsToIsrael(latitude, longitude)
                         'RentAmountNational4',	'DealAmountNeighborhood5',	'DealAmountSettlement5',	'DealAmountNational5',	'RentAmountNeighborhood5',	'RentAmountSettlement5',	
                         'RentAmountNational5']
 
-        function numberWithCommas(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
 
         function getData(x_,y_)
         {
             console.log(x_, y_);
+            
+            ClearUserPoints();
 
-            var wkt = PointToPolygon(x_, y_, 1);
+            var wkt = PointToPolygon(x_, y_, 100);
             //sites_nadlan_leumi
-            govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "sites_nadlan_leumi", 'fields': fields,getShapes: false}).then(function (response)  
+
+
+            govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "sites_nadlan_leumi", 'fields': fields,getShapes: true}).then(function (response)  
             {  
                 myData.items = [];
+                oids = [];
                 console.log(response)
+
+                        
+                s_wkts = [];
+                s_names = [];
+                s_symbols = [];
+
+
                 for (i = 0; i < response.data.length; i++)
                 {
+                    //oids = [];
                     feat = response.data[i];
+                    oids.push(response.data[i].ObjectId);
                     var person = {};
                     vals = response.data[i].Values;
+
+                    s_wkts.push(vals[vals.length - 1].replace("Z", ""));
+					s_names.push("geometry_" + i);
+                    default_symbol = {  
+												'outlineColor': [0, 0, 255, 1],
+												'outlineWidth': 3,
+												'fillColor': [255, 255, 255, 0.5]
+											}
+                    s_symbols.push(default_symbol);
+                    geometry_type = govmap.drawType.Polygon;
+
                     for (v = 0; v < vals.length; v++)
                     {
                         if (aliasses[v])
@@ -627,11 +783,42 @@ function WgsToIsrael(latitude, longitude)
                         }
                     }
                     myData.items.push(person);
-
-                    appVue.items = myData.items;
-                    appVue.dialog = true;
                 }
+                // if (oids)
+                // {
+                //     govmap.searchInLayer({layerName: 'sites_nadlan_leumi',fieldName: 'OBJECTID',fieldValues: oids,highlight: true});  
+                // }
+
+
+                
+                
+                
+
+                appVue.items = myData.items;
+                appVue.dialog = true;
+
+                var data = {  
+                    wkts: s_wkts,  
+                    names: s_names,  
+                    showBubble: true,
+                    geometryType: geometry_type,
+                    defaultSymbol: default_symbol,    
+                    symbols: s_symbols,  
+                    'clearExisting': false,
+                    data: {  
+
+                    } 
+                }
+
+                govmap.displayGeometries(data).then(function (response)
+                {
+                    console.log(response)
+                });
+
+                //getCenterCoord(s_wkts);
+         
             }); 
+
 
         }
 
@@ -670,7 +857,7 @@ function WgsToIsrael(latitude, longitude)
                                 x_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[0];
                                 y_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[1];
                             
-                                govmap.zoomToXY({ x: x_, y: y_, level: 6, marker: true });
+                                govmap.zoomToXY({ x: x_, y: y_, level: 8, marker: true });
 
                                 getData(x_,y_);
 
@@ -685,11 +872,11 @@ function WgsToIsrael(latitude, longitude)
                                     'defaultSymbol':
                                         {
                                             'outlineColor': [192, 0, 0, 1],
-                                            'outlineWidth': 1,
+                                            'outlineWidth': 2,
                                             'fillColor': [255, 192, 203, 0.5]
                                         },
                                     'symbols': [],
-                                    'clearExisting': true,
+                                    'clearExisting': false,
                                     'data': {
 
                                     }
@@ -710,7 +897,6 @@ function WgsToIsrael(latitude, longitude)
 
                     
                     geocode () {
-
                         govmap.geocode({keyword: this.geocode_text},govmap.geocodeType.FullResult)
                         .then(function(response){
 
@@ -718,7 +904,7 @@ function WgsToIsrael(latitude, longitude)
                         if (response.status == 0)
                         {
                             
-                            govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
+                            govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 8, marker: true });
 
                             getData(response.data[0].X,response.data[0].Y);
 
@@ -731,11 +917,11 @@ function WgsToIsrael(latitude, longitude)
                                 'defaultSymbol':
                                     {
                                         'outlineColor': [192, 0, 0, 1],
-                                        'outlineWidth': 1,
+                                        'outlineWidth': 2,
                                         'fillColor': [255, 192, 203, 0.5]
                                     },
                                 'symbols': [],
-                                'clearExisting': true,
+                                'clearExisting': false,
                                 'data': {
 
                                 }
