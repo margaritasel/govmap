@@ -67,10 +67,9 @@
 
 
 
-                    <v-app-bar id="barDesktop"
+     <v-app-bar id="barDesktop"
       color="#ECEFF1"
       dense
-      
     >
 
       <v-toolbar-title>שכבת מדדי הנדל"ן הלאומית</v-toolbar-title>
@@ -155,96 +154,49 @@ vertical
         cols="12"
         sm="12"
         md="12"
-        lg="3"
-        xl="3"
+        lg="5"
+        xl="5"
         >
-            <v-card
-                class="pa-2"
-                outlined
-                tile
-            >
-                <v-select
-                v-model ="RENT"
-                :items="RENT_items"
-                label="שכירות חציונית"
-                multiple small-chips
-                flat
-                hide-no-data
-                hide-details
-                append-icon=""
-                :menu-props="{ top: true, offsetY: true }"
-                ></v-select>  
-            </v-card>
+        <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
+           שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
+              <v-range-slider right
+                v-model="value1" min=1000 max = 20000 step=100
+              ></v-range-slider>
+          </v-card>
         </v-col>
 
         <v-col
         cols="12"
         sm="12"
         md="12"
-        lg="3"
-        xl="3"
+        lg="5"
+        xl="5"
         >
-        <v-card
-        class="pa-2"
-        outlined
-        tile
-    >
-        <v-select
-        v-model ="PRICE"
-        :items="PRICE_items"
-        label="מחיר חציוני"
-        multiple small-chips
-        flat
-        hide-no-data
-        hide-details
-        append-icon=""
-        :menu-props="{ top: true, offsetY: true }"
-        ></v-select>  
-        </v-card>
+        <v-card color="#ECEFF1" class="caption pa-2" outlined tile style="max-height: 66px;">
+            מחיר חציוני: {{numberWithCommas(value2[0])}} ₪ עד {{numberWithCommas(value2[1])}} ₪
+               <v-range-slider right
+                 v-model="value2"  min=200000 max = 10000000 step=100000
+               ></v-range-slider>
+           </v-card>
 
-    </v-col>
+
+        </v-col>
+ 
 
     <v-col
     cols="12"
     sm="12"
     md="12"
-    lg="3"
-    xl="3"
+    lg="2"
+    xl="2"
     >
-        <v-card
-        class="pa-2"
-        outlined
-        tile
-        >
-            <v-select
-            v-model = "YEAR"
-            :items="YEAR_items"
-            label="שנה"
-            multiple
-            flat
-            hide-no-data
-            hide-details
-            append-icon=""
-            :menu-props="{ top: true, offsetY: true }"
-            small-chips
-            ></v-select>
-        </v-card>
-    </v-col>
-
-    <v-col
-    cols="12"
-    sm="12"
-    md="12"
-    lg="3"
-    xl="3"
-    >
-        <v-card
+        <v-card color="#ECEFF1"
             class="pa-2" style="height: 66px;"
             outlined
             tile
             model= "select_btn"
         >
-            <v-btn block color="success" dark id="changed_button" style="height: 40px;"  @click="Changed()" >בצע בחירה </v-btn>
+            <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות במפה </v-btn>
         </v-card>
     </v-col>
 </v-row>
@@ -810,41 +762,15 @@ function WgsToIsrael(latitude, longitude)
                 data () {
                     return {
 
+                        value1: [2500, 4500],
+                        value2: [1600000, 2000000],
+
                         geocode_text: "",
                         dialog :false,
 		
-                        itemsPerPageOptions: [1, 25, 100, 200],
-                        itemsPerPage: 25,
+                        itemsPerPageOptions: [1, 5, 25, 100],
+                        itemsPerPage: 5,
                         items: myData.items,
-
-
-
-                        RENT_items: ["עד " + "2000 ₪", 
-                                    "2000 ₪ - 3500 ₪",
-                                    "3500 ₪ - 4500 ₪",
-                                    "4500 ₪ - 5500 ₪",
-                                    "5500 ₪ - 7000 ₪",
-                                    "יותר מ " + "7000 ₪"],
-                        RENT: [
-                                "3500 ₪ - 4500 ₪",
-                                "4500 ₪ - 5500 ₪",
-                                ],
-
-                        PRICE_items: ["עד " + "500,000 ₪", 
-                                    "500,000 ₪ - 1,000,000 ₪",
-                                    "1,000,000 ₪ - 1,300,000 ₪",
-                                    "1,300,000 ₪ - 1,600,000 ₪",
-                                    "1,600,000 ₪ - 2,000,000 ₪",
-                                    "2,000,000 ₪ - 3,000,000 ₪",
-                                    "3,000,000 ₪ - 5,000,000 ₪",
-                                    "יותר מ " + "5,000,000 ₪"],
-                        PRICE: [
-                                "3500 ₪ - 4500 ₪",
-                                "4500 ₪ - 5500 ₪",
-                                ],
-
-                        YEAR_items: [2016, 2017, 2018, 2019, 2020],
-                        YEAR: [2019, 2020],
                        
                     }
                 },
@@ -872,6 +798,25 @@ function WgsToIsrael(latitude, longitude)
                 },
 
                 methods: {
+
+                    Click()
+                    {
+
+                        min_rent = this.value1[0];
+                        max_rent = this.value1[1];
+
+                        min_price = this.value2[0];
+                        max_price = this.value2[1];
+                        
+                        query = "RentAmountNeighborhood3 >= " + min_rent + " AND RentAmountNeighborhood3 <=" + max_rent
+                        govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': query, 'zoomToExtent': true });  
+
+
+                    },
+
+                    numberWithCommas(x) {
+                        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    },
 
                     toggle () {
                         this.$nextTick(() => {
