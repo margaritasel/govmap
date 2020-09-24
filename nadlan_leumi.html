@@ -68,7 +68,7 @@
 
 
                     <v-app-bar id="barDesktop"
-      color="#E0E0E0"
+      color="#ECEFF1"
       dense
       
     >
@@ -88,12 +88,10 @@
   class="mx-4"
   vertical
 ></v-divider>
-
-
-
 <v-btn @click="zoomCurrentLocation" icon>
   <v-icon>mdi-crosshairs-gps</v-icon>
 </v-btn>
+
 
 
 <img class="mr-1" height="70" src="https://yovavsanders.github.io/Corona/logo.png"/>
@@ -110,7 +108,7 @@
 
 
     <v-app-bar id="barMobile1"
-    color="#E0E0E0"
+    color="#ECEFF1"
     dense
   >
 
@@ -128,7 +126,7 @@
 
   
   <v-app-bar id="barMobile2"
-  color="#E0E0E0"
+  color="#ECEFF1"
 >
 
   <v-text-field right v-model="geocode_text" style="margin-top: 30px; text-align: right;"
@@ -147,7 +145,109 @@ vertical
 
 
 
+
 </v-app-bar>
+
+
+
+<v-row no-gutters id="menu_row">
+        <v-col
+        cols="12"
+        sm="12"
+        md="12"
+        lg="3"
+        xl="3"
+        >
+            <v-card
+                class="pa-2"
+                outlined
+                tile
+            >
+                <v-select
+                v-model ="RENT"
+                :items="RENT_items"
+                label="שכירות חציונית"
+                multiple small-chips
+                flat
+                hide-no-data
+                hide-details
+                append-icon=""
+                :menu-props="{ top: true, offsetY: true }"
+                ></v-select>  
+            </v-card>
+        </v-col>
+
+        <v-col
+        cols="12"
+        sm="12"
+        md="12"
+        lg="3"
+        xl="3"
+        >
+        <v-card
+        class="pa-2"
+        outlined
+        tile
+    >
+        <v-select
+        v-model ="PRICE"
+        :items="PRICE_items"
+        label="מחיר חציוני"
+        multiple small-chips
+        flat
+        hide-no-data
+        hide-details
+        append-icon=""
+        :menu-props="{ top: true, offsetY: true }"
+        ></v-select>  
+        </v-card>
+
+    </v-col>
+
+    <v-col
+    cols="12"
+    sm="12"
+    md="12"
+    lg="3"
+    xl="3"
+    >
+        <v-card
+        class="pa-2"
+        outlined
+        tile
+        >
+            <v-select
+            v-model = "YEAR"
+            :items="YEAR_items"
+            label="שנה"
+            multiple
+            flat
+            hide-no-data
+            hide-details
+            append-icon=""
+            :menu-props="{ top: true, offsetY: true }"
+            small-chips
+            ></v-select>
+        </v-card>
+    </v-col>
+
+    <v-col
+    cols="12"
+    sm="12"
+    md="12"
+    lg="3"
+    xl="3"
+    >
+        <v-card
+            class="pa-2" style="height: 66px;"
+            outlined
+            tile
+            model= "select_btn"
+        >
+            <v-btn block color="success" dark id="changed_button" style="height: 40px;"  @click="Changed()" >בצע בחירה </v-btn>
+        </v-card>
+    </v-col>
+</v-row>
                 
                     <v-card
                     outlined
@@ -155,14 +255,14 @@ vertical
                     class="mx-auto"
                     >
                         <div id="map_div" style="padding: 0.5em;
-                        background:#E0E0E0;
+                        background:#ECEFF1;
                         border: 0;
                         color: white;
                         grid-column: span 2;">
                         </div>
                     </v-card>
 
-                  </v-container>
+</v-container>
 
 
                   <v-dialog
@@ -716,6 +816,35 @@ function WgsToIsrael(latitude, longitude)
                         itemsPerPageOptions: [1, 25, 100, 200],
                         itemsPerPage: 25,
                         items: myData.items,
+
+
+
+                        RENT_items: ["עד " + "2000 ₪", 
+                                    "2000 ₪ - 3500 ₪",
+                                    "3500 ₪ - 4500 ₪",
+                                    "4500 ₪ - 5500 ₪",
+                                    "5500 ₪ - 7000 ₪",
+                                    "יותר מ " + "7000 ₪"],
+                        RENT: [
+                                "3500 ₪ - 4500 ₪",
+                                "4500 ₪ - 5500 ₪",
+                                ],
+
+                        PRICE_items: ["עד " + "500,000 ₪", 
+                                    "500,000 ₪ - 1,000,000 ₪",
+                                    "1,000,000 ₪ - 1,300,000 ₪",
+                                    "1,300,000 ₪ - 1,600,000 ₪",
+                                    "1,600,000 ₪ - 2,000,000 ₪",
+                                    "2,000,000 ₪ - 3,000,000 ₪",
+                                    "3,000,000 ₪ - 5,000,000 ₪",
+                                    "יותר מ " + "5,000,000 ₪"],
+                        PRICE: [
+                                "3500 ₪ - 4500 ₪",
+                                "4500 ₪ - 5500 ₪",
+                                ],
+
+                        YEAR_items: [2016, 2017, 2018, 2019, 2020],
+                        YEAR: [2019, 2020],
                        
                     }
                 },
@@ -728,7 +857,31 @@ function WgsToIsrael(latitude, longitude)
                     })
                 },
 
+                computed: {
+                    All () {
+                        return this.SUB_TYPE.length === this.SUB_TYPE_items.length
+                    },
+                    Some () {
+                        return this.SUB_TYPE.length > 0 && !this.All
+                    },
+                    icon () {
+                        if (this.All) return 'mdi-close-box'
+                        if (this.Some) return 'mdi-minus-box'
+                        return 'mdi-checkbox-blank-outline'
+                    },
+                },
+
                 methods: {
+
+                    toggle () {
+                        this.$nextTick(() => {
+                        if (this.All) {
+                            this.SUB_TYPE = []
+                        } else {
+                            this.SUB_TYPE = this.SUB_TYPE_items.slice()
+                        }
+                        })
+                    },
 
 
                        
@@ -820,6 +973,7 @@ function WgsToIsrael(latitude, longitude)
                         }
                         else{
                             alert("לא נמצאה הכתובת המבוקשת");
+
                             appVue.tableTitle = "";
                         }
                         
