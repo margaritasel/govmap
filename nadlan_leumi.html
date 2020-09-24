@@ -183,11 +183,11 @@ vertical
               <v-range-slider right
                 v-model="value1" min=1000 max = 20000 step=100>
                 <template v-slot:append >
-                   <p >{{'₪' + numberWithCommas(value1[0] / 1000) + 'K'}}</p>  
+                   <p>{{'₪' + numberWithCommas(value1[0] / 1000) + 'K'}}</p>  
                     
                 </template> 
                 <template v-slot:prepend >
-               <p >     {{'₪' + numberWithCommas(value1[1] / 1000) + 'K'}}</p>
+               <p>{{'₪' + numberWithCommas(value1[1] / 1000) + 'K'}}</p>
                 </template> 
             </v-range-slider>
           </v-card>
