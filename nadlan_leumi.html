@@ -808,7 +808,12 @@ function WgsToIsrael(latitude, longitude)
                         min_price = this.value2[0];
                         max_price = this.value2[1];
                         
-                        query = "RentAmountNeighborhood3 >= " + min_rent + " AND RentAmountNeighborhood3 <=" + max_rent
+                        query = "((RentAmountNeighborhood3 BETWEEN " + min_rent + " AND " + max_rent + ") OR " +
+                        "(RentAmountNeighborhood4 BETWEEN " + min_rent + " AND " + max_rent + ") OR " +
+                        "(RentAmountNeighborhood5 BETWEEN " + min_rent + " AND " + max_rent + ")) AND " +
+                        "((DealAmountNeighborhood3 BETWEEN " + min_price +" AND " + max_price +") OR" +
+                        "(DealAmountNeighborhood4 BETWEEN " + min_price +" AND " + max_price +") OR " +
+                        "(DealAmountNeighborhood5 BETWEEN " + min_price +" AND " + max_price +"))";
                         govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': query, 'zoomToExtent': true });  
 
 
