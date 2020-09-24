@@ -204,7 +204,7 @@ vertical
               <v-range-slider right id="slider2"
                 v-model="value2" min=200000 max = 10000000 step=100000>
                 <template v-slot:append id="p1">
-                    <p>{{'₪' + numberWithCommas(value2[0] / 1000) + 'M'}}</p>  
+                    <p>{{'₪' + numberWithCommas(value2[0] / 1000000) + 'M'}}</p>  
                      
                  </template> 
                  <template v-slot:prepend id="p2">
