@@ -661,16 +661,16 @@ function WgsToIsrael(latitude, longitude)
                     var person = {};
                     vals = response.data[i].Values;
 
-                    s_wkts.push(vals[vals.length - 1].replace("Z", ""));
-					s_names.push("geometry_" + i);
-                    s_geomDatas.push({ 'name': 'test'+i, 'aaa': i });
-                    default_symbol = {  
-												'outlineColor': [0, 0, 255, 1],
-												'outlineWidth': 3,
-												'fillColor': [255, 255, 255, 0.5]
-											}
-                    s_symbols.push(default_symbol);
-                    geometry_type = govmap.drawType.Polygon;
+                    // s_wkts.push(vals[vals.length - 1].replace("Z", ""));
+					// s_names.push("geometry_" + i);
+                    // s_geomDatas.push({ 'name': 'test'+i, 'aaa': i });
+                    // default_symbol = {  
+					// 							'outlineColor': [0, 0, 255, 1],
+					// 							'outlineWidth': 3,
+					// 							'fillColor': [255, 255, 255, 0.5]
+					// 						}
+                    // s_symbols.push(default_symbol);
+                    // geometry_type = govmap.drawType.Polygon;
 
                     for (v = 0; v < vals.length; v++)
                     {
