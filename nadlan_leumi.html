@@ -181,8 +181,15 @@ vertical
         <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
            שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
               <v-range-slider right
-                v-model="value1" min=1000 max = 20000 step=100
-              ></v-range-slider>
+                v-model="value1" min=1000 max = 20000 step=100>
+                <template v-slot:append >
+                   <p >{{'₪' + numberWithCommas(value1[0] / 1000) + 'K'}}</p>  
+                    
+                </template> 
+                <template v-slot:prepend >
+                    {{'₪' + numberWithCommas(value1[1] / 1000) + 'K'}}
+                </template>  
+            </v-range-slider>
           </v-card>
         </v-col>
 
@@ -196,8 +203,15 @@ vertical
         <v-card color="#ECEFF1" class="caption pa-2" outlined tile style="max-height: 66px;">
             מחיר חציוני: {{numberWithCommas(value2[0])}} ₪ עד {{numberWithCommas(value2[1])}} ₪
                <v-range-slider right
-                 v-model="value2"  min=200000 max = 10000000 step=100000
-               ></v-range-slider>
+                 v-model="value2"  min=200000 max = 10000000 step=100000>
+                 <template v-slot:append >
+                    <p >{{'₪' + numberWithCommas(value2[0] / 1000000) + 'M'}}</p>  
+                     
+                 </template> 
+                 <template v-slot:prepend >
+                     {{'₪' + numberWithCommas(value2[1] / 1000000) + 'M'}}
+                 </template>  
+                </v-range-slider>
            </v-card>
 
 
@@ -562,7 +576,7 @@ function WgsToIsrael(latitude, longitude)
 
         $(document).ready(function(){
             $(document.getElementById('map_div')).height(setMapHeight);
-            //var my_token = "5a4b8472-b95b-4687-8179-0accb621c7990";//localhost
+            //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
             //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
             var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
             $(function () {
@@ -709,6 +723,7 @@ function WgsToIsrael(latitude, longitude)
             console.log(x_, y_);
             
             ClearUserPoints();
+
 
             var wkt = PointToPolygon(x_, y_, 100);
             //sites_nadlan_leumi
@@ -859,6 +874,14 @@ function WgsToIsrael(latitude, longitude)
                     zoomCurrentLocation()
                     {
                         if (navigator.geolocation) {
+
+
+                            govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': "OBJECTID > 0", 'zoomToExtent': false }); 
+
+
+                            appVue.value1= [1000, 20000];
+                            appVue.value2= [200000, 10000000];
+
                             navigator.geolocation.getCurrentPosition(function showPosition(position) {
                                 x_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[0];
                                 y_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[1];
@@ -911,6 +934,11 @@ function WgsToIsrael(latitude, longitude)
                         {
                             
                             //govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 8, marker: true });
+
+                            govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': "OBJECTID > 0", 'zoomToExtent': false }); 
+
+                            appVue.value1= [1000, 20000];
+                            appVue.value2= [200000, 10000000];
 
                             getData(response.data[0].X,response.data[0].Y);
 
