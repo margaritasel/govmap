@@ -644,33 +644,13 @@ function WgsToIsrael(latitude, longitude)
             govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "sites_nadlan_leumi", 'fields': fields,getShapes: false}).then(function (response)  
             {  
                 myData.items = [];
-                oids = [];
                 console.log(response)
-
-                        
-                s_wkts = [];
-                s_names = [];
-                s_symbols = [];
-                s_geomDatas = [];
 
                 for (i = 0; i < response.data.length; i++)
                 {
-                    //oids = [];
                     feat = response.data[i];
-                    oids.push(response.data[i].ObjectId);
                     var person = {};
                     vals = response.data[i].Values;
-
-                    // s_wkts.push(vals[vals.length - 1].replace("Z", ""));
-					// s_names.push("geometry_" + i);
-                    // s_geomDatas.push({ 'name': 'test'+i, 'aaa': i });
-                    // default_symbol = {  
-					// 							'outlineColor': [0, 0, 255, 1],
-					// 							'outlineWidth': 3,
-					// 							'fillColor': [255, 255, 255, 0.5]
-					// 						}
-                    // s_symbols.push(default_symbol);
-                    // geometry_type = govmap.drawType.Polygon;
 
                     for (v = 0; v < vals.length; v++)
                     {
@@ -706,30 +686,7 @@ function WgsToIsrael(latitude, longitude)
                 appVue.items = myData.items;
                 appVue.dialog = true;
 
-                // var data = {  
-                //     wkts: s_wkts,  
-                //     names: s_names,  
-                //     showBubble: false,
-                //     geomData: s_geomDatas,
-                //     geometryType: geometry_type,
-                //     defaultSymbol: default_symbol,    
-                //     symbols: s_symbols,  
-                //     clearExisting: false,
-                //     data: {  
-
-                //     } 
-                // }
-
-            //    govmap.displayGeometries(data).then(function (response)
-            //     {
-            //         console.log(response)
-            //         govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': "OBJECTID > 0", 'zoomToExtent': true});
-            //     });
-
-
-                
-
-                //getCenterCoord(s_wkts);
+            
          
             });
 
