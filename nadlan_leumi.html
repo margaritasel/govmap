@@ -150,12 +150,33 @@ vertical
 
 
 <v-row no-gutters id="menu_row">
+    <v-col
+    cols="12"
+    sm="12"
+    md="12"
+    lg="2"
+    xl="2"
+    >
+        <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;"
+        >
+            <v-select
+            v-model ="ROOMS"
+            :items="ROOMS_items"
+            label="מספר חדרים"
+            dense
+            outlined
+            :menu-props="{ top: true, offsetY: true }"
+            ></v-select>  
+        </v-card>
+    </v-col>
+
+
         <v-col
         cols="12"
         sm="12"
         md="12"
-        lg="5"
-        xl="5"
+        lg="4"
+        xl="4"
         >
         <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
            שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
@@ -169,8 +190,8 @@ vertical
         cols="12"
         sm="12"
         md="12"
-        lg="5"
-        xl="5"
+        lg="4"
+        xl="4"
         >
         <v-card color="#ECEFF1" class="caption pa-2" outlined tile style="max-height: 66px;">
             מחיר חציוני: {{numberWithCommas(value2[0])}} ₪ עד {{numberWithCommas(value2[1])}} ₪
@@ -542,8 +563,8 @@ function WgsToIsrael(latitude, longitude)
         $(document).ready(function(){
             $(document.getElementById('map_div')).height(setMapHeight);
             //var my_token = "5a4b8472-b95b-4687-8179-0accb621c7990";//localhost
-            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
             $(function () {
                     govmap.createMap('map_div', {
                         token: my_token,
@@ -771,6 +792,8 @@ function WgsToIsrael(latitude, longitude)
                         itemsPerPageOptions: [1, 5, 25, 100],
                         itemsPerPage: 5,
                         items: myData.items,
+                        ROOMS: 3,
+                        ROOMS_items: [3,4,5]
                        
                     }
                 },
@@ -807,13 +830,11 @@ function WgsToIsrael(latitude, longitude)
 
                         min_price = this.value2[0];
                         max_price = this.value2[1];
-                        
-                        query = "((RentAmountNeighborhood3 BETWEEN " + min_rent + " AND " + max_rent + ") OR " +
-                        "(RentAmountNeighborhood4 BETWEEN " + min_rent + " AND " + max_rent + ") OR " +
-                        "(RentAmountNeighborhood5 BETWEEN " + min_rent + " AND " + max_rent + ")) AND " +
-                        "((DealAmountNeighborhood3 BETWEEN " + min_price +" AND " + max_price +") OR" +
-                        "(DealAmountNeighborhood4 BETWEEN " + min_price +" AND " + max_price +") OR " +
-                        "(DealAmountNeighborhood5 BETWEEN " + min_price +" AND " + max_price +"))";
+
+                        rooms = this.ROOMS;
+
+                        query = "(RentAmountNeighborhood"+rooms+" BETWEEN " + min_rent + " AND " + max_rent + ") AND " + 
+                                "(DealAmountNeighborhood"+rooms+" BETWEEN " + min_price +" AND " + max_price +")";
                         govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': query, 'zoomToExtent': true });  
 
 
