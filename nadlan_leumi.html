@@ -181,11 +181,11 @@ vertical
            שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
               <v-range-slider right id="slider1"
                 v-model="value1" min=1000 max = 20000 step=100>
-                <template v-slot:append >
+                <template v-slot:append id="r1">
                    <p>{{'₪' + numberWithCommas(value1[0] / 1000) + 'K'}}</p>  
                     
                 </template> 
-                <template v-slot:prepend >
+                <template v-slot:prepend id="r2">
                     <p> {{'₪' + numberWithCommas(value1[1] / 1000) + 'K'}}</p> 
                 </template>  
             </v-range-slider>
@@ -203,11 +203,11 @@ vertical
            מחיר חציוני: {{numberWithCommas(value2[0])}} ₪ עד {{numberWithCommas(value2[1])}} ₪
               <v-range-slider right id="slider2"
                 v-model="value2" min=200000 max = 10000000 step=100000>
-                <template v-slot:append >
+                <template v-slot:append id="t1" >
                  M  <p>{{numberWithCommas(value2[0] / 1000000)}}</p>  ₪
                     
                 </template> 
-                <template v-slot:prepend >
+                <template v-slot:prepend id="t2">
                   M  <p> {{numberWithCommas(value2[1] / 1000000)}}</p> ₪
                 </template>  
             </v-range-slider>
