@@ -203,13 +203,6 @@ vertical
            מחיר חציוני: {{numberWithCommas(value2[0])}} ₪ עד {{numberWithCommas(value2[1])}} ₪
               <v-range-slider right
                 v-model="value2" min=200000 max = 10000000 step=100000>
-                <template v-slot:append >
-                   <p>{{'₪' + numberWithCommas(value2[0] / 1000000) + 'M'}}</p>  
-                    
-                </template> 
-                <template v-slot:prepend >
-                    <p> {{'₪' + numberWithCommas(value2[1] / 1000000) + 'M'}}</p> 
-                </template>  
             </v-range-slider>
           </v-card>
         </v-col>
