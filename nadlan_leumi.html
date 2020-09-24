@@ -641,7 +641,7 @@ function WgsToIsrael(latitude, longitude)
             //sites_nadlan_leumi
 
 
-            govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "sites_nadlan_leumi", 'fields': fields,getShapes: true}).then(function (response)  
+            govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "sites_nadlan_leumi", 'fields': fields,getShapes: false}).then(function (response)  
             {  
                 myData.items = [];
                 oids = [];
@@ -733,7 +733,7 @@ function WgsToIsrael(latitude, longitude)
          
             });
 
-            govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "NEIGHBORHOODS_AREA", 'fields': ["UNIQ_ID"],getShapes: true}).then(function (response)  
+            govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "NEIGHBORHOODS_AREA", 'fields': ["UNIQ_ID"],getShapes: false}).then(function (response)  
             {
                 var oids = [];
 
