@@ -14,6 +14,9 @@
         #barDesktop {
           display: none;
         }
+        #menu_row{
+            display: none;
+        }
     
     }
     
@@ -24,6 +27,10 @@
         #barMobile2{
           display: none;
         }
+        #mobileFilter{
+            display : none
+        }
+
     }
 
 </style>
@@ -93,6 +100,7 @@
 
 
 
+
 <img class="mr-1" height="70" src="https://yovavsanders.github.io/Corona/logo.png"/>
 
 
@@ -146,6 +154,21 @@ vertical
 
 
 </v-app-bar>
+
+<v-card color="#ECEFF1" id="mobileFilter"
+class="pa-2" style="height: 66px;"
+outlined
+tile
+>
+
+<v-btn
+      color="grey lighten-2" block @click="openMenuDialog" style="height: 40px;"
+    >
+      <v-icon>mdi-filter-variant</v-icon>
+      אפשרויות סינון
+</v-btn>
+
+</v-card>
 
 
 
@@ -233,7 +256,8 @@ vertical
         </v-card>
     </v-col>
 </v-row>
-                
+
+
                     <v-card
                     outlined
                     tile
@@ -248,6 +272,204 @@ vertical
                     </v-card>
 
 </v-container>
+
+
+<v-dialog max-width="410px">
+    <v-card>
+    <v-row no-gutters>
+        <v-col
+        cols="12"
+        sm="12"
+        md="12"
+        lg="2"
+        xl="2"
+        >
+            <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;"
+            >
+                <v-select
+                v-model ="ROOMS"
+                :items="ROOMS_items"
+                label="מספר חדרים"
+                dense
+                outlined
+                :menu-props="{ top: true, offsetY: true }"
+                ></v-select>  
+            </v-card>
+        </v-col>
+    
+            <v-col
+            cols="12"
+            sm="12"
+            md="12"
+            lg="4"
+            xl="4"
+            >
+            <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
+               שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
+                  <v-range-slider right id="slider1" rtl
+                    v-model="value1" min=1000 max = 20000 step=100>
+                    <template v-slot:append id="r1">
+                       <p>{{'₪' + numberWithCommas(value1[0] / 1000) + 'K'}}</p>  
+                        
+                    </template> 
+                    <template v-slot:prepend id="r2">
+                        <p> {{'₪' + numberWithCommas(value1[1] / 1000) + 'K'}}</p> 
+                    </template>  
+                </v-range-slider>
+              </v-card>
+            </v-col>
+    
+            <v-col
+            cols="12"
+            sm="12"
+            md="12"
+            lg="4"
+            xl="4"
+            >
+            <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
+               מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪
+                  <v-range-slider right id="slider2"
+                    v-model="value2" min=200 max=10000 step=100>
+                    <template v-slot:append id="p1">
+                        <p>{{'₪' + numberWithCommas(value2[0] / 1000) + 'M'}}</p>  
+                         
+                     </template> 
+                     <template v-slot:prepend id="p2">
+                         <p> {{'₪' + numberWithCommas(value2[1] / 1000) + 'M'}}</p> 
+                     </template>  
+                    
+                </v-range-slider>
+              </v-card>
+            </v-col>
+     
+    
+        <v-col
+        cols="12"
+        sm="12"
+        md="12"
+        lg="2"
+        xl="2"
+        >
+            <v-card color="#ECEFF1"
+                class="pa-2" style="height: 66px;"
+                outlined
+                tile
+                model= "select_btn"
+            >
+                <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות במפה </v-btn>
+            </v-card>
+        </v-col>
+    </v-row>
+</v-card>
+    </v-dialog>
+
+                
+    
+
+
+
+
+
+    <v-dialog
+    max-width="410px" v-model="menu_dialog" id="menu_dialog"> 
+    <v-card>
+
+
+
+      <v-container fluid grid-list-md dir="rtl">
+        <v-row no-gutters>
+            <v-col
+            cols="12"
+            sm="12"
+            md="12"
+            lg="2"
+            xl="2"
+            >
+                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;"
+                >
+                    <v-select
+                    v-model ="ROOMS"
+                    :items="ROOMS_items"
+                    label="מספר חדרים"
+                    dense
+                    outlined
+                    :menu-props="{ top: true, offsetY: true }"
+                    ></v-select>  
+                </v-card>
+            </v-col>
+        
+                <v-col
+                cols="12"
+                sm="12"
+                md="12"
+                lg="4"
+                xl="4"
+                >
+                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
+                   שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
+                      <v-range-slider right id="slider1" rtl
+                        v-model="value1" min=1000 max = 20000 step=100>
+                        <template v-slot:append id="r1">
+                           <p>{{'₪' + numberWithCommas(value1[0] / 1000) + 'K'}}</p>  
+                            
+                        </template> 
+                        <template v-slot:prepend id="r2">
+                            <p> {{'₪' + numberWithCommas(value1[1] / 1000) + 'K'}}</p> 
+                        </template>  
+                    </v-range-slider>
+                  </v-card>
+                </v-col>
+        
+                <v-col
+                cols="12"
+                sm="12"
+                md="12"
+                lg="4"
+                xl="4"
+                >
+                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
+                   מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪
+                      <v-range-slider right id="slider2"
+                        v-model="value2" min=200 max=10000 step=100>
+                        <template v-slot:append id="p1">
+                            <p>{{'₪' + numberWithCommas(value2[0] / 1000) + 'M'}}</p>  
+                             
+                         </template> 
+                         <template v-slot:prepend id="p2">
+                             <p> {{'₪' + numberWithCommas(value2[1] / 1000) + 'M'}}</p> 
+                         </template>  
+                        
+                    </v-range-slider>
+                  </v-card>
+                </v-col>
+         
+        
+            <v-col
+            cols="12"
+            sm="12"
+            md="12"
+            lg="2"
+            xl="2"
+            >
+                <v-card color="#ECEFF1"
+                    class="pa-2" style="height: 66px;"
+                    outlined
+                    tile
+                    model= "select_btn"
+                >
+                    <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות במפה </v-btn>
+                </v-card>
+            </v-col>
+        </v-row>
+                     
+      </v-container>
+                    
+     </v-card>
+      
+  </v-dialog>
+
+
+
 
 
                   <v-dialog
@@ -563,7 +785,7 @@ function WgsToIsrael(latitude, longitude)
                         };
                         if( isMobile.any() ) {
 
-                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.3
+                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 0.9
                             this.titleEl = false;
                         } 
                         console.log(h);
@@ -802,6 +1024,7 @@ function WgsToIsrael(latitude, longitude)
 
                         geocode_text: "",
                         dialog :false,
+                        menu_dialog: false,
 		
                         itemsPerPageOptions: [1, 5, 25, 100],
                         itemsPerPage: 5,
@@ -990,6 +1213,10 @@ function WgsToIsrael(latitude, longitude)
                         {
                             this.zoomCurrentLocation();
                         }
+                    },
+                    openMenuDialog()
+                    {
+                        this.menu_dialog = true;         
                     }
                 },
 
