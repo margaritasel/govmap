@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html style='width:100%; height:100%;'>
 <head>
@@ -31,6 +29,9 @@
             display : none
         }
 
+
+
+
     }
 
 </style>
@@ -57,6 +58,12 @@
 
         <script src="https://unpkg.com/terraformer@1.0.8"></script>
         <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+
+        <script src='//unpkg.com/vue-chartjs@2.6.0/dist/vue-chartjs.full.min.js'></script>
+        <script src='//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js'></script>
+        <script src='//unpkg.com/hchs-vue-charts@1.2.8'></script>
       
 
     </head>
@@ -168,6 +175,9 @@ tile
       אפשרויות סינון
 </v-btn>
 
+
+
+
 </v-card>
 
 
@@ -197,8 +207,8 @@ tile
         cols="12"
         sm="12"
         md="12"
-        lg="4"
-        xl="4"
+        lg="3"
+        xl="3"
         >
         <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
            שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
@@ -219,8 +229,8 @@ tile
         cols="12"
         sm="12"
         md="12"
-        lg="4"
-        xl="4"
+        lg="3"
+        xl="3"
         >
         <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
            מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪
@@ -252,9 +262,39 @@ tile
             tile
             model= "select_btn"
         >
-            <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות במפה </v-btn>
+            <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות </v-btn>
         </v-card>
     </v-col>
+
+    <v-col
+    cols="12"
+    sm="12"
+    md="12"
+    lg="2"
+    xl="2"
+    >
+    <v-card color="#ECEFF1"
+    class="pa-2" style="height: 66px;"
+    outlined
+    tile
+>
+    <v-btn id="chartBtn" v-show="isChart"
+    color="grey lighten-2" block @click="switchCharts" style="height: 40px;"
+  >
+    <v-icon>mdi-chart-bar </v-icon>
+    תצוגת דשבורד
+    </v-btn>
+
+    <v-btn id="mapBtn" v-show="isMap"
+        color="grey lighten-2" block @click="switchMap" style="height: 40px;"
+    >
+        <v-icon>mdi-map-search</v-icon>
+        תצוגת מפה
+    </v-btn>
+    </v-card>
+    </v-col>
+
+
 </v-row>
 
 
@@ -269,102 +309,154 @@ tile
                         color: white;
                         grid-column: span 2;">
                         </div>
+
+
+
+
+                        <div id="charts_div" hidden style="padding: 0.5em;
+                        background:#ECEFF1;
+                        border: 0;
+                        color: white;
+                        grid-column: span 2;">
+
+                        <!-- <canvas id="myChart" width="400" height="400"> </canvas> -->
+                        <v-container class="grey lighten-5" right>
+                            
+                            <v-row>
+                                <v-col cols="12"
+                                sm="12"
+                                md="12"
+                                lg="6"
+                                xl="6">
+                                <v-card
+                                class="mx-auto text-center"
+                                color="light-green lighten-5"
+                                max-width="600"
+                            >
+                                    <v-card-text>
+                                    {{ROOMS}} חדרים -
+                                    שכירות חציונית: עד {{ '₪' + numberWithCommas( min_rent_value[0]) }}
+                                    <section class="container">	
+                                        <div class="columns">
+                                          <div class="column" style="text-align: right;">
+                                            <chartjs-horizontal-bar :datalabel ="min_rent_datalabel" :labels="min_rent_labels"  :data="min_rent_value" :bind="true"
+                                            :backgroundColor="min_rent_colors" :borderColor="min_rent_b_colors"></chartjs-horizontal-bar>
+                                          </div>	    
+                                        </div>    
+                                    </section>
+    
+                                </v-card-text>
+                                <h3 class="font-weight-thin">{{ min_rent_value.length }} השכונות עם השכירות הנמוכה ביותר</h3>
+                                </v-card>
+                                </v-col>
+
+
+                                <v-col cols="12"
+                                sm="12"
+                                md="12"
+                                lg="6"
+                                xl="6">
+                                <v-card
+                                class="mx-auto text-center"
+                                color="deep-orange lighten-5"
+                                max-width="600"
+                            >
+                                    <v-card-text>
+                                    {{ROOMS}} חדרים -
+                                    מחיר חציוני: עד {{ '₪' + numberWithCommas( max_price_value[0]) }}
+                                    <section class="container">	
+                                        <div class="columns">
+                                          <div class="column" style="text-align: right;">
+                                            <chartjs-horizontal-bar :datalabel ="max_price_datalabel" :labels="max_price_labels"  :data="max_price_value" :bind="true"
+                                            :backgroundColor="max_price_colors" :borderColor="max_price_b_colors"></chartjs-horizontal-bar>
+                                          </div>	    
+                                        </div>    
+                                    </section>
+    
+                                </v-card-text>
+                                <h3 class="font-weight-thin">{{ max_price_value.length }} השכונות עם המחיר הגבוה ביותר</h3>
+                                </v-card>
+                                </v-col>
+                            </v-row>
+                        <v-spacer></v-spacer>
+
+                        <v-divider
+                        class="mx-4"
+                      ></v-divider>
+
+                      <v-spacer></v-spacer>
+
+                      <v-row>
+                        <v-col cols="12"
+                        sm="12"
+                        md="12"
+                        lg="6"
+                        xl="6">
+                        <v-card
+                        class="mx-auto text-center"
+                        color="light-green lighten-5"
+                        max-width="600"
+                    >
+                            <v-card-text>
+                            {{ROOMS}} חדרים -
+                            מחיר חציוני: עד {{ '₪' + numberWithCommas( min_price_value[0]) }}
+                            <section class="container">	
+                                <div class="columns">
+                                  <div class="column" style="text-align: right;">
+                                    <chartjs-horizontal-bar :datalabel ="min_price_datalabel" :labels="min_price_labels"  :data="min_rent_value" :bind="true"
+                                    :backgroundColor="min_price_colors" :borderColor="min_price_b_colors"></chartjs-horizontal-bar>
+                                  </div>	    
+                                </div>    
+                            </section>
+
+                        </v-card-text>
+                        <h3 class="font-weight-thin">{{ min_price_value.length }} השכונות עם המחיר הנמוך ביותר</h3>
+                        </v-card>
+                        </v-col>
+
+
+                        <v-col cols="12"
+                        sm="12"
+                        md="12"
+                        lg="6"
+                        xl="6">
+                        <v-card
+                        class="mx-auto text-center"
+                        color="deep-orange lighten-5"
+                        max-width="600"
+                    >
+                            <v-card-text>
+                            {{ROOMS}} חדרים -
+                            שכירות חציונית: עד {{ '₪' + numberWithCommas( max_rent_value[0]) }}
+                            <section class="container">	
+                                <div class="columns">
+                                  <div class="column" style="text-align: right;">
+                                    <chartjs-horizontal-bar :datalabel ="max_rent_datalabel" :labels="max_rent_labels"  :data="max_rent_value" :bind="true"
+                                    :backgroundColor="max_rent_colors" :borderColor="max_rent_b_colors"></chartjs-horizontal-bar>
+                                  </div>	    
+                                </div>    
+                            </section>
+
+                        </v-card-text>
+                        <h3 class="font-weight-thin">{{ max_rent_value.length }} השכונות עם השכירות הגבוהה ביותר</h3>
+                        </v-card>
+                        </v-col>
+                    </v-row>
+        </v-container>
+
+
+
+                            
+                       
+
+
+
+                        </div>
                     </v-card>
 
 </v-container>
 
 
-<v-dialog max-width="410px">
-    <v-card>
-    <v-row no-gutters>
-        <v-col
-        cols="12"
-        sm="12"
-        md="12"
-        lg="2"
-        xl="2"
-        >
-            <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;"
-            >
-                <v-select
-                v-model ="ROOMS"
-                :items="ROOMS_items"
-                label="מספר חדרים"
-                dense
-                outlined
-                :menu-props="{ top: true, offsetY: true }"
-                ></v-select>  
-            </v-card>
-        </v-col>
-    
-            <v-col
-            cols="12"
-            sm="12"
-            md="12"
-            lg="4"
-            xl="4"
-            >
-            <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
-               שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
-                  <v-range-slider right id="slider1" rtl
-                    v-model="value1" min=1000 max = 20000 step=100>
-                    <template v-slot:append id="r1">
-                       <p>{{'₪' + numberWithCommas(value1[0] / 1000) + 'K'}}</p>  
-                        
-                    </template> 
-                    <template v-slot:prepend id="r2">
-                        <p> {{'₪' + numberWithCommas(value1[1] / 1000) + 'K'}}</p> 
-                    </template>  
-                </v-range-slider>
-              </v-card>
-            </v-col>
-    
-            <v-col
-            cols="12"
-            sm="12"
-            md="12"
-            lg="4"
-            xl="4"
-            >
-            <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
-               מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪
-                  <v-range-slider right id="slider2"
-                    v-model="value2" min=200 max=10000 step=100>
-                    <template v-slot:append id="p1">
-                        <p>{{'₪' + numberWithCommas(value2[0] / 1000) + 'M'}}</p>  
-                         
-                     </template> 
-                     <template v-slot:prepend id="p2">
-                         <p> {{'₪' + numberWithCommas(value2[1] / 1000) + 'M'}}</p> 
-                     </template>  
-                    
-                </v-range-slider>
-              </v-card>
-            </v-col>
-     
-    
-        <v-col
-        cols="12"
-        sm="12"
-        md="12"
-        lg="2"
-        xl="2"
-        >
-            <v-card color="#ECEFF1"
-                class="pa-2" style="height: 66px;"
-                outlined
-                tile
-                model= "select_btn"
-            >
-                <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות במפה </v-btn>
-            </v-card>
-        </v-col>
-    </v-row>
-</v-card>
-    </v-dialog>
-
-                
-    
 
 
 
@@ -385,7 +477,7 @@ tile
             lg="2"
             xl="2"
             >
-                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;"
+                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 90px;"
                 >
                     <v-select
                     v-model ="ROOMS"
@@ -405,7 +497,7 @@ tile
                 lg="4"
                 xl="4"
                 >
-                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
+                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 90px;">
                    שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
                       <v-range-slider right id="slider1" rtl
                         v-model="value1" min=1000 max = 20000 step=100>
@@ -427,7 +519,7 @@ tile
                 lg="4"
                 xl="4"
                 >
-                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
+                <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 90px;">
                    מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪
                       <v-range-slider right id="slider2"
                         v-model="value2" min=200 max=10000 step=100>
@@ -452,13 +544,27 @@ tile
             xl="2"
             >
                 <v-card color="#ECEFF1"
-                    class="pa-2" style="height: 66px;"
+                    class="pa-2" style="height: 90px;"
                     outlined
                     tile
                     model= "select_btn"
                 >
-                    <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות במפה </v-btn>
+                    <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" ></v-btn>סינון שכונות </v-btn>
+                    <v-btn id="chartBtn" v-show="isChart"
+                    color="grey lighten-2" block @click="switchCharts" style="height: 40px;"
+                  >
+                    <v-icon>mdi-chart-bar </v-icon>
+                    תצוגת דשבורד
+              </v-btn>
+              
+              <v-btn id="mapBtn" v-show="isMap"
+                    color="grey lighten-2" block hidden @click="switchMap" style="height: 40px;"
+                  >
+                    <v-icon>mdi-map-search</v-icon>
+                    תצוגת מפה
+              </v-btn>
                 </v-card>
+
             </v-col>
         </v-row>
                      
@@ -792,8 +898,10 @@ function WgsToIsrael(latitude, longitude)
                         return h;
         }
 
-       
 
+       
+        var json = "https://raw.githubusercontent.com/yovavsanders/govmap/master/nadlan_values.json";
+        var nadlan_data;
         $(document).ready(function(){
             $(document.getElementById('map_div')).height(setMapHeight);
             //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
@@ -811,6 +919,36 @@ function WgsToIsrael(latitude, longitude)
                         center: {x: 179000, y: 663000}
 
                     });
+
+                    $.getJSON(json, function(data) {
+                        // JSON result in `data` variable
+                        nadlan_data = data;
+
+                    });
+
+                    
+                    // var ctx = document.getElementById('myChart').getContext('2d');
+                    // var myBarChart = new Chart(ctx, {
+                    //     type: 'horizontalBar',
+                    //     data: appVue.chart_data,
+                    //     options: {
+                    //         responsive: true,
+                    //         legend: {
+                    //             position: 'top',
+                    //         },
+                    //         title: {
+                    //             display: true,
+                    //             text: 'צדדי נדל"ן לפי שכונה'
+                    //         }
+                    //     }
+                    // });
+
+
+
+
+                    //document.getElementById("map_div").hidden = true;
+                   // document.getElementById("charts_div").hidden = false;
+
 
 
                     govmap.onEvent(govmap.events.CLICK).progress(function (e)  
@@ -884,6 +1022,15 @@ function WgsToIsrael(latitude, longitude)
 
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+
+        function reverseString(str) {
+            var newString = "";
+            for (var i = str.length - 1; i >= 0; i--) {
+                newString += str[i];
+            }
+            return newString;
         }
 
 
@@ -1012,12 +1159,50 @@ function WgsToIsrael(latitude, longitude)
 
         }
 
+        Vue.use(VueCharts);
         var appVue = new Vue({
             el:"#toolbar_app",
             vuetify: new Vuetify(),
                 rtl: true,
                 data () {
                     return {
+
+                        dataentry: null,
+                        datalabel: null,
+
+                        max_price_value: [0,0,0,0],
+                        max_price_labels: [],
+                        max_price_colors:[],
+                        max_price_b_colors:[],
+                        max_price_datalabel: "",
+
+                        min_price_value: [0,0,0,0],
+                        min_price_labels: [],
+                        min_price_colors: [],
+                        min_price_b_colors: [],
+                        min_price_datalabel: "",
+
+                        max_rent_value: [0,0,0,0],
+                        max_rent_labels: [],
+                        max_rent_colors:[],
+                        max_rent_b_colors:[],
+                        max_rent_datalabel: "",
+
+                        min_rent_value: [0,0,0,0],
+                        min_rent_labels: [],
+                        min_rent_colors:[],
+                        min_rent_b_colors:[],
+                        min_rent_datalabel: "",
+
+                        isChart: true,
+                        isMap: false,
+
+
+
+
+                    
+
+
 
                         value1: [1000, 20000],
                         value2: [200, 10000],
@@ -1030,7 +1215,7 @@ function WgsToIsrael(latitude, longitude)
                         itemsPerPage: 5,
                         items: myData.items,
                         ROOMS: 3,
-                        ROOMS_items: [3,4,5]
+                        ROOMS_items: [3,4,5],
                        
                     }
                 },
@@ -1073,6 +1258,98 @@ function WgsToIsrael(latitude, longitude)
                         query = "(RentAmountNeighborhood"+rooms+" BETWEEN " + min_rent + " AND " + max_rent + ") AND " + 
                                 "(DealAmountNeighborhood"+rooms+" BETWEEN " + min_price +" AND " + max_price +")";
                         govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': query, 'zoomToExtent': true });  
+
+                        var filteredData = nadlan_data.filter(function(i) {
+                            return i["RentAmountNeighborhood"+rooms] >= min_rent && i["RentAmountNeighborhood"+rooms] <= max_rent &&
+                                    i["DealAmountNeighborhood"+rooms] >= min_price && i["DealAmountNeighborhood"+rooms]<= max_price;
+                        });
+                        console.log(filteredData);
+
+                        
+                        filter1 = filteredData.sort((a, b) => (a["DealAmountNeighborhood"+rooms] < b["DealAmountNeighborhood"+rooms]) ? 1 : -1);
+
+
+                        appVue.max_price_value = [];
+                        appVue.max_price_labels = [];
+
+                        appVue.price_value = [];
+                        appVue.price_labels = [];
+                        appVue.price_colors=[];
+                        appVue.price_b_colors=[];
+
+                        for (i = 0; i < filter1.length ; i++)
+                        {
+                            if (i < 4)
+                            {
+                                appVue.max_price_value.push(filter1[i]["DealAmountNeighborhood"+rooms]);
+                                appVue.max_price_labels.push(filter1[i]["FNAME"] + " " + filter1[i]["SETL_NAME"]);
+                                appVue.max_price_colors.push("#E57373");
+                                appVue.max_price_b_colors.push("#D50000")
+                            }
+                        }
+
+                        
+
+                        filter2 = filteredData.sort((a, b) => (a["DealAmountNeighborhood"+rooms] > b["DealAmountNeighborhood"+rooms]) ? 1 : -1);
+
+
+                        appVue.min_price_value = [];
+                        appVue.min_price_labels = [];
+                        for (i = 0; i < filter2.length ; i++)
+                        {
+                            if (i < 5)
+                            {
+                                appVue.min_price_value.push(filter2[i]["DealAmountNeighborhood"+rooms]);
+                                appVue.min_price_labels.push(filter2[i]["FNAME"] + " " + filter1[i]["SETL_NAME"]);
+                                appVue.min_price_colors.push("#81C784");
+                                appVue.min_price_b_colors.push("#2E7D32")
+                            }
+                        }
+
+
+                      
+                        filter3 = filteredData.sort((a, b) => (a["RentAmountNeighborhood"+rooms] < b["RentAmountNeighborhood"+rooms]) ? 1 : -1);
+
+                        
+                        appVue.max_rent_value = [];
+                        appVue.max_rent_labels = [];
+
+                        appVue.rent_value = [];
+                        appVue.rent_labels = [];
+
+                        for (i = 0; i < filter3.length ; i++)
+                        {
+                            if (i < 5)
+                            {
+                                appVue.max_rent_value.push(filter3[i]["RentAmountNeighborhood"+rooms]);
+                                appVue.max_rent_labels.push(filter3[i]["FNAME"] + " " + filter1[i]["SETL_NAME"]);
+                                appVue.max_rent_colors.push("#E57373");
+                                appVue.max_rent_b_colors.push("#D50000")
+                            }
+                        }
+
+                        filter4 = filteredData.sort((a, b) => (a["RentAmountNeighborhood"+rooms] > b["RentAmountNeighborhood"+rooms]) ? 1 : -1);
+
+
+                        appVue.min_rent_value = [];
+                        appVue.min_rent_labels = [];
+                        for (i = 0; i < filter4.length ; i++)
+                        {
+                            if (i < 5)
+                            {
+                                appVue.min_rent_value.push(filter4[i]["RentAmountNeighborhood"+rooms]);
+                                appVue.min_rent_labels.push(filter4[i]["FNAME"] + " " +filter1[i]["SETL_NAME"]);
+                                appVue.min_rent_colors.push("#81C784");
+                                appVue.min_rent_b_colors.push("#2E7D32")
+                            }
+                        }
+
+                        this.min_price_datalabel = appVue.max_price_value.length.toString();  + " השכונות עם המחיר הנמוך ביותר"
+                        this.max_price_datalabel = appVue.min_price_value.length.toString();  + " השכונות עם המחיר הגבוה ביותר"
+                        this.min_rent_datalabel = appVue.min_rent_value.length.toString(); + " השכונות עם השכירות הנמוכה ביותר";
+                        this.max_rent_datalabel = appVue.min_rent_value.length.toString(); + " השכונות עם השכירות הגבוהה ביותר";
+
+
 
 
                     },
@@ -1160,7 +1437,7 @@ function WgsToIsrael(latitude, longitude)
                             govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': "OBJECTID > 0", 'zoomToExtent': false }); 
 
                             appVue.value1= [1000, 20000];
-                            appVue.value2= [200000, 10000000];
+                            appVue.value2= [200, 10000];
 
                             getData(response.data[0].X,response.data[0].Y);
 
@@ -1217,6 +1494,24 @@ function WgsToIsrael(latitude, longitude)
                     openMenuDialog()
                     {
                         this.menu_dialog = true;         
+                    },
+                    
+                    switchMap()
+                    {
+                        document.getElementById("map_div").hidden = false;
+                        document.getElementById("charts_div").hidden = true;
+                        document.getElementById("chartBtn").hidden = true;
+                        this.isChart = true;
+                        this.isMap = false;
+                    },
+
+                    switchCharts()
+                    {
+                        document.getElementById("map_div").hidden = true;
+                        document.getElementById("charts_div").hidden = false;
+                        //document.getElementById("mapBtn").hidden = true;
+                        this.isChart = false;
+                        this.isMap = true;
                     }
                 },
 
