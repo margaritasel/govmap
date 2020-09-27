@@ -350,7 +350,6 @@ tile
                                 </v-card>
                                 </v-col>
 
-
                                 <v-col cols="12"
                                 sm="12"
                                 md="12"
@@ -363,21 +362,25 @@ tile
                             >
                                     <v-card-text>
                                     {{ROOMS}} חדרים -
-                                    מחיר חציוני: עד {{ '₪' + numberWithCommas( max_price_value[0]) }}
+                                    שכירות חציונית: עד {{ '₪' + numberWithCommas( max_rent_value[0]) }}
                                     <section class="container">	
                                         <div class="columns">
                                           <div class="column" style="text-align: right;">
-                                            <chartjs-horizontal-bar :datalabel ="max_price_datalabel" :labels="max_price_labels"  :data="max_price_value" :bind="true"
-                                            :backgroundColor="max_price_colors" :borderColor="max_price_b_colors"></chartjs-horizontal-bar>
+                                            <chartjs-horizontal-bar :datalabel ="max_rent_datalabel" :labels="max_rent_labels"  :data="max_rent_value" :bind="true"
+                                            :backgroundColor="max_rent_colors" :borderColor="max_rent_b_colors"></chartjs-horizontal-bar>
                                           </div>	    
                                         </div>    
                                     </section>
-    
+        
                                 </v-card-text>
-                                <h3 class="font-weight-thin">{{ max_price_value.length }} השכונות עם המחיר הגבוה ביותר</h3>
+                                <h3 class="font-weight-thin">{{ max_rent_value.length }} השכונות עם השכירות הגבוהה ביותר</h3>
                                 </v-card>
                                 </v-col>
                             </v-row>
+
+                          
+
+                            
                         <v-spacer></v-spacer>
 
                         <v-divider
@@ -414,7 +417,7 @@ tile
                         </v-card>
                         </v-col>
 
-
+                        
                         <v-col cols="12"
                         sm="12"
                         md="12"
@@ -427,20 +430,23 @@ tile
                     >
                             <v-card-text>
                             {{ROOMS}} חדרים -
-                            שכירות חציונית: עד {{ '₪' + numberWithCommas( max_rent_value[0]) }}
+                            מחיר חציוני: עד {{ '₪' + numberWithCommas( max_price_value[0]) }}
                             <section class="container">	
                                 <div class="columns">
                                   <div class="column" style="text-align: right;">
-                                    <chartjs-horizontal-bar :datalabel ="max_rent_datalabel" :labels="max_rent_labels"  :data="max_rent_value" :bind="true"
-                                    :backgroundColor="max_rent_colors" :borderColor="max_rent_b_colors"></chartjs-horizontal-bar>
+                                    <chartjs-horizontal-bar :datalabel ="max_price_datalabel" :labels="max_price_labels"  :data="max_price_value" :bind="true"
+                                    :backgroundColor="max_price_colors" :borderColor="max_price_b_colors"></chartjs-horizontal-bar>
                                   </div>	    
                                 </div>    
                             </section>
 
                         </v-card-text>
-                        <h3 class="font-weight-thin">{{ max_rent_value.length }} השכונות עם השכירות הגבוהה ביותר</h3>
+                        <h3 class="font-weight-thin">{{ max_price_value.length }} השכונות עם המחיר הגבוה ביותר</h3>
                         </v-card>
                         </v-col>
+
+
+
                     </v-row>
         </v-container>
 
@@ -891,7 +897,7 @@ function WgsToIsrael(latitude, longitude)
                         };
                         if( isMobile.any() ) {
 
-                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 0.9
+                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 0.8
                             this.titleEl = false;
                         } 
                         console.log(h);
