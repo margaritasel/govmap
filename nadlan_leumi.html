@@ -26,6 +26,22 @@ text-align: right;
   direction: rtl;
   }
 
+  .main-container {
+  max-height: calc(100vh - 64px);
+  height:auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.content {
+  min-height:2280px; 
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+
 
 
     @media (max-width: 600px) {
@@ -97,7 +113,7 @@ text-align: right;
 
 
 
-     <v-app-bar id="barDesktop"
+     <v-app-bar id="barDesktop" prominent :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'"
       color="#ECEFF1"
       dense
     >
@@ -137,7 +153,7 @@ text-align: right;
     </v-app-bar>
 
 
-    <v-app-bar id="barMobile1"
+    <v-app-bar id="barMobile1" :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'"
     color="#ECEFF1"
     dense
   >
@@ -155,7 +171,7 @@ text-align: right;
 
 
   
-  <v-app-bar id="barMobile2"
+  <v-app-bar id="barMobile2" :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'"
   color="#ECEFF1"
 >
 
@@ -178,7 +194,7 @@ vertical
 
 </v-app-bar>
 
-<v-card color="#ECEFF1" id="mobileFilter"
+<v-card color="#ECEFF1" id="mobileFilter" 
 class="pa-2" style="height: 66px;"
 outlined
 tile
@@ -198,7 +214,7 @@ tile
 
 
 
-<v-row no-gutters id="menu_row">
+<v-row no-gutters id="menu_row" :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'">
     <v-col
     cols="12"
     sm="12"
@@ -313,7 +329,7 @@ tile
 
 </v-row>
 
-
+<v-flex ref="scroll" class="main-container" id="scrolling-techniques">
 <v-card
 outlined
 tile
@@ -575,36 +591,44 @@ class="mx-auto"
 
         </v-row>
 
-        <v-container fluid>
-            <v-data-table
-            :headers="headers"
-            :items="filteritems"
-            :items-per-page="5"
-            class="elevation-1">
 
-
-
-            <template v-slot:item.action="{ item }">
-                <v-icon
-                  color="grey"
-                  @click="zoomItem(item)"
-                >
-                mdi-map-search
-                </v-icon>
-              </template>
-          </v-data-table>
-        </v-container>
     </v-container>
-
-
-
-        
-    
-
-
-
     </div>
 </v-card>
+
+<v-row no-gutters id="table_row">
+    <v-col
+    cols="12"
+    sm="12"
+    md="12"
+    lg="12"
+    xl="12"
+    >
+
+    <v-container fluid>
+        <v-data-table
+        light
+        :headers="headers"
+        :items="filteritems"
+        :items-per-page="5"
+        fixed-header
+        class="elevation-1">
+
+
+
+        <template v-slot:item.action="{ item }">
+            <v-icon
+            color="grey"
+            @click="zoomItem(item)"
+            >
+            mdi-map-search
+            </v-icon>
+        </template>
+    </v-data-table>
+    </v-container>
+    </v-col>
+</v-row>
+</v-flex>
 
 </v-container>
 
