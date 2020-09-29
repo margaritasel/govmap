@@ -12,6 +12,20 @@
         display: none;
     }
 
+    .v-data-table__mobile-row__header {
+
+width: 49.5%;	
+text-align: right;
+  direction: rtl;
+
+}
+
+.v-data-table__mobile-row__cell {
+  width: 49.5%;
+  text-align: right;
+  direction: rtl;
+  }
+
 
 
     @media (max-width: 600px) {
@@ -560,6 +574,26 @@ class="mx-auto"
             </v-col>
 
         </v-row>
+
+        <v-container fluid>
+            <v-data-table
+            :headers="headers"
+            :items="filteritems"
+            :items-per-page="5"
+            class="elevation-1">
+
+
+
+            <template v-slot:item.action="{ item }">
+                <v-icon
+                  color="grey"
+                  @click="zoomItem(item)"
+                >
+                mdi-map-search
+                </v-icon>
+              </template>
+          </v-data-table>
+        </v-container>
     </v-container>
 
 
@@ -1302,6 +1336,21 @@ function WgsToIsrael(latitude, longitude)
                 rtl: true,
                 data () {
                     return {
+                        headers: [
+                        { text: 'מספר זיהוי', value: 'OBJECTID' },
+                        {
+                            text: 'שם שכונה',
+                            align: 'start',
+                            sortable: false,
+                            value: 'FNAME',
+                        },
+                        { text: 'שם ישוב', value: 'SETL_NAME' },
+                        { text: 'שכירות חציונית', value: 'RentAmount' },
+                        { text: 'מחיר חציוני', value: 'DealAmount' },
+                        {text: 'התמקדות', value: 'action'},
+
+                        ],
+                        filteritems: [],
 
                         dataentry: null,
                         datalabel: null,
@@ -1537,6 +1586,18 @@ function WgsToIsrael(latitude, longitude)
                         }
 
 
+                        //populate table
+                        this.filteritems = [];
+                        for (i = 0; i < filteredData.length; i++)
+                        {
+                            this.filteritems.push({
+                                "OBJECTID": filteredData[i]["OBJECTID"], 
+                                "FNAME": filteredData[i]["FNAME"], 
+                                "SETL_NAME": filteredData[i]["SETL_NAME"], 
+                                "DealAmount":  numberWithCommas(filteredData[i]["DealAmountNeighborhood"+rooms]) + ' ₪', 
+                                "RentAmount":  numberWithCommas(filteredData[i]["RentAmountNeighborhood"+rooms])+ ' ₪' })
+                        }
+
 
 
 
@@ -1700,7 +1761,20 @@ function WgsToIsrael(latitude, longitude)
                         //document.getElementById("mapBtn").hidden = true;
                         this.isChart = false;
                         this.isMap = true;
-                    }
+                    },
+
+ 
+                    zoomItem(item)
+                    {
+                        appVue.switchMap();
+                        var oids = [item.OBJECTID];
+                        //govmap.searchInLayer({layerName: "sites_nadlan_leumi",fieldName: 'OBJECTID', fieldValues: oids, highlight: true, 'outLineColor': "blue" });
+                        govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': "OBJECTID="+ item.OBJECTID, 'zoomToExtent': true });  
+                        appVue.Click();
+                        //console.log(filteredData[0].geometry.x);
+                        
+
+                    },
                 },
 
 
