@@ -317,7 +317,8 @@ class="mx-auto"
 
     <!-- <canvas id="myChart" width="400" height="400"> </canvas> -->
     <v-container right>
-        
+
+
         <v-row>
             <v-col cols="12"
             sm="12"
@@ -329,9 +330,96 @@ class="mx-auto"
                 outlined
                 tile
                 color="#ECEFF1">
-                <h3 class="font-weight-light">
+                    <h4 class="font-weight-light"> <div>{{ROOMS}} חדרים</div>
+                     <div>שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪</div> 
+                     <div>מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪</div>
+                    </h4>
+
+                    
+            </v-card>
+            </v-col>
+            <v-col cols="12"
+            sm="12"
+            md="12"
+            lg="6"
+            xl="6">
+
+            <v-card
+            class="mx-auto text-center"
+            color="light-green darken-1"
+            max-width="600"
+            max-height="600"
+            dark
+        >
+                <v-card-text>
+                <h3 >התפלגות לפי מחוז לאחר סינון</h3>
+                <section>	
+                <v-sheet dark color="rgba(0, 0, 0, .12)">
+                <chartjs-doughnut  :labels ="dn_labels"  :data="dn_data" :bind="true"
+                :backgroundColor="dn_backgroundColor" hoverBackgroundColor="#F9FBE7" scaleShowLabels="false"></chartjs-doughnut>	
+                 </v-sheet> 
+                            </section>
+    
+                </v-card-text>
+                
+            </v-card>  
+            </v-col> 
+
+            <v-col cols="12"
+            sm="12"
+            md="12"
+            lg="6"
+            xl="6">
+
+            <v-card
+            class="mx-auto text-center"
+            color="light-green darken-3"
+            max-width="600"
+            max-height="600"
+            dark
+        >
+                <v-card-text>
+                <h3 >התפלגות לפי ישוב לאחר סינון</h3>
+                <section>	
+                <v-sheet dark color="rgba(0, 0, 0, .12)">
+                <chartjs-doughnut  :labels ="sdn_labels"  :data="sdn_data" :bind="true"
+                :backgroundColor="sdn_backgroundColor" hoverBackgroundColor="#F9FBE7" scaleShowLabels="false"></chartjs-doughnut>	
+                 </v-sheet> 
+                            </section>
+    
+                </v-card-text>
+                
+            </v-card>  
+            </v-col> 
+        
+            
+            
+            </v-col>
+
+        <v-row>
+
+            <v-spacer></v-spacer>
+
+            <v-divider
+            class="mx-4"
+            ></v-divider>
+    
+            <v-spacer></v-spacer>
+
+        <v-row>
+            <v-col cols="12"
+            sm="12"
+            md="12"
+            lg="12"
+            xl="12">
+            <v-card
+                class="d-flex pa-2 justify-lg-center"
+                outlined
+                tile
+                color="#ECEFF1">
+                <h4 class="font-weight-light">
                     {{ROOMS}} חדרים -
-                    שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪</h3>
+                    שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪</h4>
             </v-card>
             </v-col>
             <v-col cols="12"
@@ -351,7 +439,7 @@ class="mx-auto"
                 <h3 >{{ min_rent_value.length }} השכונות עם השכירות הנמוכה ביותר</h3>
                 <section class="container">	
                     <v-sheet dark class="columns"  color="rgba(0, 0, 0, .12)">
-                        <chartjs-horizontal-bar :tooltips="tootips" :datalabel ="min_rent_datalabel" :labels="min_rent_labels"  :data="min_rent_value" :bind="true"
+                        <chartjs-horizontal-bar  :datalabel ="min_rent_datalabel" :labels="min_rent_labels"  :data="min_rent_value" :bind="true"
                         backgroundColor="rgba(255, 255, 255, .7)" borderColor="white"></chartjs-horizontal-bar>	    
                     </v-sheet>    
                 </section>
@@ -407,9 +495,9 @@ class="mx-auto"
                 tile
                 color="#ECEFF1"
                 >
-                <h3 class="font-weight-light">
+                <h4 class="font-weight-light">
                     {{ROOMS}} חדרים -
-                    מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪</h3>
+                    מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪</h4>
             </v-card>
         </v-col>
         <v-row>
@@ -922,6 +1010,15 @@ function WgsToIsrael(latitude, longitude)
         }
 
 
+        function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+        }
+
        
         var json = "https://raw.githubusercontent.com/yovavsanders/govmap/master/nadlan_values.json";
         var nadlan_data;
@@ -1187,7 +1284,7 @@ function WgsToIsrael(latitude, longitude)
 
 
         }
-
+        var filteredData;
         Vue.use(VueCharts);
         var appVue = new Vue({
             el:"#toolbar_app",
@@ -1223,12 +1320,23 @@ function WgsToIsrael(latitude, longitude)
                         min_rent_b_colors:[],
                         min_rent_datalabel: "",
 
-                        tootips:["sd","Asd","3","4","5","6","7","8|"],
-
                         isChart: true,
                         isMap: false,
 
+                        dn_labels: [],
+                        dn_label: 'שכונות',
+                        dn_backgroundColor: ["#FFEB3B", "#FF9800", "#4CAF50", "#03A9F4", "#673AB7", "#F44336", "#E91E63"],
+                        dn_borderWidth: 0,
+                        dn_hoverBorderWidth: 0,
+                        dn_data: [10, 10, 10, 10, 10],
 
+                        
+                        sdn_labels: [],
+                        sdn_label: 'ישובים',
+                        sdn_backgroundColor: ["#23161B", "#EFBA7A", "#EDCDBD", "#20D1DF", "#857FF8", "#ED03E5", "#700A52", "#2FDB18", "#9F967F", "#C16D83", "#1D9B0B", "#CA027E", "#B3E6A9", "#A98D93", "#7ADF9F", "#E4F605", "#298E77", "#0BD351", "#4CB9C1", "#5E5199", "#ED805A", "#80DE9D", "#3BE2D4", "#A5A61D", "#ADA83E", "#095D48", "#1E3200", "#F4C082", "#AB3E5E", "#CCD8F5", "#3D3361", "#F15F17", "#69C392", "#BD9E0C", "#7D5D77", "#B1BBC7", "#B46E22", "#1F3A1B", "#80119D", "#A9B887", "#B775B5", "#0C375C", "#CAE727", "#EEEF98", "#D07D50", "#E2EE31", "#ED866D", "#402F6A", "#7CFBC2", "#BF87B1", "#14369C", "#518962", "#0BE8E6", "#875C1A", "#232240", "#0E87CB", "#D49746", "#C6BBD4", "#7260EF", "#3ACE7F", "#E95984", "#C762B9", "#386F66", "#DAD9EC", "#9BDB7E", "#65DFA7", "#4DC1EC", "#DFC232", "#8A7D3B", "#A28C1A", "#8791BA", "#08C05E", "#9CEDE5", "#17BE34", "#020A5E", "#89CA54", "#CB812A", "#8EF0F3", "#C1E40B", "#660CBD"],
+                        sdn_borderWidth: 0,
+                        sdn_hoverBorderWidth: 0,
+                        sdn_data: [10, 10, 10, 10, 10],
 
 
                     
@@ -1277,7 +1385,7 @@ function WgsToIsrael(latitude, longitude)
 
                     Click()
                     {
-
+                        filteredData = [];
                         min_rent = this.value1[0];
                         max_rent = this.value1[1];
 
@@ -1290,7 +1398,7 @@ function WgsToIsrael(latitude, longitude)
                                 "(DealAmountNeighborhood"+rooms+" BETWEEN " + min_price +" AND " + max_price +")";
                         govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': query, 'zoomToExtent': true });  
 
-                        var filteredData = nadlan_data.filter(function(i) {
+                        filteredData = nadlan_data.filter(function(i) {
                             return i["RentAmountNeighborhood"+rooms] >= min_rent && i["RentAmountNeighborhood"+rooms] <= max_rent &&
                                     i["DealAmountNeighborhood"+rooms] >= min_price && i["DealAmountNeighborhood"+rooms]<= max_price;
                         });
@@ -1379,6 +1487,45 @@ function WgsToIsrael(latitude, longitude)
                         this.max_price_datalabel = appVue.min_price_value.length.toString();  + " השכונות עם המחיר הגבוה ביותר"
                         this.min_rent_datalabel = appVue.min_rent_value.length.toString(); + " השכונות עם השכירות הנמוכה ביותר";
                         this.max_rent_datalabel = appVue.min_rent_value.length.toString(); + " השכונות עם השכירות הגבוהה ביותר";
+
+
+                        //set piechart by macoz
+
+                        appVue.dn_labels = [];
+                        appVue.dn_data = [];
+                        appVue.dn_backgroundColor = [];
+                        var colors = ["#FFEB3B", "#FF9800", "#4CAF50", "#03A9F4", "#673AB7", "#F44336", "#E91E63"];
+                        var machozCounts = filteredData.reduce(function (result, neighborhood) {
+                            var currentCount = result[neighborhood.REGION_NAM] || 0;
+                            result[neighborhood.REGION_NAM] = currentCount + 1;
+                            return result;
+                        }, {});
+                        var result = Object.keys(machozCounts).map((key) => [key, machozCounts[key]]);
+                        for (i = 0; i < result.length; i++)
+                        {
+                            appVue.dn_labels.push(result[i][0]);
+                            appVue.dn_data.push(result[i][1]);
+                            appVue.dn_backgroundColor.push(colors[i]);
+                        }
+
+                         //set piechart by setl
+
+                        appVue.sdn_labels = [];
+                        appVue.sdn_data = [];
+                        appVue.sdn_backgroundColor = [];
+                        var setlCounts = filteredData.reduce(function (result, neighborhood) {
+                            var currentCount = result[neighborhood.SETL_NAME] || 0;
+                            result[neighborhood.SETL_NAME] = currentCount + 1;
+                            return result;
+                        }, {});
+                        var sresult = Object.keys(setlCounts).map((key) => [key, setlCounts[key]]);
+                        for (i = 0; i < sresult.length; i++)
+                        {
+                            appVue.sdn_labels.push(sresult[i][0]);
+                            appVue.sdn_data.push(sresult[i][1]);
+                            appVue.sdn_backgroundColor.push(getRandomColor());
+                        }
+
 
 
 
