@@ -369,19 +369,28 @@ class="mx-auto"
             md="12"
             lg="12"
             xl="12">
-            <v-card
-                class="d-flex pa-2 justify-lg-center"
-                outlined
-                tile
-                color="#ECEFF1">
-               <h4 class="font-weight-bold"><div>הסינון שנבחר: </div>
-                     <div class="font-weight-light">{{ROOMS}} חדרים</div>
-                     <div class="font-weight-light">שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪</div> 
-                     <div class="font-weight-light">מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪</div>
-                    </h4>
 
-                    
-            </v-card>
+            <v-card
+            elevation="6"
+            max-width="344"
+            outlined
+            center
+            class="mx-auto"
+    color="grey lighten-5"
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="font-weight-bold" >
+          הסינון שנבחר:
+        </v-list-item-title>
+        <v-list-item-subtitle class="font-weight-bold">דירות {{ROOMS}} חדרים</v-list-item-subtitle>
+        <v-list-item-subtitle class="font-weight-bold">שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪</v-list-item-subtitle>
+        <v-list-item-subtitle class="font-weight-bold">מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪</v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
+  </v-card>
+            
+            
             </v-col>
             <v-col cols="12"
             sm="12"
@@ -407,7 +416,9 @@ class="mx-auto"
     
                 </v-card-text>
                 
-            </v-card>  
+            </v-card> 
+            
+            
             </v-col> 
 
             <v-col cols="12"
