@@ -12,14 +12,18 @@
         display: none;
     }
 
-    .v-data-table__mobile-row__header {
 
-width: 49.5%;	
-text-align: right;
-  direction: rtl;
-
+html {
+    scroll-behavior: smooth;
 }
 
+.v-data-table__mobile-row__header {
+
+    width: 49.5%;	
+    text-align: right;
+    direction: rtl;
+
+}
 .v-data-table__mobile-row__cell {
   width: 49.5%;
   text-align: right;
@@ -27,7 +31,7 @@ text-align: right;
   }
 
   .main-container {
-  max-height: calc(100vh - 64px);
+  max-height: calc(100vh - (100vh / 4));
   height:auto;
   overflow-y: auto;
   overflow-x: hidden;
@@ -113,12 +117,12 @@ text-align: right;
 
 
 
-     <v-app-bar id="barDesktop" prominent :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'"
+     <v-app-bar id="barDesktop" height="65" prominent :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'"
       color="#ECEFF1"
       dense
     >
 
-      <v-toolbar-title>שכבת מדדי הנדל"ן הלאומית</v-toolbar-title>
+      <v-toolbar-title style="margin-bottom: 10px;" class="text-md-body-1 font-weight-bold">שכבת מדדי הנדל"ן הלאומית</v-toolbar-title>
       <v-divider
       class="mx-4"
       vertical
@@ -133,23 +137,10 @@ text-align: right;
   class="mx-4"
   vertical
 ></v-divider>
-<v-btn @click="zoomCurrentLocation" icon>
+<v-btn @click="zoomCurrentLocation" icon style="margin-top: 12px;">
   <v-icon>mdi-crosshairs-gps</v-icon>
 </v-btn>
-
-
-
-
 <img class="mr-1" height="70" src="https://yovavsanders.github.io/Corona/logo.png"/>
-
-
-
-
-
-
-
-  
-
     </v-app-bar>
 
 
@@ -179,10 +170,12 @@ text-align: right;
   placeholder="כתובת, רחוב, שכונה"
 ></v-text-field>
 
+
 <v-divider
 class="mx-4"
 vertical
 ></v-divider>
+
 
 
 <v-btn @click="zoomCurrentLocation" icon>
@@ -200,6 +193,8 @@ outlined
 tile
 >
 
+
+
 <v-btn
       color="grey lighten-2" block @click="openMenuDialog" style="height: 40px;"
     >
@@ -209,12 +204,10 @@ tile
 
 
 
-
+<v-badge left color="lime darken-3" style="z-index: 1;" overlap :content="badgeContent()"></v-badge>
 </v-card>
 
-
-
-<v-row no-gutters id="menu_row" :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'">
+<v-row  no-gutters id="menu_row" :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'">
     <v-col
     cols="12"
     sm="12"
@@ -278,8 +271,9 @@ tile
                 
             </v-range-slider>
           </v-card>
+           
+  
         </v-col>
- 
 
     <v-col
     cols="12"
@@ -288,14 +282,28 @@ tile
     lg="2"
     xl="2"
     >
+
+
+    
+
+    
         <v-card color="#ECEFF1"
-            class="pa-2" style="height: 66px;"
+            class="pa-2"  style="height: 66px;"
             outlined
             tile
             model= "select_btn"
         >
-            <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות </v-btn>
+       
+    
+
+                  <v-btn block  color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >  סינון שכונות 
+                </v-btn>
+            
+
+            
+             
         </v-card>
+    
     </v-col>
 
     <v-col
@@ -323,13 +331,15 @@ tile
         <v-icon>mdi-map-search</v-icon>
         תצוגת מפה
     </v-btn>
+    <v-badge color="lime darken-3" style="z-index: 1;" overlap :content="badgeContent()"></v-badge>
     </v-card>
-    </v-col>
-
-
+    
+</v-col>
 </v-row>
 
+
 <v-flex ref="scroll" class="main-container" id="scrolling-techniques">
+    
 <v-card
 outlined
 tile
@@ -341,8 +351,6 @@ class="mx-auto"
     color: white;
     grid-column: span 2;">
     </div>
-
-
 
 
     <div id="charts_div" hidden style="padding: 0.5em;
@@ -606,8 +614,17 @@ class="mx-auto"
     >
 
     <v-container fluid>
+        <v-card-title>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              placeholder="חיפוש בתוצאות הסינון"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
         <v-data-table
-        light
+        :search="search"
         :headers="headers"
         :items="filteritems"
         :items-per-page="5"
@@ -720,12 +737,13 @@ class="mx-auto"
             xl="2"
             >
                 <v-card color="#ECEFF1"
-                    class="pa-2" style="height: 90px;"
+                    class="pa-2"
                     outlined
                     tile
                     model= "select_btn"
                 >
-                    <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות </v-btn>
+                    <v-btn block color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >סינון שכונות 
+                    </v-btn>
                     <v-btn id="chartBtn" v-show="isChart"
                     color="grey lighten-2" block @click="switchCharts" style="height: 40px;"
                   >
@@ -1360,6 +1378,7 @@ function WgsToIsrael(latitude, longitude)
                 rtl: true,
                 data () {
                     return {
+                        search: '',
                         headers: [
                         { text: 'מספר זיהוי', value: 'OBJECTID' },
                         {
@@ -1371,7 +1390,7 @@ function WgsToIsrael(latitude, longitude)
                         { text: 'שם ישוב', value: 'SETL_NAME' },
                         { text: 'שכירות חציונית', value: 'RentAmount' },
                         { text: 'מחיר חציוני', value: 'DealAmount' },
-                        {text: 'התמקדות', value: 'action'},
+                        {text: 'הצג במפה', value: 'action'},
 
                         ],
                         filteritems: [],
@@ -1738,7 +1757,8 @@ function WgsToIsrael(latitude, longitude)
                                 
                             });
                             
-
+                            this.Click();
+                            this.switchMap();;
 
                             
                         }
@@ -1790,15 +1810,22 @@ function WgsToIsrael(latitude, longitude)
  
                     zoomItem(item)
                     {
-                        appVue.switchMap();
+                        this.switchMap();
                         var oids = [item.OBJECTID];
+                        console.log(item.OBJECTID);
                         //govmap.searchInLayer({layerName: "sites_nadlan_leumi",fieldName: 'OBJECTID', fieldValues: oids, highlight: true, 'outLineColor': "blue" });
                         govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': "OBJECTID="+ item.OBJECTID, 'zoomToExtent': true });  
-                        appVue.Click();
+                        this.Click();
+                        document.getElementById("map_div").scrollIntoView();
                         //console.log(filteredData[0].geometry.x);
                         
 
                     },
+
+                    badgeContent()
+                    {
+                        return (this.filteritems.length) + " שכונות לאחר סינון"
+                    }
                 },
 
 
