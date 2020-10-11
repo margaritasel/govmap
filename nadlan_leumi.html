@@ -17,6 +17,12 @@ html {
     scroll-behavior: smooth;
 }
 
+#grad1 {
+  height: 100px;
+  background-color: #E0E0E0; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to bottom right,#F9FBE7, #FFFFFF);
+}
+
 .v-data-table__mobile-row__header {
 
     width: 49.5%;	
@@ -53,6 +59,9 @@ html {
           display: none;
         }
         #menu_row{
+            display: none;
+        }
+        #menu_row2{
             display: none;
         }
     
@@ -208,32 +217,15 @@ tile
 </v-card>
 
 <v-row  no-gutters id="menu_row" :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'">
-    <v-col
-    cols="12"
-    sm="12"
-    md="12"
-    lg="2"
-    xl="2"
-    >
-        <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;"
-        >
-            <v-select
-            v-model ="ROOMS"
-            :items="ROOMS_items"
-            label="מספר חדרים"
-            dense
-            outlined
-            :menu-props="{ top: true, offsetY: true }"
-            ></v-select>  
-        </v-card>
-    </v-col>
+
+  
 
         <v-col
         cols="12"
         sm="12"
         md="12"
-        lg="3"
-        xl="3"
+        lg="6"
+        xl="6"
         >
         <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
            שכירות חציונית: {{numberWithCommas(value1[0])}} ₪ עד {{numberWithCommas(value1[1])}} ₪
@@ -254,8 +246,8 @@ tile
         cols="12"
         sm="12"
         md="12"
-        lg="3"
-        xl="3"
+        lg="6"
+        xl="6"
         >
         <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;">
            מחיר חציוני: {{numberWithCommas(value2[0] * 1000)}} ₪ עד {{numberWithCommas(value2[1] * 1000)}} ₪
@@ -275,12 +267,106 @@ tile
   
         </v-col>
 
+
+</v-row>
+
+
+
+<v-row  no-gutters id="menu_row2" :scroll-off-screen="true" :scroll-target="'#scrolling-techniques'">
+
+
+
+
     <v-col
     cols="12"
     sm="12"
     md="12"
-    lg="2"
-    xl="2"
+    lg="3"
+    xl="3"
+    >
+        <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;"
+        >
+            <v-autocomplete
+
+            label="סינון לפי ישובים"
+            reverse
+            :search-input.sync="ac_search"
+            v-model = "SETL_NAME"
+            :items="SETL_NAME_items"
+            multiple
+            small-chips
+            flat
+            hide-no-data
+            hide-details
+            append-icon=""
+            @change="ac_search = ''"
+            clearable
+            disable-lookup
+            open-on-clear
+            dense
+            outlined
+            :menu-props="{ top: false, offsetY: true }"
+            >
+
+            <template v-slot:selection="{ item, index }">
+                <v-chip small v-if="index < 2 && SETL_NAME.length < SETL_NAME_items.length">
+                  <span>{{ item }}</span>
+                </v-chip>
+                <v-chip small v-if="index === (SETL_NAME_items.length -1)">
+                    <span>כל הישובים</span>
+                  </v-chip>
+                <span
+                  v-if="index === 2  && SETL_NAME.length < SETL_NAME_items.length"
+                  class="grey--text caption"
+                >(+{{ SETL_NAME.length - 2 }} אחרים)</span>
+              </template>
+              <template v-slot:prepend-item>
+                <v-list-item
+                  ripple
+                  @click="toggle"
+                >
+                  <v-list-item-action>
+                    <v-icon :color="SETL_NAME.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                  </v-list-item-action>
+                  <v-list-item-content>
+                    <v-list-item-title>בחר הכל</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-divider class="mt-2"></v-divider>
+              </template>
+        
+        
+        </v-autocomplete> 
+        </v-card>
+    </v-col>
+
+    <v-col
+    cols="12"
+    sm="12"
+    md="12"
+    lg="3"
+    xl="3"
+    >
+        <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 66px;"
+        >
+            <v-select
+            v-model ="ROOMS"
+            :items="ROOMS_items"
+            label="מספר חדרים"
+            dense
+            outlined
+            :menu-props="{ top: true, offsetY: true }"
+            ></v-select>  
+        </v-card>
+    </v-col>
+
+
+    <v-col
+    cols="12"
+    sm="12"
+    md="12"
+    lg="3"
+    xl="3"
     >
 
 
@@ -296,7 +382,7 @@ tile
        
     
 
-                  <v-btn block  color="blue darken-1" dark id="changed_button" style="height: 40px;"  @click="Click()" >  סינון שכונות 
+                  <v-btn   color="blue darken-1" dark id="changed_button" style="height: 40px;" block @click="Click()" >  סינון שכונות 
                 </v-btn>
             
 
@@ -306,12 +392,13 @@ tile
     
     </v-col>
 
+       
     <v-col
     cols="12"
     sm="12"
     md="12"
-    lg="2"
-    xl="2"
+    lg="3"
+    xl="3"
     >
     <v-card color="#ECEFF1"
     class="pa-2" style="height: 66px;"
@@ -335,7 +422,9 @@ tile
     </v-card>
     
 </v-col>
+
 </v-row>
+
 
 
 <v-flex ref="scroll" class="main-container" id="scrolling-techniques">
@@ -674,6 +763,73 @@ class="mx-auto"
 
       <v-container fluid grid-list-md dir="rtl">
         <v-row no-gutters>
+
+
+            
+    <v-col
+    cols="12"
+    sm="12"
+    md="12"
+    lg="2"
+    xl="2"
+    >
+        <v-card color="#ECEFF1" class="caption pa-2" outlined tile right style="max-height: 90px;"      
+        >
+            <v-autocomplete
+
+            label="סינון לפי ישובים"
+            reverse
+            :search-input.sync="ac_search"
+            v-model = "SETL_NAME"
+            :items="SETL_NAME_items"
+            multiple
+            small-chips
+            flat
+            hide-no-data
+            hide-details
+            append-icon=""
+            @change="ac_search = ''"
+            clearable
+            disable-lookup
+            open-on-clear
+            dense
+            outlined
+            :menu-props="{ top: false, offsetY: true }"
+            >
+
+            <template v-slot:selection="{ item, index }">
+                <v-chip small v-if="index < 2 && SETL_NAME.length < SETL_NAME_items.length">
+                  <span>{{ item }}</span>
+                </v-chip>
+                <v-chip small v-if="index === (SETL_NAME_items.length -1)">
+                    <span>כל הישובים</span>
+                  </v-chip>
+                <span
+                  v-if="index === 2  && SETL_NAME.length < SETL_NAME_items.length"
+                  class="grey--text caption"
+                >(+{{ SETL_NAME.length - 2 }} אחרים)</span>
+              </template>
+
+              <template v-slot:prepend-item>
+                <v-list-item
+                  ripple
+                  @click="toggle"
+                >
+                  <v-list-item-action>
+                    <v-icon :color="SETL_NAME.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                  </v-list-item-action>
+                  <v-list-item-content>
+                    <v-list-item-title>בחר הכל</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-divider class="mt-2"></v-divider>
+              </template>
+        
+        
+        </v-autocomplete> 
+        </v-card>
+    </v-col>
+            
             <v-col
             cols="12"
             sm="12"
@@ -1122,7 +1278,7 @@ function WgsToIsrael(latitude, longitude)
             govmap.createMap('map_div', {
                 token: my_token,
                 visibleLayers: ["sites_nadlan_leumi"],  
-                layers: ["sites_nadlan_leumi"], 
+                layers: ["sites_nadlan_leumi"],
                 showXY: true,
                 identifyOnClick: false,
                 layersMode: 2,
@@ -1136,6 +1292,14 @@ function WgsToIsrael(latitude, longitude)
                 nadlan_data = data;
 
             }).success(function() { 
+
+                appVue.SETL_NAME_items = nadlan_data.map(item => item.SETL_NAME)
+                .filter((value, index, self) => self.indexOf(value) === index).sort();
+
+                appVue.SETL_NAME = appVue.SETL_NAME_items;
+            
+
+
             //doesn't this do what the above is doing?
             Chart.defaults.global.defaultFontColor ="white";
             Chart.defaults.scale.gridLines.display = false;
@@ -1389,7 +1553,11 @@ function WgsToIsrael(latitude, longitude)
                 rtl: true,
                 data () {
                     return {
-                        search: '',
+
+                        SETL_NAME: [],
+                        SETL_NAME_items: [],
+                        search: "",
+		                ac_search: null,
                         headers: [
                         { text: 'מספר זיהוי', value: 'OBJECTID' },
                         {
@@ -1482,10 +1650,10 @@ function WgsToIsrael(latitude, longitude)
 
                 computed: {
                     All () {
-                        return this.SUB_TYPE.length === this.SUB_TYPE_items.length
+                        return this.SETL_NAME.length === this.SETL_NAME_items.length
                     },
                     Some () {
-                        return this.SUB_TYPE.length > 0 && !this.All
+                        return this.SETL_NAME.length > 0 && !this.All
                     },
                     icon () {
                         if (this.All) return 'mdi-close-box'
@@ -1506,14 +1674,37 @@ function WgsToIsrael(latitude, longitude)
                         max_price = this.value2[1] * 1000;
 
                         rooms = this.ROOMS;
+                        if (this.SETL_NAME.length == this.SETL_NAME_items.length)
+                        {
+                            setls = this.SETL_NAME;
+                        }
+
 
                         query = "(RentAmountNeighborhood"+rooms+" BETWEEN " + min_rent + " AND " + max_rent + ") AND " + 
                                 "(DealAmountNeighborhood"+rooms+" BETWEEN " + min_price +" AND " + max_price +")";
+                        if (this.SETL_NAME.length < this.SETL_NAME_items.length)
+                        {
+                            setls = this.SETL_NAME;
+                            setl_string = "";
+                            for (i = 0; i < setls.length; i++)
+                            {
+                                if (i > 0)
+                                {                                {}
+                                    setl_string = setl_string + "," + "'" + setls[i] + "'";
+                                }
+                                else{
+                                    setl_string = setl_string + "'" + setls[i] + "'";
+                                }
+                            }
+                            query = query +  " AND SETL_NAME IN ("+setl_string+")";
+                        }
+
                         govmap.filterLayers({ 'layerName': "sites_nadlan_leumi", 'whereClause': query, 'zoomToExtent': false });  
 
                         filteredData = nadlan_data.filter(function(i) {
                             return i["RentAmountNeighborhood"+rooms] >= min_rent && i["RentAmountNeighborhood"+rooms] <= max_rent &&
-                                    i["DealAmountNeighborhood"+rooms] >= min_price && i["DealAmountNeighborhood"+rooms]<= max_price;
+                                    i["DealAmountNeighborhood"+rooms] >= min_price && i["DealAmountNeighborhood"+rooms]<= max_price &&
+                                    isInArray(i["SETL_NAME"], appVue.SETL_NAME)
                         });
                         console.log(filteredData);
 
@@ -1664,9 +1855,9 @@ function WgsToIsrael(latitude, longitude)
                     toggle () {
                         this.$nextTick(() => {
                         if (this.All) {
-                            this.SUB_TYPE = []
+                            this.SETL_NAME = []
                         } else {
-                            this.SUB_TYPE = this.SUB_TYPE_items.slice()
+                            this.SETL_NAME = this.SETL_NAME_items.slice()
                         }
                         })
                     },
