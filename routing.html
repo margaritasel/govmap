@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+<html style='width:100%; height:100%;'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+    @media (max-width: 600px) {
+        #barDesktop {
+          display: none;
+        }
+    
+    }
+    
+    @media (min-width: 600px) {
+        #barMobile1 {
+          display: none;
+        }
+        #barMobile2{
+          display: none;
+        }
+    }
+
+</style>
+
+<html>
+
+
+    <head>
+        <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script>  
+      
+        <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script>
+
+		
+			  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
+    </head>
+
+    <title>הצג מסלול נסיעה</title>
+
+    <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+        <div id="toolbar_app" right >
+            <v-app>
+                <v-container class="grey lighten-5">
+
+
+                   
+                   
+
+
+
+                    <v-app-bar id="barDesktop"
+      color="#E0E0E0"
+      dense
+      
+    >
+
+      <v-toolbar-title>הצג מסלול נסיעה</v-toolbar-title>
+      <v-divider
+      class="mx-4"
+      vertical
+    ></v-divider>
+
+
+      <v-text-field right v-model="from" style="margin-top: 30px; text-align: right;"
+      placeholder="מכתובת"
+  ></v-text-field>
+  
+  <v-divider
+class="mx-4"
+vertical
+></v-divider>
+
+      <v-text-field right v-model="to" style="margin-top: 30px; text-align: right;"
+      placeholder="לכתובת"
+  ></v-text-field>
+  
+
+  <v-divider
+  class="mx-4"
+  vertical
+></v-divider>
+
+
+
+<v-btn @click="go" icon>
+  <v-icon>mdi-crosshairs-gps</v-icon>
+</v-btn>
+
+
+<img class="mr-1" height="70" src="https://yovavsanders.github.io/Corona/logo.png"/>
+
+
+
+
+
+
+
+  
+
+    </v-app-bar>
+
+
+    <v-app-bar id="barMobile1"
+    color="#E0E0E0"
+    dense
+  >
+
+  <img class="mr-1"  height="60" src="https://yovavsanders.github.io/Corona/logo.png"/>
+
+    <v-toolbar-title center>התמקד לטווח 1000 מ'</v-toolbar-title>
+
+    
+
+
+  </v-app-bar>
+
+
+
+
+  
+  <v-app-bar id="barMobile2"
+  color="#E0E0E0"
+>
+
+  <v-text-field right v-model="from" style="margin-top: 30px; text-align: right;"
+  placeholder="מכתובת"
+></v-text-field>
+
+<v-divider
+class="mx-4"
+vertical
+></v-divider>
+
+  <v-text-field right v-model="to" style="margin-top: 30px; text-align: right;"
+  placeholder="לכתובת"
+></v-text-field>
+
+<v-divider
+class="mx-4"
+vertical
+></v-divider>
+
+
+<v-btn @click="go" icon>
+<v-icon>mdi-crosshairs-gps</v-icon>
+</v-btn>
+
+
+
+</v-app-bar>
+                
+                    <v-card
+                    outlined
+                    tile
+                    class="mx-auto"
+                    >
+                        <div id="map_div" style="padding: 0.5em;
+                        background:#E0E0E0;
+                        border: 0;
+                        color: white;
+                        grid-column: span 2;">
+                        </div>
+                    </v-card>
+
+                  </v-container>
+            </v-app>
+        </div>
+    </body>
+
+
+
+    
+
+
+    <script>
+	
+		
+	
+	function polyline_decode(str, precision) {
+    var index = 0,
+        lat = 0,
+        lng = 0,
+        coordinates = [],
+        shift = 0,
+        result = 0,
+        byte = null,
+        latitude_change,
+        longitude_change,
+        factor = Math.pow(10, precision || 6);
+
+    // Coordinates have variable length when encoded, so just keep
+    // track of whether we've hit the end of the string. In each
+    // loop iteration, a single coordinate is decoded.
+    while (index < str.length) {
+
+        // Reset shift, result, and byte
+        byte = null;
+        shift = 0;
+        result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        latitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        shift = result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        longitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        lat += latitude_change;
+        lng += longitude_change;
+
+        coordinates.push([lat / factor, lng / factor]);
+    }
+
+    return coordinates;
+};
+
+        var json_accidents = "Accidents.json"
+        var accident_features = [];
+        var wkts_all = [];
+        var names_all = [];
+        var bubbleHTMLParameters_all = [];
+        var heatmap_features = [];
+        var symbols_all = [];
+        
+        function isInArray(value, array) {
+            return array.indexOf(value) > -1;
+        }
+
+        
+	
+
+//////////////////////////////////////////
+
+                              // convert wgs84 to israel tm grid...
+
+                              //////////////////////////////////////////
+
+ 
+
+                              function degreesToRadians(degrees) {
+
+return degrees * Math.PI / 180;
+
+}
+
+
+
+function pow2(x) {
+
+return x*x;
+
+}
+
+
+
+function pow3(x) {
+
+return x*x*x;
+
+}
+
+
+
+function pow4(x) {
+
+return x*x*x*x;
+
+}
+
+
+
+function ITMLocation(easting, northing) {
+
+this.easting = easting;
+
+this.northing = northing;
+
+this.eastingInOldGrid = function() {
+
+			 return easting - 50000;
+
+}
+
+this.northingInOldGrid = function() {
+
+			 var retval = northing - 500000;
+
+			 if (retval<0) {
+
+			   retval += 1000000;
+
+			 }
+
+			 return retval;
+
+}
+
+}
+
+
+
+//////////////
+
+//// Main Function…
+
+//////////////
+
+function WgsToIsrael(latitude, longitude)
+
+{
+
+			 longitude = degreesToRadians(longitude);
+
+			 latitude = degreesToRadians(latitude);
+
+			 //LatLongToITM(latitude, longitud);
+
+			 // Projection parameters
+
+			 var centralMeridian = degreesToRadians(35.2045169444444);  // central meridian of ITM projection
+
+			 var k0 = 1.0000067;  // scale factor
+
+
+
+			 // Ellipsoid constants (WGS 80 datum)
+
+			 var a = 6378137;  // equatorial radius
+
+			 var b = 6356752.3141; // polar radius
+
+			 var e = Math.sqrt(1 - b*b/a/a);  // eccentricity
+
+			 var e1sq = e*e/(1-e*e);
+
+			 var n = (a-b)/(a+b);
+
+
+
+			 // Curvature at specified location
+
+			 var tmp = e*Math.sin(latitude);
+
+			 var nu = a/Math.sqrt(1 - tmp*tmp);
+
+
+
+			 // Meridional arc length
+
+			 var n3 = pow3(n);
+
+			 var n4 = pow4(n);
+
+			 var A0 = a*(1-n+(5*n*n/4)*(1-n) +(81*n4/64)*(1-n));
+
+			 var B0 = (3*a*n/2)*(1 - n - (7*n*n/8)*(1-n) + 55*n4/64);
+
+			 var C0 = (15*a*n*n/16)*(1 - n +(3*n*n/4)*(1-n));
+
+			 var D0 = (35*a*n3/48)*(1 - n + 11*n*n/16);
+
+			 var E0 = (315*a*n4/51)*(1-n);
+
+			 var S = A0*latitude - B0*Math.sin(2*latitude) + C0*Math.sin(4*latitude)
+
+			 - D0*Math.sin(6*latitude) + E0*Math.sin(8*latitude);
+
+
+
+			 // Coefficients for ITM coordinates
+
+			 var p = longitude-centralMeridian;
+
+			 var Ki = S*k0;
+
+			 var Kii = nu*Math.sin(latitude)*Math.cos(latitude)*k0/2;
+
+			 var Kiii = ((nu*Math.sin(latitude)*pow3(Math.cos(latitude)))/24)*(5-pow2(Math.tan(latitude))+9*e1sq*pow2(Math.cos(latitude))+4*e1sq*e1sq*pow4(Math.cos(latitude)))*k0;
+
+			 var Kiv = nu*Math.cos(latitude)*k0;
+
+			 var Kv = pow3(Math.cos(latitude))*(nu/6)*(1-pow2(Math.tan(latitude))+e1sq*pow2(Math.cos(latitude)))*k0;
+
+
+
+			 var easting = Math.round(219529.58+ Kiv*p+Kv*pow3(p) - 60);
+
+			 var northing = Math.round(Ki+Kii*p*p+Kiii*pow4(p) - 3512424.41+ 626907.39 - 45);
+
+			 return [easting, northing];
+
+}
+
+///////////////////
+
+// end convert
+
+///////////////////
+
+
+        function setMapHeight()
+        {
+            var h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.2;
+            var isMobile = {
+                            Android: function() {
+                                return navigator.userAgent.match(/Android/i);
+                            },
+
+                            BlackBerry: function() {
+                                return navigator.userAgent.match(/BlackBerry/i);
+                            },
+                            iOS: function() {
+                                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                            },
+                            Opera: function() {
+                                return navigator.userAgent.match(/Opera Mini/i);
+                            },
+                            Windows: function() {
+                                return navigator.userAgent.match(/IEMobile/i);
+                            },
+                            any: function() {
+                                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+                            }
+                        };
+                        if( isMobile.any() ) {
+
+                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.3
+                            this.titleEl = false;
+                        } 
+                        console.log(h);
+                        return h;
+        }
+
+
+
+
+
+
+
+       
+
+        $(document).ready(function(){
+            $(document.getElementById('map_div')).height(setMapHeight);
+            //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            $(function () {
+                    govmap.createMap('map_div', {
+                        token: my_token,
+                        layers:['NEIGHBORHOODS_AREA', "LOCALITY_210410", "SCHOOL", "KIDS_G"],  
+                        showXY: true,
+                        identifyOnClick: false,
+                        layersMode: 2,
+                        level: 0,
+                        center: {x: 207000, y: 647000}
+
+                    });
+
+
+                    govmap.onEvent(govmap.events.CLICK).progress(function (e)  
+				    //govmap.draw(govmap.drawType.Point).progress(function (e)  
+				    {	
+					    click_result = e;
+					    console.log(click_result)
+
+                        x_ = click_result.mapPoint.x;
+                        y_ = click_result.mapPoint.y;
+
+                        govmap.zoomToXY({ x: x_, y: y_, level: 6, marker: true });
+
+                        var data = {
+                                    'circleGeometries': [{ x: x_, y: y_, radius:1000 }],
+                                    'geomData': [{ 'name': 'test1', 'aaa': 1 }],
+                                    'showBubble': false,
+                                    'names': ['p1'],
+                                    'geometryType': 4,
+                                    'defaultSymbol':
+                                        {
+                                            'outlineColor': [192, 0, 0, 1],
+                                            'outlineWidth': 1,
+                                            'fillColor': [255, 192, 203, 0.5]
+                                        },
+                                    'symbols': [],
+                                    'clearExisting': true,
+                                    'data': {
+
+                                    }
+                                };
+                        govmap.displayGeometries(data).then(function (e)
+                        {
+                            console.log(data);
+                            
+                        });
+
+
+				    });  
+                        
+            });
+        });
+
+
+        var appVue = new Vue({
+            el:"#toolbar_app",
+            vuetify: new Vuetify(),
+                data () {
+                    return {
+
+                        from: "",
+						to: "",
+						
+                       
+                    }
+                },
+                mounted () {
+                    let self = this
+                    window.addEventListener('keyup', function (event) {
+                        if (event.keyCode === 13) {
+                            self.go()
+                        }
+                    })
+                },
+
+                methods: {                          
+                    go(){
+	console.log("go");
+	  
+	  var line_data;
+	 var data = {
+		"routing_type":govmap.routing_type.routing,
+		"adresses": [this.from, this.to]
+		,
+		"costing":govmap.costing.auto
+	};
+	
+	
+	var shp_encode;
+	var wkts = [];
+	var pts_itm = "LINESTRING (";
+	govmap.getRoutingData(data).then(function (e) {
+		console.log(e);
+		shp_encode = e.trip.legs[0].shape;
+		var coordinates = polyline_decode(shp_encode);
+		x_list = [];
+		y_list = [];
+						var linestring = "LINESTRING(";
+						for (c = 0 ; c < coordinates.length; c++)
+						{
+							var latitude = coordinates[c][1];
+							var longitude = coordinates[c][0];
+							
+	
+								xy_pair = WgsToIsrael(longitude, latitude);
+								x = xy_pair[0] 
+								y = xy_pair[1] 
+								linestring = linestring + x + " " + y + ", ";
+								x_list.push(x);
+								y_list.push(y);
+						}
+						linestring_r = linestring.substring(0, linestring.length - 1);
+						linestring_r =linestring_r + ")";
+						wkts.push(linestring_r);
+	
+			max_x = Math.max.apply(Math, x_list);
+			min_x = Math.min.apply(Math, x_list);
+			max_y = Math.max.apply(Math, y_list);
+			min_y = Math.min.apply(Math, y_list);
+			d_x = max_x - min_x;
+			d_y = max_y - min_y;
+			radius = Math.floor(Math.max.apply(Math, [d_x, d_y]))
+			console.log(radius);
+			lvl = 1;
+			if (radius <= 100)
+			{
+				lvl = 8
+			}
+			if (radius > 100 && radius <= 2500)
+			{
+				lvl = 7
+			}
+			if (radius > 2500 && radius <= 5000)
+			{
+				lvl = 6
+			}
+			if (radius > 5000 && radius <= 7500)
+			{
+				lvl = 5
+			}
+			if (radius > 7500 && radius <= 10000)
+			{
+				lvl = 4
+			}
+			if (radius > 10000 && radius <= 25000)
+			{
+				lvl = 3
+			}
+			if (radius > 25000 && radius <= 50000)
+			{
+				lvl = 2
+			}
+			if (radius > 50000 && radius <= 100000)
+			{
+				lvl = 1
+			}   
+			if (radius > 100000)
+			{
+				lvl = 0
+			}
+			console.log(lvl);
+					
+			center_x = min_x + ((max_x - min_x)  / 2);
+			center_y = min_y + ((max_y - min_y)  / 2);
+
+			govmap.zoomToXY({ x: center_x, y: center_y, level: lvl, marker: false });
+		
+		
+					data1 = {	  
+						'wkts': wkts,  
+						'names': ['p1'],  
+						'geometryType': govmap.drawType.Polyline,  
+						'defaultSymbol':  
+						{  
+							'color': [0, 0, 255, 1],  
+							'width': 3,  
+						},  
+						'symbols': [],  
+						'clearExisting':false,  
+						'data': {  
+						'tooltips': ['this is my tooltip'],  
+						'bubbles': [''],  
+						'bubbleUrl': 'https://ynet.co.il'  
+						}  
+					};  
+					govmap.displayGeometries(data1).then(function (e)  
+					{ 
+						console.log("lines created");
+					});
+		
+	});
+	
+	},
+                    zoom()
+                    {
+                        if (this.from != "" && this.to != "")
+                        {
+                            this.go();
+                        }
+                    }
+                },
+
+
+        });
+
+
+        
+    </script>
+
+
+
+</html>
