@@ -41,6 +41,7 @@
         <div class="welcome container">
             <div class="card" id="menu_row">
                 <div class="card-content center-align">
+                    <h5 class="teal-text">חישוב מסלול</h5>
                     <select class="browser-default" style="color:teal; max-width: 150px; max-height: 28px; margin-left: 5%; margin-right:10%">
                         <option value="1">נסיעה ברכב</option>
                         <option value="2">הליכה ברגל</option>
@@ -54,8 +55,12 @@
                             <input id="myInput2" type="text" placeholder="">
                         </div>
 
+                        <button class="btn ten" >הצג מסלול</button>
+                       
+                        <p v-if="feedback" class="red-text"></p>
                     </div>
-                        <p  class="red-text"></p>
+                   
+
                 </div>
                 
             <div id="map_div"  class="card-content center-align" style="padding: 0.5em;
