@@ -41,7 +41,12 @@
         <div class="welcome container">
             <div class="card" id="menu_row">
                 <div class="card-content center-align">
-                    <h5 class="teal-text">חישוב מסלול נסיעה</h5>
+                    <h5 class="teal-text">חישוב מסלול</h5>
+                    <select class="browser-default" style="max-width: 200px; max-height: 28px; margin-left: 40%; margin-right:10%">
+                        <option value="1">נסיעה ברכב</option>
+                        <option value="2">הליכה ברגל</option>
+                        <option value="3">רכיבה באופניים</option>
+                      </select>
                     <div class="row" class="autocomplete">
                         <div class="autocomplete right-align">
                             <input id="myInput1" type="text" placeholder="">
@@ -49,10 +54,12 @@
                         <div class="autocomplete right-align">
                             <input id="myInput2" type="text" placeholder="">
                         </div>
-                        <p v-if="feedback" class="red-text"></p>
-                        <button class="btn ten" >הצג מסלול</button>
+
                     </div>
+                        <button class="btn ten" >הצג מסלול</button>
+                        <p v-if="feedback" class="red-text"></p>
                 </div>
+                
             <div id="map_div"  class="card-content center-align" style="padding: 0.5em;
             background:teal;
             border: 0;
@@ -70,6 +77,9 @@
 </body>
 
 <script type=text/javascript>
+
+
+
 
 
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -99,8 +109,43 @@ var options1 = {
         govmap.geocode({keyword: res.query},govmap.geocodeType.FullResult)
 					.then(function(response){
 						console.log("then:");
-						console.log(response);
-						govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 10, marker: true });
+                        console.log(response);
+                        
+
+                        
+                        var data = {
+							'wkts': ['POINT('+response.data[0].X+ ' '+ response.data[0].Y+')'
+							],
+
+							'names': ['p1'],
+							'geometryType': govmap.drawType.Point,
+							'defaultSymbol':
+							{
+								'url':'https://www.waze.com/livemap/assets/pin-9ad4ceb21a2449b4d0bcacdcf464f015.png',
+								'width':35,
+								'height':38
+							},
+
+							'symbols': [{
+								'url':'https://www.waze.com/livemap/assets/pin-9ad4ceb21a2449b4d0bcacdcf464f015.png',
+								'width':35,
+								'height':38
+								}
+							],
+							'clearExisting': true,
+							'data': {
+							'tooltips': [response.data[0].ResultLable],
+							'bubbles': [''],
+							'bubbleUrl': 'https://ynet.co.il'
+							}
+						};
+						govmap.displayGeometries(data).then(function (e)
+						{
+							//console.log(e.data);
+						});
+
+                        govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 10, marker: false });
+
 					});
     }
 };
@@ -141,19 +186,19 @@ var options2 = {
 							'defaultSymbol':
 							{
 								'url':'https://www.waze.com/livemap/assets/pin-9ad4ceb21a2449b4d0bcacdcf464f015.png',
-								'width':15,
-								'height':15
+								'width':35,
+								'height':38
 							},
 
 							'symbols': [{
 								'url':'https://www.waze.com/livemap/assets/pin-9ad4ceb21a2449b4d0bcacdcf464f015.png',
-								'width':15,
-								'height':15
+								'width':35,
+								'height':38
 								}
 							],
-							'clearExisting': true,
+							'clearExisting': false,
 							'data': {
-							'tooltips': ['tooltip1'],
+							'tooltips': [response.data[0].ResultLable],
 							'bubbles': [''],
 							'bubbleUrl': 'https://ynet.co.il'
 							}
@@ -165,7 +210,7 @@ var options2 = {
 
 
 
-						govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 10, marker: true });
+						govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 10, marker: false });
 					});
     }
 };
@@ -209,6 +254,11 @@ function setMapHeight()
         }
 
 $(document).ready(function(){
+
+
+
+
+  
             $(document.getElementById('map_div')).height(setMapHeight);
             var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
             //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
@@ -217,7 +267,7 @@ $(document).ready(function(){
                     govmap.createMap('map_div', {
                         token: my_token,
                         visibleLayers: ["a"],
-                        layers:['NEIGHBORHOODS_AREA', "LOCALITY_210410", "SCHOOL", "KIDS_G", "NEIGHBORHOODS_AREA"],  
+                        layers:["LOCALITY_210410", "SCHOOL", "KIDS_G", "NEIGHBORHOODS_AREA"],  
                         showXY: true,
                         identifyOnClick: true,
                         layersMode: 2,
