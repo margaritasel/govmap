@@ -15,6 +15,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+    <script src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
+
+
     <script>
         var exports = {};
         var globalAppVersion = (new Date()).getTime();
@@ -42,7 +45,7 @@
             <div class="card" id="menu_row">
                 <div class="card-content center-align">
                     <h5 class="teal-text">חישוב מסלול</h5>
-                    <select class="browser-default" style="color:teal; max-width: 150px; max-height: 28px; margin-left: 5%; margin-right:3%">
+                    <select class="browser-default" style="color:teal; max-width: 150px; max-height: 29px; margin-left: 5%; margin-right:3%">
                         <option value="1">נסיעה ברכב</option>
                         <option value="2">הליכה ברגל</option>
                         <option value="3">רכיבה באופניים</option>
@@ -55,7 +58,7 @@
                             <input id="myInput2" type="text" placeholder="">
                         </div>
 
-                        <button class="btn ten" >הצג מסלול</button>
+                        <button class="btn ten" onclick="go()"  >הצג מסלול</button>
                        
                         <p v-if="feedback" class="red-text"></p>
                     </div>
@@ -83,7 +86,8 @@
 
 
 
-
+var from;
+var to;
 
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
@@ -114,7 +118,7 @@ var options1 = {
 						console.log("then:");
                         console.log(response);
                         
-
+                        from = { "x": response.data[0].X, "y": response.data[0].Y}
                         
                         var data = {
 							'wkts': ['POINT('+response.data[0].X+ ' '+ response.data[0].Y+')'
@@ -124,13 +128,13 @@ var options1 = {
 							'geometryType': govmap.drawType.Point,
 							'defaultSymbol':
 							{
-								'url':'https://www.waze.com/livemap/assets/pin-9ad4ceb21a2449b4d0bcacdcf464f015.png',
+								'url':'https://www.waze.com/livemap/assets/loader_white_bg@2x-ec45e7064a994812c78aa55f9efd11c9.gif',
 								'width':35,
 								'height':38
 							},
 
 							'symbols': [{
-								'url':'https://www.waze.com/livemap/assets/pin-9ad4ceb21a2449b4d0bcacdcf464f015.png',
+								'url':'https://www.waze.com/livemap/assets/loader_white_bg@2x-ec45e7064a994812c78aa55f9efd11c9.gif',
 								'width':35,
 								'height':38
 								}
@@ -177,14 +181,14 @@ var options2 = {
 						console.log("then:");
                         console.log(response);
                         
-
+                        to = { "x": response.data[0].X, "y": response.data[0].Y}
 
 
                         var data = {
 							'wkts': ['POINT('+response.data[0].X+ ' '+ response.data[0].Y+')'
 							],
 
-							'names': ['p1'],
+							'names': ['p2'],
 							'geometryType': govmap.drawType.Point,
 							'defaultSymbol':
 							{
@@ -224,6 +228,231 @@ var ac2 = autocomplete(inputElement2, options2);
 
 
 
+		
+	
+function polyline_decode(str, precision) {
+    var index = 0,
+        lat = 0,
+        lng = 0,
+        coordinates = [],
+        shift = 0,
+        result = 0,
+        byte = null,
+        latitude_change,
+        longitude_change,
+        factor = Math.pow(10, precision || 6);
+
+    // Coordinates have variable length when encoded, so just keep
+    // track of whether we've hit the end of the string. In each
+    // loop iteration, a single coordinate is decoded.
+    while (index < str.length) {
+
+        // Reset shift, result, and byte
+        byte = null;
+        shift = 0;
+        result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        latitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        shift = result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        longitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        lat += latitude_change;
+        lng += longitude_change;
+
+        coordinates.push([lat / factor, lng / factor]);
+    }
+
+    return coordinates;
+};
+
+
+
+	
+
+//////////////////////////////////////////
+
+                              // convert wgs84 to israel tm grid...
+
+                              //////////////////////////////////////////
+
+ 
+
+                              function degreesToRadians(degrees) {
+
+return degrees * Math.PI / 180;
+
+}
+
+
+
+function pow2(x) {
+
+return x*x;
+
+}
+
+
+
+function pow3(x) {
+
+return x*x*x;
+
+}
+
+
+
+function pow4(x) {
+
+return x*x*x*x;
+
+}
+
+
+
+function ITMLocation(easting, northing) {
+
+this.easting = easting;
+
+this.northing = northing;
+
+this.eastingInOldGrid = function() {
+
+			 return easting - 50000;
+
+}
+
+this.northingInOldGrid = function() {
+
+			 var retval = northing - 500000;
+
+			 if (retval<0) {
+
+			   retval += 1000000;
+
+			 }
+
+			 return retval;
+
+}
+
+}
+
+
+
+//////////////
+
+//// Main Function…
+
+//////////////
+
+function WgsToIsrael(latitude, longitude)
+
+{
+
+			 longitude = degreesToRadians(longitude);
+
+			 latitude = degreesToRadians(latitude);
+
+			 //LatLongToITM(latitude, longitud);
+
+			 // Projection parameters
+
+			 var centralMeridian = degreesToRadians(35.2045169444444);  // central meridian of ITM projection
+
+			 var k0 = 1.0000067;  // scale factor
+
+
+
+			 // Ellipsoid constants (WGS 80 datum)
+
+			 var a = 6378137;  // equatorial radius
+
+			 var b = 6356752.3141; // polar radius
+
+			 var e = Math.sqrt(1 - b*b/a/a);  // eccentricity
+
+			 var e1sq = e*e/(1-e*e);
+
+			 var n = (a-b)/(a+b);
+
+
+
+			 // Curvature at specified location
+
+			 var tmp = e*Math.sin(latitude);
+
+			 var nu = a/Math.sqrt(1 - tmp*tmp);
+
+
+
+			 // Meridional arc length
+
+			 var n3 = pow3(n);
+
+			 var n4 = pow4(n);
+
+			 var A0 = a*(1-n+(5*n*n/4)*(1-n) +(81*n4/64)*(1-n));
+
+			 var B0 = (3*a*n/2)*(1 - n - (7*n*n/8)*(1-n) + 55*n4/64);
+
+			 var C0 = (15*a*n*n/16)*(1 - n +(3*n*n/4)*(1-n));
+
+			 var D0 = (35*a*n3/48)*(1 - n + 11*n*n/16);
+
+			 var E0 = (315*a*n4/51)*(1-n);
+
+			 var S = A0*latitude - B0*Math.sin(2*latitude) + C0*Math.sin(4*latitude)
+
+			 - D0*Math.sin(6*latitude) + E0*Math.sin(8*latitude);
+
+
+
+			 // Coefficients for ITM coordinates
+
+			 var p = longitude-centralMeridian;
+
+			 var Ki = S*k0;
+
+			 var Kii = nu*Math.sin(latitude)*Math.cos(latitude)*k0/2;
+
+			 var Kiii = ((nu*Math.sin(latitude)*pow3(Math.cos(latitude)))/24)*(5-pow2(Math.tan(latitude))+9*e1sq*pow2(Math.cos(latitude))+4*e1sq*e1sq*pow4(Math.cos(latitude)))*k0;
+
+			 var Kiv = nu*Math.cos(latitude)*k0;
+
+			 var Kv = pow3(Math.cos(latitude))*(nu/6)*(1-pow2(Math.tan(latitude))+e1sq*pow2(Math.cos(latitude)))*k0;
+
+
+
+			 var easting = Math.round(219529.58+ Kiv*p+Kv*pow3(p) - 60);
+
+			 var northing = Math.round(Ki+Kii*p*p+Kiii*pow4(p) - 3512424.41+ 626907.39 - 45);
+
+			 return [easting, northing];
+
+}
+
+///////////////////
+
+// end convert
+
+///////////////////
+
+
+
 function setMapHeight()
         {
             var h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.1;
@@ -256,10 +485,135 @@ function setMapHeight()
                         return h;
         }
 
+
+
+
+        function go(){
+	console.log("go");
+	  
+	  var line_data;
+      var data = 
+      {  
+        "routing_type": govmap.routing_type.routing,  
+        "locations": [from, to] ,  
+        "costing":govmap.costing.auto  
+	        };  
+
+	
+	var shp_encode;
+	var wkts = [];
+	var pts_itm = "LINESTRING (";
+	govmap.getRoutingData(data).then(function (e) {
+		console.log(e);
+		shp_encode = e.trip.legs[0].shape;
+		var coordinates = polyline_decode(shp_encode);
+		x_list = [];
+		y_list = [];
+						var linestring = "LINESTRING(";
+						for (c = 0 ; c < coordinates.length; c++)
+						{
+							var latitude = coordinates[c][1];
+							var longitude = coordinates[c][0];
+							
+	
+								xy_pair = WgsToIsrael(longitude, latitude);
+								x = xy_pair[0] 
+								y = xy_pair[1] 
+								linestring = linestring + x + " " + y + ", ";
+								x_list.push(x);
+								y_list.push(y);
+						}
+						linestring_r = linestring.substring(0, linestring.length - 1);
+						linestring_r =linestring_r + ")";
+						wkts.push(linestring_r);
+	
+			max_x = Math.max.apply(Math, x_list);
+			min_x = Math.min.apply(Math, x_list);
+			max_y = Math.max.apply(Math, y_list);
+			min_y = Math.min.apply(Math, y_list);
+			d_x = max_x - min_x;
+			d_y = max_y - min_y;
+			radius = Math.floor(Math.max.apply(Math, [d_x, d_y]))
+			console.log(radius);
+			lvl = 1;
+			if (radius <= 100)
+			{
+				lvl = 8
+			}
+			if (radius > 100 && radius <= 2500)
+			{
+				lvl = 7
+			}
+			if (radius > 2500 && radius <= 5000)
+			{
+				lvl = 6
+			}
+			if (radius > 5000 && radius <= 7500)
+			{
+				lvl = 5
+			}
+			if (radius > 7500 && radius <= 10000)
+			{
+				lvl = 4
+			}
+			if (radius > 10000 && radius <= 25000)
+			{
+				lvl = 3
+			}
+			if (radius > 25000 && radius <= 50000)
+			{
+				lvl = 2
+			}
+			if (radius > 50000 && radius <= 100000)
+			{
+				lvl = 1
+			}   
+			if (radius > 100000)
+			{
+				lvl = 0
+			}
+			console.log(lvl);
+					
+			center_x = min_x + ((max_x - min_x)  / 2);
+			center_y = min_y + ((max_y - min_y)  / 2);
+
+			govmap.zoomToXY({ x: center_x, y: center_y, level: lvl, marker: false });
+		
+		
+					data1 = {	  
+						'wkts': wkts,  
+						'names': ['l1'],  
+						'geometryType': govmap.drawType.Polyline,  
+						'defaultSymbol':  
+						{  
+							'color': [51, 136, 255, 1],  
+							'width': 5,  
+						},  
+						'symbols': [],  
+						'clearExisting':false,  
+						'data': {  
+						'tooltips': ['this is my tooltip'],  
+						'bubbles': [''],  
+						'bubbleUrl': 'https://ynet.co.il'  
+						}  
+					};  
+					govmap.displayGeometries(data1).then(function (e)  
+					{ 
+						console.log("lines created");
+					});
+		
+	});
+	
+	}
+
 $(document).ready(function(){
 
 
-
+    window.addEventListener('keyup', function (event) {
+                        if (event.keyCode === 13) {
+                            go()
+                        }
+                    })
 
   
             $(document.getElementById('map_div')).height(setMapHeight);
