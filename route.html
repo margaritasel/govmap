@@ -45,10 +45,11 @@
             <div class="card" id="menu_row">
                 <div class="card-content center-align">
                     <h5 class="teal-text">חישוב מסלול</h5>
-                    <select class="browser-default" style="color:teal; max-width: 150px; max-height: 29px; margin-left: 5%; margin-right:3%">
-                        <option value="1">נסיעה ברכב</option>
-                        <option value="2">הליכה ברגל</option>
-                        <option value="3">רכיבה באופניים</option>
+                    <select id="types" class="browser-default" style="color:teal; max-width: 150px; max-height: 29px; margin-left: 5%; margin-right:3%">
+                        <option value="auto">נסיעה ברכב</option>
+                        <option value="pedestrian">הליכה ברגל</option>
+                        <option value="multimodal">תחבורה ציבורית</option>
+                        <option value="bicycle">רכיבה באופניים</option>
                       </select>
                     <div class="row" class="autocomplete">
                         <div class="autocomplete right-align">
@@ -141,7 +142,7 @@ var options1 = {
 							],
 							'clearExisting': true,
 							'data': {
-							'tooltips': [response.data[0].ResultLable],
+							'tooltips': ["מוצא: " + response.data[0].ResultLable],
 							'bubbles': [''],
 							'bubbleUrl': 'https://ynet.co.il'
 							}
@@ -205,7 +206,7 @@ var options2 = {
 							],
 							'clearExisting': false,
 							'data': {
-							'tooltips': [response.data[0].ResultLable],
+							'tooltips': ["יעד: "+response.data[0].ResultLable],
 							'bubbles': [''],
 							'bubbleUrl': 'https://ynet.co.il'
 							}
@@ -494,9 +495,11 @@ function setMapHeight()
 	  var line_data;
       var data = 
       {  
-        "routing_type": govmap.routing_type.routing,  
+        "routing_type": govmap.routing_type.routing, 
         "locations": [from, to] ,  
-        "costing":govmap.costing.auto  
+        "costing":govmap.costing[document.getElementById("types").options[document.getElementById("types").selectedIndex].value],
+        //"costing":govmap.costing.auto // pedestrian, : "bicycle",  
+        //document.getElementById("types").options[document.getElementById("types").selectedIndex].value; 
 	        };  
 
 	
