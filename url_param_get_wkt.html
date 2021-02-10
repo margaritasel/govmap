@@ -53,16 +53,10 @@
                         govmap.displayGeometries(data).progress(function (e)
                         {
                             console.log(e);
-                            alert(e.data.geomData.name);
+                            //alert(e.data.geomData.name);
                         });
                 }
 		});
-		
-		function draw(){
-			govmap.draw(govmap.drawType.Polygon).progress(function (e)  
-			{
-				alert(e.wkt);
-			});
 		}
 	
 </script>  
