@@ -1,3 +1,4 @@
+
 <html >  
 <head>  
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
@@ -5,10 +6,80 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js"></script> 
 
+
+<script src="https://unpkg.com/terraformer@1.0.8"></script>
+<script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+
 <script type="text/javascript">  
+
+function getCenterCoord(wkts)
+    {
+        x_list = [];
+        y_list = [];
+        for (i = 0; i < wkts.length; i++)
+        {
+            
+            x_list.push(parseFloat(wkts[i][0]));
+            y_list.push(parseFloat(wkts[i][1]));
+        }
+        max_x = Math.max.apply(Math, x_list);
+        min_x = Math.min.apply(Math, x_list);
+        max_y = Math.max.apply(Math, y_list);
+        min_y = Math.min.apply(Math, y_list);
+        d_x = max_x - min_x;
+        d_y = max_y - min_y;
+        radius = Math.floor(Math.max.apply(Math, [d_x, d_y]))
+        console.log(radius);
+        lvl = 1;
+        if (radius <= 100)
+        {
+            lvl = 8
+        }
+        if (radius > 100 && radius <= 2500)
+        {
+            lvl = 7
+        }
+        if (radius > 2500 && radius <= 5000)
+        {
+            lvl = 6
+        }
+        if (radius > 5000 && radius <= 7500)
+        {
+            lvl = 5
+        }
+        if (radius > 7500 && radius <= 10000)
+        {
+            lvl = 4
+        }
+        if (radius > 10000 && radius <= 25000)
+        {
+            lvl = 3
+        }
+        if (radius > 25000 && radius <= 50000)
+        {
+            lvl = 2
+        }
+        if (radius > 50000 && radius <= 100000)
+        {
+            lvl = 1
+        }   
+        if (radius > 100000)
+        {
+            lvl = 0
+        }
+        console.log(lvl);
+                
+        center_x = min_x + ((max_x - min_x)  / 2);
+        center_y = min_y + ((max_y - min_y)  / 2);
+
+        govmap.zoomToXY({ x: center_x, y: center_y, level: lvl, marker: false });
+    }
+
+
 
 		//var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //
         my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+        //var wkt = "POLYGON((220801.08 699775.21, 226225.04 691837.69, 216038.57 691837.69, 220801.08 699775.21))"
 		$(function(){
 						
 			govmap.createMap('map_div',{
@@ -26,7 +97,7 @@
 			 {
 			
 			 console.log(WKT);
-             //var wkt = "POLYGON((151612.40 534674.88, 215112.52 538643.64, 98431.04 445774.70, 74618.49 521974.85, 80968.50 552931.17, 151612.40 533881.13, 151612.40 534674.88))"
+           
 
             var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div style='background-color: yellow;'>{0}</div><div  style='background-color: blue;'>{1}</div></div>";
                             var data = {
@@ -55,6 +126,8 @@
                             console.log(e);
                             //alert(e.data.geomData.name);
                         });
+
+                        getCenterCoord(Terraformer.WKT.parse(WKT).coordinates[0]);
                 }
 		});
 	
