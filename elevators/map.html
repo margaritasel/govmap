@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>מפת מעליות - משרד העבודה</title>
+        <meta charset=utf-8>
+        <meta name=description content="">
+        <meta name=viewport content="width=device-width, initial-scale=1">
+        <meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+    </head>
+
+    <body dir="rtl">
+        <div id="app">
+            <v-app> 
+            <v-main>
+                <v-container class="grey lighten-5">
+                    <v-row no-gutters id="menu_row" d-flex justify-center align-center>
+                        <v-divider vertical></v-divider>
+                    <v-spacer></v-spacer>
+                    <v-col cols="12" md="4" sm="12">     
+                        <v-menu
+                        v-model="menu1"
+                        :close-on-content-click="false"
+                        :nudge-left="40"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto">
+                            <template v-slot:activator="{ on, attrs }">
+                            <v-text-field  v-model="date1" label="מתאריך בדיקה"  prepend-icon="mdi-calendar" readonly  v-bind="attrs" v-on="on">
+                            </v-text-field>
+                            </template>
+                            <v-date-picker v-model="date1" no-title locale="he" :first-day-of-week="0" @input="menu1 = false">
+                            </v-date-picker>
+                        </v-menu>
+
+                    </v-col>
+                    <v-spacer></v-spacer>
+                    <v-divider vertical></v-divider>
+                    <v-spacer></v-spacer>
+                    <v-col cols="12" md="4" sm="12"> 
+                
+                    <v-menu
+                    v-model="menu2"
+                    :close-on-content-click="false"
+                    :nudge-left="40"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto" >
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-text-field  v-model="date2" label="עד תאריך בדיקה"  prepend-icon="mdi-calendar" readonly  v-bind="attrs" v-on="on">
+                            </v-text-field>
+                        </template>
+                        <v-date-picker v-model="date2" no-title locale="he" :first-day-of-week="0" @input="menu2 = false"></v-date-picker>
+                    </v-menu>
+
+                    </v-col>
+
+                    <v-spacer></v-spacer>
+                    <v-divider vertical></v-divider>
+                    <v-spacer></v-spacer>
+
+                    <v-col cols="12" md="2" sm="12"> 
+                        <v-btn dark block rounded color="blue darken-3" style="margin-top: 16px;" @click="filterLayer">
+                        סינון מיקומי מעליות
+                        </v-btn>
+                    </v-col>
+
+                    <v-spacer></v-spacer>
+                    <v-divider vertical></v-divider>
+
+
+                    <v-col cols="12" md="12" sm="12" style = "margin-top: 8px; padding: 0.5em; background:lightskyblue; border: 0; color: white; grid-column: span 2;">
+                        <div style='height:auto;' id="map_div">
+                        </div>
+                    </v-col>
+                    </v-row>
+
+                    <div class="text-center" id="table_div">
+                        <v-bottom-sheet v-model="sheet">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              block
+                              color="#6fc4f9"
+                              dark
+                              dense
+                              v-on="on"
+                              @click="sheet = false"
+                            >
+                
+                            <v-badge
+                            color="green"
+                            :content="s_features.length"
+                            :value="s_features.length"
+                          >
+                          הצגת טבלה
+                          </v-badge>
+                            </v-btn>
+                          </template>
+                
+                            <v-layout id="table-v-layout" column style="max-height: 60vh">       
+                                  <v-flex style="overflow: auto;">
+                                    <v-card style="bottom: 0; ">
+                                    <v-card-title>
+                
+                                        <v-divider vertical></v-divider>
+                
+                
+                                            <p class="font-weight-medium" style="width:auto; margin-top: 30px; margin-right: 20px; margin-left: 10px;">
+                                                <v-badge left
+                                                color="green"
+                                                :content="s_features.length"
+                                                :value="s_features.length">מעליות
+                                            </v-badge></p>
+                                        
+                
+                                        <v-divider vertical></v-divider>
+                
+                                        <v-text-field
+                                          v-model="search"
+                                          append-icon="mdi-magnify"
+                                          placeholder="חיפוש בתוצאות"
+                                          single-line
+                                          hide-details
+                                          style="width: 30%; margin-left: 10px;  margin-right: 10px;"
+                                        ></v-text-field>
+                                    
+                
+                                        <v-divider vertical></v-divider>
+                
+                                        
+                
+                                        <v-tooltip right>
+                                            <template v-slot:activator="{ on }">
+                                                <v-btn class="ma-2" color="green" dark style="width: 5%;" v-on="on"  @click="fnExcelReport">
+                                                    <v-icon dark>mdi-file-excel</v-icon>
+                                                </v-btn>
+                                            </template>
+                                            <span>יצוא לקובץ אקסל</span>
+                                        </v-tooltip>
+                                        <v-divider vertical></v-divider>
+                
+                                      </v-card-title>   
+                
+                                    <v-data-table id="mytable"
+                                    :headers="headers"
+                                    :items="s_features"
+                                    :height="height"
+                                    item-key="ID"
+                                    :search="search"
+                                    class="elevation-1"
+                                    fixed-header
+                                    >
+                
+                
+                                    <template v-slot:item.action="{ item }">
+                                        <v-icon
+                                          color="#87cefa"
+                                          @click="zoomItem(item)"
+                                        >
+                                        mdi-map-marker
+                                        </v-icon>
+                                      </template>
+                                    </v-data-table>
+                                    </v-card>
+                                </v-flex>
+                            </v-layout>
+                        </v-bottom-sheet>
+                      </div>
+                </v-container>
+            </v-main>
+            </v-app>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+            var s_wkts = [];
+            var s_names = [];
+            var s_symbols = [];
+            var bubbleHTMLParameters_all = [];
+
+            var s_wkts_layer = [];
+            var s_names_layer = [];
+            var bubbleHTMLParameters_all_layer = [];
+            var s_symbols_layer = [];
+
+
+
+
+            function ClearUserPoints(){
+
+                var bubbleContent = "";
+                var data = {  
+                    wkts: [], 
+                    showBubble: true, 
+                    names: [],  
+                    geometryType: govmap.drawType.Point,  
+                    defaultSymbol:  
+                    {  
+                        url:'bldg.png',  
+                        width:20,  
+                        height:20  
+                    },   
+                    symbols: [],  
+                    clearExisting: true,  
+                    data: {  
+                            tooltips: [],  
+                            headers: [],
+                            bubbleHTML: bubbleContent,
+                            bubbleHTMLParameters:[]
+                        }  
+                };  
+                        
+                govmap.displayGeometries(data).then(function (response)  
+                {  
+                //console.log(response.data);
+                }); 
+
+            }
+            function isMobile() {
+                var match = window.matchMedia || window.msMatchMedia;
+                if(match) {
+                    var mq = match("(pointer:coarse)");
+                    return mq.matches;
+                }
+                return false;
+            }
+
+            function getHeight()
+            {
+                var height =  $(document).height()/2.7;
+                if (isMobile())
+                {
+                    console.log("mobile");
+                    height =  $(document).height() / 1.8;
+                    lo_el = document.getElementById("table-v-layout");
+                    lo_el.style.maxHeight = "90vh";
+
+                }
+                return height;
+            }
+
+        function setMapHeight()
+                        {
+                            var h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.1;
+                            var isMobile = {
+                                            Android: function() {
+                                                return navigator.userAgent.match(/Android/i);
+                                            },
+                
+                                            BlackBerry: function() {
+                                                return navigator.userAgent.match(/BlackBerry/i);
+                                            },
+                                            iOS: function() {
+                                                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                                            },
+                                            Opera: function() {
+                                                return navigator.userAgent.match(/Opera Mini/i);
+                                            },
+                                            Windows: function() {
+                                                return navigator.userAgent.match(/IEMobile/i);
+                                            },
+                                            any: function() {
+                                                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+                                            }
+                                        };
+                                        if( isMobile.any() ) {
+                
+                                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.2
+                                        } 
+                                        console.log(h);
+                                        return h;
+                        }
+            
+
+
+        var features = [];
+        $(document).ready(function(){
+            $(document.getElementById('map_div')).height(setMapHeight);
+            //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            govmap.createMap('map_div', {
+                token: my_token,
+                visibleLayers: ["a"],
+                layers:["LOCALITY_210410", "SCHOOL", "KIDS_G", "NEIGHBORHOODS_AREA"],  
+                showXY: true,
+                identifyOnClick: true,
+                layersMode: 2,
+                level: 2,
+                center: {x: 183000, y: 663000}
+
+            });
+
+
+            $.getJSON('elevators.json', function(data) {
+                    //data is the JSON string
+                    for (i = 0; i < data.length; i++)
+                    {
+                        features.push(data[i]);
+                    }
+                    console.log("features loaded succesfully");
+                    appVue.showLayers();
+                    appVue.s_features = features;
+                });
+        });
+
+        const appVue = new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data: () => ({
+                        date1: new Date().toISOString().substr(0, 10),
+                        date2: new Date().toISOString().substr(0, 10),
+                        menu1: false,
+                        menu2: false,
+                        sheet: false,
+                        headers: [
+                        {
+                            text: 'מספר סידורי',
+                            align: 'right',
+                            value: 'ID',
+                        },
+                        { text: 'מספר מפעל', value: "WORK_ID" },
+                        { text: 'תאור מפעל', value: 'AFK_WORK_NAME' },
+                        { text: 'כתובת', value: 'ADDRESS' },
+                        { text: 'מחוז', value: 'DISTRICT_NAME' },
+                        { text: 'שם חברה', value: 'MANUFACTURER_NAME' },
+                        { text: 'שנת יצור', value: 'MANUFACTURE_YEAR' },
+                        { text: 'מסמך משרד העבודה', value: 'MINISTRY_OF_LABOUR_NUMBER' },
+                        { text: 'תאריך בדיקת בודק אחרון', value: 'LAST_CHECK_DATE' },
+                        {text: 'התמקדות', value: 'action'},
+                        ],
+                        s_features: [],
+                        height: getHeight(),
+                        search: "",
+            }),
+            methods: {
+
+                fnExcelReport()
+	{
+
+
+
+		var col = [];
+        for (var i = 0; i < this.s_features.length; i++) {
+            for (var key in this.s_features[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
+
+		var table = document.createElement("table");
+
+		var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < this.s_features.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = this.s_features[i][col[j]];
+            }
+        }
+
+		var tab_text="<table><tr>";
+		var textRange; var j=0;
+		var tab = table;
+		
+		for(j = 0 ; j < tab.rows.length ; j++)
+		{
+			tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+			//tab_text=tab_text+"</tr>";
+		}
+
+		tab_text=tab_text+"</table>";
+		tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+		tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+		tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
+
+		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+		{
+			txtArea1.document.open("txt/html","replace");
+			txtArea1.document.write(tab_text);
+			txtArea1.document.close();
+			txtArea1.focus();
+			sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+		}
+		else                 //other browser not tested on IE 11
+			sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+		return (sa);
+	},
+
+         zoomItem(item)
+		{
+			var pid = item.ID;
+            console.log(pid);
+            if (item.X > 0 && item.Y > 0)
+            {
+                govmap.zoomToXY({ x: item.X, y: item.Y, level: 10, marker: false });
+            }
+		},
+                
+
+            showLayers()
+            {
+                for (i=0; i < features.length; i++)
+                {
+                    if (features[i].X != "" && features[i].Y != "")
+                    {
+                            s_wkts_layer.push("POINT(("+features[i].X+" "+features[i].Y+"))");
+                            s_names_layer.push(features[i].ID + ": " + features[i].ADDRESS);
+                            bubbleHTMLParameters_all_layer.push([
+
+                            "מספר סידורי: " + features[i].ID
+                            + "<br />"  + "מספר מפעל: " + features[i].WORK_ID
+                            + "<br />"  + "תאור מפעל: " + features[i].AFK_WORK_NAME
+                            + "<br />"  + "כתובת: " + features[i].ADDRESS
+                            + "<br />" + "מחוז: " + features[i].DISTRICT_NAME
+                            + "<br />" + "שם חברה: " + features[i].MANUFACTURER_NAME
+                            + "<br />" + "שנת יצור: " + features[i].MANUFACTURE_YEAR
+                            + "<br />" + "מסמך משרד העבודה: " + features[i].MINISTRY_OF_LABOUR_NUMBER
+                            , "תאריך בדיקת בודק אחרון: " + features[i].LAST_CHECK_DATE]);
+                            symbol_url ='https://www.kindpng.com/picc/m/390-3902550_587-office-building-office-building-icon-hd-png.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+                        
+                    }
+                }
+
+                var data = {  
+                wkts: s_wkts_layer,  
+                names: s_names_layer,  
+                showBubble: true,
+                geometryType: govmap.drawType.Point,  
+                defaultSymbol:  
+                {  
+                    url: 'https://www.kindpng.com/picc/m/390-3902550_587-office-building-office-building-icon-hd-png.png',  
+                    width:20,  
+                    height:20  
+                },   
+                symbols: s_symbols_layer,  
+                clearExisting: true,  
+                data: {  
+                        tooltips: s_names_layer,  
+                        headers: s_names_layer,
+                        bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                        bubbleHTMLParameters:bubbleHTMLParameters_all_layer
+                    }  
+                };
+
+
+                govmap.displayGeometries(data).then(function (response)  
+                {  
+                    console.log(response);
+                });
+            },
+                
+            filterLayer()
+            {
+                ClearUserPoints();
+                s_wkts_layer = [];
+                s_names_layer = [];
+                bubbleHTMLParameters_all_layer = [];
+                s_symbols_layer = [];
+
+                console.log(appVue.date1, appVue.date2);
+                this.s_features = features.filter(function(f) {
+                                return Date.parse(f.LAST_CHECK_DATE) > Date.parse(appVue.date1) && Date.parse(f.LAST_CHECK_DATE) < Date.parse(appVue.date2);		
+                });
+                console.log(this.s_features);
+                for (i=0; i < this.s_features.length; i++)
+                {
+                    if (this.s_features[i].X != "" && this.s_features[i].Y != "")
+                    {
+                            s_wkts_layer.push("POINT(("+this.s_features[i].X+" "+this.s_features[i].Y+"))");
+                            s_names_layer.push(this.s_features[i].ID + ": " + this.s_features[i].ADDRESS);
+                            bubbleHTMLParameters_all_layer.push([
+
+                            "מספר סידורי: " + this.s_features[i].ID
+                            + "<br />"  + "מספר מפעל: " +this. s_features[i].WORK_ID
+                            + "<br />"  + "תאור מפעל: " + this.s_features[i].AFK_WORK_NAME
+                            + "<br />"  + "כתובת: " + this.s_features[i].ADDRESS
+                            + "<br />" + "מחוז: " + this.s_features[i].DISTRICT_NAME
+                            + "<br />" + "שם חברה: " + this.s_features[i].MANUFACTURER_NAME
+                            + "<br />" + "שנת יצור: " + this.s_features[i].MANUFACTURE_YEAR
+                            + "<br />" + "מסמך משרד העבודה: " + this.s_features[i].MINISTRY_OF_LABOUR_NUMBER
+                            , "תאריך בדיקת בודק אחרון: " + this.s_features[i].LAST_CHECK_DATE]);
+                            symbol_url ='https://www.kindpng.com/picc/m/390-3902550_587-office-building-office-building-icon-hd-png.png'
+                            s_symbols_layer.push({url:symbol_url, width:30,  height:30  });
+                        
+                    }
+                }
+
+                var data = {  
+                wkts: s_wkts_layer,  
+                names: s_names_layer,  
+                showBubble: true,
+                geometryType: govmap.drawType.Point,  
+                defaultSymbol:  
+                {  
+                    url: 'https://www.kindpng.com/picc/m/390-3902550_587-office-building-office-building-icon-hd-png.png',  
+                    width:20,  
+                    height:20  
+                },   
+                symbols: s_symbols_layer,  
+                clearExisting: true,  
+                data: {  
+                        tooltips: s_names_layer,  
+                        headers: s_names_layer,
+                        bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                        bubbleHTMLParameters:bubbleHTMLParameters_all_layer
+                    }  
+                };
+
+
+                govmap.displayGeometries(data).then(function (response)  
+                {  
+                    console.log(response);
+                });
+
+
+            }
+            }
+        })
+
+    </script>
+    </body>
+
+    <style>
+
+        [v-cloak] {
+            display: none;
+        }
+    .v-data-table__mobile-row__header {
+    
+    width: 49.5%;	
+    text-align: right;
+      direction: rtl;
+    
+    }
+    
+    .v-data-table__mobile-row__cell {
+      width: 49.5%;
+      text-align: right;
+      direction: rtl;
+      }
+    
+  
+      
+
+    </style>
+
+</html>
