@@ -333,7 +333,10 @@ function myFunction() {
                     parcel_ul.appendChild(li);
 
                     govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + e.data[0].Values[0] + " AND PARCEL = " + e.data[0].Values[1], 'zoomToExtent': true });
+                    govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false})
 				});
+
+
 
     }
     else{
@@ -363,7 +366,11 @@ function myFunction() {
 					}
 
                     govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + document.getElementById("lot").value + " AND PARCEL = " + document.getElementById("parcel").value, 'zoomToExtent': true });
+                    govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false})
 				});
+                    
+                    
+	});
 
     }
     else{
