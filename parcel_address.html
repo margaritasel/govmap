@@ -130,13 +130,16 @@ height: 50px; margin-left: auto;
               box-shadow: 0px 3px 6px #0000000D;
               border-radius: 6px;
               opacity: 1;">
+              
                 <div class="input-field col s12 m12">
-                    <input id="addr" placeholder=" הזן כתובת מלאה " id="addr" type="text" class="validate" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                    <input id="addr" placeholder=" הזן כתובת מלאה " id="addr" type="text" class="validate required" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
                     border: 1px solid #BBBBCB;
                     border-radius: 8px;
                     opacity: 1;">
+                   
                     <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
                 </div>
+                
               </div>
             </div>
 
@@ -165,7 +168,7 @@ height: 50px; margin-left: auto;
                 </ul>
               </div>
 
-              <div class="card-stacked col s2 m2" style="margin-top: 20px;">
+              <div id="mapImage" class="card-stacked col s2 m2" style="margin-top: 20px; display:none">
                 <img src="map.png" alt="" />
               </div>
             </div>
@@ -305,6 +308,8 @@ function handleClick(myRadio) {
 var d;
 function myFunction() {
 
+  document.getElementById("mapImage").style.display = "none";
+
   if (currentValue == "addr_radio")
   {
 
@@ -331,6 +336,7 @@ function myFunction() {
 				});
         parcel = true;
         document.getElementById("chk1").checked = true;
+        document.getElementById("mapImage").style.display = "block";
 
     }
     else{
@@ -365,6 +371,7 @@ function myFunction() {
 
         parcel = true;
         document.getElementById("chk1").checked = true;
+        document.getElementById("mapImage").style.display = "block";
 
     }
     else{
@@ -413,17 +420,11 @@ $(document).ready(function(){
 <style>
 
 
-.vline
-{
-    position:fixed;
-    top:0;
-    left:50%;
-    bottom:0; margin:0;
-    border:none;
-    border-right:solid 1px black;
-    z-index:10;
-}
-
+.required:after {
+    content:" *";
+    color: red;
+    margin-right: 10px;
+  }
 
 
 /*  align the checkbox to the right    */
@@ -702,6 +703,10 @@ body {
     }
 }
 
+
+
+    
+    
     
     </style>
 </html>
