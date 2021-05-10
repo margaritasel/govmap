@@ -21,13 +21,14 @@
     <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
 </head>
 <body dir="rtl">
-    <div id=app>
+    <div id=app style="background: #F7FAFD 0% 0% no-repeat padding-box;
+    opacity: 1;">
 
 <div class="welcome container">
 
 <div class="row" id="menu_row" >
 
-                <div class="row" style="height: 265px; background-image: linear-gradient(rgb(233, 235, 236), rgb(241, 241, 241), white, white, white, white, white);">
+                <div class="row" style="height: 265px;">
                   <div class="col s12 m4" style="top:auto;  margin-bottom: 25px;">
                     <img src="transport_license-Recovered.png" alt="" />
                   </div>
@@ -37,32 +38,25 @@
                   </div>
                   <div class="title_remark_div">
                     <p class="my_title_remark">הנתונים המתקבלים כאן אינם מהווים אסמכתא. לאסמכתא חוקית לשטח הרשום של החלקה יש לפנות ללשכות המרשם במשרד המשפטים.</p>
+                    <hr style="border: 2px solid #0068F5;
+                    opacity: 1;width: 42px;
+height: 0px; margin: auto;">
                 </div>
                 </div>
                 <div class="col s0 m4"></div>
               </div>
 
+              <hr class="vline" />
+
 
 
 
 <div class="index-banner color2">
-
-
     <div class="section">
-
-
-    <!--this is a card, starter hacks card-->
-
-
-
     <div class="row" style="max-width: 1000px;">
-
       <div class="row" style="max-width: 1000px;">
-
       <div class="card-stacked col s0 m1">
-        </div>
-
-
+      </div>
           <div class="card-stacked col s12 m4" style="background: #0068F508 0% 0% no-repeat padding-box;
           border: 1px solid #0068F5;
           border-radius: 8px;
@@ -112,20 +106,20 @@ height: 50px; margin-left: auto;
           <div class="card-stacked col s0 m1">
           </div>
 
-            <div id="lotparcel_div" class="card-content col s12 m10" style="display: none;background: #FFFFFF 0% 0% no-repeat padding-box;
-            box-shadow: 0px 3px 6px #0000000D;
-            border-radius: 6px;
-            opacity: 1;">
-              <div class="col s12 info-panel container_l" style="height: 100px">
+            <div id="lotparcel_div" class="card-content col s12 m10" style="display: none;">
+              <div class="col s12 info-panel container_l" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
+              box-shadow: 0px 3px 6px #0000000D;
+              border-radius: 6px;
+              opacity: 1;">
                   <div class="input-field col s6 m6 info-panel">
-                    <input id="parcel" type="number" placeholder="הזן מספר חלקה " id="last_name" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                    <input id="parcel" type="number" placeholder=" הזן מספר חלקה " id="last_name" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
                     border: 1px solid #BBBBCB;
                     border-radius: 8px;
                     opacity: 1;">
                     <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 668</span>
                   </div>
                   <div class="input-field col s6 m6 info-panel">
-                    <input id="lot" type="number" placeholder="הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                    <input id="lot" type="number" placeholder=" הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
                     border: 1px solid #BBBBCB;
                     border-radius: 8px;
                     opacity: 1;">
@@ -135,12 +129,12 @@ height: 50px; margin-left: auto;
             </div>
 
             <div id="addr_div"  class="card-content col s12 m10">
-              <div class="col s12 info-panel container_r" style="height: 100px;background: #FFFFFF 0% 0% no-repeat padding-box;
+              <div class="col s12 info-panel container_r" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
               box-shadow: 0px 3px 6px #0000000D;
               border-radius: 6px;
               opacity: 1;">
                 <div class="input-field col s12 m12">
-                    <input id="addr" placeholder="הזן כתובת " id="addr" type="text" class="validate" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                    <input id="addr" placeholder=" הזן כתובת מלאה " id="addr" type="text" class="validate" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
                     border: 1px solid #BBBBCB;
                     border-radius: 8px;
                     opacity: 1;">
@@ -154,11 +148,14 @@ height: 50px; margin-left: auto;
           </div>
 
           </div>
-            <button class="btn center blue" onclick="myFunction()">חיפוש</button>
+            <button class="btn center" style="background: #0068F5 0% 0% no-repeat padding-box;
+            border-radius: 8px;
+            opacity: 1; width: 285px;
+            height: 48px;" onclick="myFunction()">חיפוש</button>
 
             <div class="col s12 m12" style="background: #FFFFFF 0% 0% no-repeat padding-box;
             box-shadow: 0px 2px 7px #00000014;
-            opacity: 1; text-align: right;">
+            opacity: 1;">
             <div class="row">
             <div id="AddrResults" class="col s10" dir="ltr" style="display: none; ">
                 <ul  id="addr_ul">
@@ -231,7 +228,7 @@ $(".switch1").on("click",function() {
 off = [];
 on = [];
 var status = $(this).find("input[id=chk1]").prop('checked');
-console.log(status)
+
 if (status == true)
 {
   parcel = true;
@@ -259,7 +256,7 @@ govmap.setVisibleLayers(on, off)
 $(".switch2").on("click",function() {
 
 var status = $(this).find("input[id=chk2]").prop('checked');
-console.log(status)
+
 if (status == true)
 {
   gush = true;
@@ -335,6 +332,8 @@ function myFunction() {
                     govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + e.data[0].Values[0] + " AND PARCEL = " + e.data[0].Values[1], 'zoomToExtent': true });
                     govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
 				});
+        parcel = true;
+        document.getElementById("chk1").checked = true;
 
     }
     else{
@@ -366,6 +365,9 @@ function myFunction() {
                     govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + document.getElementById("lot").value + " AND PARCEL = " + document.getElementById("parcel").value, 'zoomToExtent': true });
                     govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
 				});
+
+        parcel = true;
+        document.getElementById("chk1").checked = true;
 
     }
     else{
@@ -412,6 +414,21 @@ $(document).ready(function(){
 
 
 <style>
+
+
+.vline
+{
+    position:fixed;
+    top:0;
+    left:50%;
+    bottom:0; margin:0;
+    border:none;
+    border-right:solid 1px black;
+    z-index:10;
+}
+
+
+
 /*  align the checkbox to the right    */
 [type="checkbox"]+label:before, [type="checkbox"]+label:after{        
   right: 0px !important;
