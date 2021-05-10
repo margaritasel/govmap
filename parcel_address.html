@@ -17,7 +17,7 @@
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
 </head>
 <body dir="rtl">
@@ -122,6 +122,7 @@ height: 50px; margin-left: auto;
                     opacity: 1;">
                     <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 6433</span>
                   </div>
+                  <label id="parcel_warning" style="display:none"> <label style="color:red">*</label>יש להזין גוש וחלקה</label>
                 </div>
             </div>
 
@@ -139,7 +140,7 @@ height: 50px; margin-left: auto;
                    
                     <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
                 </div>
-                
+                <label id="addr_warning" style="display:none"> <label style="color:red">*</label>יש להזין כתובת</label>
               </div>
             </div>
 
@@ -225,61 +226,61 @@ var parcel = false;
 var gush = false;
 
 $(".switch1").on("click",function() {
-off = [];
-on = [];
-var status = $(this).find("input[id=chk1]").prop('checked');
+    off = [];
+    on = [];
+    var status = $(this).find("input[id=chk1]").prop('checked');
 
-if (status == true)
-{
-  parcel = true;
-}
-else
-{
-  parcel = false;
-}
+    if (status == true)
+    {
+      parcel = true;
+    }
+    else
+    {
+      parcel = false;
+    }
 
-if (parcel){
-  on.push("PARCEL_ALL")
-}
-else{
-  off.push("PARCEL_ALL")
-}
-if (gush){
-  on.push("SUB_GUSH_ALL")
-}
-else{
-  off.push("SUB_GUSH_ALL")
-}
-govmap.setVisibleLayers(on, off)
+    if (parcel){
+      on.push("PARCEL_ALL")
+    }
+    else{
+      off.push("PARCEL_ALL")
+    }
+    if (gush){
+      on.push("SUB_GUSH_ALL")
+    }
+    else{
+      off.push("SUB_GUSH_ALL")
+    }
+    govmap.setVisibleLayers(on, off)
 });
 
 $(".switch2").on("click",function() {
 
-var status = $(this).find("input[id=chk2]").prop('checked');
+    var status = $(this).find("input[id=chk2]").prop('checked');
 
-if (status == true)
-{
-  gush = true;
-}
-else
-{
-  gush = false;
-}
-off = [];
-on = [];
-if (parcel){
-  on.push("PARCEL_ALL")
-}
-else{
-  off.push("PARCEL_ALL")
-}
-if (gush){
-  on.push("SUB_GUSH_ALL")
-}
-else{
-  off.push("SUB_GUSH_ALL")
-}
-govmap.setVisibleLayers(on, off)
+    if (status == true)
+    {
+      gush = true;
+    }
+    else
+    {
+      gush = false;
+    }
+    off = [];
+    on = [];
+    if (parcel){
+      on.push("PARCEL_ALL")
+    }
+    else{
+      off.push("PARCEL_ALL")
+    }
+    if (gush){
+      on.push("SUB_GUSH_ALL")
+    }
+    else{
+      off.push("SUB_GUSH_ALL")
+    }
+    govmap.setVisibleLayers(on, off)
 });
 
 var currentValue = "addr_radio";
@@ -309,6 +310,8 @@ var d;
 function myFunction() {
 
   document.getElementById("mapImage").style.display = "none";
+  document.getElementById("parcel_warning").style.display = "none";
+  document.getElementById("addr_warning").style.display = "none";
 
   if (currentValue == "addr_radio")
   {
@@ -349,6 +352,7 @@ function myFunction() {
     }
     else{
         //alert("יש להזין כתובת")
+        document.getElementById("addr_warning").style.display = "block";
     }
   }
   else{
@@ -393,10 +397,8 @@ function myFunction() {
     }
     else{
         //alert("יש להזין גוש וחלקה")
+        document.getElementById("parcel_warning").style.display = "block";
     }
-
-
-
   }
 }
 
@@ -404,31 +406,25 @@ function myFunction() {
 
 
 $(document).ready(function(){
-
-
     window.addEventListener('keyup', function (event) {
-                        if (event.keyCode === 13) {
-                          myFunction()
-                        }
-                    })
-
-  
-            //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
-            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
-            $(function () {
-                    govmap.createMap('map_div', {
-                        token: my_token,
-                        showXY: true,
-                        identifyOnClick: true,
-                        layersMode: 2,
-                        level: 4,
-                        center: {x: 179000, y: 664000}
-
-                    });
-                        
-            });
-        });
+        if (event.keyCode === 13) {
+          myFunction()
+        }
+    })
+    //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+    //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+    var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+    $(function () {
+            govmap.createMap('map_div', {
+                token: my_token,
+                showXY: true,
+                identifyOnClick: true,
+                layersMode: 2,
+                level: 4,
+                center: {x: 179000, y: 664000}
+            });          
+    });
+});
 
 
 </script>
@@ -436,40 +432,11 @@ $(document).ready(function(){
 
 <style>
 
-
-.required:after {
-    content:" *";
-    color: red;
-    margin-right: 10px;
-  }
-
-
-/*  align the checkbox to the right    */
-[type="checkbox"]+label:before, [type="checkbox"]+label:after{        
-  right: 0px !important;
-}
-
-/*  align the v in the center of the checkbox    */
-[type="checkbox"].filled-in:checked+label:before{
-  right: 11px !important;
-}
-
-/*  align the label left to the checkbox   */
-[type="checkbox"]+label{
-  padding-right: 27px !important;
-}
 .checkbox-blue-grey[type="checkbox"].filled-in:checked+span:not(.lever):after {
   background: #0079FF 0% 0% no-repeat padding-box;
 border: 1px solid #0079FF;
 border-radius: 6px;
 opacity: 1;
-}
-
-
-.flexbox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .my_title_remark{
@@ -492,8 +459,6 @@ opacity: 1;
     height: auto;
     margin: 0 auto;
     position: relative;
-
-
 }
 
 
@@ -588,115 +553,6 @@ opacity: 1;
     /* * { */
 /* box-sizing: border-box; */
 /* } */
-
-/*the container_l must be positioned relative:*/
-.autocomplete {
-	position: relative;
-	display: inline-block;
-}
-
-.autocomplete input {
-	border: 1px solid transparent;
-	background-color: white;
-	padding: 10px;
-	font-size: 16px;
-}
-
-.autocomplete-items {
-	position: absolute;
-	border: 1px solid #d4d4d4;
-	/* border-bottom: none; */
-	border-top: none;
-	z-index: 99;
-	/*position the autocomplete items to be the same width as the container_l:*/
-	top: 100%;
-	left: 0;
-	right: 0;
-
-	overflow-y: auto;
-	max-height: calc(100vh - 200px ) /*todo mobile, calc, scroll on key up/down*/
-}
-
-.autocomplete-items::-webkit-scrollbar {
-width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-background: #f1f1f1; 
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-background: #888; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-background: #555; 
-}
-
-.autocomplete-items div {
-	padding: 5px; /*10px*/
-	cursor: pointer;
-	background-color: #fff;
-	/* border-bottom: 1px solid #d4d4d4; */
-}
-
-/*when hovering an item:*/
-.autocomplete-items div:hover {
-	background-color: #e9e9e9;
-}
-
-/*when navigating through the items using the arrow keys:*/
-.autocomplete-active {
-	background-color: DodgerBlue !important;
-	color: #ffffff;
-}
-		
-		
-.autocomplete-error-msg {
-    display: block;
-    position: absolute;
-    top: 100%;
-    right: 0px;
-    z-index: 10;
-    width: 100%;
-    color: #FF5959;
-    font-size: 20px;
-    background: rgba(228,228,228,.77);
-    text-align: center;
-    margin-top: 5px;
-}
-
-
-.autocomplete-error-msg.show{
-  visibility: visible;
-  opacity: 1;
-}
-
-.autocomplete-error-msg.hide{
-	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0s 2s, opacity 2s linear;
-}
-
-.autocomplete-badge {
-    position: absolute;
-    left: 2px;
-		color:#00477e;
-		font-weight: 400;
-    background-color: #f1f1f1!important;
-    border-radius: 50%;
-    display: inline-block;
-		text-align: center;
-		padding-left: 8px;
-		padding-right: 8px;
-		opacity: 0.4;
-
-}
-
-
 
 
 
