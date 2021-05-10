@@ -324,8 +324,15 @@ function myFunction() {
 					type:govmap.locateType.lotParcelToAddress,
 					address: document.getElementById("addr").value
 				}).then(function(e){
-					e.data[0].Values[0];
-					e.data[0].Values[1];
+          if (!e.data){
+              var li = document.createElement("li");
+              var r = e.message;
+              li.appendChild(document.createTextNode(r));
+              parcel_ul.appendChild(li);
+          }
+          else {
+					    e.data[0].Values[0];
+					    e.data[0].Values[1];
                     var li = document.createElement("li");
                     var r = "גוש " + e.data[0].Values[0] + " חלקה " + e.data[0].Values[1];
                     li.appendChild(document.createTextNode(r));
@@ -333,6 +340,7 @@ function myFunction() {
 
                     govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + e.data[0].Values[0] + " AND PARCEL = " + e.data[0].Values[1], 'zoomToExtent': true });
                     govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
+          }
 				});
         parcel = true;
         document.getElementById("chk1").checked = true;
@@ -356,17 +364,26 @@ function myFunction() {
 	               lot:  document.getElementById("lot").value,
 	               parcel: document.getElementById("parcel").value
 	           }).then(function(e){
-					var Addresses = e;
-					d = e;
-					for (i = 0; i < Addresses.data.length; i++) {
-                        var li = document.createElement("li");
-                        var r = Addresses.data[i].Values[0]+" "+Addresses.data[i].Values[1]+" "+Addresses.data[i].Values[2];
-                        li.appendChild(document.createTextNode(r));
-                        addr_ul.appendChild(li);
-					}
+              if (!e.data){
+                  var li = document.createElement("li");
+                  var r = e.message;
+                  li.appendChild(document.createTextNode(r));
+                  addr_ul.appendChild(li);
+              }
+              else{
+                  var Addresses = e;
+                  d = e;
+                  for (i = 0; i < Addresses.data.length; i++) {
+                                var li = document.createElement("li");
+                                var r = Addresses.data[i].Values[0]+" "+Addresses.data[i].Values[1]+" "+Addresses.data[i].Values[2];
+                                li.appendChild(document.createTextNode(r));
+                                addr_ul.appendChild(li);
+                  }
+                  govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + document.getElementById("lot").value + " AND PARCEL = " + document.getElementById("parcel").value, 'zoomToExtent': true });
+                  govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
 
-                    govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + document.getElementById("lot").value + " AND PARCEL = " + document.getElementById("parcel").value, 'zoomToExtent': true });
-                    govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
+              }
+
 				});
 
         parcel = true;
