@@ -70,10 +70,35 @@
                   </p>
             </div>
 
+            <div id="lotparcel_div_mobile" class="card-content col s12 m0" style="display: none;  vertical-align: top;">
+              <div class="col s12 info-panel container_m" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                          box-shadow: 0px 3px 6px #0000000D;
+                          border-radius: 6px;
+                          opacity: 1;">
+                  <div class="input-field col s6 m6 info-panel">
+                    <input id="parcel_m" type="number" placeholder=" הזן מספר חלקה " id="last_name" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                border: 1px solid #BBBBCB;
+                                border-radius: 8px;
+                                opacity: 1;">
+                    <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 668</span>
+                  </div>
+                  <div class="input-field col s6 m6 info-panel">
+                    <input id="lot_m" type="number" placeholder=" הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true"
+                     style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                            border: 1px solid #BBBBCB;
+                            border-radius: 8px;
+                            opacity: 1;">
+                    <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 6433</span>
+                  </div>
+                  <label id="parcel_warning" style="display:none"> <label style="color:red">*</label>יש להזין גוש וחלקה</label>
+                </div>
+              </div>
+
             <div class="card-stacked col s0 m2"
-                 style="height: 50px; margin-left: auto;
+                 style="height: 20px; margin-left: auto;
                         margin-right: auto;">
-    </div>
+            </div>
+
 
 
         
@@ -93,6 +118,26 @@
                   </p>
           </div> 
 
+          
+      <div id="addr_div_mobile"  class="card-content col s12 m0">
+        <div class="col s12 m0 info-panel container_m"
+         style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                box-shadow: 0px 3px 6px #0000000D;
+                border-radius: 6px;
+                opacity: 1;">
+        
+          <div class="input-field col s12 m0">
+              <input id="addr_m" name ="addr" placeholder=" הזן כתובת מלאה " type="text" class="validate required" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+              border: 1px solid #BBBBCB;
+              border-radius: 8px;
+              opacity: 1;">
+             
+              <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
+          </div>
+          <label id="addr_warning" style="display:none"> <label style="color:red">*</label>יש להזין כתובת</label>
+        </div>
+      </div>
+
           <div class="card-stacked col s0 m1">
             </div>
 
@@ -105,7 +150,7 @@
           <div class="card-stacked col s0 m1">
           </div>
 
-            <div id="lotparcel_div" class="card-content col s12 m10" style="display: none;">
+            <div id="lotparcel_div" class="card-content col s0 m10" style="display: none;">
               <div class="col s12 info-panel container_l" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
                           box-shadow: 0px 3px 6px #0000000D;
                           border-radius: 6px;
@@ -129,7 +174,7 @@
                 </div>
             </div>
 
-            <div id="addr_div"  class="card-content col s12 m10">
+            <div id="addr_div"  class="card-content col s0 m10">
               <div class="col s12 info-panel container_r"
                style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
                       box-shadow: 0px 3px 6px #0000000D;
@@ -137,7 +182,7 @@
                       opacity: 1;">
               
                 <div class="input-field col s12 m12">
-                    <input id="addr" placeholder=" הזן כתובת מלאה " id="addr" type="text" class="validate required" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                    <input id="addr" placeholder=" הזן כתובת מלאה " name="addr" type="text" class="validate required" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
                     border: 1px solid #BBBBCB;
                     border-radius: 8px;
                     opacity: 1;">
@@ -297,9 +342,18 @@ $(".switch2").on("click",function() {
 
 var currentValue = "addr_radio";
 function handleClick(myRadio) {
-    var addr_div = document.getElementById("addr_div");
+    if(isMobile()) {
+
+        var lotparcel_div = document.getElementById("lotparcel_div_mobile");
+        var addr_div = document.getElementById("addr_div_mobile");
+    } 
+    else
+    {
+        var lotparcel_div = document.getElementById("lotparcel_div"); 
+        var addr_div = document.getElementById("addr_div");
+    }
     var AddrResults = document.getElementById("AddrResults");
-    var lotparcel_div = document.getElementById("lotparcel_div");
+    //var lotparcel_div = document.getElementById("lotparcel_div");
     var ParcelResults = document.getElementById("ParcelResults");
 
     currentValue = myRadio.value;
@@ -325,10 +379,24 @@ function myFunction() {
   document.getElementById("parcel_warning").style.display = "none";
   document.getElementById("addr_warning").style.display = "none";
 
+  var addr;
+  var lot;
+  var parcel;
+  if (isMobile() == false){
+    addr = document.getElementById("addr");
+    lot = document.getElementById("lot");
+    parcel = document.getElementById("parcel");
+  }
+  else{
+    addr = document.getElementById("addr_m");
+    lot = document.getElementById("lot_m");
+    parcel = document.getElementById("parcel_m");
+  }
+
   if (currentValue == "addr_radio")
   {
 
-    if (document.getElementById("addr").value){
+    if (addr.value){
         parcel_ul = document.getElementById("parcel_ul");
         parcel_ul.innerHTML = "";
         var li = document.createElement("b");
@@ -337,7 +405,7 @@ function myFunction() {
                     parcel_ul.appendChild(li);
         govmap.searchAndLocate({
 					type:govmap.locateType.lotParcelToAddress,
-					address: document.getElementById("addr").value
+					address: addr.value
 				}).then(function(e){
           if (!e.data){
               var li = document.createElement("li");
@@ -368,7 +436,7 @@ function myFunction() {
     }
   }
   else{
-    if (document.getElementById("lot").value && document.getElementById("parcel").value){
+    if (lot.value && parcel.value){
         addr_ul = document.getElementById("addr_ul");
         addr_ul.innerHTML = "";
         var li = document.createElement("b");
@@ -377,8 +445,8 @@ function myFunction() {
                     addr_ul.appendChild(li);
         govmap.searchAndLocate({
 	               type:govmap.locateType.addressToLotParcel,
-	               lot:  document.getElementById("lot").value,
-	               parcel: document.getElementById("parcel").value
+	               lot:  lot.value,
+	               parcel: parcel.value
 	           }).then(function(e){
               if (!e.data){
                   var li = document.createElement("li");
@@ -415,7 +483,35 @@ function myFunction() {
 }
 
 
+function isMobile()
+{
+  is_mobile = false;
+  var Mobile = {
+                            Android: function() {
+                                return navigator.userAgent.match(/Android/i);
+                            },
 
+                            BlackBerry: function() {
+                                return navigator.userAgent.match(/BlackBerry/i);
+                            },
+                            iOS: function() {
+                                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                            },
+                            Opera: function() {
+                                return navigator.userAgent.match(/Opera Mini/i);
+                            },
+                            Windows: function() {
+                                return navigator.userAgent.match(/IEMobile/i);
+                            },
+                            any: function() {
+                                return (Mobile.Android() || Mobile.BlackBerry() || Mobile.iOS() || Mobile.Opera() || Mobile.Windows());
+                            }
+                        };
+    if(Mobile.any() ) {
+      is_mobile = true;
+    }
+    return is_mobile;
+}
 
 $(document).ready(function(){
     window.addEventListener('keyup', function (event) {
@@ -423,9 +519,23 @@ $(document).ready(function(){
           myFunction()
         }
     })
-    //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+
+    if(!isMobile()) {
+
+      var addr_div = document.getElementById("addr_div_mobile");
+      addr_div.style.display="none";
+
+    }
+    else{
+      var addr_div = document.getElementById("addr_div");
+      addr_div.style.display="none";
+
+    }
+
+
+    var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
     //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-    var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+    //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
     $(function () {
             govmap.createMap('map_div', {
                 token: my_token,
@@ -546,6 +656,40 @@ opacity: 1;
   border: 10px solid transparent;
   border-bottom-color: white ;
 }
+
+
+
+
+
+
+.container_m {
+  border-top: 2px solid #0068F5 !important;
+  position: relative;
+  background: #ffffff;
+  padding: 15px;
+  border: 1px solid #dddddd;
+  margin-top: 20px;
+}
+
+.container_m:before,
+.container_m:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  right: 13px;
+  border: 13px solid transparent;
+  border-bottom-color: #0068F5;
+}
+
+.container_m:after {
+  right: 16px;
+  border: 10px solid transparent;
+  border-bottom-color: white ;
+}
+
+
+
+
 
     .welcome{
       max-width: 1400px;
