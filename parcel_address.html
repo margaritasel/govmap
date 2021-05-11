@@ -463,7 +463,7 @@ function myFunction() {
                                 li.appendChild(document.createTextNode(r));
                                 addr_ul.appendChild(li);
                   }
-                  govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + document.getElementById("lot").value + " AND PARCEL = " + document.getElementById("parcel").value, 'zoomToExtent': true });
+                  govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + lot.value + " AND PARCEL = " + parcel.value, 'zoomToExtent': true });
                   govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
 
               }
