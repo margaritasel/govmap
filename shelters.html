@@ -156,12 +156,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+  
+  <script src="https://unpkg.com/terraformer@1.0.8"></script>
+  <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
 
   <script>
 
 
 		//var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //for localhost domain
 		var my_user_token ='e13c8a91858bfaeeb8d6e163141bef88' // = "427ac1cf3ba8d5a818799ed6a176ce44";
+
+
+        var s_wkts = [];
+		var s_names = [];
+		var s_symbols = [];
+        var s_tooltips = [];
+        var bubbleHTMLParameters_all_layer = [];
+        var fill_colors = [[0,255,0,0.5], [255,0,0,0.5],[255,255,0,0.5]];
 
     //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
         var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
@@ -181,516 +192,101 @@
 					layersMode: 2,
 					//isEmbeddedToggle: false,
 					showXY: true,
-					center:  {x: 179000, y: 664000},// {x: 180996, y: 663402},
+					center:  {x: 179000, y: 664000},
 					level: 7,
                     identifyOnClick: false
 					});
 
-		});
-	 var circle_result;
-	 var circleInfo;
-	 var click_result;
-	var parcel_result;
-	var e_obj;
-	 $(function(){
 
-		$("#cbx_types li a").click(function(){
+                    
 
-		  $(".btn:first-child").text($(this).text());
-		  	func_type = $(this).text();
-			var address = "";
-		  	if (func_type == "AddUserPoint")
-			{
-				govmap.draw(govmap.drawType.Point).progress(function (e)
-				{
-						console.log(e)
-						var data = {
-							'wkts': [e.wkt],
+        var json = "https://raw.githubusercontent.com/yovavsanders/govmap/master/%D7%9E%D7%A7%D7%9C%D7%98%D7%99%D7%9D%20%D7%91%D7%A8%D7%A7%D7%90%D7%99.JSON";
+        var json_obj = $.getJSON(json);
+        json_obj.complete(function(response) {
+            data = response.responseJSON;
+            features = response.responseJSON.features;
+            console.log(features.length);
+					if (features.length > 0)
+					{
+						geom_type = data.features[0].geometry.type;
 
-							'names': ['p1'],
-							'geometryType': govmap.drawType.Point,
-							'defaultSymbol':
-							{
-								'url':'http://maps.google.com/mapfiles/ms/micons/horsebackriding.png',
-								'width':15,
-								'height':15
-							},
-
-							'symbols': [{
-								'url':'http://maps.google.com/mapfiles/ms/micons/horsebackriding.png',
-								'width':15,
-								'height':15
-								}
-							],
-							'clearExisting': false,
-							'data': {
-							'tooltips': ['tooltip1'],
-							'bubbles': [''],
-							'bubbleUrl': 'https://ynet.co.il'
+						for (i=0; i < features.length; i++)
+						{
+							feat = features[i];
+                            console.log(feat);
+							wkt = Terraformer.WKT.convert(feat.geometry);
+							if (wkt.includes("Z")){
+								wkt = wkt.replaceAll("Z", "").replaceAll(" 0, "," , ").replaceAll(" 0)))", " )))");
 							}
-						};
-						govmap.displayGeometries(data).then(function (e)
-						{
-							console.log(e.data);
-						});
-				});
+							s_wkts.push(wkt);
+							s_names.push("geometry_" + i);
 
+							if (geom_type == "Point")
+							{
+								symbol_url ='https://w0.pngwave.com/png/508/387/google-maps-google-map-maker-pritchard-community-center-marker-pen-map-png-clip-art.png';
+								default_symbol = {url:symbol_url, width:30,  height:30  };
+								s_symbols.push(default_symbol);
 
-			}
+								geometry_type = govmap.drawType.Point;
 
-			if (func_type == "GeocodeString")
-			{
-				$("#myModal").modal("show");
-			}
-			if (func_type == "GetSearchAccuracy")
-			{
-				GovMapGisApi_GetSearchAccuracy(address, "GetSearchAccuracyResult");
-			}
-			if (func_type == "GetXY")
-			{
-				govmap.getXY().progress(function (e)
-				{
-					console.log(e);
-					govmap.setDefaultTool();
-					alert(e.mapPoint.x + " / " + e.mapPoint.y);
-				});
-			}
-			if (func_type == "DrawRectangle")
-			{
-				govmap.draw(govmap.drawType.Rectangle).progress(function (e)
-				{
-						wkt = e.wkt;
-						console.log(wkt);
-						var thep = document.getElementById("info");
-						thep.innerHTML = "";
-						thep.appendChild(document.createElement("br"));
-						thep.appendChild(document.createTextNode("WKT:"));
-						thep.appendChild(document.createElement("br"));
-						thep.appendChild(document.createTextNode(wkt));
-						thep.appendChild(document.createElement("br"));
-						thep.className="lead";
-						document.getElementById("myModalLabel").innerHTML = "Rectangle Info";
-						$("#myInfoModal").modal("show");
-				});
+								
+							}
+							if (geom_type == "MultiPolygon" || geom_type == "Polygon")
+							{
+								default_symbol = {  
+												'outlineColor': [0, 0, 255, 1],
+												'outlineWidth': 3,
+												'fillColor': [255, 255, 255, 0.5]
+											}
+								s_symbols.push(default_symbol);
+								geometry_type = govmap.drawType.Polygon;
+							}
+							if (geom_type == "Polyline")
+							{
+								default_symbol = {  
+													color: [255, 0, 80, 1],  
+													width: 1,  
+												}
+								s_symbols.push(default_symbol);
+								geometry_type = govmap.drawType.Line;
+							}
 
-			}
-			if (func_type == "DrawCircle")
-			{
-				govmap.draw(govmap.drawType.Circle).progress(function (e)
-				{
-					circleInfo = e;
-					var thep = document.getElementById("info");
-					thep.innerHTML = "";
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createTextNode("X Coordinate:"));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createTextNode(e.x));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createTextNode("Y Coordinate:"));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createTextNode(e.y));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createTextNode("Radius:"));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createTextNode(e.radius));
-					document.getElementById("myModalLabel").innerHTML = "Circle Info";
-					thep.className="lead";
-					$("#myInfoModal").modal("show");
-				});
-			}
-			
-			if (func_type == "DrawPolygon")
-			{
-				govmap.draw(govmap.drawType.Polygon).progress(function (e)
-				{
-					console.log(e.wkt);
-					govmap.intersectFeatures({
-					geometry: e.wkt,
-					layerName: "TAZNATIONALMOTRATE2040_MOT",
-					fields: ['OBJECTID','MOTORATE40']
-					}).then(function (e)
-					{
-						result = e;
-						console.log(e.data[0].Values[0]);
-					});
-					
-					var thep = document.getElementById("info");
-					thep.innerHTML = "";
-					thep.appendChild(document.createElement("WKT:"));
-					thep.appendChild(document.createElement("br"));
-					thep.appendChild(document.createTextNode(e.wkt));
-					document.getElementById("myModalLabel").innerHTML = "WKT Info";
-					thep.className="lead";
-					$("#myInfoModal").modal("show");
-					});
-			}
-			if (func_type == "AddUserPoint1")
-			{
-			
-			
-				var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div style='background-color: yellow;'>{0}</div><div               style='background-color: blue;'>{1}</div></div>";
-				var data = {  
-					wkts: ["POLYGON((151612.40 534674.88, 215112.52 538643.64, 98431.04 445774.70, 74618.49 521974.85, 80968.50 552931.17, 151612.40 533881.13,151612.40 534674.88))",  
-							"POLYGON((196062.48 621458.39, 196591.65 622516.72, 197649.99 659293.88, 229929.22 665379.31, 243423.00 632306.33, 196062.48 621458.39))"],  
-					names: ['p1', 'p2'],  
-					geometryType: govmap.drawType.Polygon,  
-					defaultSymbol:  
-						{  
-						outlineColor: [0, 80, 255, 1],  
-						outlineWidth: 1,  
-						fillColor: [138, 43, 226, 0.5]
-						},  
-					symbols: [],  
-					clearExisting: true 
-					//data: {  
-							//tooltips: ['פוליגון 1 tooltip', 'פוליגון 2 tooltip'],  
-							//headers: ['פוליגון 1 כותרת','פוליגון 2 כותרת'],
-							//bubbleHTML: bubbleContent,
-							//bubbleHTMLParameters: [['פוליגון 1','מידע נוסף...'], [name, 'מידע נוסף...']]
-					//}  
-                };  
-				  
-				govmap.displayGeometries(data).then(function (response)  
-				{  
-				  console.log(response.data);
-				}); 
-
-			}
-			if (func_type == "ZoomToDrawing")
-			{
-				govmap.zoomToDrawing();
-			}
-			if (func_type == "ClearDrawing")
-			{
-				govmap.clearDrawings();
-			}
-			if (func_type == "FilterLayer")
-			{
-				//govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM =7620 AND PARCEL =274", 'zoomToExtent': true });
-				//govmap.filterLayers({ 'layerName': "NEIGHBORHOODS_AREA", 'whereClause': "FNAME ='נווה סביון'", 'zoomToExtent': true });
-				govmap.filterLayers({ 'layerName': "GUIDESTARPOINTS", 'whereClause': "NUMBER_  =580030104", 'zoomToExtent': true });
-				govmap.filterLayers({ 'layerName': "GUIDESTARPOINTS", 'whereClause': "NUMBER_  =580030104", 'zoomToExtent': true });
-
-
-			}
-			if (func_type == "searchInLayer1")
-			{
-				//govmap.searchInLayer({ 'layerName': 'PARCEL_ALL', 'fieldName': 'GUSH_NUM', 'fieldValues': [7620], 'highlight': true });
-				govmap.searchInLayer({ 'layerName': 'PARCEL_ALL', 'fieldName': 'OBJECTID', 'fieldValues': [422400], 'highlight': true });
-
-				//govmap.searchInLayer({ 'layerName': 'ECONOMYLOTS', 'fieldName': 'LOTIDSTRING', 'fieldValues': ['C5H0000', 'C5GB000', 'C5D0000'], 'highlight': true });
-				
-				//govmap.searchInLayer({ 'layerName': 'ECONOMYLOTS_MOCH', 'fieldName': 'LOTIDINT', 'fieldValues': [7334, 8920], 'highlight': true, 'showBubble': true });
-				
-				
-			}
-			if (func_type == "searchInLayer2")
-			{
-				//govmap.searchInLayer({ 'layerName': 'PARCEL_ALL', 'fieldName': 'GUSH_NUM', 'fieldValues': [7620], 'highlight': true });
-				//govmap.searchInLayer({ 'layerName': 'ECONOMYLOTS', 'fieldName': 'LOTIDSTRING', 'fieldValues': ['C5H0000', 'C5GB000', 'C5D0000'], 'highlight': true });
-				govmap.searchInLayer({ 'layerName': "NEIGHBORHOODS_AREA", 'fieldName': "FNAME",  'fieldValues':['נווה סביון'], 'highlight': true});
-				//govmap.searchInLayer({ 'layerName': 'ECONOMYLOTS_MOCH', 'fieldName': 'LOTIDINT', 'fieldValues': [7334, 8920], 'highlight': true, 'showBubble': true });
-				//govmap.searchInLayer({ 'layerName': 'DIVUCHIM2017', 'fieldName': 'SHNATDIVUACH', 'fieldValues': [2017], 'highlight': true, 'showBubble': true });
-				
-			}
-			if (func_type == "AddressToLotParcel")
-			{
-				$("#myModalAddressToLotParcel").modal("show");
-
-			}
-			if (func_type == "LotParcelToAddress")
-			{
-				$("#myModalLotParcelToAddress").modal("show");
-			}
-			if (func_type == "showMeasure")
-			{
-				//govmap.onEvent(govmap.events.DOUBLE_CLICK).progress(function (e)   
-                //{  	   
-                   //alert("click event");  
-                //});  
-				govmap.showMeasure();
-				
-			}
-			
-			if (func_type == "intersectFeatures")
-			{
-				//var israelExtentPolygonGeo = "POLYGON((129897.85 818015.41, 287854.42 818015.41, 287854.42 376689.53, 129897.85 376689.53, 129897.85 818015.41))";
-				// get neighborhoods name by inersecting parcel polygon..
-				govmap.geocode({keyword: "7098 9"},govmap.geocodeType.FullResult)
-				.then(function(GeocdeResponse){
-						console.log("then:");
-						console.log(GeocdeResponse);
-						var params = {
-							LayerName: 'NEIGHBORHOODS_AREA',
-							Point: {x: GeocdeResponse.data[0].X, y: GeocdeResponse.data[0].Y},
-							Radius:5
-						};
-						govmap.getLayerData(params).then(function(getLayerDataResponse){
-						   console.log(getLayerDataResponse);
-						   if (getLayerDataResponse.data){
-							alert(getLayerDataResponse.data[0].Fields[0].Value + " " + getLayerDataResponse.data[0].Fields[2].Value);
-						   }
-					   });
-				});
-				//govmap.intersectFeatures({ 'geometry': israelExtentPolygonGeo, 'layerName': "KALPI_NEGISHUT", 'fields': ["OBJECTID"], getShapes: true})
-				//.then(function (e) {
-					//if (e.data != null && e.data.length > 0)
-					//{
-						//var objID = [];
-						//for (i = 0; i < e.data.length; i++)
-						//{
-						  //console.log(e.data[i].ObjectId);
-						 // objID.push(e.data[i].ObjectId);
-						//}
-						//govmap.filterLayers({ 'layerName': "KALPI_NEGISHUT", 'whereClause': "OBJECTID IN ("+objID.toString()+")", 'zoomToExtent': true });
-						
-					//}
-					//else
-					//{
-					//	console.log("0 results");
-					//}
-				//});
-			
-			
-				//layerName: TazNationalMotRate2040_MOT
-				//govmap.intersectFeatures({
-                //address: "הרוקמים 26 חולון",
-                //layerName: "TAZNATIONALMOTRATE2040_MOT",
-               // fields: ['OBJECTID','MOTORATE40']
-				//}).then(function (e)
-				//{
-					//result = e;
-					//console.log(e.data[0].Values[0]);
-				//});
-			}
-			
-			if (func_type == "OnEvent")
-			{
-				govmap.onEvent(govmap.events.CLICK).progress(function (e)  
-				//govmap.draw(govmap.drawType.Point).progress(function (e)  
-				{	
-					click_result = e;
-					console.log(click_result)
-				}); 
-			}
-			if (func_type == "DisplayPolygons")
-			{
-			var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div style='background-color: yellow;'>{0}</div><div               style='background-color: blue;'>{1}</div></div>";
-            var data = {  
-                wkts: ["POLYGON((151612.40 534674.88, 215112.52 538643.64, 98431.04 445774.70, 74618.49 521974.85, 80968.50 552931.17, 151612.40 533881.13,151612.40 534674.88))",  
-                        "POLYGON((196062.48 621458.39, 196591.65 622516.72, 197649.99 659293.88, 229929.22 665379.31, 243423.00 632306.33, 196062.48 621458.39))"],  
-                names: ['p1', 'p2'],  
-                geometryType: govmap.drawType.Polygon,  
-                defaultSymbol:  
-                    {  
-                    outlineColor: [0, 80, 255, 1],  
-                    outlineWidth: 1,  
-                    fillColor: [138, 43, 226, 0.5]
-                    },  
-                symbols: [],  
-                clearExisting: true,  
-                data: {  
-                        tooltips: ['פוליגון 1 tooltip', 'פוליגון 2 tooltip'],  
-                        headers: ['פוליגון 1 כותרת','פוליגון 2 כותרת'],
-                        bubbleHTML: bubbleContent,
-                        bubbleHTMLParameters: [['פוליגון 1','מידע נוסף...'], ['פוליגון 2', 'מידע נוסף...']]
-                }  
-                };  
-            govmap.displayGeometries(data).then(function (response)  
-            {  
-              console.log(response.data);
-            });   
-			}
-			if (func_type == "DisplayPolygons1")
-			{
-				var data = {
-                'circleGeometries': [{ x: 179724, y: 659609, radius:1000 }],
-                'names': ['p1'],
-                'geometryType': govmap.geometryType.CIRCLE,
-                'defaultSymbol':
-                    {
-                        'outlineColor': [0, 0, 255, 1],
-                        'outlineWidth': 1,
-                        'fillColor': [0, 255, 0, 0.5]
-                    },
-                'symbols': [],
-                'clearExisting': true,
-                'data': {}
-            };
-govmap.displayGeometries(data).then(function (e)
-            {
-               
-            });
-
-			}
-			if (func_type == "DisplayGeometriesCircle1")
-			{
-
-
-
-				var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div style='background-color: yellow;'>{0}</div><div  style='background-color: blue;'>{1}</div></div>";
-				var data = {
-				'circleGeometries' : [{ 'x': 176085, 'y': 657600, 'radius':500 }, { 'x': 183184, 'y': 669173, 'radius':500 }],
-				'names': ['p1', 'p2'],
-				'geometryType': govmap.geometryType.CIRCLE,
-				'defaultSymbol':
-				{
-					'outlineColor': [0, 0, 255, 1],
-					'outlineWidth': 1,
-					'fillColor': [0, 255, 0, 0.5]
-				},
-				'symbols': [],
-				'clearExisting': false,
-				'data': {
-						'tooltips': ['tooltip1', 'tooltip2'],
-						'headers': ['header1', 'header2'],
-						'bubbles': ['', ''],
-						'bubbleHTML': bubbleContent,
-						'bubbleHTMLParameters': [['value1', 'value2'], ['value1', 'value2']]
-					}
-				}
-				govmap.displayGeometries(data).then(function (e)
-				{
-					circle_result = e;
-					console.log(e.data);
-				});
-				//govmap.zoomToXY({ x: 176085, y: 657600, level: 10, marker: false });
-				govmap.zoomToDrawing();
-			}
-
-			if (func_type == "DisplayGeometriesCircle")
-			{
-				 govmap.zoomToXY({ x: 189901, y: 668338, level: 6, marker: true });
-
-				var data = {
-					'circleGeometries': [{ x: 189901, y: 668338, radius:1000 }],
-					'geomData': [{ 'name': 'test1', 'aaa': 1 }],
-					'showBubble': false,
-					'names': ['p1'],
-					'geometryType': govmap.geometryType.CIRCLE,
-					'defaultSymbol':
-						{
-							'outlineColor': [192, 0, 0, 1],
-							'outlineWidth': 1,
-							'fillColor': [255, 192, 203, 0.5]
-						},
-					'symbols': [],
-					'clearExisting': true,
-					'data': {
-
-					}
-				};
-				govmap.displayGeometries(data).then(function (e)
-				{
-					console.log(data);
-					
-				});
-			}
-			if (func_type == "ReverseGeocoding")
-			{
-				// get map click
-				govmap.onEvent(govmap.events.CLICK).progress(function (e)
-				{
-					click_result = e;
-					// get point coordinates
-					var wkt = "POINT ("+click_result.mapPoint.x+" "+click_result.mapPoint.y+")"
-					console.log(wkt);
-					// intersect point with parcel_ll layer
-					govmap.intersectFeatures({ geometry: wkt ,layerName: "PARCEL_ALL", fields: ['GUSH_NUM', 'PARCEL']  })
-					.then(function (e)
-					{
-						//get parcels result
-						results = e;
-						console.log(results);
-						// save parcels objectid's
-						var fieldValues = [];
-						for (i = 0; i < results.data.length; i++)
-						{
-							fieldValues.push(results.data[i].ObjectId);
 						}
-						// draw point marker on map
-						var data = {
-							'wkts': ["POINT ("+click_result.mapPoint.x+" "+click_result.mapPoint.y+")"
-							],
 
-							'names': ['p1'],
-							'geometryType': govmap.drawType.Point,
-							'defaultSymbol':
-							{
-								'url':'https://www.govmap.gov.il/images/marker.png',
-								'width':32,
-								'height':32
-							},
+						var default_symbol;
+						var geometry_type;
+				
+						var data = {  
+							wkts: s_wkts,  
+							names: s_names,
+							showBubble: true,
+							geometryType: geometry_type,
+							defaultSymbol: default_symbol,    
+							symbols: s_symbols,  
+							'clearExisting': false,
+							data: {  
+								tooltips: s_names,
+							} 
+						}
 
-							'symbols': [{
-								'url':'https://www.govmap.gov.il/images/marker.png',
-								'width':32,
-								'height':32
-								}
-							],
-							'clearExisting': true,
-							'data': {
-							}
-						};
-						// highlight selected parcels
-						govmap.searchInLayer({ 'layerName': "PARCEL_ALL", 'fieldName': 'OBJECTID', 'fieldValues': fieldValues, 'highlight': true, 'showBubble':false,'outLineColor':[6,55,158,128],'fillColor':[6,55,158,102] });
-						alert("גוש " + results.data[0].Values[0] + " חלקה " + results.data[0].Values[1]);
-						// get addresses within first parcel
-						govmap.searchAndLocate({
-						   type:govmap.locateType.addressToLotParcel,
-						   lot:  results.data[0].Values[0],
-						   parcel: results.data[0].Values[1]
-					   }).then(function(e){
-							var Addresses = e;
-							var addresses_string = "";
-							if (Addresses.data)
-							{
-								for (i = 0; i < Addresses.data.length; i++) {
-									addresses_string = addresses_string + Addresses.data[i].Values[0]+" "+Addresses.data[i].Values[1]+" "+Addresses.data[i].Values[2] + ", ";
-								}
-								alert(addresses_string);
-							}
+						govmap.displayGeometries(data).then(function (response)
+						{
+							console.log(response)
 						});
+					}
+				
+        });
+    });
 
 
-					});
-				});
-			}
-			if (func_type == "GetLayerEntities")
-			{
-				var params = {
-					layerName: '111065'//'72000'
-				};
-				govmap.getLayerEntities(params).then(function(response){
-					console.log(response);
-				});  
-			}
-			if (func_type == "GetLayerData")
-			{
-				var params = {
-					LayerName: 'CELL_ACTIVE',
-					Point: {x: 217009, y: 708689},
-					Radius:500
-				};
-			   govmap.getLayerData(params).then(function(response){
-				   console.log(response);
-			   });
-			}
-			
-			if (func_type == "LayerToGeojson")
-			{
-				LayerToGeojson("REGION");
-				//LayerToGeojson("CELL_ACTIVE");
-			}
 
 
-	   });
-	});
-	
+
+
+
+
+
+
 
 		  var answer;
 		  function TestGovMap()
@@ -748,397 +344,7 @@ govmap.displayGeometries(data).then(function (e)
 						console.log(response);
 					});
 		  }
-		  
-		  
-		  String.prototype.replaceAll = function(search, replace)
-		{
-			//if replace is not sent, return original string otherwise it will
-			//replace search string with 'undefined'.
-			if (replace === undefined) {
-				return this.toString();
-			}
-
-			return this.replace(new RegExp('[' + search + ']', 'g'), replace);
-		};
-
-
-		  var addr_list = {};
-		  var results;
-		  function TestGovMapExpanded()
-		  {
-		  	var thep = document.getElementById("additional results");
-			thep.innerHTML = "";
-			//alert(document.getElementById("myModalstring").value);
-			govmap.geocode({keyword: document.getElementById("myModalstring").value},govmap.geocodeType.FullResult)
-					.then(function(response){
-						console.log("then:");
-						console.log(response);
-						results = response.data;
-						if (results.length == 1)
-						{
-							govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 10, marker: true });
-							document.getElementById("Coordinates").innerHTML = response.data[0].X + " / " + response.data[0].Y;
-						}
-						if (results.length > 1)
-						{
-							document.getElementById("Coordinates").innerHTML ="";
-							var thep = document.getElementById("additional results");
-							thep.appendChild(document.createElement("br"));
-							thep.appendChild(document.createTextNode("האם התכוונת ל: "+ "\n"));
-							thep = document.getElementById("additional results");
-							thep.innerHTML = "";
-							var addr_list_txt ="";
-							addr_list = {};
-							for (var i = 0; i < results.length; i++)
-							{
-								addr_list[results[i].ResultLable] = [results[i].X, results[i].Y];
-								addr_list_txt = addr_list_txt + results[i].ResultLable + "\n";
-
-								var thep = document.getElementById("additional results");
-								thep.appendChild(document.createElement("br"));
-								thep.appendChild(document.createTextNode("\n"));
-								var r = results[i].ResultLable;
-								var btn = document.createElement("BUTTON");
-								btn.type  = 'button';
-								btn.className="btn btn-link";
-								btn.innerHTML = r;
-								btn.value = r;
-								btn.addEventListener('click', function() {
-									document.getElementById("myModalstring").value = this.value;
-									govmap.zoomToXY({ x: addr_list[this.value][0], y: addr_list[this.value][1], level: 10, marker: true });
-								}, false);
-								document.getElementById("additional results").appendChild(btn);
-							}
-						}
-
-					})
-				    .done(function(response){
-						console.log("done:");
-						console.log(response);
-					})
-					.always(function(response){
-						console.log("always:");
-						console.log(response);
-					})
-					.fail(function(response){
-						console.log("fail:");
-						console.log(response);
-					});
-		  }
-
-		  function TestGovMapAddressToLotParcel()
-		  {
-				govmap.searchAndLocate({
-					type:govmap.locateType.lotParcelToAddress,
-					address: document.getElementById("myModalstringAddressToLotParcel").value
-				}).then(function(e){
-					e.data[0].Values[0];
-					e.data[0].Values[1];
-					document.getElementById("LotParcel").innerHTML ="גוש " + e.data[0].Values[0] + " חלקה " + e.data[0].Values[1]; //40095 13
-				});
-
-		  }
-
-		  function TestGovMapLotParcelToAddress()
-		  {
-				govmap.searchAndLocate({
-	               type:govmap.locateType.addressToLotParcel,
-	               lot:  document.getElementById("myModalstringGush").value,
-	               parcel: document.getElementById("myModalstringParcel").value
-	           }).then(function(e){
-					console.log(e);
-				    var thep = document.getElementById("Addr");
-					thep.innerHTML = "";
-					var Addresses = e;
-					d = e;
-					thep.appendChild(document.createElement("Addresses:"));
-					thep.appendChild(document.createElement("br"));
-					for (i = 0; i < Addresses.data.length; i++) {
-
-						thep.appendChild(document.createElement("br"));
-						var r = Addresses.data[i].Values[0]+" "+Addresses.data[i].Values[1]+" "+Addresses.data[i].Values[2];
-						var btn = document.createElement("BUTTON");
-						btn.type  = 'button';
-						btn.className="btn btn-link";
-						btn.innerHTML = r;
-						btn.value = r;
-						btn.addEventListener('click', function() {
-						}, false);
-						thep.appendChild(btn);
-					}
-				});
-
-		  }
-		function PointToPolygon(x, y, r)
-		{			
-			x1 = x - r;
-			y1 = y;
-			x2 = x - (((r / 2)) / (2)) - ((r / 2));
-			y2 = y + (((r / 2)) / (2)) + ((r / 2));
-			x3 = x;
-			y3 = y + r;
-			x4 = x + (((r / 2)) / (2)) + ((r / 2));
-			y4 = y + (((r / 2)) / (2)) + ((r / 2));
-			x5 = x + r;
-			y5 = y;
-			x6 = x + (((r / 2)) / (2)) + ((r / 2));
-			y6 = y - (((r / 2)) / (2)) - ((r / 2));
-			x7 = x;
-			y7 = y - r;
-			x8 = x - (((r / 2)) / (2)) - ((r / 2));
-			y8 = y - (((r / 2)) / (2)) - ((r / 2));
-			wkt = "POLYGON(("+x1+" "+y1+", "+x2+" "+y2+", "+x3+" "+y3+", "+x4+" "+y4+", "+x5+" "+y5+", "+x6+" "+y6+", "+x7+" "+y7+", "+x8+" "+y8+", "+x1+" "+y1+"))";
-			return wkt;
-		}
-		
-		
-
-
-		function LayerToGeojson1(LayerName)
-		{
-			var geom_type;
-			var geo_json;
-			var empty_features_list = [];
-			console.log("start...");
-				var fields1;
-				var params = {
-					LayerName: LayerName,
-					Point: {x: 217009, y: 708689},
-					Radius:1
-				};
-			   govmap.getLayerData(params).then(function(response){
-					response_getlayer = response;
-					var fields = ["OBJECTID"];
-					var israelExtentPolygonGeo = "POLYGON((129897.85 818015.41, 287854.42 818015.41, 287854.42 376689.53, 129897.85 376689.53, 129897.85 818015.41))";
-					var objectids = [];
-					var counter = 0;
-					var arrayofdefers = [];
-					var polygonswithmoretahn500 = [];
-					for (p = 1; p <= 639; p++)
-					{
-						polygon = israel_polygons[p];
-						(function (polygon,p,counter)
-						{
-						  arrayofdefers.push(  govmap.intersectFeatures({ 'geometry': polygon, 'layerName': LayerName, 'fields': fields, getShapes: true })
-								.then(function (e) {
-									if (e.data != null) {
-										//setTimeout(function () {console.log("timeout");}, 5000);
-										e_obj = e;
-										//objectids = [];
-										for (i = 0; i < e_obj.data.length; i++)
-										{
-											if (e_obj.data.length == 500)
-											{
-												if (polygonswithmoretahn500.includes(i) == false)
-													polygonswithmoretahn500.push(p);
-											}
-											
-											if (objectids.includes(e_obj.data[i].ObjectId) == false) {
-												objectids.push(e_obj.data[i].ObjectId);
-
-												full_wkt = e_obj.data[i].Values[e_obj.data[0].Values.length - 1];
-												if (full_wkt.includes("POLYGON")) {
-													feat_wkt = full_wkt.replace("POLYGON  (( ", "").replace("))", "");
-													geom_type = "Polygon";
-												}
-												if (full_wkt.includes("LINESTRING")) {
-													feat_wkt = full_wkt.replace("LINESTRING  (( ", "").replace("))", "");
-													feat_wkt = feat_wkt.replace("LINESTRING  ( ", "").replace(")", "");
-													feat_wkt = feat_wkt.replace("LINESTRING ZM ( ", "").replace(")", "");
-													geom_type = "LineString";
-												}
-												if (full_wkt.includes("POINT"))
-												{
-													feat_wkt = full_wkt.replace("POINT  ( ", "").replace(")", "");
-													geom_type = "Point";
-												}
-												var coordinates = [];
-												coords = feat_wkt.split(", ");
-												for (xy = 0; xy < coords.length; xy++) {
-													if (coords[xy].split(" ").length > 0) {
-														coordinates.push([parseFloat(coords[xy].split(" ")[0]), parseFloat(coords[xy].split(" ")[1])]);
-													}
-												}
-
-												if (geom_type == "Polygon") {
-													coordinates = [coordinates];
-												}
-
-												var index = fields.indexOf("OBJECTID");
-												if (index > -1) {
-													fields.splice(index, 1);
-												}
-												v = e_obj.data[i].Values;
-												properties = {};
-												for (f = 0; f < fields.length; f++) {
-													properties[fields[f]] = v[f];
-												}
-
-												var feature = {
-													"type": "Feature",
-													"geometry": {
-														"type": geom_type,
-														"coordinates":
-															coordinates
-
-													},
-													"properties": properties
-												};
-												empty_features_list.push(feature);
-												
-											}
-
-
-										}
-									  
-										//geo_json = {
-										//    "type": "FeatureCollection",
-										//    "features": empty_features_list
-										//};
-										
-										//var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(geo_json));
-										//var dlAnchorElem = document.getElementById('downloadAnchorElem');
-										//dlAnchorElem.setAttribute("href", dataStr);
-										//dlAnchorElem.setAttribute("download", LayerName + ".geojson");
-										//dlAnchorElem.click();
-										
-										//var myJSON = JSON.stringify(geo_json);
-										//console.log(myJSON);
-										//console.log("done");
-									  
-									}
-
-								}));
-
-							
-						})(polygon,p,counter);
-
-						
-					}
- 
-					//
-					$.when.apply($, arrayofdefers).done(function () {
-						// do things that need to wait until ALL gets are done
-						geo_json = {
-							"type": "FeatureCollection",
-							"features": empty_features_list
-						};
-
-						var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(geo_json));
-						//dataStr += "---------------------------------------------------------------------------------";
-						//dataStr += encodeURIComponent(JSON.stringify(polygonswithmoretahn500));
-						var dlAnchorElem = document.getElementById('downloadAnchorElem');
-						dlAnchorElem.setAttribute("href", dataStr);
-						dlAnchorElem.setAttribute("download", LayerName + ".geojson");
-						dlAnchorElem.click();
-						//console.log(polygonswithmoretahn500);
-
-						//var myJSON = JSON.stringify(geo_json);
-						//console.log(myJSON);
-						//console.log("done");
-					});
-			   });
-		}
-		
-		var response_getlayer;
-		function LayerToGeojson(LayerName)
-		{
-			var geom_type;
-			var geo_json;
-			var empty_features_list = [];
-			console.log("start...");
-				var fields1;
-				var params = {
-					LayerName: LayerName,
-					Point: {x: 217009, y: 708689},
-					Radius:10000
-				};
-			   govmap.getLayerData(params).then(function(response){
-					response_getlayer = response;
-					//var fields = response.split("from (select ")[1].split(",ROUND")[0].split(",");
-					response_getlayer.data[0]
-					var israelExtentPolygonGeo = "POLYGON((129897.85 818015.41, 287854.42 818015.41, 287854.42 376689.53, 129897.85 376689.53, 129897.85 818015.41))";
-					govmap.intersectFeatures({ 'geometry': israelExtentPolygonGeo, 'layerName': LayerName, 'fields': fields, getShapes: true })
-					.then(function (e) {
-						e_obj = e;
-						for (i = 0; i < e_obj.data.length; i++)
-						{
-							full_wkt = e_obj.data[i].Values[e_obj.data[0].Values.length - 1];
-							if (full_wkt.includes("POLYGON"))
-							{
-								feat_wkt = full_wkt.replace("POLYGON  (( ","").replace("))", "");
-								geom_type = "Polygon";
-							}
-							if (full_wkt.includes("LINESTRING"))
-							{
-								feat_wkt = full_wkt.replace("LINESTRING  (( ","").replace("))", "");
-								feat_wkt = feat_wkt.replace("LINESTRING  ( ","").replace(")", "");
-								feat_wkt = feat_wkt.replace("LINESTRING ZM ( ","").replace(")", "");
-								geom_type = "LineString";
-							}
-							if (full_wkt.includes("POINT"))
-							{
-								feat_wkt = full_wkt.replace("POINT (( ","").replace("))", "");
-								geom_type = "Point";
-							}
-						    var coordinates = [];
-							coords = feat_wkt.split(", ");
-							for (xy = 0; xy < coords.length; xy++)
-							{
-								if (coords[xy].split(" ").length > 0)
-								{
-									coordinates.push([parseFloat(coords[xy].split(" ")[0]),parseFloat(coords[xy].split(" ")[1])]);
-								}
-							}
-							
-							if (geom_type == "Polygon")
-							{
-								coordinates = [coordinates];
-							}
-							
-							//var index = fields.indexOf("OBJECTID");
-							//if (index > -1) {
-							  //fields.splice(index, 1);
-							//}
-							//v = e_obj.data[i].Values;
-							properties = {};
-							//for (f = 0; f < fields.length; f++)
-							//{
-								//properties[fields[f]] = v[f];
-							//}
-							
-							 var feature =   {
-								"type": "Feature",
-								"geometry": {
-									"type": geom_type,
-									"coordinates": 
-										coordinates
-									
-								},
-								"properties": properties
-							}
-							empty_features_list.push(feature)
-							
-						}
-						
-						geo_json = {
-						  "type": "FeatureCollection",
-						  "features": empty_features_list
-						}
-						////
-						var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(geo_json));
-						var dlAnchorElem = document.getElementById('downloadAnchorElem');
-						dlAnchorElem.setAttribute("href",     dataStr     );
-						dlAnchorElem.setAttribute("download", LayerName+".geojson");
-						dlAnchorElem.click();
-						////
-						var myJSON = JSON.stringify(geo_json);
-						console.log(myJSON);
-						console.log("done")
-					});
-			   });
-		}
-
+	
   </script>
 </head>
 
