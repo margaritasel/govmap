@@ -1,13 +1,8 @@
-
-<!DOCTYPE html>
-<html dir="rtl">
-  <head>
-    <title>איתור גוש חלקה</title>
-    <meta charset=utf-8>
-    <meta name=description content="">
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <head>
-    <meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel=stylesheet>
     <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -19,473 +14,13 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+    <title>Document</title>
 </head>
-<body dir="rtl">
-    <div id=app style="background: #F7FAFD 0% 0% no-repeat padding-box;
-    opacity: 1;">
 
-<div class="welcome container">
 
-<div class="row" id="menu_row" >
+<script>
 
-                <div class="row" style="height: 265px;">
-                  <div class="col s12 m4" style="top:auto;  margin-bottom: 25px;">
-                    <img src="transport_license-Recovered.png" alt="" />
-                  </div>
-                  <div class="col s12 m4" style="padding: 30px; margin-top: 25px;">
-                  <div class="title_div">
-                      <h3 class="my_title">איתור גוש, חלקה וכתובת </h3>
-                  </div>
-                  <div class="title_remark_div">
-                    <p class="my_title_remark">הנתונים המתקבלים כאן אינם מהווים אסמכתא. לאסמכתא חוקית לשטח הרשום של החלקה יש לפנות ללשכות המרשם במשרד המשפטים.</p>
-                    <hr style="border: 2px solid #0068F5;
-                              opacity: 1;width: 42px;
-                              height: 0px; margin: auto;">
-                </div>
-                </div>
-                <div class="col s0 m4"></div>
-              </div>
-
-
-
-<div class="index-banner color2">
-    <div class="section">
-    <div class="row" style="max-width: 1000px;">
-      <div class="row" style="max-width: 1000px;">
-      <div class="card-stacked col s0 m1">
-      </div>
-          <div class="card-stacked col s12 m4" 
-           style="background: #0068F508 0% 0% no-repeat padding-box;
-                  border: 1px solid #0068F5;
-                  border-radius: 8px;
-                  opacity: 1;
-                  height: 50px; margin-left: auto;
-                  margin-right: auto;">
-                <p dir="rtl"  style="text-align: right;  margin-top: 5px;">
-                  <label>
-                    <input class="with-gap" name="group1" type="radio" onclick="handleClick(this);" value="lotparcel_radio" />
-                    <span></span>
-                  </label>
-                  איתור כתובת לפי גוש חלקה
-                  </p>
-            </div>
-
-            <div id="lotparcel_div_mobile" class="card-content col s12 m0" style="display: none;  vertical-align: top;">
-              <div class="col s12 info-panel container_m" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                          box-shadow: 0px 3px 6px #0000000D;
-                          border-radius: 6px;
-                          opacity: 1;">
-                  <div class="input-field col s6 m6 info-panel">
-                    <input id="parcel_m" type="number" placeholder=" הזן מספר חלקה " id="last_name" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                                border: 1px solid #BBBBCB;
-                                border-radius: 8px;
-                                opacity: 1;">
-                    <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 668</span>
-                  </div>
-                  <div class="input-field col s6 m6 info-panel">
-                    <input id="lot_m" type="number" placeholder=" הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true"
-                     style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                            border: 1px solid #BBBBCB;
-                            border-radius: 8px;
-                            opacity: 1;">
-                    <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 6433</span>
-                  </div>
-                  <label id="parcel_warning" style="display:none"> <label style="color:red">*</label>יש להזין גוש וחלקה</label>
-                </div>
-              </div>
-
-            <div class="card-stacked col s0 m2"
-                 style="height: 20px; margin-left: auto;
-                        margin-right: auto;">
-            </div>
-
-
-
-        
-            <div class="card-stacked col s12 m4" 
-                 style="background: #0068F508 0% 0% no-repeat padding-box;
-                        border: 1px solid #0068F5;
-                        border-radius: 8px;
-                        opacity: 1;
-                        height: 50px; margin-left: auto;
-                        margin-right: auto;">
-                <p dir="rtl" style="text-align: right; margin-top: 5px;">
-                    <label>
-                      <input class="with-gap" name="group1" type="radio" checked onclick="handleClick(this);" value="addr_radio" />
-                      <span></span>
-                    </label>
-                    איתור גוש חלקה לפי כתובת
-                  </p>
-          </div> 
-
-          
-      <div id="addr_div_mobile"  class="card-content col s12 m0">
-        <div class="col s12 m0 info-panel container_m"
-         style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                box-shadow: 0px 3px 6px #0000000D;
-                border-radius: 6px;
-                opacity: 1;">
-        
-          <div class="input-field col s12 m0">
-              <input id="addr_m" name ="addr" placeholder=" הזן כתובת מלאה " type="text" class="validate required" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
-              border: 1px solid #BBBBCB;
-              border-radius: 8px;
-              opacity: 1;">
-             
-              <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
-          </div>
-          <label id="addr_warning" style="display:none"> <label style="color:red">*</label>יש להזין כתובת</label>
-        </div>
-      </div>
-
-          <div class="card-stacked col s0 m1">
-            </div>
-
-          </div>
-
-
-        <div class="row" style="max-width: 1000px;">
-
-          
-          <div class="card-stacked col s0 m1">
-          </div>
-
-            <div id="lotparcel_div" class="card-content col s0 m10" style="display: none;">
-              <div class="col s12 info-panel container_l" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                          box-shadow: 0px 3px 6px #0000000D;
-                          border-radius: 6px;
-                          opacity: 1;">
-                  <div class="input-field col s6 m6 info-panel">
-                    <input id="parcel" type="number" placeholder=" הזן מספר חלקה " id="last_name" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                                border: 1px solid #BBBBCB;
-                                border-radius: 8px;
-                                opacity: 1;">
-                    <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 668</span>
-                  </div>
-                  <div class="input-field col s6 m6 info-panel">
-                    <input id="lot" type="number" placeholder=" הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true"
-                     style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                            border: 1px solid #BBBBCB;
-                            border-radius: 8px;
-                            opacity: 1;">
-                    <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 6433</span>
-                  </div>
-                  <label id="parcel_warning" style="display:none"> <label style="color:red">*</label>יש להזין גוש וחלקה</label>
-                </div>
-            </div>
-
-            <div id="addr_div"  class="card-content col s0 m10">
-              <div class="col s12 info-panel container_r"
-               style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                      box-shadow: 0px 3px 6px #0000000D;
-                      border-radius: 6px;
-                      opacity: 1;">
-              
-                <div class="input-field col s12 m12">
-                    <input id="addr" placeholder=" הזן כתובת מלאה " name="addr" type="text" class="validate required" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                    border: 1px solid #BBBBCB;
-                    border-radius: 8px;
-                    opacity: 1;">
-                   
-                    <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
-                </div>
-                <label id="addr_warning" style="display:none"> <label style="color:red">*</label>יש להזין כתובת</label>
-              </div>
-            </div>
-
-            
-          <div class="card-stacked col s0 m1">
-          </div>
-
-          </div>
-            <button class="btn center"
-             style="background: #0068F5 0% 0% no-repeat padding-box;
-                    border-radius: 8px;
-                    opacity: 1; width: 285px;
-                    height: 48px;" onclick="myFunction()">חיפוש</button>
-
-            <div class="col s12 m12"
-             style="background: #FFFFFF 0% 0% no-repeat padding-box;
-                    box-shadow: 0px 2px 7px #00000014;
-                    opacity: 1;">
-            <div class="row">
-            <div id="AddrResults" class="col s10" dir="ltr" 
-            style="display: none; text-align: right; ">
-                <ul  id="addr_ul">
-                </ul>
-
-              </div>
-
-              <div id="ParcelResults" class="col s10" dir="ltr" 
-              style="text-align: right;">
-                <ul  id="parcel_ul">
-                </ul>
-              </div>
-
-              <div id="mapImage" class="card-stacked col s2 m2" style="margin-top: 20px; display:none">
-                <img src="map.png" alt="" />
-              </div>
-            </div>
-            </div>
-
-  
-             <div class="row" style="text-align: right;">
-
-              <div class="col s10 m10" dir="rtl" style="margin-top:40px">
-                <label class="switch1">
-                  <input id="chk1" type="checkbox" class="filled-in checkbox-blue-grey"/>
-                  <span>*</span>
-                </label>
-                <span style="margin-bottom:20px">חלקות</span>
-                
-                <label class="switch2">
-                  <input id="chk2" type="checkbox" class="filled-in checkbox-blue-grey"/>
-                  <span>*</span>
-                </label>
-                <span style="margin-bottom:20px">גושים</span>
-              </div>
-
-              <div class="card-stacked col s2 m2" style="margin-top:40px">
-               שכבות מידע: 
-              </div>
-
-             </div>
-
-             <div id="map_div"  class="card-content center-align"
-             style="padding: 0.5em;
-                    background:rgb(232, 235, 236);
-                    border: 0;
-                    color: white;
-                    grid-column: span 2;
-                    max-width: 1006px;
-                    height: 467px;">
-            </div>
-      </div>
-
-
-
-
-
-    </div>
-
-      </div>
-
-    </div>
-    </div>
-    </div>
-
-
-</body>
-
-<script type=text/javascript>
-
-var parcel = false;
-var gush = false;
-
-$(".switch1").on("click",function() {
-    off = [];
-    on = [];
-    var status = $(this).find("input[id=chk1]").prop('checked');
-
-    if (status == true)
-    {
-      parcel = true;
-    }
-    else
-    {
-      parcel = false;
-    }
-
-    if (parcel){
-      on.push("PARCEL_ALL")
-    }
-    else{
-      off.push("PARCEL_ALL")
-    }
-    if (gush){
-      on.push("SUB_GUSH_ALL")
-    }
-    else{
-      off.push("SUB_GUSH_ALL")
-    }
-    govmap.setVisibleLayers(on, off)
-});
-
-$(".switch2").on("click",function() {
-
-    var status = $(this).find("input[id=chk2]").prop('checked');
-
-    if (status == true)
-    {
-      gush = true;
-    }
-    else
-    {
-      gush = false;
-    }
-    off = [];
-    on = [];
-    if (parcel){
-      on.push("PARCEL_ALL")
-    }
-    else{
-      off.push("PARCEL_ALL")
-    }
-    if (gush){
-      on.push("SUB_GUSH_ALL")
-    }
-    else{
-      off.push("SUB_GUSH_ALL")
-    }
-    govmap.setVisibleLayers(on, off)
-});
-
-var currentValue = "addr_radio";
-function handleClick(myRadio) {
-    if(isMobile()) {
-
-        var lotparcel_div = document.getElementById("lotparcel_div_mobile");
-        var addr_div = document.getElementById("addr_div_mobile");
-    } 
-    else
-    {
-        var lotparcel_div = document.getElementById("lotparcel_div"); 
-        var addr_div = document.getElementById("addr_div");
-    }
-    var AddrResults = document.getElementById("AddrResults");
-    //var lotparcel_div = document.getElementById("lotparcel_div");
-    var ParcelResults = document.getElementById("ParcelResults");
-
-    currentValue = myRadio.value;
-
-    if (currentValue == "addr_radio") {
-        addr_div.style.display = "block";
-        AddrResults.style.display = "none";
-        lotparcel_div.style.display = "none";
-        ParcelResults.style.display = "block";
-
-    } else {
-        addr_div.style.display = "none";
-        AddrResults.style.display = "block";
-        lotparcel_div.style.display = "block";
-        ParcelResults.style.display = "none";
-    }
-}
-
-var d;
-function myFunction() {
-
-  document.getElementById("mapImage").style.display = "none";
-  document.getElementById("parcel_warning").style.display = "none";
-  document.getElementById("addr_warning").style.display = "none";
-
-  var addr;
-  var lot;
-  var parcel;
-  if (isMobile() == false){
-    addr = document.getElementById("addr");
-    lot = document.getElementById("lot");
-    parcel = document.getElementById("parcel");
-  }
-  else{
-    addr = document.getElementById("addr_m");
-    lot = document.getElementById("lot_m");
-    parcel = document.getElementById("parcel_m");
-  }
-
-  if (currentValue == "addr_radio")
-  {
-
-    if (addr.value){
-        parcel_ul = document.getElementById("parcel_ul");
-        parcel_ul.innerHTML = "";
-        var li = document.createElement("b");
-                    var r = ":גוש וחלקה שאותרו";
-                    li.appendChild(document.createTextNode(r));
-                    parcel_ul.appendChild(li);
-        govmap.searchAndLocate({
-					type:govmap.locateType.lotParcelToAddress,
-					address: addr.value
-				}).then(function(e){
-          if (!e.data){
-              var li = document.createElement("li");
-              var r = e.message;
-              li.appendChild(document.createTextNode(r));
-              parcel_ul.appendChild(li);
-          }
-          else {
-					    e.data[0].Values[0];
-					    e.data[0].Values[1];
-                    var li = document.createElement("li");
-                    var r = "גוש " + e.data[0].Values[0] + " חלקה " + e.data[0].Values[1];
-                    li.appendChild(document.createTextNode(r));
-                    parcel_ul.appendChild(li);
-
-                    govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + e.data[0].Values[0] + " AND PARCEL = " + e.data[0].Values[1], 'zoomToExtent': true });
-                    govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
-          }
-				});
-        parcel = true;
-        document.getElementById("chk1").checked = true;
-        document.getElementById("mapImage").style.display = "block";
-
-    }
-    else{
-        //alert("יש להזין כתובת")
-        document.getElementById("addr_warning").style.display = "block";
-    }
-  }
-  else{
-    if (lot.value && parcel.value){
-
-        govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + lot.value+ " AND PARCEL = " + parcel.value, 'zoomToExtent': true });
-        govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
-
-
-        addr_ul = document.getElementById("addr_ul");
-        addr_ul.innerHTML = "";
-        var li = document.createElement("b");
-                    var r = ":כתובות שאותרו";
-                    li.appendChild(document.createTextNode(r));
-                    addr_ul.appendChild(li);
-        govmap.searchAndLocate({
-	               type:govmap.locateType.addressToLotParcel,
-	               lot:  lot.value,
-	               parcel: parcel.value
-	           }).then(function(e){
-              if (!e.data){
-                  var li = document.createElement("li");
-                  var r = e.message;
-                  li.appendChild(document.createTextNode(r));
-                  addr_ul.appendChild(li);
-              }
-              else{
-                  var Addresses = e;
-                  d = e;
-                  for (i = 0; i < Addresses.data.length; i++) {
-                                var li = document.createElement("li");
-                                var r = Addresses.data[i].Values[0]+" "+Addresses.data[i].Values[1]+" "+Addresses.data[i].Values[2];
-                                li.appendChild(document.createTextNode(r));
-                                addr_ul.appendChild(li);
-                  }
-              }
-
-
-				});
-
-        parcel = true;
-        document.getElementById("chk1").checked = true;
-        document.getElementById("mapImage").style.display = "block";
-
-    }
-    else{
-        //alert("יש להזין גוש וחלקה")
-        document.getElementById("parcel_warning").style.display = "block";
-    }
-  }
-}
-
-
+    
 function isMobile()
 {
   is_mobile = false;
@@ -516,6 +51,123 @@ function isMobile()
     return is_mobile;
 }
 
+var d;
+function myFunction() {
+
+document.getElementById("mapImage").style.display = "none";
+document.getElementById("parcel_warning").style.display = "none";
+document.getElementById("parcel_warning_mobile").style.display = "none";
+document.getElementById("addr_warning").style.display = "none";
+document.getElementById("addr_warning_mobile").style.display = "none";
+
+var addr;
+var lot;
+var parcel;
+if (isMobile() == false){
+  addr = document.getElementById("addr");
+  lot = document.getElementById("lot");
+  parcel = document.getElementById("parcel");
+}
+else{
+  addr = document.getElementById("addr_m");
+  lot = document.getElementById("lot_m");
+  parcel = document.getElementById("parcel_m");
+}
+
+if (currentValue == "addr_radio")
+{
+
+  if (addr.value){
+      parcel_ul = document.getElementById("parcel_ul");
+      parcel_ul.innerHTML = "";
+      var li = document.createElement("b");
+                  var r = ":גוש וחלקה שאותרו";
+                  li.appendChild(document.createTextNode(r));
+                  parcel_ul.appendChild(li);
+      govmap.searchAndLocate({
+                  type:govmap.locateType.lotParcelToAddress,
+                  address: addr.value
+              }).then(function(e){
+        if (!e.data){
+            var li = document.createElement("li");
+            var r = e.message;
+            li.appendChild(document.createTextNode(r));
+            parcel_ul.appendChild(li);
+        }
+        else {
+                      e.data[0].Values[0];
+                      e.data[0].Values[1];
+                  var li = document.createElement("li");
+                  var r = "גוש " + e.data[0].Values[0] + " חלקה " + e.data[0].Values[1];
+                  li.appendChild(document.createTextNode(r));
+                  parcel_ul.appendChild(li);
+
+                  govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + e.data[0].Values[0] + " AND PARCEL = " + e.data[0].Values[1], 'zoomToExtent': true });
+                  govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
+        }
+              });
+      parcel = true;
+      document.getElementById("chk1").checked = true;
+      document.getElementById("mapImage").style.display = "block";
+
+  }
+  else{
+      //alert("יש להזין כתובת")
+      document.getElementById("addr_warning").style.display = "block";
+      document.getElementById("addr_warning_mobile").style.display = "block";
+  }
+}
+else{
+  if (lot.value && parcel.value){
+
+      govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM = " + lot.value+ " AND PARCEL = " + parcel.value, 'zoomToExtent': true });
+      govmap.filterLayers({ 'layerName': "PARCEL_ALL", 'whereClause': "GUSH_NUM > 0", 'zoomToExtent': false });
+
+
+      addr_ul = document.getElementById("addr_ul");
+      addr_ul.innerHTML = "";
+      var li = document.createElement("b");
+                  var r = ":כתובות שאותרו";
+                  li.appendChild(document.createTextNode(r));
+                  addr_ul.appendChild(li);
+      govmap.searchAndLocate({
+                 type:govmap.locateType.addressToLotParcel,
+                 lot:  lot.value,
+                 parcel: parcel.value
+             }).then(function(e){
+            if (!e.data){
+                var li = document.createElement("li");
+                var r = e.message;
+                li.appendChild(document.createTextNode(r));
+                addr_ul.appendChild(li);
+            }
+            else{
+                var Addresses = e;
+                d = e;
+                for (i = 0; i < Addresses.data.length; i++) {
+                              var li = document.createElement("li");
+                              var r = Addresses.data[i].Values[0]+" "+Addresses.data[i].Values[1]+" "+Addresses.data[i].Values[2];
+                              li.appendChild(document.createTextNode(r));
+                              addr_ul.appendChild(li);
+                }
+            }
+
+
+              });
+
+      parcel = true;
+      document.getElementById("chk1").checked = true;
+      document.getElementById("mapImage").style.display = "block";
+
+  }
+  else{
+      //alert("יש להזין גוש וחלקה")
+      document.getElementById("parcel_warning").style.display = "block";
+      document.getElementById("parcel_warning_mobile").style.display = "block";
+  }
+}
+}
+
 $(document).ready(function(){
     window.addEventListener('keyup', function (event) {
         if (event.keyCode === 13) {
@@ -527,14 +179,17 @@ $(document).ready(function(){
 
       var addr_div = document.getElementById("addr_div_mobile");
       addr_div.style.display="none";
+      
+
 
     }
     else{
       var addr_div = document.getElementById("addr_div");
       addr_div.style.display="none";
+      var dt_div =  document.getElementById("dt_div");
+      dt_div.style.display="none";
 
     }
-
 
     //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
     //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
@@ -550,12 +205,396 @@ $(document).ready(function(){
             });          
     });
 });
+    
+var currentValue = "addr_radio";
+function handleClick(myRadio) {
+    if(isMobile()) {
 
+        var lotparcel_div = document.getElementById("lotparcel_div_mobile");
+        var addr_div = document.getElementById("addr_div_mobile");
+    } 
+    else
+    {
+        var lotparcel_div = document.getElementById("lotparcel_div"); 
+        var addr_div = document.getElementById("addr_div");
+    }
+    var AddrResults = document.getElementById("AddrResults");
+    var ParcelResults = document.getElementById("ParcelResults");
+
+    currentValue = myRadio.value;
+
+    if (currentValue == "addr_radio") {
+        addr_div.style.display = "block";
+        AddrResults.style.display = "none";
+        lotparcel_div.style.display = "none";
+        ParcelResults.style.display = "block";
+
+    } else {
+        addr_div.style.display = "none";
+        AddrResults.style.display = "block";
+        lotparcel_div.style.display = "block";
+        ParcelResults.style.display = "none";
+    }
+}
 
 </script>
 
+<body dir="rtl" style="background: #F7FAFD 0% 0% no-repeat padding-box;
+opacity: 1;">
+    <div class="welcome container" style="background: #F7FAFD 0% 0% no-repeat padding-box;
+    opacity: 1;">
+
+        <div class="center header_container col l12 m12 s12">
+
+            <div class="center row">
+
+                <div class="center col l3 m3 s12">
+                    
+                    <img class="bldg_img" src="transport_license-Recovered.png" alt="" />
+                    
+                </div>
+
+                
+
+                <div class="center col l6 m6 s12" style="margin-top: 100px; height: 114px; border: 3px solid transparent">
+
+
+                        <div class="center row">
+                                <h3 class="title">איתור גוש, חלקה וכתובת </h3>
+                        </div>
+                        <div class="center row">
+                                <p class="title_remark">הנתונים המתקבלים כאן אינם מהווים אסמכתא. לאסמכתא חוקית לשטח הרשום של החלקה יש לפנות ללשכות המרשם במשרד המשפטים. </p>
+                                <div class="center row">
+                                    <hr style="border: 2px solid #0068F5;
+                                    opacity: 1;width: 42px;
+                                    height: 0px; margin: auto;">
+                                    </div>
+                        </div>
+
+ 
+
+                </div>
+
+                <div class="center col l3 m3 s0">
+
+                    
+
+                    
+                </div>
+            </div>
+
+
+            
+            <div class="center row">
+                <div class="center col l0 m0 s12"></div>
+            </div>
+
+
+            <div class="center row">
+
+                <div class="center col l2 m2 s0">
+                    
+                    
+                </div>                
+                <div class="center col l8 m8 s12" style="border: 3px solid transparent;">
+
+
+                        <div class="center col l6 m6 s12" style="height:50px; border: 3px solid transparent">
+                            <div id="cbx_lotparcel"
+                                style="background: #0068F508 0% 0% no-repeat padding-box;
+                                border: 1px solid #0068F5;
+                                border-radius: 8px;
+                                opacity: 1;
+                                height: 50px; margin-left: auto; margin-right: auto">
+                            <p dir="rtl"  style="text-align: right;  margin-top: 5px;">
+                                <label>
+                                <input class="with-gap" name="group1" type="radio" onclick="handleClick(this);" value="lotparcel_radio" />
+                                <span></span>
+                                </label>
+                                איתור כתובת לפי גוש חלקה
+                                </p>
+                            </div>
+                        </div>
+
+                        <div id="lotparcel_div_mobile" class="card-content col s12 m0" style="display: none;  vertical-align: top;">
+                            <div class="col s12 info-panel container_m" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                        box-shadow: 0px 3px 6px #0000000D;
+                                        border-radius: 6px;
+                                        opacity: 1;">
+                                <div class="input-field col s6 m6 info-panel">
+                                  <input id="parcel_m" type="number" placeholder=" הזן מספר חלקה " id="last_name" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                              border: 1px solid #BBBBCB;
+                                              border-radius: 8px;
+                                              opacity: 1;">
+                                  <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 668</span>
+                                </div>
+                                <div class="input-field col s6 m6 info-panel">
+                                  <input id="lot_m" type="number" placeholder=" הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true"
+                                   style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                          border: 1px solid #BBBBCB;
+                                          border-radius: 8px;
+                                          opacity: 1;">
+                                  <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 6433</span>
+                                </div>
+                               
+                              </div>
+
+                            
+                              <label id="parcel_warning_mobile" style="display:none"> <label style="color:red">*</label>יש להזין גוש וחלקה</label>
+                              
+                            </div>
+              
+
+    
+                        
+                        <div class="center col l6 m6 s12" style="height:50px; border: 3px solid transparent;">
+                            <div  id="cbx_address" style="background: #0068F508 0% 0% no-repeat padding-box;
+                            border: 1px solid #0068F5;
+                            border-radius: 8px;
+                            opacity: 1;
+                            height: 50px;
+                            margin-right: auto; margin-left: auto">
+                                <p cr dir="rtl" style="text-align: right; margin-top: 5px;">
+                                    <label>
+                                    <input class="with-gap" name="group1" type="radio" checked onclick="handleClick(this);" value="addr_radio" />
+                                    <span></span>
+                                    </label>
+                                    איתור גוש חלקה לפי כתובת
+                                </p>
+                            </div>
+                        </div>  
+
+
+          
+                        <div id="addr_div_mobile"  class="card-content col s12 m0">
+                            <div class="col s12 m0 info-panel container_m"
+                             style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                    box-shadow: 0px 3px 6px #0000000D;
+                                    border-radius: 6px;
+                                    opacity: 1;">
+                            
+                              <div class="input-field col s12 m0">
+                                  <input id="addr_m" name ="addr" placeholder=" הזן כתובת מלאה " type="text" class="validate required" required="" aria-required="true"  style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                  border: 1px solid #BBBBCB;
+                                  border-radius: 8px;
+                                  opacity: 1;">
+                                 
+                                  <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
+                              </div>
+                              <label id="addr_warning_mobile" style="display:none"> <label style="color:red">*</label>יש להזין כתובת</label>
+                            </div>
+                          </div>
+                    
+                </div>
+
+                <div class="center col l2 m2 s0">
+                     
+                </div>
+
+
+                
+            </div>
+
+
+            
+
+
+
+
+            <div class="center row" id = "dt_div">
+
+                <div class="center col l2 m2 s0">
+                    
+                    
+                </div>                
+                <div class="center col l8 m8 s12" style="border: 3px solid transparent;">
+
+
+                        <div class="center col l12 m12 s12" style="height:152px; border: 3px solid transparent;">
+
+                            <div id="lotparcel_div" class="card-content center" style="display: none;">
+                                <div class="col s12 info-panel container_l" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                            box-shadow: 0px 3px 6px #0000000D;
+                                            border-radius: 6px;
+                                            opacity: 1;">
+                                    <div class="input-field col s6 m6 info-panel">
+                                      <input id="parcel" type="number" placeholder=" הזן מספר חלקה " id="last_name" class="validate" required="" aria-required="true" style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                                  border: 1px solid #BBBBCB;
+                                                  border-radius: 8px;
+                                                  opacity: 1;">
+                                      <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 668</span>
+                                    </div>
+                                    <div class="input-field col s6 m6 info-panel">
+                                      <input id="lot" type="number" placeholder=" הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true"
+                                       style="max-width: 317.25px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                              border: 1px solid #BBBBCB;
+                                              border-radius: 8px;
+                                              opacity: 1;">
+                                      <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 6433</span>
+                                    </div>
+                                    <label id="parcel_warning" style="display:none"> <label style="color:red">*</label>יש להזין גוש וחלקה</label>
+                                  </div>
+                              </div>
+
+
+                              <div id="addr_div"  class="card-content center">
+                                <div class="col s12 info-panel container_r"
+                                 style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                        box-shadow: 0px 3px 6px #0000000D;
+                                        border-radius: 6px;
+                                        opacity: 1;">
+                                
+                                  <div class="input-field col s12 m12">
+                                      <input id="addr" placeholder=" הזן כתובת מלאה " name="addr" type="text" class="validate required" required="" aria-required="true"  style="max-width: p38px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                      border: 1px solid #BBBBCB;
+                                      border-radius: 8px;
+                                      opacity: 1; max-width:638px">
+                                     
+                                      <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
+                                  </div>
+                                  <label id="addr_warning" style="display:none"> <label style="color:red">*</label>יש להזין כתובת</label>
+                                </div>
+                              </div>
+
+                        </div> 
+                    
+                </div>
+
+                <div class="center col l2 m2 s0">
+                     
+                </div>
+
+
+            </div>
+
+
+
+            <div class="center row">
+                <div class="center col l12 m12 s12" style="border: 3px solid transparent;">
+
+                    <button class="btn center"
+                    style="
+                    width: 285px;
+                    height: 48px;
+                    background: #0068F5 0% 0% no-repeat padding-box;
+                    border-radius: 8px;
+                    opacity: 1;" onclick="myFunction()">חיפוש</button>
+                
+                
+                </div>
+            </div>
+
+            <div class="center row" style="background: #FFFFFF 0% 0% no-repeat padding-box;
+            box-shadow: 0px 2px 7px #00000014;
+            opacity: 1;">
+
+            
+
+
+
+                <div class="center col l10 m10 s10" style="border: 3px solid transparent">
+                    <div id="AddrResults" dir="ltr" 
+                    style="display: none; text-align: right; ">
+                        <ul  id="addr_ul">
+                        </ul>
+        
+                      </div>
+        
+                      <div id="ParcelResults" dir="ltr" 
+                      style="text-align: right;">
+                        <ul  id="parcel_ul">
+                        </ul>
+                      </div>
+
+                </div>
+
+                <div id="mapImage"  class="center col l2 m2 s2" style="border: 3px solid transparent; display: none; margin-top: 10px;">
+                    <img src="map.png" alt="" />
+                </div>
+
+            </div>
+
+            <div class="center row" style="background: #FFFFFF 0% 0% no-repeat padding-box;
+            box-shadow: 0px 2px 7px #00000014;
+            opacity: 1;">
+                <div class="center col l1 m1 s0" style="border: 3px solid transparent;">
+                    
+                </div>
+
+                
+                <div class="center col l10 m10 s12" style="border: 3px solid transparent;">
+
+                    <div class="center row">
+
+                        <div class="center col l8 m8 s0" style="border: 3px solid transparent;">
+
+                        </div>
+
+                        <div class="right col l4 m4 s12" style="border: 3px solid transparent;">
+
+                                    שכבות מידע:
+
+                                    <label class="switch1">
+                                        <input id="chk1" type="checkbox" class="filled-in checkbox-blue-grey"/>
+                                        <span>*</span>
+                                      </label>
+                                      <span style="margin-bottom:20px">חלקות</span>
+                                      
+                                      <label class="switch2">
+                                        <input id="chk2" type="checkbox" class="filled-in checkbox-blue-grey"/>
+                                        <span>*</span>
+                                      </label>
+                                      <span style="margin-bottom:20px">גושים</span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="center row">
+                        <div id="map_div"  class="card-content col l12 m12 s12 center-align"
+                        style="padding: 0.5em;
+                               background:rgb(232, 235, 236);
+                               border: 0;
+                               color: white;
+                               grid-column: span 2;
+                               height: 400px;">
+                       </div>
+                       
+                    </div>
+                </div>
+                
+                <div class="center col l1 m1 s0" style="border: 3px solid transparent;">
+                    
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+    
+</body>
+</html>
 
 <style>
+body {
+    font: 16px Rubik;
+    direction: rtl;
+}
+
+.welcome{
+      max-width: 1400px;
+      margin-top: 30px;
+      opacity: 1;
+      text-align: center;
+    }
 
 .checkbox-blue-grey[type="checkbox"].filled-in:checked+span:not(.lever):after {
   background: #0079FF 0% 0% no-repeat padding-box;
@@ -564,47 +603,34 @@ border-radius: 6px;
 opacity: 1;
 }
 
-.my_title_remark{
-  text-align: center;
-font: normal normal normal 16px/24px Rubik;
-letter-spacing: 0px;
-color: #0C3058;
-opacity: 1;
 
 
 
-}
-.title_remark_div{
-
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-
-    max-width: 640px; /* Can be in percentage also. */
-    height: auto;
-    margin: 0 auto;
-    position: relative;
+.container_m {
+  border-top: 2px solid #0068F5 !important;
+  position: relative;
+  background: #ffffff;
+  padding: 15px;
+  border: 1px solid #dddddd;
+  margin-top: 20px;
 }
 
-
-.title_div{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-
-    max-width: 640px; /* Can be in percentage also. */
-    height: auto;
-    margin: 0 auto;
-    position: relative;
+.container_m:before,
+.container_m:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  right: 13px;
+  border: 13px solid transparent;
+  border-bottom-color: #0068F5;
 }
-  .my_title{
-    text-align:center;
-    font: normal normal medium 32px/38px Rubik;
-    letter-spacing: 0px;
-    color: #0C3058;
-    opacity: 1;
-    font-weight: bold
-  }
+
+.container_m:after {
+  right: 16px;
+  border: 10px solid transparent;
+  border-bottom-color: white ;
+}
+
 
 
 .container_l {
@@ -657,83 +683,77 @@ opacity: 1;
 .container_r:after {
   right: 102px;
   border: 10px solid transparent;
-  border-bottom-color: white ;
+  border-bottom-color: white;
 }
 
 
 
 
+.header_container{
+
+    max-width: 1400px;
+    max-height: 265px;
+    position: relative;
+    border: 3px solid  transparent;
 
 
-.container_m {
-  border-top: 2px solid #0068F5 !important;
-  position: relative;
-  background: #ffffff;
-  padding: 15px;
-  border: 1px solid #dddddd;
-  margin-top: 20px;
+}
+.app_container{
+    top: 198px;
+    left: 0px;
+    max-width: 1400px;
+    max-height: 1710px;
+    background: #F7FAFD 0% 0% no-repeat padding-box;
+    opacity: 1;
 }
 
-.container_m:before,
-.container_m:after {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  right: 13px;
-  border: 13px solid transparent;
-  border-bottom-color: #0068F5;
-}
+.div_title{
 
-.container_m:after {
-  right: 16px;
-  border: 10px solid transparent;
-  border-bottom-color: white ;
-}
-
-
-
-
-
-    .welcome{
-      max-width: 1400px;
-      margin-top: 30px;
-      opacity: 1;
-      text-align: center;
-    }
-    
-    .welcome h2{
-      font-size: 3em;
-    }
-    
-    .welcome button{
-      margin: 30px auto;
-    }
-
-
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font: 16px Rubik;
-    direction: rtl;
-}
-
-@media screen and (min-width: 800px) {
-    #ac-result #ac-details{
-        padding-right:310px;
-    }
-
-    .autocomplete, #subject-select, #ds-select{
-        width:40% !important;
-    }
+    top: 379px;
+    left: 546px;
+    max-width: 327px;
+    height: 38px;
+    text-align: left;
+    font: normal normal medium 32px/38px Rubik;
+    letter-spacing: 0px;
+    color: #0C3058;
+    opacity: 1;
 }
 
 
+.title {
 
-    
-    
-    
-    </style>
-</html>
+text-align:center;
+font: normal normal medium 32px/38px Rubik;
+letter-spacing: 0px;
+color: #0C3058;
+opacity: 1;
+font-weight: bold;
+}
+
+
+.remark{
+
+text-align: center;
+font: normal normal normal 16px/24px Rubik;
+letter-spacing: 0px;
+color: #0C3058;
+opacity: 1;
+
+
+}
+
+
+.bldg_img_div{
+    max-width: 307px;
+    height: 263px;
+}
+
+.bldg_img{
+    background: transparent 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+
+
+</style>
