@@ -80,7 +80,7 @@ opacity: 1;">
                 <div class="center col l8 m8 s12" style="border: 3px solid transparent;">
 
 
-                        <div class="center col l6 m6 s12" style="height:50px; border: 3px solid transparent">
+                        <div id="one" class="center col l6 m6 s12" style="height:50px; border: 3px solid transparent;">
                             <div id="cbx_lotparcel"
                                 style="background: #0068F508 0% 0% no-repeat padding-box;
                                 border: 1px solid #0068F5;
@@ -95,7 +95,9 @@ opacity: 1;">
                                 איתור כתובת לפי גוש חלקה
                                 </p>
                             </div>
+  
                         </div>
+
 
                         <div id="lotparcel_div_mobile" class="card-content col s12 m0" style="display: none;  vertical-align: top;">
                             <div class="col s12 info-panel container_m" style="height: 100px; background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -119,18 +121,16 @@ opacity: 1;">
                                 </div>
                                
                               </div>
-
-                            
+                              <div>
                               <label id="parcel_warning_mobile" style="display:none"> <label style="color:red">*</label>יש להזין גוש וחלקה</label>
+                              </div>
+                              
 
                             </div>
 
-     
-              
-
-    
+      
                         
-                        <div class="center col l6 m6 s12" style="height:50px; border: 3px solid transparent;">
+                        <div id="two" class="center col l6 m6 s12" style="height:50px; border: 3px solid transparent;">
                             <div  id="cbx_address" style="background: #0068F508 0% 0% no-repeat padding-box;
                             border: 1px solid #0068F5;
                             border-radius: 8px;
@@ -673,6 +673,14 @@ body {
       opacity: 1;
       text-align: center;
     }
+
+
+@media screen and (max-width: 600px) {
+   
+     #one{margin-bottom: 5px};
+     #two{margin-bottom: 5px};
+  
+}
 
 .checkbox-blue-grey[type="checkbox"].filled-in:checked+span:not(.lever):after {
   background: #0079FF 0% 0% no-repeat padding-box;
