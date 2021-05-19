@@ -3,9 +3,15 @@
     <title>איתור גוש חלקה</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta
+    name="viewport"
+    content="width = device-width,
+               initial-scale = 1"/>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel=stylesheet>
     <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -15,6 +21,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+    
 </head>
 
 
@@ -109,7 +116,8 @@ opacity: 1;">
                                               border: 1px solid #BBBBCB;
                                               border-radius: 8px;
                                               opacity: 1;">
-                                  <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 668</span>
+                                  <span class="helper-text" data-error="לא תקין" data-success='תקין' 
+                                  >לדוגמא: 668</span>
                                 </div>
                                 <div class="input-field col s6 m6 info-panel">
                                   <input id="lot_m" type="number" placeholder=" הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true"
@@ -117,7 +125,8 @@ opacity: 1;">
                                           border: 1px solid #BBBBCB;
                                           border-radius: 8px;
                                           opacity: 1;">
-                                  <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 6433</span>
+                                  <span class="helper-text" data-error="לא תקין" data-success="תקין"
+                                  >לדוגמא: 6433</span>
                                 </div>
                                
                               </div>
@@ -162,7 +171,7 @@ opacity: 1;">
                                   border-radius: 8px;
                                   opacity: 1;">
                                  
-                                  <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
+                                  <span class="helper-text" data-error="לא תקין" data-success="תקין">לדוגמא: לינקולן 1 תל אביב</span>
                               </div>
                               <label id="addr_warning_mobile" style="display:none"> <label style="color:red">*</label>יש להזין כתובת</label>
                             </div>
@@ -205,7 +214,7 @@ opacity: 1;">
                                                   border: 1px solid #BBBBCB;
                                                   border-radius: 8px;
                                                   opacity: 1;">
-                                      <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 668</span>
+                                      <span class="helper-text" data-error="לא תקין" data-success="תקין">לדוגמא: 668</span>
                                     </div>
                                     <div class="input-field col s6 m6 info-panel">
                                       <input id="lot" type="number" placeholder=" הזן מספר גוש " id="last_name" type="text" class="validate" required="" aria-required="true"
@@ -213,7 +222,7 @@ opacity: 1;">
                                               border: 1px solid #BBBBCB;
                                               border-radius: 8px;
                                               opacity: 1;">
-                                      <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: 6433</span>
+                                      <span class="helper-text" data-error="לא תקין" data-success="תקין">לדוגמא: 6433</span>
                                     </div>
                                     <label id="parcel_warning" style="display:none"> <label style="color:red">*</label>יש להזין גוש וחלקה</label>
                                   </div>
@@ -233,7 +242,7 @@ opacity: 1;">
                                       border-radius: 8px;
                                       opacity: 1; max-width:638px">
                                      
-                                      <span class="helper-text" data-error="wrong" data-success="right">לדוגמא: לינקולן 1 תל אביב</span>
+                                      <span class="helper-text" data-error="לא תקין" data-success="תקין">לדוגמא: לינקולן 1 תל אביב</span>
                                   </div>
                                   <label id="addr_warning" style="display:none"> <label style="color:red">*</label>יש להזין כתובת</label>
                                 </div>
@@ -309,25 +318,52 @@ opacity: 1;">
 
                     <div class="center row">
 
-                        <div class="center col l8 m8 s0" style="border: 3px solid transparent;">
+                        <div class="center col l6 m6 s0">
+
 
                         </div>
 
-                        <div class="right col l4 m4 s12" style="border: 3px solid transparent;">
+                        <div class="right col l6 m6 s12" style="margin: auto;float: right;">
 
-                                    שכבות מידע:
+      
 
-                                    <label class="switch1">
-                                        <input id="chk1" type="checkbox" class="filled-in checkbox-blue-grey"/>
-                                        <span>*</span>
-                                      </label>
-                                      <span style="margin-bottom:20px">חלקות</span>
-                                      
-                                      <label class="switch2">
-                                        <input id="chk2" type="checkbox" class="filled-in checkbox-blue-grey"/>
-                                        <span>*</span>
-                                      </label>
-                                      <span style="margin-bottom:20px">גושים</span>
+                           <i data-toggle="tooltip" style="vertical-align:middle;" class="material-icons">help_outline<a>
+                             
+                            <div id="help_desktop" style="padding:10px;">
+
+                              :במידה ושכבות הגושים והחלקות לא מופיעות על גבי המפה לאחר ביצוע חיפוש <br>
+                              הדליקו את השכבות גושים וחלקות ע"י הקלקה על הריבועים הקטנים שמצד <br>
+                              ימין לכיתוב
+
+                            
+                            </div>
+
+                            <div id="help_mobile"  style="padding:10px;">
+
+                              במידה ושכבות הגושים והחלקות <br>
+                              :לא מופיעות על גבי המפה לאחר ביצוע חיפוש  <br>
+                              הדליקו את השכבות גושים וחלקות <br>
+                              ע"י הקלקה על הריבועים הקטנים שמצד <br>
+                              ימין לכיתוב
+
+                            
+                            </div>
+   
+
+                           </a></i>
+                                      שכבות מידע:
+
+                                      <label class="switch1">
+                                          <input id="chk1" type="checkbox" class="filled-in checkbox-blue-grey"/>
+                                          <span>*</span>
+                                        </label>
+                                        <span style="margin-bottom:20px">חלקות</span>
+                                        
+                                        <label class="switch2">
+                                          <input id="chk2" type="checkbox" class="filled-in checkbox-blue-grey"/>
+                                          <span>*</span>
+                                        </label>
+                                        <span style="margin-bottom:20px">גושים</span>
                         </div>
                     </div>
 
@@ -587,6 +623,9 @@ $(".switch2").on("click",function() {
   }
   
   $(document).ready(function(){
+
+
+
       window.addEventListener('keyup', function (event) {
           if (event.keyCode === 13) {
             myFunction()
@@ -597,6 +636,9 @@ $(".switch2").on("click",function() {
   
         var addr_div = document.getElementById("addr_div_mobile");
         addr_div.style.display="none";
+
+        var help_mobile = document.getElementById("help_mobile");
+        help_mobile.style.display="none";
         
   
   
@@ -606,6 +648,9 @@ $(".switch2").on("click",function() {
         addr_div.style.display="none";
         var dt_div =  document.getElementById("dt_div");
         dt_div.style.display="none";
+
+        var help_desktop = document.getElementById("help_desktop");
+        help_desktop.style.display="none";
   
       }
   
@@ -679,8 +724,85 @@ body {
    
      #one{margin-bottom: 5px};
      #two{margin-bottom: 5px};
+     #help_mobile{
+      display:block
+    };
+    #help_desktop{
+      display:none;
+    };
+}
+
+@media screen and (min-width: 600px){
+
+  #help_desktop{
+    display:block
+  };
+
+  #help_mobile{
+    display:none
+  };
   
 }
+
+
+i > a:before, i > a:after {
+    content: "";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 100%;
+    left: 86.5%;
+    margin-left: -10px;
+  }
+i {
+	position: relative;
+	cursor: pointer;
+  }
+
+i > a {
+  border-radius: 7px;
+  text-align: right;
+  letter-spacing: 0px;
+  color: #0C3058;
+  opacity: 1;
+
+	font: normal 14px/20px Rubik;
+	color: black;
+	text-shadow: white 0 1px;
+	background: white;
+	background-clip: padding-box;
+
+	border: 1px solid #111;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	position: absolute;
+  right: -50px;
+	padding: 10px 0;
+	bottom: 100%;
+	margin-bottom: 15px;
+ 
+  visibility: hidden;
+
+}
+
+
+
+i > a:before {
+	border-top: 10px solid #111;
+	border-top: 10px solid rgba(0, 0, 0, 0.5);
+}
+
+i > a:after{
+	border-top: 8px solid white;
+	z-index: 1;
+}
+
+i:hover > a {
+	visibility: visible;
+	opacity: 1;
+}
+
+
+
 
 .checkbox-blue-grey[type="checkbox"].filled-in:checked+span:not(.lever):after {
   background: #0079FF 0% 0% no-repeat padding-box;
@@ -697,7 +819,7 @@ opacity: 1;
   position: relative;
   background: #ffffff;
   padding: 15px;
-  border: 1px solid #dddddd;
+  border: 1px solid whiteddd;
   margin-top: 20px;
 }
 
@@ -724,7 +846,7 @@ opacity: 1;
   position: relative;
   background: #ffffff;
   padding: 15px;
-  border: 1px solid #dddddd;
+  border: 1px solid whiteddd;
   margin-top: 20px;
 }
 
@@ -752,7 +874,7 @@ opacity: 1;
   position: relative;
   background: #ffffff;
   padding: 15px;
-  border: 1px solid #dddddd;
+  border: 1px solid whiteddd;
   margin-top: 20px;
 }
 
