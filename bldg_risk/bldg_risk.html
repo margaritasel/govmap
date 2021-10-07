@@ -26,7 +26,12 @@
 
 
             <v-container>
-                <v-system-bar><div style="margin-top: 17px; font-size: small;"><p class="center text small" ></p></div></v-system-bar>
+    
+                <v-system-bar>
+                </v-system-bar>
+
+     
+
                 
       
                 <v-app-bar color="rgba(255, 255, 255, 0.8)" justify="space-around">
@@ -51,22 +56,27 @@
                           sm="6"
                           md="6"
                         >
-                        <v-select
-                        :items="[1980, 1981, 1982, 1983]"
-                        label="משנת בניה"
+
+                      <v-text-field
                         v-model="min_year"
-                      ></v-select>
+                        label="משנת בניה"
+                        type="number"
+                        :rules="minyear_rules"
+                        />
                         </v-col>
                         <v-col
                           cols="12"
                           sm="6"
                           md="6"
                         >
-                        <v-select
-                        :items="[1980, 1981, 1982, 1983]"
-                        label="עד שנת בניה"
-                        v-model="max_year"
-                      ></v-select>
+
+
+                      <v-text-field
+                      v-model="max_year"
+                      label="עד שנת בניה"
+                      type="number"
+                      :rules="maxyear_rules"
+                      />
                         </v-col>
 
                         <v-col
@@ -118,19 +128,51 @@
       
 
       
-                <div style="margin-top: 17px; font-size: small;"><p class="text-center" > <v-badge
+              <div v-if="mobile" style="margin-top: 17px; font-size: small;"><p> <v-badge
+                color="red"
+                :content="selected_features.length"
+              >ניתוח מבנים להתחדשות עירונית </v-badge></p></div>
+
+
+                <div v-else style="margin-top: 17px; font-size: large;"><p> ניתוח מבנים להתחדשות עירונית </p></div>
+
+
+                  <v-chip v-if="!mobile" v-show="selected_features.length > 0"
+                    class="ma-2"
                     color="red"
-                    :content="selected_features.length"
-                  >ניתוח מבנים להתחדשות עירונית </v-badge></p></div>
+                    text-color="white"
+                    >
+                    {{selected_features.length}} מבנים נבחרו
+                    </v-chip>
+
+    
+      
+              <v-spacer></v-spacer>
+
+
+
+           
+               
 
                 <v-divider
                 class="mx-4"
                 inset
                 vertical
               ></v-divider>
-              <v-spacer></v-spacer>
 
-                
+
+              <v-btn
+        class="ma-2"
+        color="grey lighten-1"
+        dark
+        v-show="selected" @click="dialog=true"
+      >
+        <v-icon dark >
+            mdi-menu
+        </v-icon>
+      </v-btn>
+             
+
                 <v-autocomplete
                 v-model="selected"
                 :items="options"
@@ -156,6 +198,7 @@
                     
                     <v-card
                       class="mx-auto"
+                      style = "margin-top: 17px;"
 
                     >
                             <div id="map" style="height:600px"></div>
@@ -167,7 +210,7 @@
 
 
 
-            <v-card style="bottom: 0; ">
+            <v-card v-show="selected_features.length > 0" style="bottom: 0; margin-top: 17px; ">
                 <v-card-title>
                   <v-text-field
                     v-model="search"
@@ -182,10 +225,11 @@
 
                 <v-data-table 
                   style="cursor: pointer"
-
+                  height="400"
+                  fixed-header
                   @click:row="handleClick"
                   :headers="headers"
-                  sort-by="UNIQ_ID"
+                  sort-by="STR_NAME"
                   :items="selected_features"
                   :search="search"
                   :loading="myloadingvariable" 
@@ -228,6 +272,15 @@
                   </div>
               </v-card>
 
+
+
+              <v-snackbar
+              v-model="snackbar"
+            >
+              לא נמצאו מבנים לחיפוש המבוקש
+        
+            </v-snackbar>
+
             </v-container>
 
           </v-main>
@@ -259,7 +312,7 @@
                 {
                     token:  my_token,
                     showXY: true,
-                    layers: ["BLDG_risk", "T413", "ADD_PROJECTS_UR_MUCHRAZ", "SCHOOL"],
+                    layers: ["BLDG_risk", "sites_muchrazim_test", "sites_tamaheyter_test", "T413", "ADD_PROJECTS_UR_MUCHRAZ", "SCHOOL"],
                     visibleLayers: ["BLDG_risk"],
                     layersMode: 2,
                     identifyOnClick: true,
@@ -267,6 +320,10 @@
                     background: 0,
                     layersMode: 1
                 });
+
+            if (isMobile()){
+                appVue.mobile = true;
+            }
         });
 
         var s_wkts = [];
@@ -295,7 +352,7 @@
           if (isMobile())
           {
               console.log("mobile");
-              height =  $(document).height() / 1.8;
+              height =  $(document).height() / 0.8;
               lo_el = document.getElementById("table-v-layout");
               lo_el.style.maxHeight = "90vh";
   
@@ -337,6 +394,10 @@
         vuetify: new Vuetify(),
         data () {
         return {
+            snackbar: false,
+            maxyear_rules: [v => v <= 1985 || 'שנת בניה מקסימלית 1985'],
+            minyear_rules: [v => v >= 1900 || 'שנת בניה מינימלית 1900'],
+            mobile: false,
             min_year: null,
             max_year: null,
             min_floor: null,
@@ -345,16 +406,16 @@
           dialog: false,
           page: 1,
           pageCount: 0,
-          itemsPerPage: 10000,
+          itemsPerPage: 2500,
           search: '',
           headers: [
-          { text: 'מזהה', value: 'UNIQ_ID' },
-          { text: 'שם ישוב', value: 'SETL_NAME' },
-          { text: 'שם רחוב', value: 'STR_NAME' },
-          { text: 'מספר בית', value: 'HOUSE_NUM'},
-          { text: 'מספר דירות', value: 'AppCount'},
-          { text: 'מספר קומות', value: 'BuildingFloors'},
-          { text: 'שנת בניה', value: 'BuildingYear'},
+          { text: 'מזהה', value: 'UNIQ_ID' },
+          { text: 'שם ישוב', value: 'SETL_NAME' },
+          { text: 'שם רחוב', value: 'STR_NAME' },
+          { text: 'מספר בית', value: 'HOUSE_NUM'},
+          { text: 'מספר דירות', value: 'AppCount'},
+          { text: 'מספר קומות', value: 'BuildingFloors'},
+          { text: 'שנת בניה', value: 'BuildingYear'},
           { text: 'גוגל מפות', value: 'action' }  
           ],
 
@@ -580,10 +641,15 @@
                 return item.value == appVue.selected;
             });
             console.log(newArray[0].text + "!!!!")
-            if (newArray){
+            if (newArray.length > 0){
                 appVue.selected_features = appVue.bldg_features.filter(function(item) {
                     return (item.SETL_NAME == newArray[0].text) && (item.BuildingYear >= appVue.min_year && item.BuildingYear <= appVue.max_year) //&& (item.BuildingFloors > this.min_floor && item.BuildingFloors < this.max_floor) ;
                 });
+                if (appVue.selected_features.length == 0)
+                {
+                    console.log("SFDF")
+                    appVue.snackbar = true;
+                }
             }
 
 
@@ -605,14 +671,16 @@
                 //govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE = " + event, 'zoomToExtent': true });
                 govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'SETL_CODE', 'fieldValues': [event], 'highlight': true });
 
-                this.dialog = true;
+                //this.dialog = true;
+
+                this.menu_btn = true;
             }
         },
 
         openStreetView(item){
 
-            console.log(item.StreetView);
-            window.open(item.StreetView, '_blank').focus();
+            console.log(item.StreetView.replace('++', '+'));
+            window.open(item.StreetView.replace('++', '+').replace(' -', ' '), '_blank').focus();
 
         }
       }
