@@ -1,700 +1,729 @@
+
 <html xmlns="http://www.w3.org/1999/xhtml">
- <head>
-    <title>ניתוח מבנים להתחדשות עירונית</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta
-    name="viewport"
-    content="width = device-width,
-               initial-scale = 1"/>
+<head>
+   <title>ניתוח מבנים להתחדשות עירונית</title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta
+   name="viewport"
+   content="width = device-width,
+              initial-scale = 1"/>
 
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-
-
- </head>
- <body scrolling='no' dir="rtl">
-
-    <div id="app" style="height: 800px;"  >
+ <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
 
-  
-        <v-app v-cloak right style='background-image: linear-gradient(to bottom right, #FAFAFA ,  #BBDEFB); opacity: 90%;'>
-          <v-main>
+</head>
+<body scrolling='no' dir="rtl">
+
+   <div id="app" style="height: 800px;"  >
 
 
-            <v-container>
+ 
+       <v-app v-cloak right style='background-image: linear-gradient(to bottom right, #FAFAFA ,  #BBDEFB); opacity: 90%;'>
+         <v-main>
+
+
+           <v-container>
+   
+               <v-system-bar>
+               </v-system-bar>
+
     
-                <v-system-bar>
-                </v-system-bar>
+
+               
+     
+               <v-app-bar color="rgba(255, 255, 255, 0.8)" justify="space-around">
 
      
 
-                
-      
-                <v-app-bar color="rgba(255, 255, 255, 0.8)" justify="space-around">
 
-      
+               <v-dialog
+               v-model="dialog"
+               max-width="500px"
+             >
+               <v-card>
+                 <v-card-title>
+                   <span >אפשרויות סינון</span>
+                 </v-card-title>
+     
+                 <v-card-text>
+                   <v-container>
+                     <v-row>
+                       <v-col
+                         cols="12"
+                         sm="6"
+                         md="6"
+                       >
 
-
-                <v-dialog
-                v-model="dialog"
-                max-width="500px"
-              >
-                <v-card>
-                  <v-card-title>
-                    <span >אפשרויות סינון</span>
-                  </v-card-title>
-      
-                  <v-card-text>
-                    <v-container>
-                      <v-row>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="6"
-                        >
-
-                      <v-text-field
-                        v-model="min_year"
-                        label="משנת בניה"
-                        type="number"
-                        :rules="minyear_rules"
-                        />
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="6"
-                        >
+                     <v-text-field
+                       v-model="min_year"
+                       label="משנת בניה"
+                       type="number"
+                       :rules="minyear_rules"
+                       />
+                       </v-col>
+                       <v-col
+                         cols="12"
+                         sm="6"
+                         md="6"
+                       >
 
 
-                      <v-text-field
-                      v-model="max_year"
-                      label="עד שנת בניה"
-                      type="number"
-                      :rules="maxyear_rules"
-                      />
-                        </v-col>
+                     <v-text-field
+                     v-model="max_year"
+                     label="עד שנת בניה"
+                     type="number"
+                     :rules="maxyear_rules"
+                     />
+                       </v-col>
 
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="6"
-                        >
-                        <v-select
-                        :items="[1,2,3,4,5,6,7,8,9,10]"
-                        label="ממספר קומות"
-                        v-model="min_floor"
-                      ></v-select>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="6"
-                        >
-                          <v-select
-                          :items="[1,2,3,4,5,6,7,8,9,10]"
-                            label="עד מספר קומות"
-                            v-model="max_floor"
-                          ></v-select>
-                        </v-col>
-         
-                      </v-row>
-                    </v-container>
-                  </v-card-text>
-      
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="close"
-                    >
-                      ביטול
-                    </v-btn>
-                    <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="save"
-                    >
-                      אישור
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-      
-
-      
-              <div v-if="mobile" style="margin-top: 17px; font-size: small;"><p> <v-badge
-                color="red"
-                :content="selected_features.length"
-              >ניתוח מבנים להתחדשות עירונית </v-badge></p></div>
-
-
-                <div v-else style="margin-top: 17px; font-size: large;"><p> ניתוח מבנים להתחדשות עירונית </p></div>
-
-
-                  <v-chip v-if="!mobile" v-show="selected_features.length > 0"
-                    class="ma-2"
-                    color="red"
-                    text-color="white"
-                    >
-                    {{selected_features.length}} מבנים נבחרו
-                    </v-chip>
-
-    
-      
-              <v-spacer></v-spacer>
-
-
-
-           
-               
-
-                <v-divider
-                class="mx-4"
-                inset
-                vertical
-              ></v-divider>
-
-
-              <v-btn
-        class="ma-2"
-        color="grey lighten-1"
-        dark
-        v-show="selected" @click="dialog=true"
-      >
-        <v-icon dark >
-            mdi-menu
-        </v-icon>
-      </v-btn>
-             
-
-                <v-autocomplete
-                v-model="selected"
-                :items="options"
-                dense
-                label="שם ישוב"
-              class="mx-4"
-              flat
-              hide-no-data
-              hide-details
-              style="max-width: 200px;"
-              @change='onChange'
-
-
-              ></v-autocomplete>
-      
-    
-                
-                
-      
-                </v-app-bar>
-
-
-                    
-                    <v-card
-                      class="mx-auto"
-                      style = "margin-top: 17px;"
-
-                    >
-                            <div id="map" style="height:600px"></div>
-
-                    </v-card>
-
-
-           
-
-
-
-            <v-card v-show="selected_features.length > 0" style="bottom: 0; margin-top: 17px; ">
-                <v-card-title>
-                  <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                  ></v-text-field>
-                </v-card-title>
-                <v-layout id="table-v-layout" column style="max-height: 60vh">       
-                    <v-flex style="overflow: auto;">
-
-                <v-data-table 
-                  style="cursor: pointer"
-                  height="400"
-                  fixed-header
-                  @click:row="handleClick"
-                  :headers="headers"
-                  sort-by="STR_NAME"
-                  :items="selected_features"
-                  :search="search"
-                  :loading="myloadingvariable" 
-                  loading-text="טוען נתונים..."
-                  item-key="UNIQ_ID"
-                  :page.sync="page"
-                  :items-per-page="itemsPerPage"
-                  hide-default-footer
-                  class="elevation-1"
-                  @page-count="pageCount = $event">
-
-    
-
-                  <template v-slot:item.action="{ item }">
-                    <v-icon
-                      color="blue"
-                      @click="openStreetView(item)"
-                    >
-                    mdi-earth-box
-                    </v-icon>
-                  </template>
-
-
-                </v-data-table>
-                </v-flex>
-            </v-layout>
-                <div class="text-center pt-2">
-                    <v-pagination
-                      v-model="page"
-                      :length="pageCount"
-                    ></v-pagination>
-                    <v-text-field
-                      :value="itemsPerPage"
-                      label="Items per page"
-                      type="number"
-                      min="-1"
-                      max="15"
-                      @input="itemsPerPage = parseInt($event, 10)"
-                    ></v-text-field>
-                  </div>
-              </v-card>
-
-
-
-              <v-snackbar
-              v-model="snackbar"
-            >
-              לא נמצאו מבנים לחיפוש המבוקש
+                       <v-col
+                         cols="12"
+                         sm="6"
+                         md="6"
+                       >
+                       <v-select
+                       :items="[1,2,3,4,5,6,7,8,9,10]"
+                       label="ממספר קומות"
+                       v-model="min_floor"
+                     ></v-select>
+                       </v-col>
+                       <v-col
+                         cols="12"
+                         sm="6"
+                         md="6"
+                       >
+                         <v-select
+                         :items="[1,2,3,4,5,6,7,8,9,10]"
+                           label="עד מספר קומות"
+                           v-model="max_floor"
+                         ></v-select>
+                       </v-col>
         
-            </v-snackbar>
+                     </v-row>
+                   </v-container>
+                 </v-card-text>
+     
+                 <v-card-actions>
+                   <v-spacer></v-spacer>
+                   <v-btn
+                     color="blue darken-1"
+                     text
+                     @click="close"
+                   >
+                     ביטול
+                   </v-btn>
+                   <v-btn
+                     color="blue darken-1"
+                     text
+                     @click="save"
+                   >
+                     אישור
+                   </v-btn>
+                 </v-card-actions>
+               </v-card>
+             </v-dialog>
+     
 
-            </v-container>
-
-          </v-main>
-        </v-app>
-      </div>
-
-
-
+     
+             <div v-if="mobile" style="margin-top: 17px; font-size: small;"><p> <v-badge
+               color="red"
+               :content="selected_features.length"
+               :value="badge"
+             >ניתוח מבנים להתחדשות עירונית </v-badge></p></div>
 
 
+               <div v-else style="margin-top: 17px; font-size: large;"><p> ניתוח מבנים להתחדשות עירונית </p></div>
 
 
+                 <v-chip v-if="!mobile" v-show="selected_features.length > 0"
+                   class="ma-2"
+                   color="red"
+                   text-color="white"
+                   >
+                   {{selected_features.length}} מבנים נבחרו
+                   </v-chip>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-    <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script>
-        var res;
-
-        //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //for localhost domain
-		var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
-		//var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";
-        //var my_token:  "34280469-d493-4041-95e5-664f7fec6daf"; trillium
-        $(document).ready(function ()
-        {
-            govmap.createMap('map', 
-                {
-                    token:  my_token,
-                    showXY: true,
-                    layers: ["BLDG_risk", "sites_muchrazim_test", "sites_tamaheyter_test", "T413", "ADD_PROJECTS_UR_MUCHRAZ", "SCHOOL"],
-                    visibleLayers: ["BLDG_risk"],
-                    layersMode: 2,
-                    identifyOnClick: true,
-                    isEmbeddedToggle: false,
-                    background: 0,
-                    layersMode: 1
-                });
-
-            if (isMobile()){
-                appVue.mobile = true;
-            }
-        });
-
-        var s_wkts = [];
-        var s_names = [];
-        var s_symbols = [];
-        var bubbleHTMLParameters_all = [];
-
-        var s_wkts_layer = [];
-        var s_names_layer = [];
-        var bubbleHTMLParameters_all_layer = [];
-        var s_symbols_layer = [];
-      
-  
-      function isMobile() {
-          var match = window.matchMedia || window.msMatchMedia;
-          if(match) {
-              var mq = match("(pointer:coarse)");
-              return mq.matches;
-          }
-          return false;
-      }
-      var lo_el;
-      function getHeight()
-      {
-          var height =  $(document).height()/2.7;
-          if (isMobile())
-          {
-              console.log("mobile");
-              height =  $(document).height() / 0.8;
-              lo_el = document.getElementById("table-v-layout");
-              lo_el.style.maxHeight = "90vh";
-  
-          }
-          return height;
-      }
-
-          $.ajax({
-              dataType: 'json',
-              beforeSend : function() { 
-                  console.log("sending...");
-              },
-              success: function(json_data) {
-                  {
-                    if (json_data.length > 0)
-                    {
-                        for (i = 0; i < json_data.length; i++)
-                        {
-                            appVue.bldg_features.push(json_data[i]);
-                        }
-                        appVue.myloadingvariable = false;
- 
    
-                        console.log("done");
-                    }
-                  }
-                  
-              },
-              error : function(jqXHR, textStatus, errorThrown) {
-                  console.log("Error occurred: " + errorThrown);
-              },
-              url: 'bldg_risk.json'
-          });
-      
+     
+             <v-spacer></v-spacer>
+
+
+
+             <v-icon color="red lighten-1" v-show="selected" @click="clear">
+               mdi-close-circle
+             </v-icon>
+          
+              
+
+               <v-divider
+               class="mx-4"
+               inset
+               vertical
+             ></v-divider>
+
+
+             <v-btn
+       class="ma-2"
+       color="grey lighten-1"
+       dark
+       v-show="selected" @click="dialog=true"
+     >
+       <v-icon dark >
+           mdi-menu
+       </v-icon>
+     </v-btn>
+            
+
+               <v-autocomplete
+               v-model="selected"
+               :items="options"
+               dense
+               label="שם ישוב"
+             class="mx-4"
+             flat
+             hide-no-data
+             hide-details
+             style="max-width: 200px;"
+             @change='onChange'
+
+
+             ></v-autocomplete>
+     
+   
+               
+               
+     
+               </v-app-bar>
+
+
+                   
+                   <v-card
+                     class="mx-auto"
+                     style = "margin-top: 17px;"
+
+                   >
+                           <div id="map" style="height:600px"></div>
+
+                   </v-card>
+
+
+          
+
+
+
+           <v-card v-show="selected_features.length > 0" style="bottom: 0; margin-top: 17px; ">
+               <v-card-title>
+                 <v-text-field
+                   v-model="search"
+                   append-icon="mdi-magnify"
+                   label="Search"
+                   single-line
+                   hide-details
+                 ></v-text-field>
+               </v-card-title>
+               <v-layout id="table-v-layout" column style="max-height: 60vh">       
+                   <v-flex style="overflow: auto;">
+
+               <v-data-table 
+                 style="cursor: pointer"
+                 height="400"
+                 fixed-header
+                 @click:row="handleClick"
+                 :headers="headers"
+                 sort-by="STR_NAME"
+                 :items="selected_features"
+                 :search="search"
+                 :loading="myloadingvariable" 
+                 loading-text="טוען נתונים..."
+                 item-key="UNIQ_ID"
+                 :page.sync="page"
+                 :items-per-page="itemsPerPage"
+                 hide-default-footer
+                 class="elevation-1"
+                 @page-count="pageCount = $event">
+
+   
+
+                 <template v-slot:item.action="{ item }">
+                   <v-icon
+                     color="blue"
+                     @click="openStreetView(item)"
+                   >
+                   mdi-earth-box
+                   </v-icon>
+                 </template>
+
+
+               </v-data-table>
+               </v-flex>
+           </v-layout>
+               <div class="text-center pt-2">
+                   <v-pagination
+                     v-model="page"
+                     :length="pageCount"
+                   ></v-pagination>
+                   <v-text-field
+                     :value="itemsPerPage"
+                     label="Items per page"
+                     type="number"
+                     min="-1"
+                     max="15"
+                     @input="itemsPerPage = parseInt($event, 10)"
+                   ></v-text-field>
+                 </div>
+             </v-card>
+
+
+
+             <v-snackbar
+             v-model="snackbar"
+           >
+             לא נמצאו מבנים לחיפוש המבוקש
+       
+           </v-snackbar>
+
+           </v-container>
+
+         </v-main>
+       </v-app>
+     </div>
+
+
+
+
+
+
+
+
+   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+   <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+   <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+   <script>
+       var res;
+
+       //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //for localhost domain
+       var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+       //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";
+       //var my_token:  "34280469-d493-4041-95e5-664f7fec6daf"; trillium
+       $(document).ready(function ()
+       {
+           govmap.createMap('map', 
+               {
+                   token:  my_token,
+                   showXY: true,
+                   layers: ["BLDG_risk", "sites_muchrazim_test", "sites_tamaheyter_test", "T413", "ADD_PROJECTS_UR_MUCHRAZ", "SCHOOL"],
+                   visibleLayers: ["BLDG_risk"],
+                   layersMode: 2,
+                   identifyOnClick: true,
+                   isEmbeddedToggle: false,
+                   background: 0,
+                   layersMode: 1
+               });
+
+           if (isMobile()){
+               appVue.mobile = true;
+           }
+       });
+
+       var s_wkts = [];
+       var s_names = [];
+       var s_symbols = [];
+       var bubbleHTMLParameters_all = [];
+
+       var s_wkts_layer = [];
+       var s_names_layer = [];
+       var bubbleHTMLParameters_all_layer = [];
+       var s_symbols_layer = [];
+     
+ 
+     function isMobile() {
+         var match = window.matchMedia || window.msMatchMedia;
+         if(match) {
+             var mq = match("(pointer:coarse)");
+             return mq.matches;
+         }
+         return false;
+     }
+     var lo_el;
+     function getHeight()
+     {
+         var height =  $(document).height()/2.7;
+         if (isMobile())
+         {
+             console.log("mobile");
+             height =  $(document).height() / 0.8;
+             lo_el = document.getElementById("table-v-layout");
+             lo_el.style.maxHeight = "90vh";
+ 
+         }
+         return height;
+     }
+
+         $.ajax({
+             dataType: 'json',
+             beforeSend : function() { 
+                 console.log("sending...");
+             },
+             success: function(json_data) {
+                 {
+                   if (json_data.length > 0)
+                   {
+                       for (i = 0; i < json_data.length; i++)
+                       {
+                           appVue.bldg_features.push(json_data[i]);
+                       }
+                       appVue.myloadingvariable = false;
 
   
-      var appVue = new Vue({
-        el: '#app',
-        vuetify: new Vuetify(),
-        data () {
-        return {
-            snackbar: false,
-            maxyear_rules: [v => v <= 1985 || 'שנת בניה מקסימלית 1985'],
-            minyear_rules: [v => v >= 1900 || 'שנת בניה מינימלית 1900'],
-            mobile: false,
-            min_year: null,
-            max_year: null,
-            min_floor: null,
-            max_floor: null,
-          selected: null,
-          dialog: false,
-          page: 1,
-          pageCount: 0,
-          itemsPerPage: 2500,
-          search: '',
-          headers: [
-          { text: 'מזהה', value: 'UNIQ_ID' },
-          { text: 'שם ישוב', value: 'SETL_NAME' },
-          { text: 'שם רחוב', value: 'STR_NAME' },
-          { text: 'מספר בית', value: 'HOUSE_NUM'},
-          { text: 'מספר דירות', value: 'AppCount'},
-          { text: 'מספר קומות', value: 'BuildingFloors'},
-          { text: 'שנת בניה', value: 'BuildingYear'},
-          { text: 'גוגל מפות', value: 'action' }  
-          ],
+                       console.log("done");
+                   }
+                 }
+                 
+             },
+             error : function(jqXHR, textStatus, errorThrown) {
+                 console.log("Error occurred: " + errorThrown);
+             },
+             url: 'https://www.govmap.gov.il/sites/bldg_risk.json'
+         });
+     
+
+ 
+     var appVue = new Vue({
+       el: '#app',
+       vuetify: new Vuetify(),
+       data () {
+       return {
+           snackbar: false,
+           maxyear_rules: [v => v <= 1985 || 'שנת בניה מקסימלית 1985'],
+           minyear_rules: [v => v >= 1900 || 'שנת בניה מינימלית 1900'],
+           mobile: false,
+           min_year: null,
+           max_year: null,
+           min_floor: null,
+           max_floor: null,
+         selected: null,
+         dialog: false,
+         page: 1,
+         pageCount: 0,
+         itemsPerPage: 2500,
+         search: '',
+         headers: [
+         { text: 'מזהה', value: 'UNIQ_ID' },
+         { text: 'שם ישוב', value: 'SETL_NAME' },
+         { text: 'שם רחוב', value: 'STR_NAME' },
+         { text: 'מספר בית', value: 'HOUSE_NUM'},
+         { text: 'מספר דירות', value: 'AppCount'},
+         { text: 'מספר קומות', value: 'BuildingFloors'},
+         { text: 'שנת בניה', value: 'BuildingYear'},
+         { text: 'גוגל מפות', value: 'action' }  
+         ],
 
 
-          options: [
- { text: 'אבו גוש', value: 472 },
- { text: 'אבו סנאן', value: 473 },
- { text: 'אבן יהודה', value: 182 },
- { text: 'אום אל-פחם', value: 2710 },
- { text: 'אופקים', value: 31 },
- { text: 'אור יהודה', value: 2400 },
- { text: 'אור עקיבא', value: 1020 },
- { text: 'אזור', value: 565 },
- { text: 'אחוזת ברק', value: 1330 },
- { text: 'אחיטוב', value: 850 },
- { text: 'אילת', value: 2600 },
- { text: 'אכסאל', value: 478 },
- { text: 'אליכין', value: 41 },
- { text: 'אלעד', value: 1309 },
- { text: 'אלפי מנשה', value: 3750 },
- { text: 'אלקנה', value: 3560 },
- { text: 'אפרת', value: 3650 },
- { text: 'אריאל', value: 3570 },
- { text: 'אשדוד', value: 70 },
- { text: 'אשקלון', value: 7100 },
- { text: 'באר יעקב', value: 2530 },
- { text: 'באר שבע', value: 9000 },
- { text: 'בוסתן הגליל', value: 559 },
- { text: 'בית אל', value: 3574 },
- { text: 'בית אלפא', value: 95 },
- { text: 'בית אריה', value: 3652 },
- { text: 'בית דגן', value: 466 },
- { text: 'בית ינאי', value: 200 },
- { text: 'בית יצחק-שער חפר', value: 326 },
- { text: 'בית שאן', value: 9200 },
- { text: 'בית שמש', value: 2610 },
- { text: 'ביתר עילית', value: 3780 },
- { text: 'בני ברק', value: 6100 },
- { text: 'בני עי"ש', value: 1066 },
- { text: 'בנימינה-גבעת עדה', value: 9800 },
- { text: 'בת חפר', value: 1319 },
- { text: 'בת ים', value: 6200 },
- { text: 'גבעת אבני', value: 1293 },
- { text: 'גבעת אלה', value: 1288 },
- { text: 'גבעת זאב', value: 3730 },
- { text: 'גבעת יערים', value: 787 },
- { text: 'גבעת שמואל', value: 681 },
- { text: 'גבעתיים', value: 6300 },
- { text: 'גדרה', value: 2550 },
- { text: 'גונן', value: 852 },
- { text: 'גינוסר', value: 262 },
- { text: 'גן יבנה', value: 166 },
- { text: 'גן נר', value: 1274 },
- { text: 'גני תקווה', value: 229 },
- { text: 'געתון', value: 463 },
- { text: 'דאלית אל-כרמל', value: 494 },
- { text: 'דימונה', value: 2200 },
- { text: 'הוד השרון', value: 9700 },
- { text: 'הר אדר', value: 3769 },
- { text: 'הרצלייה', value: 6400 },
- { text: 'זכרון יעקב', value: 9300 },
- { text: 'זרזיר', value: 975 },
- { text: 'חבצלת השרון', value: 235 },
- { text: 'חדרה', value: 6500 },
- { text: 'חולון', value: 6600 },
- { text: 'חופית', value: 115 },
- { text: 'חיבת ציון', value: 219 },
- { text: 'חיפה', value: 4000 },
- { text: 'חפץ חיים', value: 363 },
- { text: 'חצור-אשדוד', value: 406 },
- { text: 'חצור הגלילית', value: 2034 },
- { text: 'חריש', value: 1247 },
- { text: 'חשמונאים', value: 3770 },
- { text: 'טבריה', value: 6700 },
- { text: 'טורעאן', value: 498 },
- { text: 'טייבה', value: 2730 },
- { text: 'טירת כרמל', value: 2100 },
- { text: 'טל-אל', value: 1181 },
- { text: 'יבנה', value: 2660 },
- { text: 'יד נתן', value: 775 },
- { text: 'יהוד-מונוסון', value: 9400 },
- { text: 'יפיע', value: 499 },
- { text: 'יקנעם עילית', value: 240 },
- { text: 'ירוחם', value: 831 },
- { text: 'ירושלים', value: 3000 },
- { text: 'ירכא', value: 502 },
- { text: 'כוכב יאיר', value: 1224 },
- { text: 'כפר ברא', value: 633 },
- { text: 'כפר ורדים', value: 1263 },
- { text: 'כפר יונה', value: 168 },
- { text: 'כפר כמא', value: 508 },
- { text: 'כפר מנחם', value: 274 },
- { text: 'כפר מסריק', value: 297 },
- { text: 'כפר נטר', value: 316 },
- { text: 'כפר סבא', value: 6900 },
- { text: 'כפר קאסם', value: 634 },
- { text: 'כפר קרע', value: 654 },
- { text: 'כפר שמריהו', value: 267 },
- { text: 'כפר תבור', value: 47 },
- { text: 'כרמי יוסף', value: 1264 },
- { text: 'כרמיאל', value: 1139 },
- { text: 'לביא', value: 585 },
- { text: 'להבים', value: 1271 },
- { text: 'לוד', value: 7000 },
- { text: 'מבועים', value: 1080 },
- { text: 'מבשרת ציון', value: 1015 },
- { text: 'מגדל', value: 65 },
- { text: 'מגדל העמק', value: 874 },
- { text: 'מגשימים', value: 722 },
- { text: 'מודיעין-מכבים-רעות', value: 1200 },
- { text: 'מודיעין עילית', value: 3797 },
- { text: 'מוצא עילית', value: 208 },
- { text: 'מזכרת בתיה', value: 28 },
- { text: 'מזרעה', value: 517 },
- { text: 'מטולה', value: 43 },
- { text: 'מיתר', value: 1268 },
- { text: 'מכמורת', value: 382 },
- { text: 'מנחמיה', value: 48 },
- { text: 'מעלה אדומים', value: 3616 },
- { text: 'מעלות-תרשיחא', value: 1063 },
- { text: 'מענית', value: 344 },
- { text: 'מצפה רמון', value: 99 },
- { text: 'מרכז שפירא', value: 1098 },
- { text: 'משהד', value: 520 },
- { text: 'נהורה', value: 309 },
- { text: 'נהרייה', value: 9100 },
- { text: 'נווה ירק', value: 858 },
- { text: 'נופית', value: 1284 },
- { text: 'ניר עם', value: 348 },
- { text: 'ניר צבי', value: 331 },
- { text: 'נס ציונה', value: 7200 },
- { text: 'נצרת', value: 7300 },
- { text: 'נצרת עילית', value: 1061 },
- { text: 'נשר', value: 2500 },
- { text: 'נתיבות', value: 246 },
- { text: 'נתניה', value: 7400 },
- { text: 'סביון', value: 587 },
- { text: 'ספיר', value: 1176 },
- { text: 'עומר', value: 666 },
- { text: 'עילוט', value: 511 },
- { text: 'עין דור', value: 436 },
- { text: 'עין ורד', value: 157 },
- { text: 'עין יהב', value: 806 },
- { text: 'עכו', value: 7600 },
- { text: 'עמנואל', value: 3660 },
- { text: 'עפולה', value: 7700 },
- { text: 'עפרה', value: 3617 },
- { text: 'עץ אפרים', value: 3778 },
- { text: 'ערד', value: 2560 },
- { text: 'עשרת', value: 591 },
- { text: 'עתלית', value: 53 },
- { text: 'פוריידיס', value: 537 },
- { text: 'פקיעין (בוקייעה)', value: 536 },
- { text: 'פרדס חנה-כרכור', value: 7800 },
- { text: 'פרדסייה', value: 171 },
- { text: 'פתח תקווה', value: 7900 },
- { text: 'צוקי ים', value: 1102 },
- { text: 'צור הדסה', value: 1113 },
- { text: 'צפת', value: 8000 },
- { text: 'קדימה-צורן', value: 195 },
- { text: 'קורנית', value: 1179 },
- { text: 'קיסריה', value: 1167 },
- { text: 'קציר', value: 1243 },
- { text: 'קריית אונו', value: 2620 },
- { text: 'קריית ארבע', value: 3611 },
- { text: 'קריית אתא', value: 6800 },
- { text: 'קריית ביאליק', value: 9500 },
- { text: 'קריית גת', value: 2630 },
- { text: 'קריית ים', value: 9600 },
- { text: 'קריית יערים', value: 1137 },
- { text: 'קריית מוצקין', value: 8200 },
- { text: 'קריית מלאכי', value: 1034 },
- { text: 'קריית עקרון', value: 469 },
- { text: 'קריית שמונה', value: 2800 },
- { text: 'קרית טבעון', value: 2300 },
- { text: 'קרני שומרון', value: 3640 },
- { text: 'ראמה', value: 543 },
- { text: 'ראש העין', value: 2640 },
- { text: 'ראשון לציון', value: 8300 },
- { text: 'רחובות', value: 8400 },
- { text: 'ריינה', value: 542 },
- { text: 'רכסים', value: 922 },
- { text: 'רמות השבים', value: 206 },
- { text: 'רמלה', value: 8500 },
- { text: 'רמת גן', value: 8600 },
- { text: 'רמת השופט', value: 335 },
- { text: 'רמת השרון', value: 2650 },
- { text: 'רמת ישי', value: 122 },
- { text: 'רעננה', value: 8700 },
- { text: 'שבי ציון', value: 282 },
- { text: 'שבלי - אום אל-גנם', value: 913 },
- { text: 'שדרות', value: 1031 },
- { text: 'שוהם', value: 1304 },
- { text: 'שלומי', value: 812 },
- { text: 'שניר', value: 1132 },
- { text: 'שערי תקווה', value: 3720 },
- { text: 'שפרעם', value: 8800 },
- { text: 'שריגים (לי-און)', value: 1114 },
- { text: 'תל אביב -יפו', value: 5000 },
- { text: 'תל מונד', value: 154 },
- { text: 'תמרת', value: 1244 }
-    ],
+         options: [
+{ text: 'אבו גוש', value: 472 },
+{ text: 'אבו סנאן', value: 473 },
+{ text: 'אבן יהודה', value: 182 },
+{ text: 'אום אל-פחם', value: 2710 },
+{ text: 'אופקים', value: 31 },
+{ text: 'אור יהודה', value: 2400 },
+{ text: 'אור עקיבא', value: 1020 },
+{ text: 'אזור', value: 565 },
+{ text: 'אחוזת ברק', value: 1330 },
+{ text: 'אחיטוב', value: 850 },
+{ text: 'אילת', value: 2600 },
+{ text: 'אכסאל', value: 478 },
+{ text: 'אליכין', value: 41 },
+{ text: 'אלעד', value: 1309 },
+{ text: 'אלפי מנשה', value: 3750 },
+{ text: 'אלקנה', value: 3560 },
+{ text: 'אפרת', value: 3650 },
+{ text: 'אריאל', value: 3570 },
+{ text: 'אשדוד', value: 70 },
+{ text: 'אשקלון', value: 7100 },
+{ text: 'באר יעקב', value: 2530 },
+{ text: 'באר שבע', value: 9000 },
+{ text: 'בוסתן הגליל', value: 559 },
+{ text: 'בית אל', value: 3574 },
+{ text: 'בית אלפא', value: 95 },
+{ text: 'בית אריה', value: 3652 },
+{ text: 'בית דגן', value: 466 },
+{ text: 'בית ינאי', value: 200 },
+{ text: 'בית יצחק-שער חפר', value: 326 },
+{ text: 'בית שאן', value: 9200 },
+{ text: 'בית שמש', value: 2610 },
+{ text: 'ביתר עילית', value: 3780 },
+{ text: 'בני ברק', value: 6100 },
+{ text: 'בני עי"ש', value: 1066 },
+{ text: 'בנימינה-גבעת עדה', value: 9800 },
+{ text: 'בת חפר', value: 1319 },
+{ text: 'בת ים', value: 6200 },
+{ text: 'גבעת אבני', value: 1293 },
+{ text: 'גבעת אלה', value: 1288 },
+{ text: 'גבעת זאב', value: 3730 },
+{ text: 'גבעת יערים', value: 787 },
+{ text: 'גבעת שמואל', value: 681 },
+{ text: 'גבעתיים', value: 6300 },
+{ text: 'גדרה', value: 2550 },
+{ text: 'גונן', value: 852 },
+{ text: 'גינוסר', value: 262 },
+{ text: 'גן יבנה', value: 166 },
+{ text: 'גן נר', value: 1274 },
+{ text: 'גני תקווה', value: 229 },
+{ text: 'געתון', value: 463 },
+{ text: 'דאלית אל-כרמל', value: 494 },
+{ text: 'דימונה', value: 2200 },
+{ text: 'הוד השרון', value: 9700 },
+{ text: 'הר אדר', value: 3769 },
+{ text: 'הרצלייה', value: 6400 },
+{ text: 'זכרון יעקב', value: 9300 },
+{ text: 'זרזיר', value: 975 },
+{ text: 'חבצלת השרון', value: 235 },
+{ text: 'חדרה', value: 6500 },
+{ text: 'חולון', value: 6600 },
+{ text: 'חופית', value: 115 },
+{ text: 'חיבת ציון', value: 219 },
+{ text: 'חיפה', value: 4000 },
+{ text: 'חפץ חיים', value: 363 },
+{ text: 'חצור-אשדוד', value: 406 },
+{ text: 'חצור הגלילית', value: 2034 },
+{ text: 'חריש', value: 1247 },
+{ text: 'חשמונאים', value: 3770 },
+{ text: 'טבריה', value: 6700 },
+{ text: 'טורעאן', value: 498 },
+{ text: 'טייבה', value: 2730 },
+{ text: 'טירת כרמל', value: 2100 },
+{ text: 'טל-אל', value: 1181 },
+{ text: 'יבנה', value: 2660 },
+{ text: 'יד נתן', value: 775 },
+{ text: 'יהוד-מונוסון', value: 9400 },
+{ text: 'יפיע', value: 499 },
+{ text: 'יקנעם עילית', value: 240 },
+{ text: 'ירוחם', value: 831 },
+{ text: 'ירושלים', value: 3000 },
+{ text: 'ירכא', value: 502 },
+{ text: 'כוכב יאיר', value: 1224 },
+{ text: 'כפר ברא', value: 633 },
+{ text: 'כפר ורדים', value: 1263 },
+{ text: 'כפר יונה', value: 168 },
+{ text: 'כפר כמא', value: 508 },
+{ text: 'כפר מנחם', value: 274 },
+{ text: 'כפר מסריק', value: 297 },
+{ text: 'כפר נטר', value: 316 },
+{ text: 'כפר סבא', value: 6900 },
+{ text: 'כפר קאסם', value: 634 },
+{ text: 'כפר קרע', value: 654 },
+{ text: 'כפר שמריהו', value: 267 },
+{ text: 'כפר תבור', value: 47 },
+{ text: 'כרמי יוסף', value: 1264 },
+{ text: 'כרמיאל', value: 1139 },
+{ text: 'לביא', value: 585 },
+{ text: 'להבים', value: 1271 },
+{ text: 'לוד', value: 7000 },
+{ text: 'מבועים', value: 1080 },
+{ text: 'מבשרת ציון', value: 1015 },
+{ text: 'מגדל', value: 65 },
+{ text: 'מגדל העמק', value: 874 },
+{ text: 'מגשימים', value: 722 },
+{ text: 'מודיעין-מכבים-רעות', value: 1200 },
+{ text: 'מודיעין עילית', value: 3797 },
+{ text: 'מוצא עילית', value: 208 },
+{ text: 'מזכרת בתיה', value: 28 },
+{ text: 'מזרעה', value: 517 },
+{ text: 'מטולה', value: 43 },
+{ text: 'מיתר', value: 1268 },
+{ text: 'מכמורת', value: 382 },
+{ text: 'מנחמיה', value: 48 },
+{ text: 'מעלה אדומים', value: 3616 },
+{ text: 'מעלות-תרשיחא', value: 1063 },
+{ text: 'מענית', value: 344 },
+{ text: 'מצפה רמון', value: 99 },
+{ text: 'מרכז שפירא', value: 1098 },
+{ text: 'משהד', value: 520 },
+{ text: 'נהורה', value: 309 },
+{ text: 'נהרייה', value: 9100 },
+{ text: 'נווה ירק', value: 858 },
+{ text: 'נופית', value: 1284 },
+{ text: 'ניר עם', value: 348 },
+{ text: 'ניר צבי', value: 331 },
+{ text: 'נס ציונה', value: 7200 },
+{ text: 'נצרת', value: 7300 },
+{ text: 'נצרת עילית', value: 1061 },
+{ text: 'נשר', value: 2500 },
+{ text: 'נתיבות', value: 246 },
+{ text: 'נתניה', value: 7400 },
+{ text: 'סביון', value: 587 },
+{ text: 'ספיר', value: 1176 },
+{ text: 'עומר', value: 666 },
+{ text: 'עילוט', value: 511 },
+{ text: 'עין דור', value: 436 },
+{ text: 'עין ורד', value: 157 },
+{ text: 'עין יהב', value: 806 },
+{ text: 'עכו', value: 7600 },
+{ text: 'עמנואל', value: 3660 },
+{ text: 'עפולה', value: 7700 },
+{ text: 'עפרה', value: 3617 },
+{ text: 'עץ אפרים', value: 3778 },
+{ text: 'ערד', value: 2560 },
+{ text: 'עשרת', value: 591 },
+{ text: 'עתלית', value: 53 },
+{ text: 'פוריידיס', value: 537 },
+{ text: 'פקיעין (בוקייעה)', value: 536 },
+{ text: 'פרדס חנה-כרכור', value: 7800 },
+{ text: 'פרדסייה', value: 171 },
+{ text: 'פתח תקווה', value: 7900 },
+{ text: 'צוקי ים', value: 1102 },
+{ text: 'צור הדסה', value: 1113 },
+{ text: 'צפת', value: 8000 },
+{ text: 'קדימה-צורן', value: 195 },
+{ text: 'קורנית', value: 1179 },
+{ text: 'קיסריה', value: 1167 },
+{ text: 'קציר', value: 1243 },
+{ text: 'קריית אונו', value: 2620 },
+{ text: 'קריית ארבע', value: 3611 },
+{ text: 'קריית אתא', value: 6800 },
+{ text: 'קריית ביאליק', value: 9500 },
+{ text: 'קריית גת', value: 2630 },
+{ text: 'קריית ים', value: 9600 },
+{ text: 'קריית יערים', value: 1137 },
+{ text: 'קריית מוצקין', value: 8200 },
+{ text: 'קריית מלאכי', value: 1034 },
+{ text: 'קריית עקרון', value: 469 },
+{ text: 'קריית שמונה', value: 2800 },
+{ text: 'קרית טבעון', value: 2300 },
+{ text: 'קרני שומרון', value: 3640 },
+{ text: 'ראמה', value: 543 },
+{ text: 'ראש העין', value: 2640 },
+{ text: 'ראשון לציון', value: 8300 },
+{ text: 'רחובות', value: 8400 },
+{ text: 'ריינה', value: 542 },
+{ text: 'רכסים', value: 922 },
+{ text: 'רמות השבים', value: 206 },
+{ text: 'רמלה', value: 8500 },
+{ text: 'רמת גן', value: 8600 },
+{ text: 'רמת השופט', value: 335 },
+{ text: 'רמת השרון', value: 2650 },
+{ text: 'רמת ישי', value: 122 },
+{ text: 'רעננה', value: 8700 },
+{ text: 'שבי ציון', value: 282 },
+{ text: 'שבלי - אום אל-גנם', value: 913 },
+{ text: 'שדרות', value: 1031 },
+{ text: 'שוהם', value: 1304 },
+{ text: 'שלומי', value: 812 },
+{ text: 'שניר', value: 1132 },
+{ text: 'שערי תקווה', value: 3720 },
+{ text: 'שפרעם', value: 8800 },
+{ text: 'שריגים (לי-און)', value: 1114 },
+{ text: 'תל אביב -יפו', value: 5000 },
+{ text: 'תל מונד', value: 154 },
+{ text: 'תמרת', value: 1244 }
+   ],
 
-          bldg_features: [],
-          selected_features: [],
-          myloadingvariable: true,
-        }
-      },
-      methods: {
-        handleClick(value) {
-            console.log(value.UNIQ_ID);
-            //govmap.zoomToXY({ x: value.x, y: value.y, level: 10, marker: false });
-            govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'UNIQ_ID', 'fieldValues': [value.UNIQ_ID], 'highlight': true });
-        },
-        close () {
-            this.dialog = false;
-        },
-        save () {
+         bldg_features: [],
+         selected_features: [],
+         myloadingvariable: true,
+       }
+     },
+     computed: {
+         badge(){
+             var res = false;
+             if (this.selected_features.length > 0)
+             {
+                 res = true;
+             }
+             return res;
+ 
+         }
+     },
+     methods: {
+       handleClick(value) {
+           console.log(value.UNIQ_ID);
+           //govmap.zoomToXY({ x: value.x, y: value.y, level: 10, marker: false });
+           govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'UNIQ_ID', 'fieldValues': [value.UNIQ_ID], 'highlight': true });
+       },
+       close () {
+           this.dialog = false;
+       },
+       save () {
 
-            govmap.clearSelection();
-            govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE = " + this.selected +" AND (BuildingYear BETWEEN "+ this.min_year + " AND " + this.max_year + ") AND (BuildingFloors BETWEEN " + this.min_floor + " AND " + this.max_floor +")", 'zoomToExtent': true });
-            var newArray = appVue.options.filter(function(item) {
-                return item.value == appVue.selected;
-            });
-            console.log(newArray[0].text + "!!!!")
-            if (newArray.length > 0){
-                appVue.selected_features = appVue.bldg_features.filter(function(item) {
-                    return (item.SETL_NAME == newArray[0].text) && (item.BuildingYear >= appVue.min_year && item.BuildingYear <= appVue.max_year) //&& (item.BuildingFloors > this.min_floor && item.BuildingFloors < this.max_floor) ;
-                });
-                if (appVue.selected_features.length == 0)
-                {
-                    console.log("SFDF")
-                    appVue.snackbar = true;
-                }
-            }
-
-
-
-            this.dialog = false;
-        },
-        onChange(event) {
-            console.log(event)
-            var newArray = appVue.options.filter(function(item) {
-                return item.value == event;
-            });
-
-            if (newArray){
-                console.log(newArray[0].text);
-                appVue.selected_features = appVue.bldg_features.filter(function(item) {
-                    return item.SETL_NAME == newArray[0].text;
-                });
-                
-                //govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE = " + event, 'zoomToExtent': true });
-                govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'SETL_CODE', 'fieldValues': [event], 'highlight': true });
-
-                //this.dialog = true;
-
-                this.menu_btn = true;
-            }
-        },
-
-        openStreetView(item){
-
-            console.log(item.StreetView.replace('++', '+'));
-            window.open(item.StreetView.replace('++', '+').replace(' -', ' '), '_blank').focus();
-
-        }
-      }
-      })
-  
-      appVue.bldg_features = [];
-    </script>
+           govmap.clearSelection();
+           govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE = " + this.selected +" AND (BuildingYear BETWEEN "+ this.min_year + " AND " + this.max_year + ") AND (BuildingFloors BETWEEN " + this.min_floor + " AND " + this.max_floor +")", 'zoomToExtent': true });
+           var newArray = appVue.options.filter(function(item) {
+               return item.value == appVue.selected;
+           });
+           console.log(newArray[0].text + "!!!!")
+           if (newArray.length > 0){
+               appVue.selected_features = appVue.bldg_features.filter(function(item) {
+                   return (item.SETL_NAME == newArray[0].text) && (item.BuildingYear >= appVue.min_year && item.BuildingYear <= appVue.max_year) && (item.BuildingFloors >= appVue.min_floor && item.BuildingFloors <= appVue.max_floor) ;
+               });
+               if (appVue.selected_features.length == 0)
+               {
+                   console.log("SFDF")
+                   appVue.snackbar = true;
+               }
+           }
 
 
 
+           this.dialog = false;
+       },
+       onChange(event) {
+           console.log(event)
+           var newArray = appVue.options.filter(function(item) {
+               return item.value == event;
+           });
+
+           if (newArray){
+               console.log(newArray[0].text);
+               appVue.selected_features = appVue.bldg_features.filter(function(item) {
+                   return item.SETL_NAME == newArray[0].text;
+               });
+               
+               //govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE = " + event, 'zoomToExtent': true });
+               govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'SETL_CODE', 'fieldValues': [event], 'highlight': true });
+
+               //this.dialog = true;
+
+               this.menu_btn = true;
+           }
+       },
+
+       openStreetView(item){
+
+           console.log(item.StreetView.replace('++', '+'));
+           window.open(item.StreetView.replace('++', '+').replace(' -', ' '), '_blank').focus();
+
+       },
+       clear(){
+
+           appVue.selected_features = [];
+           appVue.selected = null;
+           appVue.min_year = null;
+           appVue.max_year= null;
+           appVue.min_floor= null;
+           appVue. max_floor= null;
+           appVue.dialog= false;
+           govmap.clearSelection();
+           govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE > 0", 'zoomToExtent': true });
+
+       }
+     }
+     })
+ 
+     appVue.bldg_features = [];
+   </script>
 
 
 
-    
- </body>
+
+
+
+   
+</body>
 
 </html>
