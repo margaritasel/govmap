@@ -426,208 +426,11 @@
 
        var res;
 
-       var setl_options = [
-{ text: 'אבו גוש', value: 472 },
-{ text: 'אבו סנאן', value: 473 },
-{ text: 'אבן יהודה', value: 182 },
-{ text: 'אום אל-פחם', value: 2710 },
-{ text: 'אופקים', value: 31 },
-{ text: 'אור יהודה', value: 2400 },
-{ text: 'אור עקיבא', value: 1020 },
-{ text: 'אזור', value: 565 },
-{ text: 'אחוזת ברק', value: 1330 },
-{ text: 'אחיטוב', value: 850 },
-{ text: 'אילת', value: 2600 },
-{ text: 'אכסאל', value: 478 },
-{ text: 'אליכין', value: 41 },
-{ text: 'אלעד', value: 1309 },
-{ text: 'אלפי מנשה', value: 3750 },
-{ text: 'אלקנה', value: 3560 },
-{ text: 'אפרת', value: 3650 },
-{ text: 'אריאל', value: 3570 },
-{ text: 'אשדוד', value: 70 },
-{ text: 'אשקלון', value: 7100 },
-{ text: 'באר יעקב', value: 2530 },
-{ text: 'באר שבע', value: 9000 },
-{ text: 'בוסתן הגליל', value: 559 },
-{ text: 'בית אל', value: 3574 },
-{ text: 'בית אלפא', value: 95 },
-{ text: 'בית אריה', value: 3652 },
-{ text: 'בית דגן', value: 466 },
-{ text: 'בית ינאי', value: 200 },
-{ text: 'בית יצחק-שער חפר', value: 326 },
-{ text: 'בית שאן', value: 9200 },
-{ text: 'בית שמש', value: 2610 },
-{ text: 'ביתר עילית', value: 3780 },
-{ text: 'בני ברק', value: 6100 },
-{ text: 'בני עי"ש', value: 1066 },
-{ text: 'בנימינה-גבעת עדה', value: 9800 },
-{ text: 'בת חפר', value: 1319 },
-{ text: 'בת ים', value: 6200 },
-{ text: 'גבעת אבני', value: 1293 },
-{ text: 'גבעת אלה', value: 1288 },
-{ text: 'גבעת זאב', value: 3730 },
-{ text: 'גבעת יערים', value: 787 },
-{ text: 'גבעת שמואל', value: 681 },
-{ text: 'גבעתיים', value: 6300 },
-{ text: 'גדרה', value: 2550 },
-{ text: 'גונן', value: 852 },
-{ text: 'גינוסר', value: 262 },
-{ text: 'גן יבנה', value: 166 },
-{ text: 'גן נר', value: 1274 },
-{ text: 'גני תקווה', value: 229 },
-{ text: 'געתון', value: 463 },
-{ text: 'דאלית אל-כרמל', value: 494 },
-{ text: 'דימונה', value: 2200 },
-{ text: 'הוד השרון', value: 9700 },
-{ text: 'הר אדר', value: 3769 },
-{ text: 'הרצלייה', value: 6400 },
-{ text: 'זכרון יעקב', value: 9300 },
-{ text: 'זרזיר', value: 975 },
-{ text: 'חבצלת השרון', value: 235 },
-{ text: 'חדרה', value: 6500 },
-{ text: 'חולון', value: 6600 },
-{ text: 'חופית', value: 115 },
-{ text: 'חיבת ציון', value: 219 },
-{ text: 'חיפה', value: 4000 },
-{ text: 'חפץ חיים', value: 363 },
-{ text: 'חצור-אשדוד', value: 406 },
-{ text: 'חצור הגלילית', value: 2034 },
-{ text: 'חריש', value: 1247 },
-{ text: 'חשמונאים', value: 3770 },
-{ text: 'טבריה', value: 6700 },
-{ text: 'טורעאן', value: 498 },
-{ text: 'טייבה', value: 2730 },
-{ text: 'טירת כרמל', value: 2100 },
-{ text: 'טל-אל', value: 1181 },
-{ text: 'יבנה', value: 2660 },
-{ text: 'יד נתן', value: 775 },
-{ text: 'יהוד-מונוסון', value: 9400 },
-{ text: 'יפיע', value: 499 },
-{ text: 'יקנעם עילית', value: 240 },
-{ text: 'ירוחם', value: 831 },
-{ text: 'ירושלים', value: 3000 },
-{ text: 'ירכא', value: 502 },
-{ text: 'כוכב יאיר', value: 1224 },
-{ text: 'כפר ברא', value: 633 },
-{ text: 'כפר ורדים', value: 1263 },
-{ text: 'כפר יונה', value: 168 },
-{ text: 'כפר כמא', value: 508 },
-{ text: 'כפר מנחם', value: 274 },
-{ text: 'כפר מסריק', value: 297 },
-{ text: 'כפר נטר', value: 316 },
-{ text: 'כפר סבא', value: 6900 },
-{ text: 'כפר קאסם', value: 634 },
-{ text: 'כפר קרע', value: 654 },
-{ text: 'כפר שמריהו', value: 267 },
-{ text: 'כפר תבור', value: 47 },
-{ text: 'כרמי יוסף', value: 1264 },
-{ text: 'כרמיאל', value: 1139 },
-{ text: 'לביא', value: 585 },
-{ text: 'להבים', value: 1271 },
-{ text: 'לוד', value: 7000 },
-{ text: 'מבועים', value: 1080 },
-{ text: 'מבשרת ציון', value: 1015 },
-{ text: 'מגדל', value: 65 },
-{ text: 'מגדל העמק', value: 874 },
-{ text: 'מגשימים', value: 722 },
-{ text: 'מודיעין-מכבים-רעות', value: 1200 },
-{ text: 'מודיעין עילית', value: 3797 },
-{ text: 'מוצא עילית', value: 208 },
-{ text: 'מזכרת בתיה', value: 28 },
-{ text: 'מזרעה', value: 517 },
-{ text: 'מטולה', value: 43 },
-{ text: 'מיתר', value: 1268 },
-{ text: 'מכמורת', value: 382 },
-{ text: 'מנחמיה', value: 48 },
-{ text: 'מעלה אדומים', value: 3616 },
-{ text: 'מעלות-תרשיחא', value: 1063 },
-{ text: 'מענית', value: 344 },
-{ text: 'מצפה רמון', value: 99 },
-{ text: 'מרכז שפירא', value: 1098 },
-{ text: 'משהד', value: 520 },
-{ text: 'נהורה', value: 309 },
-{ text: 'נהרייה', value: 9100 },
-{ text: 'נווה ירק', value: 858 },
-{ text: 'נופית', value: 1284 },
-{ text: 'ניר עם', value: 348 },
-{ text: 'ניר צבי', value: 331 },
-{ text: 'נס ציונה', value: 7200 },
-{ text: 'נצרת', value: 7300 },
-{ text: 'נצרת עילית', value: 1061 },
-{ text: 'נשר', value: 2500 },
-{ text: 'נתיבות', value: 246 },
-{ text: 'נתניה', value: 7400 },
-{ text: 'סביון', value: 587 },
-{ text: 'ספיר', value: 1176 },
-{ text: 'עומר', value: 666 },
-{ text: 'עילוט', value: 511 },
-{ text: 'עין דור', value: 436 },
-{ text: 'עין ורד', value: 157 },
-{ text: 'עין יהב', value: 806 },
-{ text: 'עכו', value: 7600 },
-{ text: 'עמנואל', value: 3660 },
-{ text: 'עפולה', value: 7700 },
-{ text: 'עפרה', value: 3617 },
-{ text: 'עץ אפרים', value: 3778 },
-{ text: 'ערד', value: 2560 },
-{ text: 'עשרת', value: 591 },
-{ text: 'עתלית', value: 53 },
-{ text: 'פוריידיס', value: 537 },
-{ text: 'פקיעין (בוקייעה)', value: 536 },
-{ text: 'פרדס חנה-כרכור', value: 7800 },
-{ text: 'פרדסייה', value: 171 },
-{ text: 'פתח תקווה', value: 7900 },
-{ text: 'צוקי ים', value: 1102 },
-{ text: 'צור הדסה', value: 1113 },
-{ text: 'צפת', value: 8000 },
-{ text: 'קדימה-צורן', value: 195 },
-{ text: 'קורנית', value: 1179 },
-{ text: 'קיסריה', value: 1167 },
-{ text: 'קציר', value: 1243 },
-{ text: 'קריית אונו', value: 2620 },
-{ text: 'קריית ארבע', value: 3611 },
-{ text: 'קריית אתא', value: 6800 },
-{ text: 'קריית ביאליק', value: 9500 },
-{ text: 'קריית גת', value: 2630 },
-{ text: 'קריית ים', value: 9600 },
-{ text: 'קריית יערים', value: 1137 },
-{ text: 'קריית מוצקין', value: 8200 },
-{ text: 'קריית מלאכי', value: 1034 },
-{ text: 'קריית עקרון', value: 469 },
-{ text: 'קריית שמונה', value: 2800 },
-{ text: 'קרית טבעון', value: 2300 },
-{ text: 'קרני שומרון', value: 3640 },
-{ text: 'ראמה', value: 543 },
-{ text: 'ראש העין', value: 2640 },
-{ text: 'ראשון לציון', value: 8300 },
-{ text: 'רחובות', value: 8400 },
-{ text: 'ריינה', value: 542 },
-{ text: 'רכסים', value: 922 },
-{ text: 'רמות השבים', value: 206 },
-{ text: 'רמלה', value: 8500 },
-{ text: 'רמת גן', value: 8600 },
-{ text: 'רמת השופט', value: 335 },
-{ text: 'רמת השרון', value: 2650 },
-{ text: 'רמת ישי', value: 122 },
-{ text: 'רעננה', value: 8700 },
-{ text: 'שבי ציון', value: 282 },
-{ text: 'שבלי - אום אל-גנם', value: 913 },
-{ text: 'שדרות', value: 1031 },
-{ text: 'שוהם', value: 1304 },
-{ text: 'שלומי', value: 812 },
-{ text: 'שניר', value: 1132 },
-{ text: 'שערי תקווה', value: 3720 },
-{ text: 'שפרעם', value: 8800 },
-{ text: 'שריגים (לי-און)', value: 1114 },
-{ text: 'תל אביב -יפו', value: 5000 },
-{ text: 'תל מונד', value: 154 },
-{ text: 'תמרת', value: 1244 }
-   ];
+      
 
        //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //for localhost domain
-       var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
-       //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";
+       //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+       var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";
        //var my_token:  "34280469-d493-4041-95e5-664f7fec6daf"; trillium
        $(document).ready(function ()
        {
@@ -717,19 +520,6 @@
                        appVue.bldg_features = json_data.filter(function(item) {
                             return item.AppCount > 3
                         });
-                        var setl_names = []
-                        for (i = 0; i < appVue.bldg_features.length; i++){
-                          var setl_name = appVue.bldg_features[i].SETL_NAME;
-                          if  (!setl_names.includes(setl_name)){
-                            setl_names.push(setl_name)
-                          }
-                        }
-                        setl_names.sort();
-
-                        appVue.options = setl_options.filter(function(item) {
-                            return setl_names.includes(item.text)
-                        });
-
 
                        appVue.myloadingvariable = false;
 
@@ -789,7 +579,428 @@
          ],
 
 
-         options: [],
+         options: [
+    {
+        "text": "אבן יהודה",
+        "value": 182
+    },
+    {
+        "text": "אופקים",
+        "value": 31
+    },
+    {
+        "text": "אור יהודה",
+        "value": 2400
+    },
+    {
+        "text": "אור עקיבא",
+        "value": 1020
+    },
+    {
+        "text": "אזור",
+        "value": 565
+    },
+    {
+        "text": "אילת",
+        "value": 2600
+    },
+    {
+        "text": "אפרת",
+        "value": 3650
+    },
+    {
+        "text": "אריאל",
+        "value": 3570
+    },
+    {
+        "text": "אשדוד",
+        "value": 70
+    },
+    {
+        "text": "אשקלון",
+        "value": 7100
+    },
+    {
+        "text": "באר יעקב",
+        "value": 2530
+    },
+    {
+        "text": "באר שבע",
+        "value": 9000
+    },
+    {
+        "text": "בית אלפא",
+        "value": 95
+    },
+    {
+        "text": "בית דגן",
+        "value": 466
+    },
+    {
+        "text": "בית שאן",
+        "value": 9200
+    },
+    {
+        "text": "בית שמש",
+        "value": 2610
+    },
+    {
+        "text": "ביתר עילית",
+        "value": 3780
+    },
+    {
+        "text": "בני ברק",
+        "value": 6100
+    },
+    {
+        "text": "בנימינה-גבעת עדה",
+        "value": 9800
+    },
+    {
+        "text": "בת ים",
+        "value": 6200
+    },
+    {
+        "text": "גבעת זאב",
+        "value": 3730
+    },
+    {
+        "text": "גבעת שמואל",
+        "value": 681
+    },
+    {
+        "text": "גבעתיים",
+        "value": 6300
+    },
+    {
+        "text": "גדרה",
+        "value": 2550
+    },
+    {
+        "text": "גן יבנה",
+        "value": 166
+    },
+    {
+        "text": "גני תקווה",
+        "value": 229
+    },
+    {
+        "text": "דימונה",
+        "value": 2200
+    },
+    {
+        "text": "הוד השרון",
+        "value": 9700
+    },
+    {
+        "text": "הרצלייה",
+        "value": 6400
+    },
+    {
+        "text": "זכרון יעקב",
+        "value": 9300
+    },
+    {
+        "text": "זרזיר",
+        "value": 975
+    },
+    {
+        "text": "חדרה",
+        "value": 6500
+    },
+    {
+        "text": "חולון",
+        "value": 6600
+    },
+    {
+        "text": "חיפה",
+        "value": 4000
+    },
+    {
+        "text": "חצור הגלילית",
+        "value": 2034
+    },
+    {
+        "text": "חריש",
+        "value": 1247
+    },
+    {
+        "text": "טבריה",
+        "value": 6700
+    },
+    {
+        "text": "טירת כרמל",
+        "value": 2100
+    },
+    {
+        "text": "יבנה",
+        "value": 2660
+    },
+    {
+        "text": "יהוד-מונוסון",
+        "value": 9400
+    },
+    {
+        "text": "יפיע",
+        "value": 499
+    },
+    {
+        "text": "יקנעם עילית",
+        "value": 240
+    },
+    {
+        "text": "ירוחם",
+        "value": 831
+    },
+    {
+        "text": "ירושלים",
+        "value": 3000
+    },
+    {
+        "text": "כוכב יאיר",
+        "value": 1224
+    },
+    {
+        "text": "כפר ורדים",
+        "value": 1263
+    },
+    {
+        "text": "כפר יונה",
+        "value": 168
+    },
+    {
+        "text": "כפר סבא",
+        "value": 6900
+    },
+    {
+        "text": "כפר קרע",
+        "value": 654
+    },
+    {
+        "text": "כרמיאל",
+        "value": 1139
+    },
+    {
+        "text": "להבים",
+        "value": 1271
+    },
+    {
+        "text": "לוד",
+        "value": 7000
+    },
+    {
+        "text": "מבשרת ציון",
+        "value": 1015
+    },
+    {
+        "text": "מגדל העמק",
+        "value": 874
+    },
+    {
+        "text": "מודיעין-מכבים-רעות",
+        "value": 1200
+    },
+    {
+        "text": "מודיעין עילית",
+        "value": 3797
+    },
+    {
+        "text": "מזכרת בתיה",
+        "value": 28
+    },
+    {
+        "text": "מנחמיה",
+        "value": 48
+    },
+    {
+        "text": "מעלה אדומים",
+        "value": 3616
+    },
+    {
+        "text": "מעלות-תרשיחא",
+        "value": 1063
+    },
+    {
+        "text": "מצפה רמון",
+        "value": 99
+    },
+    {
+        "text": "נהרייה",
+        "value": 9100
+    },
+    {
+        "text": "נס ציונה",
+        "value": 7200
+    },
+    {
+        "text": "נצרת",
+        "value": 7300
+    },
+    {
+        "text": "נצרת עילית",
+        "value": 1061
+    },
+    {
+        "text": "נשר",
+        "value": 2500
+    },
+    {
+        "text": "נתיבות",
+        "value": 246
+    },
+    {
+        "text": "נתניה",
+        "value": 7400
+    },
+    {
+        "text": "סביון",
+        "value": 587
+    },
+    {
+        "text": "עכו",
+        "value": 7600
+    },
+    {
+        "text": "עמנואל",
+        "value": 3660
+    },
+    {
+        "text": "עפולה",
+        "value": 7700
+    },
+    {
+        "text": "ערד",
+        "value": 2560
+    },
+    {
+        "text": "עתלית",
+        "value": 53
+    },
+    {
+        "text": "פרדס חנה-כרכור",
+        "value": 7800
+    },
+    {
+        "text": "פתח תקווה",
+        "value": 7900
+    },
+    {
+        "text": "צפת",
+        "value": 8000
+    },
+    {
+        "text": "קדימה-צורן",
+        "value": 195
+    },
+    {
+        "text": "קיסריה",
+        "value": 1167
+    },
+    {
+        "text": "קריית אונו",
+        "value": 2620
+    },
+    {
+        "text": "קריית ארבע",
+        "value": 3611
+    },
+    {
+        "text": "קריית אתא",
+        "value": 6800
+    },
+    {
+        "text": "קריית ביאליק",
+        "value": 9500
+    },
+    {
+        "text": "קריית גת",
+        "value": 2630
+    },
+    {
+        "text": "קריית ים",
+        "value": 9600
+    },
+    {
+        "text": "קריית יערים",
+        "value": 1137
+    },
+    {
+        "text": "קריית מוצקין",
+        "value": 8200
+    },
+    {
+        "text": "קריית מלאכי",
+        "value": 1034
+    },
+    {
+        "text": "קריית עקרון",
+        "value": 469
+    },
+    {
+        "text": "קריית שמונה",
+        "value": 2800
+    },
+    {
+        "text": "קרית טבעון",
+        "value": 2300
+    },
+    {
+        "text": "ראש העין",
+        "value": 2640
+    },
+    {
+        "text": "ראשון לציון",
+        "value": 8300
+    },
+    {
+        "text": "רחובות",
+        "value": 8400
+    },
+    {
+        "text": "רכסים",
+        "value": 922
+    },
+    {
+        "text": "רמלה",
+        "value": 8500
+    },
+    {
+        "text": "רמת גן",
+        "value": 8600
+    },
+    {
+        "text": "רמת השרון",
+        "value": 2650
+    },
+    {
+        "text": "רמת ישי",
+        "value": 122
+    },
+    {
+        "text": "רעננה",
+        "value": 8700
+    },
+    {
+        "text": "שדרות",
+        "value": 1031
+    },
+    {
+        "text": "שוהם",
+        "value": 1304
+    },
+    {
+        "text": "שלומי",
+        "value": 812
+    },
+    {
+        "text": "תל אביב -יפו",
+        "value": 5000
+    },
+    {
+        "text": "תל מונד",
+        "value": 154
+    }
+],
 
          bldg_features: [],
          selected_features: [],
