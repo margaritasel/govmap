@@ -4,6 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+
+
    <title>ניתוח מבנים להתחדשות עירונית</title>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,15 +21,25 @@
  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
+ <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+        
+ <style>
+
+    [v-cloak] {
+            display: none;
+        }
+</style>
 
 </head>
 <body scrolling='no' dir="rtl">
 
-   <div id="app" style="height: 800px;"  >
+   <div id="app" v-cloak style="height: 800px;"  >
 
 
  
-       <v-app v-cloak right style='background-image: linear-gradient(to bottom right, #FAFAFA ,  #BBDEFB); opacity: 90%;'>
+       <v-app right style='background-image: linear-gradient(to bottom right, #FAFAFA ,  #BBDEFB); opacity: 90%;'>
          <v-main>
 
 
@@ -416,8 +429,7 @@
 
 
 
-   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
    <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -429,8 +441,8 @@
       
 
        //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //for localhost domain
-       //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
-       var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";
+       var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+       //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";
        //var my_token:  "34280469-d493-4041-95e5-664f7fec6daf"; trillium
        $(document).ready(function ()
        {
@@ -515,7 +527,7 @@
                  {
                    if (json_data.length > 0)
                    {
-                       appVue.bldg_features = json_data.filter
+                       //appVue.bldg_features = json_data.filter
 
                        appVue.bldg_features = json_data.filter(function(item) {
                             return item.AppCount > 3
@@ -1164,11 +1176,5 @@
 </body>
 
 
-<style>
-
-[v-cloak] {
-        display: none;
-    }
-</style>
 
 </html>
