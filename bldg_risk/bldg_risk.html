@@ -2,7 +2,7 @@
 
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="https://www.w3.org/1999/xhtml">
 <head>
 
 
@@ -37,22 +37,65 @@
 
    <div id="app" v-cloak style="height: 800px;"  >
 
+    
+
+
 
  
        <v-app right style='background-image: linear-gradient(to bottom right, #FAFAFA ,  #BBDEFB); opacity: 90%;'>
          <v-main>
 
 
-           <v-container>
    
-               <v-system-bar id="app_bar">
-               </v-system-bar>
+  
+       <div style="width: 250px;
+       height: 50px;
+       position: absolute;
+       top:0;
+       bottom: 0;
+       left: 0;
+       right: 0;
+       
+       margin: auto;">
 
+        <v-alert v-model="progress" class="text-center" style="position: absolute; z-index: 1;"
+        type="info"
+      >
+         <strong>טוען נתונים...</strong>
+      </v-alert>
+
+      <v-alert v-model="done" class="text-center" style="position: absolute; z-index: 1;"
+      type="success"
+    >
+    <strong>נתונים נטענו בהצלחה</strong>
+    </v-alert>
+   
     
+        </div>
+
+         
+
+
+
+            <v-snackbar 
+            color="blue-grey"
+            rounded="pill"
+            v-model="setl_name_snack_bar"
+          >
+          {{selected_features.length}} מבנים ב{{setl_name}} - שנת בניה עד {{max_year}}
+          </v-snackbar>
+
+
+           <v-container>
+
+                <v-system-bar id="app_bar">
+                </v-system-bar>
+                   
+                <v-app-bar color="rgba(255, 255, 255, 0.8)" justify="space-around">
 
                
-     
-               <v-app-bar color="rgba(255, 255, 255, 0.8)" justify="space-around">
+           
+
 
      
 
@@ -240,11 +283,15 @@
      
    
                
-               
+
+     
+              
      
                </v-app-bar>
 
 
+
+      
                    
                    <v-card
                      class="mx-auto"
@@ -313,7 +360,7 @@
                    ></v-pagination>
                    <v-text-field
                      :value="itemsPerPage"
-                     label="Items per page"
+                     label="מספר תוצאות בעמוד"
                      type="number"
                      min="-1"
                      max="15"
@@ -380,39 +427,47 @@
      
          </v-snackbar>
 
+
+
+           
+
+
+        
+
+      
+
          <v-fab-transition>
-          <v-btn style="position:fixed;
-                left:25px;
-                bottom:80px;"
-            color='#43A047'
-            fab
-            dark
-            bottom
-            left
-            @click="$vuetify.goTo('#app_bar'); showArrow=false; showArrowTop=true"
-            v-show="showArrow"
-          >
-            <v-icon>mdi-chevron-up</v-icon>
-          </v-btn>
-        </v-fab-transition>
-
-
-        <v-fab-transition>
-          <v-btn style="position:fixed;
-                left:25px;
-                top:80px;"
-            color='#43A047'
-            fab
-            dark
-            bottom
-            left
-            @click="$vuetify.goTo('#table'); showArrowTop=false; showArrow=true"
-            v-show="showArrowTop"
-          >
-            <v-icon>mdi-chevron-down</v-icon>
-          </v-btn>
-        </v-fab-transition>
-
+            <v-btn style="position:fixed;
+                  left:25px;
+                  bottom:80px;"
+              color='#43A047'
+              fab
+              dark
+              bottom
+              left
+              @click="$vuetify.goTo('#app_bar'); showArrow=false; showArrowTop=true"
+              v-show="showArrow"
+            >
+              <v-icon>mdi-chevron-up</v-icon> 
+            </v-btn>
+          </v-fab-transition>
+  
+  
+          <v-fab-transition>
+            <v-btn style="position:fixed;
+                  left:25px;
+                  top:80px;"
+              color='#43A047'
+              fab
+              dark
+              bottom
+              left
+              @click="$vuetify.goTo('#table'); showArrowTop=false; showArrow=true"
+              v-show="showArrowTop"
+            >
+              <v-icon>mdi-chevron-down</v-icon>
+            </v-btn>
+          </v-fab-transition>
            </v-container>
 
 
@@ -433,38 +488,155 @@
    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
    <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+   <script async defer src="https://apis.google.com/js/api.js"
+onload="this.onload=function(){};handleClientLoad()"
+onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+
    <script>
 
 
        var res;
 
       
+     
+
 
        //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //for localhost domain
        var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
        //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";
        //var my_token:  "34280469-d493-4041-95e5-664f7fec6daf"; trillium
+       
+
+       $(window).load(function() {
+        //dom not only ready, but everything is loaded
+            listBldgs();
+        });
+
        $(document).ready(function ()
        {
            govmap.createMap('map', 
                {
                    token:  my_token,
                    showXY: true,
-                   layers: ["BLDG_risk", "sites_muchrazim_test", "sites_tamaheyter_test", "T413", "ADD_PROJECTS_UR_MUCHRAZ", "SCHOOL"],
+                   layers: ["BLDG_risk", "sites_distance_shore_buffer_prod", "sites_tamaheyter_test", "T413", "ADD_PROJECTS_UR_MUCHRAZ", "local_committees"],
                    visibleLayers: ["BLDG_risk"],
                    layersMode: 2,
                    identifyOnClick: true,
                    isEmbeddedToggle: false,
                    background: 0,
-                   layersMode: 1
                });
 
-               govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE > 0 AND AppCount >3", 'zoomToExtent': false });
+               govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE > 0 AND AppCount >3 AND BuildingYear <= 1975", 'zoomToExtent': false });
 
            if (isMobile()){
                appVue.mobile = true;
            }
+
+           
+           
+
+           
        });
+
+       function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+          //authorizeButton.onclick = handleAuthClick;
+          //signoutButton.onclick = handleSignoutClick;
+        }, function(error) {
+          //JSON.stringify(error, null, 2));
+        });
+      }
+
+
+       function authenticate() {
+		return gapi.auth2.getAuthInstance()
+			.signIn({scope: SCOPES})
+			.then(function() { console.log("Sign-in successful"); },
+				  function(err) { console.error("Error signing in", err); });
+	}
+	function loadClient() {
+		gapi.client.setApiKey(API_KEY);
+		return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
+			.then(function() { console.log("GAPI client loaded for API"); },
+				  function(err) { console.error("Error loading GAPI client for API", err); });
+	}
+
+
+//https://docs.google.com/spreadsheets/d/1_Z8j4o2PkMEve-t9cX4mFGNoyx_SZiLmXykqPEK9Et4/edit#gid=1059545443
+
+
+       var PointCount = 0;
+      // Client ID and API key from the Developer Console
+      var CLIENT_ID = '455032185652-ogrgu70vr0u72p1v0ht1864o1ng4nvil.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyBDU5RFJk1IDETKeGB0I5ycQu6NaUnLWqA'; 
+      // Array of API discovery doc URLs for APIs used by the quickstart
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+	    
+      // SpreadsheetID to be updated:https://docs.google.com/spreadsheets/d/1TYUtK5NChZ2DNFebR4KTycpju9I9evhvsI8M3dCt2lE/edit
+      var SPREADSHEETID = '1_Z8j4o2PkMEve-t9cX4mFGNoyx_SZiLmXykqPEK9Et4'
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      var SCOPES = "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets";
+
+
+       function listBldgs() {
+        appVue.progress = true;
+        setTimeout(function(){
+            gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: SPREADSHEETID,
+          range: 'bldg_risk_1975!A2:J',
+        }).then(function(response) {
+          var range = response.result;
+          if (range.values.length > 0) {
+            for (i = 0; i < range.values.length; i++) {
+              var row = range.values[i];
+              var obj = {
+              'UNIQ_ID' : row[0],
+              'AppCount' : row[1],
+              'BuildingYear': row[2],
+              'BuildingFloors': row[3],
+              'HOUSE_NUM':  row[4],
+              'ENTRY_LETR': row[5],
+              'SETL_NAME' : row[6],
+              'STR_NAME': row[7],
+              };
+              // Print columns A and E, which correspond to indices 0 and 4.
+              appVue.bldg_features.push(obj);
+
+              if (i == range.values.length - 1){
+                appVue.progress = false;
+                appVue.done  = true;
+                setTimeout(function(){appVue.done  = false;}, 1000)
+                appVue.myloadingvariable = false;
+                
+              }
+            }
+          } else {
+            console.log('No data found.');
+          }
+	  
+        }, function(response) {
+            console.log('Error: ' + response.result.error.message);
+        });
+
+        }, 1000);
+       
+      }
 
        var s_wkts = [];
        var s_names = [];
@@ -501,51 +673,53 @@
      }
 
 
-
-
     $(window).scroll(function() {
-      if (appVue.selected_features.length > 0)
-      {
-        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+      //if (appVue.selected_features.length > 0)
+     // {
+        x = $(window).scrollTop() + $(window).height();
+        if (x >=  $(document).height() - 3 && x <=  $(document).height() + 3) {
+        //if($(window).scrollTop() + $(window).height() == $(document).height()) {
               appVue.showArrow = true;
               appVue.showArrowTop = false;
+              console.log("bottom");
         }
-        if ($(window).scrollTop() == 0) {
-          console.log("top");
+        if ($(window).scrollTop() <= 15) {
+              console.log("top");
               appVue.showArrow = false;
               appVue.showArrowTop = true;
         }  
-      }
+      //}
     });
 
-         $.ajax({
-             dataType: 'json',
-             beforeSend : function() { 
-                 //console.log("sending...");
-             },
-             success: function(json_data) {
-                 {
-                   if (json_data.length > 0)
-                   {
-                       //appVue.bldg_features = json_data.filter
+        //  $.ajax({
+        //      dataType: 'json',
+        //      beforeSend : function() { 
+        //          //console.log("sending...");
+        //      },
+        //      success: function(json_data) {
+        //          {
+        //            if (json_data.length > 0)
+        //            {
+                       
 
-                       appVue.bldg_features = json_data.filter(function(item) {
-                            return item.AppCount > 3
-                        });
+        //                //appVue.bldg_features = json_data.filter(function(item) {
+        //                     //return item.AppCount > 3 && item.BuildingYear <= 1975
+        //                // });
 
-                       appVue.myloadingvariable = false;
 
-  
-                       //console.log("done");
-                   }
-                 }
+        //                appVue.myloadingvariable = false;
+
+                       
+        //                //console.log("done");
+        //            }
+        //          }
                  
-             },
-             error : function(jqXHR, textStatus, errorThrown) {
-                 //console.log("Error occurred: " + errorThrown);
-             },
-             url: 'https://www.govmap.gov.il/sites/bldg_risk.json'
-         });
+        //      },
+        //      error : function(jqXHR, textStatus, errorThrown) {
+        //          //console.log("Error occurred: " + errorThrown);
+        //      },
+        //      url: 'https://www.govmap.gov.il/sites/bldg_risk.json'
+        //  });
      
 
  
@@ -554,6 +728,11 @@
        vuetify: new Vuetify(),
        data () {
        return {
+        value: 0,
+        done: false,
+        progress: false,
+        setl_name: null,
+        setl_name_snack_bar: false,
         showArrowTop: false,
         showArrow:false,
         min_appartments: 4,
@@ -566,11 +745,11 @@
            gsv_dialog: false,
            snackbar: false,
            strview_snackbar: false,
-           year_rules: [v => v <= 1985 || 'שנת בניה מקסימלית 1985', v => v >= 1900 || 'שנת בניה מינימלית 1900'],
-           year_rules: [v => v <= 1985 || 'שנת בניה מקסימלית 1985', v => v >= 1900 || 'שנת בניה מינימלית 1900'],
+           year_rules: [v => v <= 1975 || 'שנת בניה מקסימלית 1975', v => v >= 1900 || 'שנת בניה מינימלית 1900'],
+           year_rules: [v => v <= 1975 || 'שנת בניה מקסימלית 1975', v => v >= 1900 || 'שנת בניה מינימלית 1900'],
            mobile: false,
            min_year: 1900,
-           max_year: 1985,
+           max_year: 1975,
            min_floor: 1,
            max_floor: 10,
          selected: null,
@@ -1035,6 +1214,9 @@
            //console.log(value.UNIQ_ID);
            //govmap.zoomToXY({ x: value.x, y: value.y, level: 10, marker: false });
            govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'UNIQ_ID', 'fieldValues': [value.UNIQ_ID], 'highlight': true });
+           appVue.showArrowTop = true;
+           appVue.showArrow = false;
+           window.scrollTo({ top: 0, behavior: 'smooth' });
        },
        close () {
            this.dialog = false;
@@ -1056,6 +1238,14 @@
                    //console.log("SFDF")
                    appVue.snackbar = true;
                }
+               else{
+                appVue.setl_name_snack_bar = true;
+                   this.menu_btn = true;
+                    this.showArrow = true;
+                    this.showArrowTop = false;
+                    //$vuetify.goTo('#table')
+                    setTimeout(function(){window.scrollTo(3,document.body.scrollHeight)}, 500);
+               }
            }
 
 
@@ -1063,6 +1253,7 @@
            this.dialog = false;
        },
        onChange(event) {
+        appVue.myloadingvariable = true;
            console.log(event.toString());
 
            govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE = " + event.toString() + " AND AppCount > 3", 'zoomToExtent': true });
@@ -1072,8 +1263,11 @@
 
            if (newArray){
                //console.log(newArray[0].text);
+               appVue.setl_name = newArray[0].text;
+               appVue.setl_name_snack_bar = true;
+               console.log(appVue.bldg_features.length);
                appVue.selected_features = appVue.bldg_features.filter(function(item) {
-                   return item.SETL_NAME == newArray[0].text;
+                   return (item.SETL_NAME == newArray[0].text) && (item.BuildingYear >= appVue.min_year && item.BuildingYear <= appVue.max_year) && (item.BuildingFloors >= appVue.min_floor && item.BuildingFloors <= appVue.max_floor)  && (item.AppCount >= appVue.min_appartments && item.AppCount <= appVue.max_appartments) ;
                });
                //console.log(event);
                
@@ -1084,8 +1278,10 @@
                this.menu_btn = true;
                this.showArrow = true;
                this.showArrowTop = false;
-               setTimeout(function(){window.scrollTo(0,document.body.scrollHeight)}, 100);
+               //$vuetify.goTo('#table')
+               setTimeout(function(){window.scrollTo(3,document.body.scrollHeight)}, 500);
            }
+           appVue.myloadingvariable = false;
        },
 
        openStreetView(item){
@@ -1149,23 +1345,28 @@
            appVue.selected_features = [];
            appVue.selected = null;
            appVue.min_year = 1900;
-           appVue.max_year= 1985;
+           appVue.max_year= 1975;
            appVue.min_floor= 1;
            appVue. max_floor= 10;
            appVue.min_appartments= 4;
            appVue. appartments= 100;
            appVue.dialog= false;
            govmap.clearSelection();
-           govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE > 0 AND AppCount >3", 'zoomToExtent': true });
+           govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE > 0 AND AppCount >3 AND BuildingYear <= 1975", 'zoomToExtent': true });
            appVue.showArrow = false;
            appVue.showArrowTop = false;
+           appVue.setl_name= null;
+           appVue.setl_name_snack_bar= false;
 
        }
-     }
+     },
      })
  
      appVue.bldg_features = [];
    </script>
+
+   
+
 
 
 
