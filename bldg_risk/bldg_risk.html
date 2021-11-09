@@ -2,18 +2,20 @@
 
 
 
+
 <html xmlns="https://www.w3.org/1999/xhtml">
 <head>
 
 
 
-   <title>ניתוח מבנים להתחדשות עירונית</title>
+   <title>ניתוח מבנים בפוטנציאל סיכון</title>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta
    name="viewport"
    content="width = device-width,
               initial-scale = 1"/>
+<meta name="google-site-verification" content="4fJRdwWw-P_pInZJcUSw5iLGm0Hkg2kyA1btUxmgXPA" />
 
  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
  <script src="https://maps.googleapis.com/maps/api/js?region=ES&key=AIzaSyDQbdWdebd06QbQgaU3hRCHKJsa9JujxkQ"></script> 
@@ -30,6 +32,12 @@
     [v-cloak] {
             display: none;
         }
+
+        tr.v-data-table__selected {
+          background: #A7FFEB!important;
+        }
+
+
 </style>
 
 </head>
@@ -45,9 +53,6 @@
        <v-app right style='background-image: linear-gradient(to bottom right, #FAFAFA ,  #BBDEFB); opacity: 90%;'>
          <v-main>
 
-
-   
-  
        <div style="width: 250px;
        height: 50px;
        position: absolute;
@@ -221,10 +226,10 @@
                color="red"
                :content="selected_features.length"
                :value="badge"
-             >ניתוח מבנים להתחדשות עירונית </v-badge></p></div>
+             >ניתוח מבנים בפוטנציאל סיכון </v-badge></p></div>
 
 
-               <div v-else style="margin-top: 17px; font-size: large;"><p> ניתוח מבנים להתחדשות עירונית </p></div>
+               <div v-else style="margin-top: 17px; font-size: large;"><p> ניתוח מבנים בפוטנציאל סיכון </p></div>
 
 
                  <v-chip v-if="!mobile" v-show="selected_features.length > 0"
@@ -277,6 +282,7 @@
              hide-details
              style="max-width: 200px;"
              @change='onChange'
+             v-show="!progress"
 
 
              ></v-autocomplete>
@@ -320,12 +326,12 @@
                <v-layout id="table-v-layout" column style="max-height: 60vh">       
                    <v-flex style="overflow: auto;">
 
-               <v-data-table 
+               <v-data-table ref="d-table"
                  style="cursor: pointer"
                  height="400"
                  fixed-header
                  @click:row="handleClick"
-                 :headers="headers"
+                 :headers="computedHeaders"
                  sort-by="STR_NAME"
                  :items="selected_features"
                  :search="search"
@@ -338,6 +344,15 @@
                  class="elevation-1"
                  @page-count="pageCount = $event">
 
+
+                 <template v-slot:item.status="{ item }">
+                  <v-chip
+                    :color="getColor(item.STATUS)"
+                    outlined
+                  >
+                    {{item.STATUS}}
+                  </v-chip>
+                </template>
    
 
                  <template v-slot:item.action="{ item }">
@@ -349,8 +364,197 @@
                    </v-icon>
                  </template>
 
+                 <template v-slot:item.actions="{ item }">
+                    <v-icon
+                      small
+                      @click="editItem(item)"
+                      v-show="userIn"
+                      color="green darken-3"
+                    >
+                      mdi-pencil
+                    </v-icon>
+                  </template>
+
+                  <template v-slot:top>
+                    <v-toolbar
+                      flat
+                    >
+                      <v-toolbar-title>ניהול פרטי מבנים</v-toolbar-title>
+                      <v-divider
+                        class="mx-4"
+                        inset
+                        vertical
+                      ></v-divider>
+                      <v-spacer></v-spacer>
+  
+                        <v-btn
+                        depressed
+                        color="primary"
+                        @click="logIn"
+                        v-show="!userIn"
+                    >
+                        עריכת נתונים
+                  </v-btn>
+
+                    <v-btn
+                    depressed
+                    color="error"
+                    @click="logOut"
+                    v-show="userIn"
+                >
+                יציאה מעריכה
+                </v-btn>
+
+                      <v-dialog
+                        v-model="edit_dialog"
+                        max-width="500px"
+                      >
+                      <v-system-bar>
+                        {{addr}}
+                        <v-spacer></v-spacer>
+                        <v-btn
+                        color="black"
+                        text
+                        @click="edit_dialog = false"
+                      >
+                        X
+                      </v-btn>
+                      </v-system-bar>
+
+                        <v-card>
+                          <v-card-title v-show="userIn">
+
+                            <span class="headline">עריכת פרטים</span>
+                          </v-card-title>
+              
+                          <v-card-text>
+                            <v-container>
+
+                              <v-data-iterator
+                              :items="selected_features"
+                              :items-per-page.sync="itemsPerPage"
+                              hide-default-footer
+                            >
+
+     
+                                <v-row>
+                                  <v-col
+                                    cols="12"
+                                    sm="12"
+                                    md="12"
+                                    lg="12"
+                                  >
+                                    <v-card>
+                                      <v-card-title class="subtitle-1 font-weight-bold">
+                                        {{addr}}
+                                      </v-card-title>
+                        
+                                      <v-divider></v-divider>
+                        
+                                      <v-list dense>
+                                        <v-list-item>
+                                          <v-list-item-content>קומות:</v-list-item-content>
+                                          <v-list-item-content class="align-end">
+                                            {{ editItem.BuildingFloors }}
+                                          </v-list-item-content>
+                                        </v-list-item>
+                        
+                                        <v-list-item>
+                                          <v-list-item-content>שנת בניה:</v-list-item-content>
+                                          <v-list-item-content class="align-end">
+                                            {{ editItem.BuildingYear }}
+                                          </v-list-item-content>
+                                        </v-list-item>
+
+                                                           
+                                        <v-list-item>
+                                          <v-list-item-content>מספר דירות:</v-list-item-content>
+                                          <v-list-item-content class="align-end">
+                                            {{ editItem.AppCount }}
+                                          </v-list-item-content>
+                                        </v-list-item>
+
+                                        <v-list-item>
+                                          <v-list-item-content>תמונה מגוגל מפות</v-list-item-content>
+                                          <v-list-item-content class="align-end">
+                                            <v-row>
+                                             
+                                              <v-icon
+                                                style="margin: 5px;"
+                                                color="yellow darken-3"
+                                                @click="openStreetView(item)"
+                                              >
+                                              mdi-google-street-view
+                                              </v-icon>
+                                              <v-spacer></v-spacer>
+                                            </v-row>
+                                      
+                                          </v-list-item-content>
+                                        </v-list-item>
+
+
+   
+                      
+                                      </v-list>
+                                    </v-card>
+                                  </v-col>
+                                </v-row>
+                            </v-data-iterator>
+
+                              <v-row v-show="userIn">
+                                <v-col
+                                  cols="12"
+                                  sm="6"
+                                  md="4"
+                                >
+                                  <v-select
+                                    :items="['טרם נבדק', 'חשש לסיכון', 'לא בסיכון']"
+                                    v-model="editItem.STATUS"
+                                    label="סטטוס"
+                                  ></v-select>
+                                </v-col>
+                                <v-col
+                                  cols="12"
+                                  sm="6"
+                                  md="4"
+                                >
+                                  <v-select
+                                    :items="['לא ידוע', 'כן', 'לא']"
+                                    v-model="editItem.AMUDIM"
+                                    label="עמודים"
+                                  ></v-select>
+                                </v-col>
+                              </v-row>
+                            </v-container>
+                          </v-card-text>
+              
+                          <v-card-actions v-show="userIn">
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="close"
+                            >
+                              ביטול
+                            </v-btn>
+                            <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="saveItem"
+                            >
+                              שמירה
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </v-toolbar>
+                </template>
+
 
                </v-data-table>
+
+
+
                </v-flex>
            </v-layout>
                <div class="text-center pt-2">
@@ -496,6 +700,28 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
 
    <script>
 
+function PointToPolygon(x, y, r)
+		{			
+			var x1 = x - r;
+			var y1 = y;
+			var x2 = x - (((r / 2)) / (2)) - ((r / 2));
+			var y2 = y + (((r / 2)) / (2)) + ((r / 2));
+			var x3 = x;
+			var y3 = y + r;
+			var x4 = x + (((r / 2)) / (2)) + ((r / 2));
+			var y4 = y + (((r / 2)) / (2)) + ((r / 2));
+			var x5 = x + r;
+			var y5 = y;
+			var x6 = x + (((r / 2)) / (2)) + ((r / 2));
+			var y6 = y - (((r / 2)) / (2)) - ((r / 2));
+			var x7 = x;
+			var y7 = y - r;
+			var x8 = x - (((r / 2)) / (2)) - ((r / 2));
+			var y8 = y - (((r / 2)) / (2)) - ((r / 2));
+			var wkt = "POLYGON(("+x1+" "+y1+", "+x2+" "+y2+", "+x3+" "+y3+", "+x4+" "+y4+", "+x5+" "+y5+", "+x6+" "+y6+", "+x7+" "+y7+", "+x8+" "+y8+", "+x1+" "+y1+"))";
+			return wkt;
+		}
+
 
        var res;
 
@@ -503,7 +729,7 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
      
 
 
-       //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //for localhost domain
+      // var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990"; //for localhost domain
        var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
        //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";
        //var my_token:  "34280469-d493-4041-95e5-664f7fec6daf"; trillium
@@ -516,6 +742,7 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
 
        $(document).ready(function ()
        {
+          appVue.progress = true;
            govmap.createMap('map', 
                {
                    token:  my_token,
@@ -526,6 +753,7 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
                    identifyOnClick: true,
                    isEmbeddedToggle: false,
                    background: 0,
+                   showBubble: false
                });
 
                govmap.filterLayers({ 'layerName': "BLDG_risk", 'whereClause': "SETL_CODE > 0 AND AppCount >3 AND BuildingYear <= 1975", 'zoomToExtent': false });
@@ -533,6 +761,99 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
            if (isMobile()){
                appVue.mobile = true;
            }
+
+          govmap.onEvent(govmap.events.CLICK).progress(function (e)  
+          {	
+              
+              click_result = e;
+              console.log(e);
+              var wkt = PointToPolygon(e.mapPoint.x, e.mapPoint.y, 1)
+              var params = {  
+                  geometry: wkt, //point: {x: 167127.5939715321,  y: 624580.483296493},  // need wkt polygon...
+                  layerName: "BLDG_risk",  
+                  fields: ['UNIQ_ID',
+                            'AppCount',
+                            'BuildingYear',
+                            'BuildingFloors',
+                            'HOUSE_NUM',
+                            'ENTRY_LETR',
+                            'SETL_NAME',
+                            'STR_NAME']
+              }
+              govmap.intersectFeatures(params).then(function (response)  
+              {  
+                console.log(response)
+                if (response.status == 0){
+                  if (appVue.selected_features.length == 0){
+                    appVue.selected_features = appVue.bldg_features.filter(function(item) {
+                        return (item.UNIQ_ID == response.data[0].Values[0]);
+                    });
+                    appVue.editItem = appVue.selected_features[0];
+                    var item = appVue.selected_features[0];
+                    appVue.addr = item.STR_NAME.replace('""', '"') + " " + item.HOUSE_NUM + " " + ", " + item.SETL_NAME.replace('""', '"');
+                    govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'UNIQ_ID', 'fieldValues': [response.data[0].Values[0]], 'highlight': true,
+                              'showBubble':false,
+                              'outLineColor':[127, 255, 220, 1],
+                              'outlineWidth': 1, 
+                              'fillColor': [255, 255, 255, 0.1]});
+                    setTimeout(function(){
+                      table = document.getElementsByTagName('table')[0];
+                      var rows = table.rows;
+                      for (var i = 0; i < rows.length; i++) {
+                          var rowText = rows[i].firstChild.textContent;
+                          console.log("rowText = " + rowText)
+                          console.log("response.data[0].Values[0] = " +response.data[0].Values[0])
+                          if (rowText == response.data[0].Values[0]){
+                            rows[i].style="background: #A7FFEB!important;";
+                            appVue.edit_dialog = true;
+                          }
+                      }
+                    }, 500)
+                  }
+                
+                else{
+                
+                
+                    var filterArray = appVue.bldg_features.filter(function(item) {
+                        return (item.UNIQ_ID == response.data[0].Values[0]);
+                    });
+                    appVue.editItem = filterArray[0];
+                    var item = filterArray[0];
+                    appVue.addr = item.STR_NAME.replace('""', '"') + " " + item.HOUSE_NUM + " " + ", " + item.SETL_NAME.replace('""', '"');
+                    govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'UNIQ_ID', 'fieldValues': [response.data[0].Values[0]], 'highlight': true,
+                              'showBubble':false,
+                              'outLineColor':[127, 255, 220, 1],
+                              'outlineWidth': 1, 
+                              'fillColor': [255, 255, 255, 0.1]});
+                    setTimeout(function(){
+                      var table = document.getElementsByTagName('table')[0];
+                    var rows = table.rows;
+                    for (var i = 0; i < rows.length; i++) {
+                        
+                        var rowText = rows[i].firstChild.textContent;
+                        console.log("rowText = " + rowText)
+                        console.log("response.data[0].Values[0] = " +response.data[0].Values[0])
+                        if (rowText == response.data[0].Values[0]){
+                          rows[i].style="background: #A7FFEB!important;";
+                          appVue.edit_dialog = true;
+                          prevRow = rows[i];
+                        }
+                        else{
+                          //rows[i].style="background: none!important;";
+                          rows[i].style="background: none!important;";
+
+                        }
+                    }
+                    }, 1000)
+                  }
+                }
+                
+
+                
+              });
+
+          });
+
 
            
            
@@ -562,6 +883,20 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
         });
       }
 
+ 
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          appVue.userIn = true;
+          //authorizeButton.style.display = 'none';
+          //signoutButton.style.display = 'block';
+          
+        } else {
+          appVue.userIn = false;
+          //authorizeButton.style.display = 'block';
+          //signoutButton.style.display = 'none';
+        }
+      }
+
 
        function authenticate() {
 		return gapi.auth2.getAuthInstance()
@@ -582,8 +917,8 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
 
        var PointCount = 0;
       // Client ID and API key from the Developer Console
-      var CLIENT_ID = '455032185652-ogrgu70vr0u72p1v0ht1864o1ng4nvil.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyBDU5RFJk1IDETKeGB0I5ycQu6NaUnLWqA'; 
+      var CLIENT_ID = '333270149523-3a7iv5m8fhn7pbenn54cgrvkdkecgl1c.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyBzAuV865rJp6pUk_9iFKVrliUc4mjVKpo'; 
       // Array of API discovery doc URLs for APIs used by the quickstart
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 	    
@@ -592,6 +927,52 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
       var SCOPES = "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets";
+
+      function authenticate() {
+		return gapi.auth2.getAuthInstance()
+			.signIn({scope: SCOPES})
+			.then(function() { console.log("Sign-in successful"); },
+				  function(err) { console.error("Error signing in", err); });
+	}
+	function loadClient() {
+		gapi.client.setApiKey(API_KEY);
+		return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
+			.then(function() { console.log("GAPI client loaded for API"); },
+				  function(err) { console.error("Error loading GAPI client for API", err); });
+	}
+
+       function updateBldg(this_UNIQ_ID, this_STATUS){
+        setTimeout(function(){
+        gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: SPREADSHEETID,
+            range: 'bldg_risk_1975!A1:J',
+                }).then(function(response) {
+                var range = response.result;
+                if (range.values.length > 0) {
+                    console.log(this_UNIQ_ID);
+                    for (i = 0; i < range.values.length; i++) {
+                        var row = range.values[i];
+                        var UNIQ_ID = row[0];
+                        //console.log(appVue.editedItem.UNIQ_ID);
+                        if (UNIQ_ID == this_UNIQ_ID){
+                            console.log(i + 1);
+                            var rowId = i + 1;
+                                gapi.client.sheets.spreadsheets.values.update({
+                                    spreadsheetId: SPREADSHEETID,
+                                    range: 'bldg_risk_1975!I' + rowId,
+                                    valueInputOption: 'USER_ENTERED',
+                                    values: [ [this_STATUS] ]
+                                }).then(function(response) {
+                                    console.log(response);
+                                });
+                          
+                        }
+                    }
+                }
+            });
+        }, 1000);
+
+       }
 
 
        function listBldgs() {
@@ -614,6 +995,8 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
               'ENTRY_LETR': row[5],
               'SETL_NAME' : row[6],
               'STR_NAME': row[7],
+              'AMUDIM': row[9],
+              'STATUS':  row[8],
               };
               // Print columns A and E, which correspond to indices 0 and 4.
               appVue.bldg_features.push(obj);
@@ -728,6 +1111,21 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
        vuetify: new Vuetify(),
        data () {
        return {
+        prevRow: null,
+        userIn: false,
+        edit_dialog: false,
+        editedItem: {
+            AMUDIM: "",
+            AppCount: "",
+            BuildingFloors: "",
+            BuildingYear: "",
+            ENTRY_LETR: "",
+            HOUSE_NUM: "",
+            SETL_NAME: "",
+            STATUS: "",
+            STR_NAME: "",
+            UNIQ_ID: "",
+        },
         value: 0,
         done: false,
         progress: false,
@@ -758,16 +1156,6 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
          pageCount: 0,
          itemsPerPage: 500,
          search: '',
-         headers: [
-         { text: 'מזהה', value: 'UNIQ_ID' },
-         { text: 'שם ישוב', value: 'SETL_NAME' },
-         { text: 'שם רחוב', value: 'STR_NAME' },
-         { text: 'מספר בית', value: 'HOUSE_NUM'},
-         { text: 'מספר דירות', value: 'AppCount'},
-         { text: 'מספר קומות', value: 'BuildingFloors'},
-         { text: 'שנת בניה', value: 'BuildingYear'},
-         { text: 'גוגל מפות', value: 'action' }  
-         ],
 
 
          options: [
@@ -1207,19 +1595,117 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
              }
              return res;
  
-         }
+         },
+         computedHeaders () {
+             if (this.userIn){
+                 return [
+         { text: 'מזהה', value: 'UNIQ_ID' },
+         { text: 'שם ישוב', value: 'SETL_NAME' },
+         { text: 'שם רחוב', value: 'STR_NAME' },
+         { text: 'מספר בית', value: 'HOUSE_NUM'},
+         { text: 'מספר דירות', value: 'AppCount'},
+         { text: 'מספר קומות', value: 'BuildingFloors'},
+         { text: 'שנת בניה', value: 'BuildingYear'},
+         { text: 'עמודים', value: 'AMUDIM' },
+         { text: 'סטטוס', value: 'status' },
+         { text: 'גוגל מפות', value: 'action' },
+         { text: 'עריכה', value: 'actions', sortable: false }
+         ]
+             }
+             else{
+
+                return [
+         { text: 'מזהה', value: 'UNIQ_ID' },
+         { text: 'שם ישוב', value: 'SETL_NAME' },
+         { text: 'שם רחוב', value: 'STR_NAME' },
+         { text: 'מספר בית', value: 'HOUSE_NUM'},
+         { text: 'מספר דירות', value: 'AppCount'},
+         { text: 'מספר קומות', value: 'BuildingFloors'},
+         { text: 'שנת בניה', value: 'BuildingYear'},
+         { text: 'עמודים', value: 'AMUDIM' },
+         { text: 'סטטוס', value: 'status' },
+         { text: 'גוגל מפות', value: 'action' },
+          
+         ]
+
+             }
+             
+        }
      },
      methods: {
-       handleClick(value) {
-           //console.log(value.UNIQ_ID);
-           //govmap.zoomToXY({ x: value.x, y: value.y, level: 10, marker: false });
-           govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'UNIQ_ID', 'fieldValues': [value.UNIQ_ID], 'highlight': true });
+        getColor(status ) {
+          if (status  == 'חשש לסיכון') return 'red'
+          else if (status == 'לא בסיכון') return 'green'
+          else return 'grey darken-2'
+        },
+        logIn(){
+            authenticate().then(loadClient);
+         },
+         logOut(){
+            gapi.auth2.getAuthInstance().signOut();
+         },
+        editItem (item) {
+        
+        this.editedIndex = this.selected_features.indexOf(item);
+        this.editedItem = Object.assign({}, item);
+        this.edit_dialog = true;
+      },
+       handleClick(value, row) {
+         console.log(row);
+
+          //   if (this.prevRow){
+          //     this.prevRow.select(false);
+          //   }
+
+          //   row.select(true);
+          //   this.prevRow = row;
+          //  //console.log(value.UNIQ_ID);
+          //  //govmap.zoomToXY({ x: value.x, y: value.y, level: 10, marker: false });
+          //  govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'UNIQ_ID', 'fieldValues': [value.UNIQ_ID], 'highlight': true,
+          //                     'showBubble':false,
+          //                     'outLineColor':[127, 255, 220, 1],
+          //                     'outlineWidth': 1, 
+          //                     'fillColor': [255, 255, 255, 0.1]});
+
+
+          var filterArray = appVue.bldg_features.filter(function(item) {
+                        return (item.UNIQ_ID == value.UNIQ_ID);
+                    });
+                    appVue.editItem = filterArray[0];
+                    var item = filterArray[0];
+                    appVue.addr = item.STR_NAME.replace('""', '"') + " " + item.HOUSE_NUM + " " + ", " + item.SETL_NAME.replace('""', '"');
+                    govmap.searchInLayer({ 'layerName': 'BLDG_risk', 'fieldName': 'UNIQ_ID', 'fieldValues': [value.UNIQ_ID], 'highlight': true,
+                              'showBubble':false,
+                              'outLineColor':[127, 255, 220, 1],
+                              'outlineWidth': 1, 
+                              'fillColor': [255, 255, 255, 0.1]});
+                    setTimeout(function(){
+                      var table = document.getElementsByTagName('table')[0];
+                    var rows = table.rows;
+                    for (var i = 0; i < rows.length; i++) {
+                        
+                        var rowText = rows[i].firstChild.textContent;
+                        console.log("rowText = " + rowText)
+                        console.log("value.UNIQ_ID = " +value.UNIQ_ID)
+                        if (rowText == value.UNIQ_ID){
+                          rows[i].style="background: #A7FFEB!important;";
+                        }
+                        else{
+                          //rows[i].style="background: none!important;";
+                          rows[i].style="background: none!important;";
+
+                        }
+                    }
+                    }, 500)
+
+
+
            appVue.showArrowTop = true;
            appVue.showArrow = false;
            window.scrollTo({ top: 0, behavior: 'smooth' });
        },
        close () {
-           this.dialog = false;
+           this.edit_dialog = false;
        },
        save() {
 
@@ -1340,6 +1826,34 @@ onreadystatechange="if (this.readyState === 'complete') this.onload()">
            //window.open(item.StreetView.replace('++', '+').replace(' -', ' '), '_blank').focus();
 
        },
+
+       close () {
+        this.edit_dialog = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+      },
+
+      saveItem () {
+        
+        if (this.editedIndex > -1) {
+            Object.assign(this.selected_features[this.editedIndex], this.editedItem)
+
+            // change on firebase
+            console.log("// get the uniq_id " + this.editedItem.UNIQ_ID );
+            var this_UNIQ_ID = this.editedItem.UNIQ_ID;
+            var this_STATUS = this.editedItem.STATUS;
+            console.log(this_UNIQ_ID);
+            console.log("// get the object " + this.editedItem.STATUS );
+
+
+            updateBldg(this_UNIQ_ID, this_STATUS);
+
+        }
+        this.close()
+      },
+
        clear(){
 
            appVue.selected_features = [];
