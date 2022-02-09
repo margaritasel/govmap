@@ -211,55 +211,113 @@
 
                         <v-form>
                         <v-container>
-                            <v-row align="center" justify="center">
+                          <v-radio-group
+                          v-model="radios"
+                          mandatory
+                        >
+                            <v-row>
                             <v-col
                                 cols="12"
                                 md="6"
                             >
-                                <v-text-field
-                                v-model="name"
-                                :disabled="isUpdating"
-                                filled
-                                color="blue-grey lighten-2"
-                                label="תפקיד"
-                                ></v-text-field>
+                            <v-layout row wrap>
+                            <v-flex xs1 style="margin-top: 18px;">
+                              <v-radio
+                              value="role_radio"
+                              style="margin-bottom: 25px; margin-right:-8px"
+                              >
+                              </v-radio>
+                            </v-flex>
+                            <v-flex xs11>
+                                  <v-select
+                                  :disabled="!(radios=='role_radio')"
+                                  v-model="role_item"
+                                  :disabled="isUpdating"
+                                  filled
+                                  color="blue-grey lighten-2"
+                                  label="תפקיד"
+                                  :items="role_items"
+                                  @change="roleChanged()"
+                                  >
+                                </v-select>
+                              </v-flex>
+                            </v-layout>
+
                             </v-col>
                             <v-col
                                 cols="12"
                                 md="6"
                             >
-                                <v-text-field
-                                v-model="title"
-                                :disabled="isUpdating"
+                            <v-layout row wrap>
+                              <v-flex xs1 style="margin-top: 18px;">
+                              <v-radio
+                              value="org_radio"
+                              style="margin-bottom: 25px; margin-right:-8px">
+                              </v-radio>
+                              </v-flex>
+                              <v-flex xs11>
+                                <v-select
+                                :disabled="!(radios=='org_radio')"
+                                v-model="org_item"
                                 filled
                                 color="blue-grey lighten-2"
                                 label="ארגון"
-                                ></v-text-field>
+                                :items="org_items"
+                                @change="orgChanged()"
+                                ></v-select>
+                              </v-flex>
+                            </v-layout>
+                              
                             </v-col>
                             <v-col 
                                 cols="12"
                                 md="6"
                             >
-                                <v-text-field 
-                                v-model="name"
-                                :disabled="isUpdating"
-                                filled
-                                color="blue-grey lighten-2"
-                                label="שם ישוב"
-                                ></v-text-field>
+                            <v-layout row wrap>
+                              <v-flex xs1 style="margin-top: 18px;">
+                              <v-radio
+                              value="setl_radio"
+                              style="margin-bottom: 25px; margin-right:-8px">
+                              </v-radio>
+                              </v-flex>
+                              <v-flex xs11>
+                              <v-select
+                              :disabled="!(radios=='setl_radio')"
+                              v-model="setlname"
+                              filled
+                              color="blue-grey lighten-2"
+                              label="שם ישוב"
+                              :items="setl_items"
+                              @change="setlChanged()"
+                              ></v-select>
+                            </v-layout>
+                              
                             </v-col>
+
+   
 
                             <v-col 
                             cols="12"
                             md="6"
                         >
-                            <v-text-field 
-                            v-model="name"
-                            :disabled="isUpdating"
-                            filled
-                            color="blue-grey lighten-2"
-                            label="תכנית"
-                            ></v-text-field>
+                        <v-layout row wrap>
+                          <v-flex xs1 style="margin-top: 18px;">
+                            <v-radio
+                            value="tochnit_radio"
+                            style="margin-bottom: 25px; margin-right:-8px">
+                            </v-radio>
+                          </v-flex>
+                          <v-flex xs11>
+                              <v-select 
+                              :disabled="!(radios=='tochnit_radio')"
+                              v-model="tochnit_item"
+                              filled
+                              color="blue-grey lighten-2"
+                              label="תכנית"
+                              :items="tochnit_items"
+                              @change="tochnitChanged()"
+                              ></v-select>
+                        </v-layout>
                         </v-col>
 
 
@@ -310,6 +368,10 @@
                                 </v-autocomplete>
                             </v-col>
                             </v-row>
+
+
+
+                          </v-radio-group>
                         </v-container>
                         </v-form>
                         <v-divider></v-divider>
@@ -715,6 +777,23 @@ var appVue = new Vue({
         ],
         title: '',
 
+        setl_items: [],
+        setlname: null,
+
+        org_items: [],
+        org_item: null,
+
+        role_items: [],
+        role_item: null,
+
+        tochnit_items:[],
+        tochnit_item: null,
+
+        radios: [],
+
+
+
+
 
 
         }
@@ -728,10 +807,84 @@ var appVue = new Vue({
     },
 
     methods: {
+      tochnitChanged(){
+        this.setItemsByTochnitSelect(this.tochnit_item);
+        this.setl_item = "";
+        this.role_item = "";
+        this.org_item = "";
+        this.friends = [];
+
+      },
+      roleChanged(){
+        this.setItemsByRole(this.role_item);
+        this.setl_item = "";
+        this.tochnit_item = "";
+        this.org_item = "";
+        this.friends = [];
+
+
+      },
+      orgChanged(){
+        this.setItemsByOrg(this.org_item);
+        this.setl_item = "";
+        this.tochnit_item = "";
+        this.role_item = "";
+        this.friends = [];
+
+      },
+      setlChanged(){
+        this.setItemsBySetl(this.setlname);
+        this.role_item = "";
+        this.tochnit_item = "";
+        this.org_item = "";
+        this.friends = [];
+        govmap.geocode()
+
+      },
       autoComplete(){
         console.log(this.friends);
         this.setItemsByFriends(this.friends)
+        this.setItemsBySetl(this.setlname);
+        this.role_item = "";
+        this.tochnit_item = "";
+        this.org_item = "";
+        this.setl_item = "";
 
+      },
+      setItemsByTochnitSelect(tochnit_item){
+        this.items = [];
+        //console.log(tochnit_item);
+          var array = json.filter(function (el) {return el.Tochnit == tochnit_item});
+          if (array.length > 0){
+            this.items = array;
+            console.log(array.length  + "results");
+          }
+          else{
+            console.log("no results");
+          }
+
+      },
+      setItemsByRole(role_item){
+        this.items = [];
+          var array = json.filter(function (el) {return el.Role == role_item});
+          if (array.length > 0){
+            this.items = array;
+          }
+
+      },
+      setItemsBySetl(setl_name){
+        this.items = [];
+          var array = json.filter(function (el) {return el.Settlement == setl_name});
+          if (array.length > 0){
+            this.items = array;
+          }
+      },
+      setItemsByOrg(org_item){
+        this.items = [];
+          var array = json.filter(function (el) {return el.Organization == org_item});
+          if (array.length > 0){
+            this.items = array;
+          }
       },
       setItemsByFriends(friends) {
         this.items = [];
@@ -760,6 +913,11 @@ var appVue = new Vue({
             console.log(item)
             this.selectedTitle = item;
             this.setItemsByTochnit(item)
+            this.role_item = "";
+            this.tochnit_item = "";
+            this.org_item = "";
+            this.friends = [];
+
 
         },
       isMobile() {
@@ -787,6 +945,8 @@ var appVue = new Vue({
         this.itemsPerPage = number
       },
     },
+
+
     mounted() {
       this.people = [];
       for (i=0; i < json.length; i++){
@@ -795,7 +955,41 @@ var appVue = new Vue({
         )
       }
 
+      //
+      this.setl_items = [];
+      for (i=0; i < json.length; i++){
+        if (!this.setl_items.includes(json[i].Settlement)){
+          this.setl_items.push(json[i].Settlement);
+        }
+      }
+      this.setl_items.sort();
 
+      //
+      this.org_items = [];
+      for (i=0; i < json.length; i++){
+        if (!this.org_items.includes(json[i].Organization)){
+          this.org_items.push(json[i].Organization);
+        }
+      }
+      this.org_items.sort();
+
+      //
+      this.role_items = [];
+      for (i=0; i < json.length; i++){
+        if (!this.role_items.includes(json[i].Role)){
+          this.role_items.push(json[i].Role);
+        }
+      }
+      this.role_items.sort();
+
+      //
+      this.tochnit_items = [];
+      for (i=0; i < json.length; i++){
+        if (!this.tochnit_items.includes(json[i].Tochnit)){
+          this.tochnit_items.push(json[i].Tochnit);
+        }
+      }
+      this.tochnit_items.sort();
     },
 
     computed: {
@@ -829,6 +1023,19 @@ var appVue = new Vue({
       margin-right: 5px !important;
     }
 
+    .float-container {
+        border: 3px solid #fff;
+    }
+
+
+
+    .float-child_big {
+        width: 10%;
+    }  
+
+    .float-child_small {
+        width: 90%;
+    }  
 
 
 
