@@ -778,7 +778,7 @@ var appVue = new Vue({
         title: '',
 
         setl_items: [],
-        setlname: null,
+        setl_item: null,
 
         org_items: [],
         org_item: null,
@@ -833,7 +833,7 @@ var appVue = new Vue({
 
       },
       setlChanged(){
-        this.setItemsBySetl(this.setlname);
+        this.setItemsBySetl(this.setl_item);
         this.role_item = "";
         this.tochnit_item = "";
         this.org_item = "";
@@ -844,7 +844,6 @@ var appVue = new Vue({
       autoComplete(){
         console.log(this.friends);
         this.setItemsByFriends(this.friends)
-        this.setItemsBySetl(this.setlname);
         this.role_item = "";
         this.tochnit_item = "";
         this.org_item = "";
