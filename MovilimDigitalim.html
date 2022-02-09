@@ -34,8 +34,8 @@
 
 
 <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
-    <div id="app" >
-      <v-app>
+    <div id="app" style="background-color: #ECEFF1" >
+      <v-app style="background-color: #ECEFF1">
 
  
             <v-app-bar
@@ -172,8 +172,9 @@
           
 
 
-       
+            <v-container>
             <v-row style="margin-top:50px;"> 
+         
                 <v-col cols="12"  xs="12" sm="12" md="6"  style="max-height: 750px; background-color: #00305b;">
 
                     <v-card
@@ -319,7 +320,9 @@
                         <v-card style="background-color: #ffffff !important;
                         border: 5px solid #01579B !important; margin-bottom:25px; margin: 25px;" id = "map" :height="mapHeight()"></v-card>
                 </v-col>
+              
             </v-row>
+          </v-container>
 
             <v-row style="background-color: #ECEFF1">
               <v-container>
