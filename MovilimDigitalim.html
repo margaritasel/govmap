@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html style='width:100%; height:100%;'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<head>
+  <title>מובילים דיגיטליים על המפה</title>
+
+
+
+  <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script>  
+  <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+
+
+ <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+ <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+</head>
+
+
+
+<body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+    <div id="app" >
+      <v-app>
+
+
+        <div>
+            <v-app-bar
+            fixed
+              color="#003154"
+              dense
+              dark
+              style="height:65px;"
+
+
+              
+            >
+              <v-spacer v-if="!isMobile()" ></v-spacer>
+             
+
+              <div v-if="!isMobile()" style="width: 250px"></div>
+
+
+
+              
+
+              <v-spacer v-if="!isMobile()"></v-spacer>
+
+              <v-menu
+              open-on-hover
+              offset-y
+
+             
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-toolbar-title
+                  color="#003154"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  style="margin-top:10px; font-family: Alef Hebrew"
+                  
+                >
+                 שלטון מרכזי
+              </v-toolbar-title>
+              </template>
+        
+              <v-list dark style="align-items:center; cursor: pointer;" color="#003154">
+                <v-list-item
+                  v-for="(item, index) in merkazi_items"
+                  :key="index" style="text-align: center;" @click="selectItem(item)"
+                >
+                  <v-list-item-title  style="font-family: Alef Hebrew">{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+
+            <v-spacer></v-spacer>
+
+            <v-divider vertical style="margin-top:8px; border-color:white !important;"></v-divider>
+
+            <v-spacer></v-spacer>
+
+              <v-menu
+              open-on-hover
+              offset-y
+             
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-toolbar-title
+                  color="#003154"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  style="margin-top:10px; font-family: Alef Hebrew"
+                  
+                >
+                 שלטון מקומי
+              </v-toolbar-title>
+              </template>
+        
+              <v-list center dark style="cursor: pointer;" color="#003154">
+                <v-list-item
+                  v-for="(item, index) in mekomi_items"
+                  :key="index" style="text-align: center;" @click="selectItem(item)"
+                >
+                  <v-list-item-title style="font-family: Alef Hebrew">{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+
+            
+            <v-spacer></v-spacer>
+
+            <v-divider vertical style="margin-top:8px; border-color:white !important;"> </v-divider>
+
+            <v-spacer></v-spacer>
+
+              <v-menu
+              open-on-hover
+              offset-y
+             
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-toolbar-title
+                  color="#003154"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  style="margin-top:10px; font-family: Alef Hebrew"
+                  
+                >
+                 שותפים
+              </v-toolbar-title>
+              </template>
+        
+              <v-list center dark style="cursor: pointer;" color="#003154">
+                <v-list-item
+                  v-for="(item, index) in shutafim_items"
+                  :key="index" style="text-align: center;" @click="selectItem(item)"
+                >
+                  <v-list-item-title style="font-family: Alef Hebrew">{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+
+
+            <v-spacer v-if="!isMobile()"></v-spacer>
+
+            <div v-if="!isMobile()" style="width: 250px"></div>
+            
+              <v-spacer v-if="!isMobile()"></v-spacer>
+
+              
+        
+           
+            </v-app-bar>
+          </div>
+
+
+          <div style="margin-top:70px;">
+            <v-row> 
+                <v-col cols="12"  xs="12" sm="12" md="6"  style="max-height: 650px; background-color: #00305b;">
+
+                    <v-card
+                        color="#00305b"
+                        dark
+                        :loading="isUpdating"
+                    >
+                        <template v-slot:progress>
+                        <v-progress-linear
+                            absolute
+                            color="green lighten-3"
+                            height="4"
+                            indeterminate
+                        ></v-progress-linear>
+                        </template>
+
+                        <v-row>
+                            <v-row
+                            class="pa-4"
+                            justify="center"
+                            >
+                            <v-col class="text-center" style="font-family: Alef Hebrew">
+                                <span class="grey--text text--lighten-1">{{selectedTitle.title}} {{selectedTitle.program}}</span>
+                                <v-divider></v-divider>
+                                <h2 style="font-family: Alef Hebrew">
+                                    מובילים דיגיטליים - קהילה של רשתות
+                                </h2>
+
+                                <span class="grey--text text--lighten-1">מובילים את הטרנספורמציה הדיגיטלית בשירות הציבורי</span>
+                            </v-col>
+                            </v-row>
+                        </v-row>
+                        
+
+                        <v-form>
+                        <v-container>
+                            <v-row>
+                            <v-col
+                                cols="12"
+                                md="6"
+                            >
+                                <v-text-field
+                                v-model="name"
+                                :disabled="isUpdating"
+                                filled
+                                color="blue-grey lighten-2"
+                                label="תפקיד"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col
+                                cols="12"
+                                md="6"
+                            >
+                                <v-text-field
+                                v-model="title"
+                                :disabled="isUpdating"
+                                filled
+                                color="blue-grey lighten-2"
+                                label="ארגון"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col 
+                                cols="12"
+                                md="6"
+                            >
+                                <v-text-field 
+                                v-model="name"
+                                :disabled="isUpdating"
+                                filled
+                                color="blue-grey lighten-2"
+                                label="שם ישוב"
+                                ></v-text-field>
+                            </v-col>
+
+                            <v-col 
+                            cols="12"
+                            md="6"
+                        >
+                            <v-text-field 
+                            v-model="name"
+                            :disabled="isUpdating"
+                            filled
+                            color="blue-grey lighten-2"
+                            label="תכנית"
+                            ></v-text-field>
+                        </v-col>
+
+
+                            <v-col cols="12" md="12" id="combo">
+                                <v-autocomplete 
+                                v-model="friends"
+                                :disabled="isUpdating"
+                                :items="people"
+                                filled
+                                chips
+                                color="blue-grey lighten-2"
+                                label="שם"
+                                item-text="name"
+                                item-value="name"
+                                multiple
+                                @change="autoComplete()"
+                                
+                                >
+                                <template style="height: 56px" v-slot:selection="data">
+                                    <v-chip right
+                                    v-bind="data.attrs"
+                                    :input-value="data.selected"
+                                    close
+                                    @click="data.select"
+                                    @click:close="remove(data.item)"
+                                    >
+                                    <v-avatar right>
+                                        <v-img :src="data.item.avatar"></v-img>
+                                    </v-avatar>
+                                    {{ data.item.name }}
+
+                                    </v-chip>
+                                </template>
+                                <template v-slot:item="data">
+                                    <template v-if="typeof data.item !== 'object'">
+                                    <v-list-item-content v-text="data.item"></v-list-item-content>
+                                    </template>
+                                    <template v-else>
+                                    <v-list-item-avatar>
+                                        <img :src="data.item.avatar">
+                                    </v-list-item-avatar>
+                                    <v-list-item-content>
+                                        <v-list-item-title v-html="data.item.name"></v-list-item-title>
+                                        <v-list-item-subtitle v-html="data.item.group"></v-list-item-subtitle>
+                                    </v-list-item-content>
+                                    </template>
+                                </template>
+                                </v-autocomplete>
+                            </v-col>
+                            </v-row>
+                        </v-container>
+                        </v-form>
+                        <v-divider></v-divider>
+                    </v-card>
+                   
+                </v-col>
+                <v-col cols="12"  xs="12" sm="12" md="6" style="max-height: 650px; background-color: #ECEFF1">
+                        <v-card style="background-color: #ffffff !important;
+                        border: 5px solid #01579B !important; margin-bottom:25px; margin: 25px;" id = "map" :height="mapHeight()"></v-card>
+                </v-col>
+            </v-row>
+
+            <div style="background-color: #ECEFF1">
+                <v-data-iterator
+                  :items="items"
+                  :items-per-page.sync="itemsPerPage"
+                  :page.sync="page"
+                  :search="search"
+                  :sort-by="sortBy.toLowerCase()"
+                  :sort-desc="sortDesc"
+                  hide-default-footer
+                >
+                  <template v-slot:header>
+                    <v-toolbar
+                      dark
+                      color="#01579B"
+                      class="mb-1"
+                    >
+
+                    <v-avatar v-if="items.length"
+                    color="white"
+                    size="36"
+                  >
+                    <span  class="black--text text-h5">{{items.length}}</span>
+                   
+                  </v-avatar>
+
+                  <h3 style="margin-right: 5px; font-family: Alef Hebrew" v-if="items.length && !isMobile()">תוצאות חיפוש </h3>
+
+                    <v-spacer></v-spacer>
+                      <v-text-field dir="rtl" v-if="items.length"
+                      style="font-family: Alef Hebrew"
+                        v-model="search"
+                        label="חיפוש"
+                        clearable
+                        flat
+                        solo-inverted
+                        hide-details
+                        prepend-inner-icon="mdi-magnify"
+                      ></v-text-field>
+                      <v-spacer></v-spacer>
+                    </v-toolbar>
+                  </template>
+            
+                  <template v-slot:default="props">
+                    <v-row style="font-family: Alef Hebrew">
+                      <v-col
+                        v-for="item in props.items"
+                        :key="item.name"
+                        cols="12"
+                        sm="6"
+                        md="4"
+                        lg="3"
+                      >
+                        <v-card>
+                          <v-card-title class="subheading font-weight-bold">
+                            {{ item.FirstName }}    {{ item.LastName }}
+
+                           <v-spacer></v-spacer>
+
+                           <v-divider vertical> </v-divider>
+
+                           <v-spacer></v-spacer>
+
+                           <v-avatar
+                           class="profile"
+                           color="grey"
+                           size="80"
+                         >
+                           <v-img :src="item.Img"></v-img>
+                         </v-avatar>
+                            <v-spacer></v-spacer>
+                          </v-card-title>
+            
+                          <v-divider></v-divider>
+            
+                          <v-list
+                          
+                          dense
+                        >
+                          <v-list-item>
+                            <v-list-item-content>ארגון:</v-list-item-content>
+                            <v-list-item-content class="align-end">
+                              {{ item.Organization }}
+                            </v-list-item-content>
+                          </v-list-item>
+                          <v-list-item>
+                            <v-list-item-content>תפקיד:</v-list-item-content>
+                            <v-list-item-content class="align-end">
+                              {{ item.Role }}
+                            </v-list-item-content>
+                          </v-list-item>
+                          <v-list-item>
+                            <v-list-item-content>מייל:</v-list-item-content>
+                            <v-list-item-content class="align-end">
+                              {{ item.Email }}
+                            </v-list-item-content>
+                          </v-list-item>
+                          <v-list-item>
+                            <v-list-item-content>תכנית:</v-list-item-content>
+                            <v-list-item-content class="align-end">
+                              {{ item.Tochnit}}
+                            </v-list-item-content>
+                          </v-list-item>
+                          <v-list-item>
+                            <v-list-item-content>טלפון:</v-list-item-content>
+                            <v-list-item-content class="align-end">
+                              {{ item.Mobile }}
+                            </v-list-item-content>
+                          </v-list-item>
+                          <v-list-item>
+                            <v-list-item-content>שם ישוב:</v-list-item-content>
+                            <v-list-item-content class="align-end">
+                              {{ item.Settlement}}
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                  </template>
+            
+                  <template v-slot:footer>
+                    <v-row
+                      class="mt-2"
+                      align="center"
+                      justify="center"
+                    >
+                      <span class="grey--text">Items per page</span>
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            dark
+                            text
+                            color="primary"
+                            class="ml-2"
+                            v-bind="attrs"
+                            v-on="on"
+                          >
+                            {{ itemsPerPage }}
+                            <v-icon>mdi-chevron-down</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-list>
+                          <v-list-item
+                            v-for="(number, index) in itemsPerPageArray"
+                            :key="index"
+                            @click="updateItemsPerPage(number)"
+                          >
+                            <v-list-item-title>{{ number }}</v-list-item-title>
+                          </v-list-item>
+                        </v-list>
+                      </v-menu>
+            
+                      <v-spacer></v-spacer>
+            
+                      <span
+                        class="mr-4
+                        grey--text"
+                      >
+                        Page {{ page }} of {{ numberOfPages }}
+                      </span>
+                      <v-btn
+                        fab
+                        dark
+                        color="blue darken-3"
+                        class="mr-1"
+                        @click="formerPage"
+                      >
+                        <v-icon>mdi-chevron-left</v-icon>
+                      </v-btn>
+                      <v-btn
+                        fab
+                        dark
+                        color="blue darken-3"
+                        class="ml-1"
+                        @click="nextPage"
+                      >
+                        <v-icon>mdi-chevron-right</v-icon>
+                      </v-btn>
+                    </v-row>
+                  </template>
+                </v-data-iterator>
+            
+            </div>
+
+
+          </div>
+ 
+
+        
+
+
+          
+
+
+      </v-app>
+    </div>
+
+  <script>
+
+      var json = [
+  {
+    "FirstName": "זאב",
+    "LastName": "חיות",
+    "Organization": "SWF כלכלית",
+    "Role": "מנכ\"ל קרן חברתית",
+    "Email": "zeev@swf.org.il",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(054) 472-6632",
+    "Settlement": "תל אביב",
+    "Img": "https://static.wixstatic.com/media/d29746_f0444ea544144ad1ab6648995c5643ea~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "יפעת",
+    "LastName": "זמיר",
+    "Organization": "הקרן לפיתוח כלכלי- חברתי של נשיאות הארגוניים העסקיים",
+    "Role": "סמנכ\"לית אסטרטגיה",
+    "Email": "Ifatza3@gmail.com",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(052) 228-7776",
+    "Settlement": "יהוד",
+    "Img": "https://static.wixstatic.com/media/d29746_ca066fb7dbae47b18f3f09f668aa2b50~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "אריאלה",
+    "LastName": "שגב",
+    "Organization": "משרד הרווחה והשירותים החברתיים",
+    "Role": "מנהלת מחוז ת\"א והמרכז (לשעבר)",
+    "Email": "Segev.a@gmail.com",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(050) 622-3888",
+    "Settlement": "תל אביב",
+    "Img": "https://static.wixstatic.com/media/d29746_df66d78fd00d420db1fb5da26c9d0406~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "דן",
+    "LastName": "להב",
+    "Organization": "משרד ראש הממשלה",
+    "Role": "סמנכ״ל (פנים תכנון ופיתוח)",
+    "Email": "4danlahav@gmail.com",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(050) 620-1948",
+    "Settlement": "תל אביב",
+    "Img": "https://static.wixstatic.com/media/d29746_ae4ce0b4db8044aaaf9f5d9d6f437a3d~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "מריה",
+    "LastName": "ג'יריס",
+    "Organization": "משרד התחבורה",
+    "Role": "ראש מטה מנכ\"לית משרד התחבורה",
+    "Email": "",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(050) 620-5960",
+    "Settlement": "ירושלים",
+    "Img": "https://static.wixstatic.com/media/d29746_09250efa0e1544a4aa5850c4311e3eae~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "אילן",
+    "LastName": "בן עדי",
+    "Organization": "עיריית אשדוד",
+    "Role": "מנכ\"ל",
+    "Email": "ben-adi@ashdod.muni.il",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(053) 486-7550",
+    "Settlement": "אשדוד",
+    "Img": "https://static.wixstatic.com/media/d29746_a3f46fff781545e08ea90ca56ed07c2b~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "אלון",
+    "LastName": "אופיר",
+    "Organization": "עיריית נתניה",
+    "Role": "ס. מנהל אגף מערכות מידע",
+    "Email": "alon.o@netanya.muni.il",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(052) 322-2870",
+    "Settlement": "נתניה",
+    "Img": "https://static.wixstatic.com/media/d29746_e0adf16914fd4d0ba7b593325f225f25~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "אליעזר",
+    "LastName": "יעקב",
+    "Organization": "אשכול נגב מזרחי",
+    "Role": "מנכ\"ל",
+    "Email": "eliezer@eastnegev.org",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(050) 777-8802",
+    "Settlement": "באר גנים",
+    "Img": "https://static.wixstatic.com/media/d29746_73cbda2f07f9458496f080a30e97e959~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "אמיתי",
+    "LastName": "רויטמן",
+    "Organization": "מועצה אזורית שומרון",
+    "Role": "מנכ\"ל",
+    "Email": "amitair@shomron.org.il",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(055) 882-0263",
+    "Settlement": "כפר עציון",
+    "Img": "https://static.wixstatic.com/media/d29746_28f5965f3a164a588d07db87fa277d53~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  },
+  {
+    "FirstName": "אסף",
+    "LastName": "אדרי",
+    "Organization": "עיריית גבעתיים",
+    "Role": "סמנכ\"ל מינהל ומשאבי אנוש",
+    "Email": "asafe@givatayim.muni.il",
+    "Tochnit": "שלטון מקומי מחזור א",
+    "Mobile": "(053) 666-6648",
+    "Settlement": "גבעתיים",
+    "Img": "https://static.wixstatic.com/media/d29746_c0029ba52c6640a481a543e3e954cf04~mv2.png/v1/fill/w_215,h_326,al_c,q_85,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
+  }
+]
+
+var my_token= '5a4b8472-b95b-4687-8179-0ccb621c7990';
+//var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+//var my_token = '76b35124-4d1f-44b5-a612-3463951f89f9'//my atlas-il on firebase
+
+govmap.createMap('map', 
+              {
+                  layers: ['geo_formation', 'geo_faults','geo_plutonics','geo_scars','geo_contact','earthquakes', 'sites_tkufat_bniya_prod','sites_napot_prod','sites_mahozot_prod','sites_natural_area_prod','sites_mesilot_barzel_1918_prod', 'sites_mesilot_barzel_2020_prod', 'sites_roads_2020_prod', 'sites_roads_1968_2006_prod', 'sites_roads_1948_1967_prod', 'sites_roads_1937_1947_prod', 'sites_roads_1937_prod','sites_mesilot_barzel_1918_prod', 'sites_pop_by_region', 'sites_arab_pop_by_religion', 'sites_pop_by_natural_areas', 'sites_pop_by_mahoz', ''],
+                  visibleLayers: [],
+                  token: my_token,
+                  showXY: true,
+                  identifyOnClick: false,
+                  isEmbeddedToggle: false,
+                  background: 0,
+                  layersMode: 0,
+                  zoomButtons:true,
+                  isEmbeddedToggle:false
+              });
+
+
+
+var appVue = new Vue({
+    el:"#app",
+    vuetify: new Vuetify(),
+    data () {
+        return {
+
+        itemsPerPageArray: [4, 8, 12],
+        search: '',
+        filter: {},
+        sortDesc: false,
+        page: 1,
+        itemsPerPage: 12,
+        sortBy: 'name',
+        keys: [
+            "FirstName",
+            "LastName",
+            "Organization",
+            "Role",
+            "Email",
+            "Tochnit",
+            "Mobile",
+            "Settlement",
+            "Img"
+            ],
+        items: json,
+
+
+
+
+        selectedTitle: { title: "כל המחזורים", program: "כל התוכניות" },
+        merkazi_items: [
+            { title: 'מחזור א', program: 'שלטון מרכזי' },
+            { title: 'מחזור ב', program: 'שלטון מרכזי' },
+            { title: 'מחזור ג', program: 'שלטון מרכזי' },
+            { title: 'מחזור ד', program: 'שלטון מרכזי' },
+        ],
+        mekomi_items: [
+            { title: 'מחזור א', program: 'שלטון מקומי' },
+            { title: 'מחזור ב', program: 'שלטון מקומי' },
+            { title: 'מחזור ג', program: 'שלטון מקומי'},
+            { title: 'מחזור ד', program: 'שלטון מקומי' },
+        ],
+        shutafim_items: [
+            { title: 'שותפים וצוות הקהילה', program: 'שותפים' },
+            { title: 'צוות ושותפים לדורותיהם', program: 'שותפים'  },
+        ],
+
+
+
+
+        autoUpdate: true,
+        friends: [],
+        isUpdating: false,
+        name: '',
+        people: [
+      
+        ],
+        title: '',
+
+
+
+        }
+      },
+      watch: {
+      isUpdating (val) {
+        if (val) {
+          setTimeout(() => (this.isUpdating = false), 3000)
+        }
+      },
+    },
+
+    methods: {
+      autoComplete(){
+        console.log(this.friends);
+        this.setItemsByFriends(this.friends)
+
+      },
+      setItemsByFriends(friends) {
+        this.items = [];
+        for (var i=0; i < friends.length; i++)
+        {
+          var array = json.filter(function (el) {return el.FirstName + " " + el.LastName == friends[i]});
+          if (array.length > 0){
+            this.items.push(array[0]);
+          }
+        }
+      },
+      setItemsByTochnit(tochnit) {
+        this.items = [];
+        console.log(tochnit);
+          var array = json.filter(function (el) {return el.Tochnit == tochnit.program + " " + tochnit.title});
+          if (array.length > 0){
+            this.items=array;
+          }
+      },
+      remove (item) {
+        const index = this.friends.indexOf(item.name)
+        if (index >= 0) this.friends.splice(index, 1)
+        this.autoComplete();
+      },
+      selectItem(item){
+            console.log(item)
+            this.selectedTitle = item;
+            this.setItemsByTochnit(item)
+
+        },
+      isMobile() {
+      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            return true
+        } else {
+            return false
+        }
+      },
+      mapHeight(){
+          if (this.isMobile()){
+              return 200
+          } else{
+              return 390;
+          }
+      },
+
+      nextPage () {
+        if (this.page + 1 <= this.numberOfPages) this.page += 1
+      },
+      formerPage () {
+        if (this.page - 1 >= 1) this.page -= 1
+      },
+      updateItemsPerPage (number) {
+        this.itemsPerPage = number
+      },
+    },
+    mounted() {
+      this.people = [];
+      for (i=0; i < json.length; i++){
+        this.people.push(
+          { firstname: json[i].FirstName, lastname: json[i].LastName, name: json[i].FirstName + " " + json[i].LastName, group: json[i].Tochnit, avatar: json[i].Img }
+        )
+      }
+
+
+    },
+
+    computed: {
+      numberOfPages () {
+        return Math.ceil(this.items.length / this.itemsPerPage)
+      },
+      filteredKeys () {
+        return this.keys.filter(key => key !== 'FirstName')
+      },
+    },
+    })
+  </script>
+</body>
+
+
+<style>
+
+
+    @import url(https://fonts.googleapis.com/earlyaccess/alefhebrew.css);
+
+
+    body{
+        font-family: "Alef Hebrew",
+                    “Helvetica Neue”,
+                    Helvetica,
+                    Arial,
+                    sans-serif !important;
+    }
+
+    span > button {
+      margin-right: 5px !important;
+    }
+
+
+
+
+ 
+
+
+</style>
+</html>
