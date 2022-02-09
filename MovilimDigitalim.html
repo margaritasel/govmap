@@ -412,20 +412,18 @@
                    
                   </v-avatar>
 
-                  <h3 style="margin-right: 5px; font-family: Alef Hebrew" v-if="items.length && !isMobile()">תוצאות חיפוש </h3>
+                  <h3 style="margin-right: 5px; font-family: Alef Hebrew" v-if="items.length && !isMobile()">תוצאות </h3>
 
-                    <v-spacer></v-spacer>
                       <v-text-field dir="rtl" v-if="items.length"
-                      style="font-family: Alef Hebrew"
+                      style="font-family: Alef Hebrew; margin-right: 20px;"
                         v-model="search"
-                        label="חיפוש"
+                        placeholder="חיפוש בתוצאות"
                         clearable
                         flat
                         solo-inverted
                         hide-details
                         prepend-inner-icon="mdi-magnify"
                       ></v-text-field>
-                      <v-spacer></v-spacer>
                     </v-toolbar>
                   </template>
             
@@ -439,7 +437,7 @@
                         md="4"
                         lg="3"
                       >
-                        <v-card>
+                        <v-card> 
                           <v-card-title class="subheading font-weight-bold">
                             {{ item.FirstName }}    {{ item.LastName }}
 
@@ -466,37 +464,37 @@
                           dense
                         >
                           <v-list-item>
-                            <v-list-item-content>ארגון:</v-list-item-content>
+                            <v-list-item-content style="max-width: 80px;">ארגון:</v-list-item-content>
                             <v-list-item-content class="align-end">
                               {{ item.Organization }}
                             </v-list-item-content>
                           </v-list-item>
                           <v-list-item>
-                            <v-list-item-content>תפקיד:</v-list-item-content>
+                            <v-list-item-content style="max-width: 80px;">תפקיד:</v-list-item-content>
                             <v-list-item-content class="align-end">
                               {{ item.Role }}
                             </v-list-item-content>
                           </v-list-item>
                           <v-list-item>
-                            <v-list-item-content>מייל:</v-list-item-content>
+                            <v-list-item-content style="max-width: 80px;">מייל:</v-list-item-content>
                             <v-list-item-content class="align-end">
                               {{ item.Email }}
                             </v-list-item-content>
                           </v-list-item>
                           <v-list-item>
-                            <v-list-item-content>תכנית:</v-list-item-content>
+                            <v-list-item-content style="max-width: 80px;">תכנית:</v-list-item-content>
                             <v-list-item-content class="align-end">
                               {{ item.Tochnit}}
                             </v-list-item-content>
                           </v-list-item>
                           <v-list-item>
-                            <v-list-item-content>טלפון:</v-list-item-content>
+                            <v-list-item-content style="max-width: 80px;">טלפון:</v-list-item-content>
                             <v-list-item-content class="align-end">
                               {{ item.Mobile }}
                             </v-list-item-content>
                           </v-list-item>
                           <v-list-item>
-                            <v-list-item-content>שם ישוב:</v-list-item-content>
+                            <v-list-item-content style="max-width: 80px;">שם ישוב:</v-list-item-content>
                             <v-list-item-content class="align-end">
                               {{ item.Settlement}}
                             </v-list-item-content>
@@ -1021,21 +1019,6 @@ var appVue = new Vue({
     span > button {
       margin-right: 5px !important;
     }
-
-    .float-container {
-        border: 3px solid #fff;
-    }
-
-
-
-    .float-child_big {
-        width: 10%;
-    }  
-
-    .float-child_small {
-        width: 90%;
-    }  
-
 
 
  
