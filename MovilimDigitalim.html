@@ -37,8 +37,7 @@
     <div id="app" >
       <v-app>
 
-
-        <div>
+ 
             <v-app-bar
             fixed
               color="#003154"
@@ -169,12 +168,13 @@
         
            
             </v-app-bar>
-          </div>
+         
+          
 
 
-          <div style="margin-top:70px;">
-            <v-row> 
-                <v-col cols="12"  xs="12" sm="12" md="6"  style="max-height: 650px; background-color: #00305b;">
+       
+            <v-row style="margin-top:50px;"> 
+                <v-col cols="12"  xs="12" sm="12" md="6"  style="max-height: 750px; background-color: #00305b;">
 
                     <v-card
                         color="#00305b"
@@ -190,7 +190,7 @@
                         ></v-progress-linear>
                         </template>
 
-                        <v-row>
+                        <v-row align="center" justify="center">
                             <v-row
                             class="pa-4"
                             justify="center"
@@ -210,7 +210,7 @@
 
                         <v-form>
                         <v-container>
-                            <v-row>
+                            <v-row align="center" justify="center">
                             <v-col
                                 cols="12"
                                 md="6"
@@ -315,13 +315,14 @@
                     </v-card>
                    
                 </v-col>
-                <v-col cols="12"  xs="12" sm="12" md="6" style="max-height: 650px; background-color: #ECEFF1">
+                <v-col cols="12"  xs="12" sm="12" md="6" style="max-height: 750px; background-color: #ECEFF1">
                         <v-card style="background-color: #ffffff !important;
                         border: 5px solid #01579B !important; margin-bottom:25px; margin: 25px;" id = "map" :height="mapHeight()"></v-card>
                 </v-col>
             </v-row>
 
-            <div style="background-color: #ECEFF1">
+            <v-row style="background-color: #ECEFF1">
+              <v-container>
                 <v-data-iterator
                   :items="items"
                   :items-per-page.sync="itemsPerPage"
@@ -364,7 +365,7 @@
                   </template>
             
                   <template v-slot:default="props">
-                    <v-row style="font-family: Alef Hebrew">
+                    <v-row align="center" justify="center" style="font-family: Alef Hebrew">
                       <v-col
                         v-for="item in props.items"
                         :key="item.name"
@@ -502,17 +503,16 @@
                     </v-row>
                   </template>
                 </v-data-iterator>
-            
-            </div>
+
+              </v-container>
+            </v-row>
 
 
-          </div>
+         
  
 
         
 
-
-          
 
 
       </v-app>
