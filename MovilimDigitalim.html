@@ -1043,6 +1043,11 @@ var appVue = new Vue({
             this.org_item = "";
             this.friends = [];
 
+            if (this.isMobile()){
+              var close = document.querySelector("#navdrawer > div > div.nav-drawer__close--right");
+              close.click();
+            }
+
 
         },
       isMobile() {
