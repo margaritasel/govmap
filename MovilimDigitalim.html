@@ -38,9 +38,31 @@
     <div id="app" style="background-color: #ECEFF1"  v-cloak>
       <v-app style="background-color: #ECEFF1">
 
-        <nav-drawer-handle v-if="isMobile()" id="navbtn" style="background-color: #ECEFF1 !important;
-        color: #00305b !important;">
-        </nav-drawer-handle>
+
+        <v-row align="center" justify="center">
+          <v-row
+          class="pa-4"
+          justify="center"
+          >
+     
+            <nav-drawer-handle v-if="isMobile()" id="navbtn" style="background-color: #ECEFF1 !important;
+            color: #00305b !important;">
+            </nav-drawer-handle>
+
+       
+          <v-col style="margin-top: 3px; margin-right: -50px;" class="text-center">
+              <h3 style="font-family: Alef Hebrew; color:#00305b" class="text--lighten-2">{{selectedTitle.title}} {{selectedTitle.program}}</h3>
+              <v-divider style="border-color:#00305b !important;"></v-divider>
+          </v-col>
+          </v-row>
+      </v-row>
+
+
+        
+        
+
+
+
         <nav-drawer id="navdrawer" v-if="isMobile()" >
           <div style="background-color: #18446c !important; height: 100%; width: 100%;">
 
@@ -324,8 +346,8 @@
                             justify="center"
                             >
                             <v-col class="text-center" style="font-family: Alef Hebrew">
-                                <span class="grey--text text--lighten-1">{{selectedTitle.title}} {{selectedTitle.program}}</span>
-                                <v-divider></v-divider>
+                                <span v-if="!isMobile()" class="grey--text text--lighten-1">{{selectedTitle.title}} {{selectedTitle.program}}</span>
+                                <v-divider v-if="!isMobile()"></v-divider>
                                 <h2 style="font-family: Alef Hebrew">
                                     מובילים דיגיטליים - קהילה של רשתות
                                 </h2>
