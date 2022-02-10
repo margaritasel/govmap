@@ -29,13 +29,139 @@
  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
  <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+ <script src="https://cdn.jsdelivr.net/gh/inotom/vue-nav-drawer@v1.2.0/dist/vue-nav-drawer.min.js"></script>
 </head>
 
 
 
 <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
-    <div id="app" style="background-color: #ECEFF1" >
+    <div id="app" style="background-color: #ECEFF1"  v-cloak>
       <v-app style="background-color: #ECEFF1">
+
+        <nav-drawer-handle v-if="isMobile()" id="navbtn" style="background-color: #ECEFF1 !important;
+        color: #00305b !important;">
+        </nav-drawer-handle>
+        <nav-drawer id="navdrawer" v-if="isMobile()" >
+          <div style="background-color: #18446c !important; height: 100%; width: 100%;">
+
+            <v-row align="center" v-if="isMobile()"
+            justify="center">
+
+              <v-menu
+              :close-on-content-click="true"
+              :nudge-width="150"
+              offset-y
+                   
+
+             
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  style="margin-top:50px; font-family: Alef Hebrew"
+                  color="white"
+                  plain
+                  x-large
+                  
+                >
+                 שלטון מרכזי
+              </v-btn>
+              </template>
+        
+              <v-list dark style="align-items:center; cursor: pointer;" color="#003154">
+                <v-list-item
+                  v-for="(item, index) in merkazi_items"
+                  :key="index" style="text-align: center;" @click="selectItem(item)"
+                >
+                  <v-list-item-title  style="font-family: Alef Hebrew">{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+             
+            </v-row>
+
+            <v-row align="center" v-if="isMobile()"
+            justify="center">
+
+
+            
+            <v-menu
+            :close-on-content-click="true"
+      :nudge-width="150"
+      offset-y
+           
+           
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+              v-bind="attrs"
+              v-on="on"
+              style="margin-top:10px; font-family: Alef Hebrew"
+              color="white"
+              plain
+              x-large
+              
+                
+              >
+               שלטון מקומי
+            </v-btn>
+            </template>
+      
+            <v-list center dark style="cursor: pointer;" color="#003154">
+              <v-list-item
+                v-for="(item, index) in mekomi_items"
+                :key="index" style="text-align: center;" @click="selectItem(item)"
+              >
+                <v-list-item-title style="font-family: Alef Hebrew">{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+
+            </v-row>
+
+            <v-row align="center" v-if="isMobile()"
+            justify="center">
+
+            <v-menu
+
+            :close-on-content-click="true"
+      :nudge-width="150"
+      offset-y
+           
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+              v-bind="attrs"
+              v-on="on"
+              style="margin-top:10px; font-family: Alef Hebrew"
+              color="white"
+              plain
+              x-large
+              
+                
+              >
+               שותפים
+            </v-btn>
+            </template>
+      
+            <v-list center dark style="cursor: pointer;" color="#003154">
+              <v-list-item
+                v-for="(item, index) in shutafim_items"
+                :key="index" style="text-align: center;" @click="selectItem(item)"
+              >
+                <v-list-item-title style="font-family: Alef Hebrew">{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+
+            </v-row>
+
+          
+          </div>
+        </nav-drawer>
 
  
             <v-app-bar
@@ -44,6 +170,7 @@
               dense
               dark
               style="height:65px;"
+              v-if="!isMobile()"
 
 
               
@@ -173,7 +300,7 @@
 
 
             <v-container>
-            <v-row style="margin-top:50px;"> 
+            <v-row v-bind:style=" !isMobile() ? 'margin-top:50px;' : 'background-color: #0000ffff' "> 
          
                 <v-col cols="12"  xs="12" sm="12" md="6"  style="max-height: 750px; background-color: #00305b;">
 
@@ -1008,6 +1135,10 @@ var appVue = new Vue({
 
     @import url(https://fonts.googleapis.com/earlyaccess/alefhebrew.css);
 
+    [v-cloak] {
+        display: none;
+    }
+
 
     body{
         font-family: "Alef Hebrew",
@@ -1017,8 +1148,15 @@ var appVue = new Vue({
                     sans-serif !important;
     }
 
+  
     span > button {
       margin-right: 5px !important;
+    }
+
+
+    #navbtn{
+      background-color: #ECEFF1 !important;
+      color: #00305b !important;
     }
 
 
