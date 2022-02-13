@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html style='width:100%; height:100%;'>
 <head>
@@ -35,6 +36,8 @@
 
 
 <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+
+  
     <div id="app" style="background-color: #ECEFF1"  v-cloak>
       <v-app style="background-color: #ECEFF1">
  
@@ -96,6 +99,8 @@
            
            
           >
+
+         
             <template v-slot:activator="{ on, attrs }">
               <v-btn
               v-bind="attrs"
@@ -303,23 +308,14 @@
 
 
             <v-container>
-            <v-row v-bind:style=" !isMobile() ? 'margin-top:50px;' : 'background-color: #0000ffff' "> 
+            <v-row v-bind:style=" !isMobile() ? 'margin-top:53px;' : 'background-color: #ECEFF1' "> 
          
                 <v-col cols="12"  xs="12" sm="12" md="6"  style="max-height: 750px; background-color: #00305b;">
 
                     <v-card
                         color="#00305b"
                         dark
-                        :loading="isUpdating"
                     >
-                        <template v-slot:progress>
-                        <v-progress-linear
-                            absolute
-                            color="green lighten-3"
-                            height="4"
-                            indeterminate
-                        ></v-progress-linear>
-                        </template>
 
                         <v-row align="center" justify="center">
                             <v-row
@@ -438,7 +434,7 @@
                             </v-radio>
                           </v-flex>
                           <v-flex xs11>
-                              <v-select 
+                              <v-autocomplete
                               :disabled="!(radios=='tochnit_radio')"
                               v-model="tochnit_item"
                               filled
@@ -446,7 +442,7 @@
                               label="תכנית"
                               :items="tochnit_items"
                               @change="tochnitChanged()"
-                              ></v-select>
+                              ></v-autocomplete>
                         </v-layout>
                         </v-col>
 
@@ -508,15 +504,15 @@
                     </v-card>
                    
                 </v-col>
-                <v-col cols="12"  xs="12" sm="12" md="6" style="max-height: 750px; background-color: #ECEFF1">
+                <v-col cols="12"  xs="12" sm="12" md="6" style="max-height: 750px;">
                         <v-card style="background-color: #ffffff !important;
                         border: 5px solid #01579B !important; margin-bottom:25px; margin: 25px;" id = "map" :height="mapHeight()"></v-card>
                 </v-col>
               
             </v-row>
           </v-container>
-
-            <v-row style="background-color: #ECEFF1">
+          <v-container>
+            <v-row style="background-color: #ECEFF1" v-if="items.length" align="center" justify="center">
               <v-container>
                 <v-data-iterator
                   :items="items"
@@ -532,15 +528,16 @@
                       dark
                       color="#01579B"
                       class="mb-1"
+                      style="background-image: url('https://cdn.pixabay.com/photo/2016/08/31/17/02/blue-1634110_960_720.png');
+                      background-repeat: no-repeat;
+                      background-position: 50% 0;
+                      background-size: cover;"
                     >
 
-                    <v-avatar v-if="items.length"
-                    color="white"
-                    size="36"
-                  >
-                    <span  class="black--text text-h5">{{items.length}}</span>
+
+                    {{items.length}}
                    
-                  </v-avatar>
+                
 
                   <h3 style="margin-right: 5px; font-family: Alef Hebrew" v-if="items.length && !isMobile()">תוצאות </h3>
 
@@ -554,6 +551,21 @@
                         hide-details
                         prepend-inner-icon="mdi-magnify"
                       ></v-text-field>
+
+
+                      <v-btn
+                      class="mx-2"
+                      fab
+                      small
+                      dark
+                      color="red" 
+                      v-if="items.length < json.length && items.length"
+                      @click="refreshItems"
+                    >
+                      <v-icon dark>
+                        mdi-close
+                      </v-icon>
+                    </v-btn>
                     </v-toolbar>
                   </template>
             
@@ -697,9 +709,11 @@
                     </v-row>
                   </template>
                 </v-data-iterator>
-
               </v-container>
+
+       
             </v-row>
+          </v-container>
 
 
          
@@ -714,126 +728,18 @@
 
   <script>
 
-      var json = [
-  {
-    "FirstName": "זאב",
-    "LastName": "חיות",
-    "Organization": "SWF כלכלית",
-    "Role": "מנכ\"ל קרן חברתית",
-    "Email": "zeev@swf.org.il",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(054) 472-6632",
-    "Settlement": "תל אביב",
-    "Img": "https://static.wixstatic.com/media/d29746_f0444ea544144ad1ab6648995c5643ea~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "יפעת",
-    "LastName": "זמיר",
-    "Organization": "הקרן לפיתוח כלכלי- חברתי של נשיאות הארגוניים העסקיים",
-    "Role": "סמנכ\"לית אסטרטגיה",
-    "Email": "Ifatza3@gmail.com",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(052) 228-7776",
-    "Settlement": "יהוד",
-    "Img": "https://static.wixstatic.com/media/d29746_ca066fb7dbae47b18f3f09f668aa2b50~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "אריאלה",
-    "LastName": "שגב",
-    "Organization": "משרד הרווחה והשירותים החברתיים",
-    "Role": "מנהלת מחוז ת\"א והמרכז (לשעבר)",
-    "Email": "Segev.a@gmail.com",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(050) 622-3888",
-    "Settlement": "תל אביב",
-    "Img": "https://static.wixstatic.com/media/d29746_df66d78fd00d420db1fb5da26c9d0406~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "דן",
-    "LastName": "להב",
-    "Organization": "משרד ראש הממשלה",
-    "Role": "סמנכ״ל (פנים תכנון ופיתוח)",
-    "Email": "4danlahav@gmail.com",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(050) 620-1948",
-    "Settlement": "תל אביב",
-    "Img": "https://static.wixstatic.com/media/d29746_ae4ce0b4db8044aaaf9f5d9d6f437a3d~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "מריה",
-    "LastName": "ג'יריס",
-    "Organization": "משרד התחבורה",
-    "Role": "ראש מטה מנכ\"לית משרד התחבורה",
-    "Email": "",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(050) 620-5960",
-    "Settlement": "ירושלים",
-    "Img": "https://static.wixstatic.com/media/d29746_09250efa0e1544a4aa5850c4311e3eae~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "אילן",
-    "LastName": "בן עדי",
-    "Organization": "עיריית אשדוד",
-    "Role": "מנכ\"ל",
-    "Email": "ben-adi@ashdod.muni.il",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(053) 486-7550",
-    "Settlement": "אשדוד",
-    "Img": "https://static.wixstatic.com/media/d29746_a3f46fff781545e08ea90ca56ed07c2b~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "אלון",
-    "LastName": "אופיר",
-    "Organization": "עיריית נתניה",
-    "Role": "ס. מנהל אגף מערכות מידע",
-    "Email": "alon.o@netanya.muni.il",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(052) 322-2870",
-    "Settlement": "נתניה",
-    "Img": "https://static.wixstatic.com/media/d29746_e0adf16914fd4d0ba7b593325f225f25~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "אליעזר",
-    "LastName": "יעקב",
-    "Organization": "אשכול נגב מזרחי",
-    "Role": "מנכ\"ל",
-    "Email": "eliezer@eastnegev.org",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(050) 777-8802",
-    "Settlement": "באר גנים",
-    "Img": "https://static.wixstatic.com/media/d29746_73cbda2f07f9458496f080a30e97e959~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "אמיתי",
-    "LastName": "רויטמן",
-    "Organization": "מועצה אזורית שומרון",
-    "Role": "מנכ\"ל",
-    "Email": "amitair@shomron.org.il",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(055) 882-0263",
-    "Settlement": "כפר עציון",
-    "Img": "https://static.wixstatic.com/media/d29746_28f5965f3a164a588d07db87fa277d53~mv2.jpg/v1/fill/w_215,h_326,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  },
-  {
-    "FirstName": "אסף",
-    "LastName": "אדרי",
-    "Organization": "עיריית גבעתיים",
-    "Role": "סמנכ\"ל מינהל ומשאבי אנוש",
-    "Email": "asafe@givatayim.muni.il",
-    "Tochnit": "שלטון מקומי מחזור א",
-    "Mobile": "(053) 666-6648",
-    "Settlement": "גבעתיים",
-    "Img": "https://static.wixstatic.com/media/d29746_c0029ba52c6640a481a543e3e954cf04~mv2.png/v1/fill/w_215,h_326,al_c,q_85,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
-  }
-]
 
-var my_token= '5a4b8472-b95b-4687-8179-0ccb621c7990';
-//var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+  var json = [];
+
+
+
+//var my_token= '5a4b8472-b95b-4687-8179-0ccb621c7990';
+var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
 //var my_token = '76b35124-4d1f-44b5-a612-3463951f89f9'//my atlas-il on firebase
 
 govmap.createMap('map', 
               {
-                  layers: ['geo_formation', 'geo_faults','geo_plutonics','geo_scars','geo_contact','earthquakes', 'sites_tkufat_bniya_prod','sites_napot_prod','sites_mahozot_prod','sites_natural_area_prod','sites_mesilot_barzel_1918_prod', 'sites_mesilot_barzel_2020_prod', 'sites_roads_2020_prod', 'sites_roads_1968_2006_prod', 'sites_roads_1948_1967_prod', 'sites_roads_1937_1947_prod', 'sites_roads_1937_prod','sites_mesilot_barzel_1918_prod', 'sites_pop_by_region', 'sites_arab_pop_by_religion', 'sites_pop_by_natural_areas', 'sites_pop_by_mahoz', ''],
+                  layers: ['KSHTANN_SETL_AREA'],
                   visibleLayers: [],
                   token: my_token,
                   showXY: true,
@@ -873,6 +779,8 @@ var appVue = new Vue({
             ],
         items: json,
 
+        json: json,
+
 
 
 
@@ -886,12 +794,10 @@ var appVue = new Vue({
         mekomi_items: [
             { title: 'מחזור א', program: 'שלטון מקומי' },
             { title: 'מחזור ב', program: 'שלטון מקומי' },
-            { title: 'מחזור ג', program: 'שלטון מקומי'},
-            { title: 'מחזור ד', program: 'שלטון מקומי' },
+            { title: 'מחזור ג', program: 'שלטון מקומי' },
         ],
         shutafim_items: [
-            { title: 'שותפים וצוות הקהילה', program: 'שותפים' },
-            { title: 'צוות ושותפים לדורותיהם', program: 'שותפים'  },
+            { title: 'צוות הקהילה', program: 'שותפים' },
         ],
 
 
@@ -936,6 +842,54 @@ var appVue = new Vue({
     },
 
     methods: {
+      refreshItems(){
+
+         //
+         appVue.setl_items = [];
+          for (i=0; i < json.length; i++){
+            if (!appVue.setl_items.includes(json[i].Settlement)){
+              appVue.setl_items.push(json[i].Settlement);
+            }
+          }
+          appVue.setl_items.sort();
+
+          //
+          appVue.org_items = [];
+          for (i=0; i < json.length; i++){
+            if (!appVue.org_items.includes(json[i].Organization)){
+              appVue.org_items.push(json[i].Organization);
+            }
+          }
+          appVue.org_items.sort();
+
+          //
+          appVue.role_items = [];
+          for (i=0; i < json.length; i++){
+            if (!appVue.role_items.includes(json[i].Role)){
+              appVue.role_items.push(json[i].Role);
+            }
+          }
+          appVue.role_items.sort();
+
+          //
+          appVue.tochnit_items = [];
+          for (i=0; i < json.length; i++){
+            if (!appVue.tochnit_items.includes(json[i].Tochnit)){
+              appVue.tochnit_items.push(json[i].Tochnit);
+            }
+          }
+          appVue.tochnit_items.sort();
+
+          //
+          appVue.items = appVue.json;
+          
+          appVue.selectedTitle =  { title: "כל המחזורים", program: "כל התוכניות" };
+          //appVue.selectedTitle.program="כל התוכניות" ;
+
+          govmap.zoomToXY({ x: 176085, y: 657600, level: 0, marker: false });
+
+
+      },
       tochnitChanged(){
         this.setItemsByTochnitSelect(this.tochnit_item);
         this.setl_item = "";
@@ -967,7 +921,37 @@ var appVue = new Vue({
         this.tochnit_item = "";
         this.org_item = "";
         this.friends = [];
-        //govmap.geocode()
+        govmap.geocode({keyword: this.setl_item, type: govmap.geocodeType.AccuracyOnly}
+            ).then(function(response){
+              if (response.data){
+                if (response.data[0].DescLayerID == "SETL_MID_POINT"){
+
+                  // console.log("נמצא ישוב!");
+                  // var params ={ 
+                  //   layerName: 'KSHTANN_SETL_AREA',
+                  //   whereClause: 'SETL_CODE = '+response.data[0].ObjectID,
+                  //   zoomToExtent: true 
+                  // }
+                  // govmap.filterLayers(params)
+
+                  //
+
+                  var params = {
+                      'layerName': 'KSHTANN_SETL_AREA',
+                      'fieldName': 'SETL_CODE',
+                      'fieldValues': [response.data[0].ObjectID],
+                      'highlight': true,
+                      'showBubble':false,
+                      'outLineColor':[127, 246, 223, 1],
+                      'outlineWidth': 1, 
+                      'fillColor': [255, 255, 255, 0.5]
+                  };
+                  govmap.searchInLayer(params);
+
+                }
+              }						
+            });  
+        
 
       },
       autoComplete(){
@@ -981,7 +965,8 @@ var appVue = new Vue({
       },
       setItemsByTochnitSelect(tochnit_item){
         this.items = [];
-        //console.log(tochnit_item);
+        console.log(tochnit_item);
+        if (appVue.selectedTitle.title == "כל המחזורים" &&  appVue.selectedTitle.program == "כל התוכניות"){
           var array = json.filter(function (el) {return el.Tochnit == tochnit_item});
           if (array.length > 0){
             this.items = array;
@@ -990,29 +975,65 @@ var appVue = new Vue({
           else{
             console.log("no results");
           }
+        }
+        else{
+          var array = json.filter(function (el) {return el.Tochnit == tochnit_item && el.Tochnit== appVue.selectedTitle.program +" " +appVue.selectedTitle.title});
+          if (array.length > 0){
+            this.items = array;
+            console.log(array.length  + "results");
+          }
+
+        }
 
       },
       setItemsByRole(role_item){
         this.items = [];
-          var array = json.filter(function (el) {return el.Role == role_item});
-          if (array.length > 0){
-            this.items = array;
+          if (this.selectedTitle.title == "כל המחזורים" &&  this.selectedTitle.program == "כל התוכניות"){
+            var array = json.filter(function (el) {return el.Role == role_item});
+            if (array.length > 0){
+              this.items = array;
+            }
+          }
+          else{
+            var array = json.filter(function (el) {return el.Role == role_item && el.Tochnit== appVue.selectedTitle.program +" " +appVue.selectedTitle.title  });
+            if (array.length > 0){
+              this.items = array;
+            }
+
           }
 
       },
       setItemsBySetl(setl_name){
         this.items = [];
+        if (this.selectedTitle.title == "כל המחזורים" &&  this.selectedTitle.program == "כל התוכניות"){
           var array = json.filter(function (el) {return el.Settlement == setl_name});
           if (array.length > 0){
             this.items = array;
           }
+        }
+        else{
+          var array = json.filter(function (el) {return el.Settlement == setl_name && el.Tochnit== appVue.selectedTitle.program +" " +appVue.selectedTitle.title});
+          if (array.length > 0){
+            this.items = array;
+          }
+
+        }
       },
       setItemsByOrg(org_item){
         this.items = [];
+        if (this.selectedTitle.title == "כל המחזורים" &&  this.selectedTitle.program == "כל התוכניות"){
           var array = json.filter(function (el) {return el.Organization == org_item});
           if (array.length > 0){
             this.items = array;
           }
+        }
+        else{
+          var array = json.filter(function (el) {return el.Organization == org_item && el.Tochnit== appVue.selectedTitle.program +" " +appVue.selectedTitle.title});
+          if (array.length > 0){
+            this.items = array;
+          }
+
+        }
       },
       setItemsByFriends(friends) {
         this.items = [];
@@ -1026,11 +1047,50 @@ var appVue = new Vue({
       },
       setItemsByTochnit(tochnit) {
         this.items = [];
-        console.log(tochnit);
+        console.log(tochnit.program + " " + tochnit.title);
           var array = json.filter(function (el) {return el.Tochnit == tochnit.program + " " + tochnit.title});
           if (array.length > 0){
             this.items=array;
           }
+
+
+          //
+          appVue.setl_items = [];
+          for (i=0; i < array.length; i++){
+            if (!appVue.setl_items.includes(array[i].Settlement)){
+              appVue.setl_items.push(array[i].Settlement);
+            }
+          }
+          appVue.setl_items.sort();
+
+          //
+          appVue.org_items = [];
+          for (i=0; i < array.length; i++){
+            if (!appVue.org_items.includes(array[i].Organization)){
+              appVue.org_items.push(array[i].Organization);
+            }
+          }
+          appVue.org_items.sort();
+
+          //
+          appVue.role_items = [];
+          for (i=0; i < array.length; i++){
+            if (!appVue.role_items.includes(array[i].Role)){
+              appVue.role_items.push(array[i].Role);
+            }
+          }
+          appVue.role_items.sort();
+
+          //
+          appVue.tochnit_items = [];
+          for (i=0; i < array.length; i++){
+            if (!appVue.tochnit_items.includes(array[i].Tochnit)){
+              appVue.tochnit_items.push(array[i].Tochnit);
+            }
+          }
+          appVue.tochnit_items.sort();
+
+
       },
       remove (item) {
         const index = this.friends.indexOf(item.name)
@@ -1079,50 +1139,62 @@ var appVue = new Vue({
       },
     },
 
-
     mounted() {
-      this.people = [];
+
+      var url = 'https://raw.githubusercontent.com/yovavsanders/govmap/master/movilim.json';
+      $.getJSON(url, function(data) {
+        json = data;
+        appVue.people = [];
       for (i=0; i < json.length; i++){
-        this.people.push(
+        console.log(json[i]);
+        appVue.people.push(
           { firstname: json[i].FirstName, lastname: json[i].LastName, name: json[i].FirstName + " " + json[i].LastName, group: json[i].Tochnit, avatar: json[i].Img }
         )
       }
+        //
 
-      //
-      this.setl_items = [];
-      for (i=0; i < json.length; i++){
-        if (!this.setl_items.includes(json[i].Settlement)){
-          this.setl_items.push(json[i].Settlement);
-        }
-      }
-      this.setl_items.sort();
+          //
+          appVue.setl_items = [];
+          for (i=0; i < json.length; i++){
+            if (!appVue.setl_items.includes(json[i].Settlement)){
+              appVue.setl_items.push(json[i].Settlement);
+            }
+          }
+          appVue.setl_items.sort();
 
-      //
-      this.org_items = [];
-      for (i=0; i < json.length; i++){
-        if (!this.org_items.includes(json[i].Organization)){
-          this.org_items.push(json[i].Organization);
-        }
-      }
-      this.org_items.sort();
+          //
+          appVue.org_items = [];
+          for (i=0; i < json.length; i++){
+            if (!appVue.org_items.includes(json[i].Organization)){
+              appVue.org_items.push(json[i].Organization);
+            }
+          }
+          appVue.org_items.sort();
 
-      //
-      this.role_items = [];
-      for (i=0; i < json.length; i++){
-        if (!this.role_items.includes(json[i].Role)){
-          this.role_items.push(json[i].Role);
-        }
-      }
-      this.role_items.sort();
+          //
+          appVue.role_items = [];
+          for (i=0; i < json.length; i++){
+            if (!appVue.role_items.includes(json[i].Role)){
+              appVue.role_items.push(json[i].Role);
+            }
+          }
+          appVue.role_items.sort();
 
-      //
-      this.tochnit_items = [];
-      for (i=0; i < json.length; i++){
-        if (!this.tochnit_items.includes(json[i].Tochnit)){
-          this.tochnit_items.push(json[i].Tochnit);
-        }
-      }
-      this.tochnit_items.sort();
+          //
+          appVue.tochnit_items = [];
+          for (i=0; i < json.length; i++){
+            if (!appVue.tochnit_items.includes(json[i].Tochnit)){
+              appVue.tochnit_items.push(json[i].Tochnit);
+            }
+          }
+          appVue.tochnit_items.sort();
+
+          //
+          appVue.items = json;
+          appVue.json = json;
+         
+    
+      });
     },
 
     computed: {
