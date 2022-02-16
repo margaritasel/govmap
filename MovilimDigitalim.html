@@ -619,28 +619,28 @@
                                     </v-list-item-title>
                                     <p style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt">  {{ item.Role }}</p>
                                     <p class="text-wrap" class="wrap-text" style="color: #fabd1a !important; font-family: 'Open Sans', sans-serif !important; font-size:10pt">  {{ item.Organization }}</p>
-                                    <v-row dense>
-                                        <v-col cols="3">
+                                    <v-row style="width:100%">
+                                        <v-col cols="4" style="margin-right: -15px; margin-top: 3px;">
                                                 <v-img
 
-                                                max-height="85"
-                                                max-width="85"
+                                                max-height="100"
+                                                max-width="100"
                                                   src="https://raw.githubusercontent.com/yovavsanders/govmap/master/Dg%20Map%20Member%20Card%20In%20Icon%20png-.png"
                                                 > 
                                         </v-col>
-                                        <v-col cols="9">
+                                        <v-col style="margin-right: -30px" cols="8">
                                             <p style="margin-top: 10px; word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt"> {{item.Email}}</p>
                                             <p style="margin-top: -10px; word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt"> {{item.Mobile}}</p>
                                         </v-col>
                                     </v-row>
                                   
-                                    <v-list-item style="margin-top: -20px; margin-right: -17px;">
+                                    <v-list-item style="margin-top: -30px; margin-right: -17px;">
                                         <v-list-item-content>
                                             <p style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt; font-weight:600; "> עוד עלי</p>
                                             <a style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt" :href="item.Link">{{decodeURI(item.Link)}}</a>
                                         </v-list-item-content>
                                     </v-list-item>  
-                                    <v-list-item style="margin-right: -10px;">
+                                    <v-list-item style="margin-top: -10px; margin-right: -17px">
                                         <v-list-item-content>
                                             <p style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:10pt; font-weight:600; "> XXXX</p>
                                                 <p style="color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:12pt">XXXX</p>
