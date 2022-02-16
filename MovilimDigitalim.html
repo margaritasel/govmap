@@ -518,7 +518,7 @@
           </v-container>
           
           <v-container>
-            <v-row style="background-color: #ECEFF1" v-if="items.length" align="center" justify="center">
+            <v-row style="background-color: #ECEFF1" v-if="items.length" justify="center">
                 <v-data-iterator
                   :items="items"
                   :items-per-page.sync="itemsPerPage"
@@ -575,7 +575,7 @@
                   </template>
             
                   <template v-slot:default="props">
-                    <v-row align="center" justify="center" style="font-family: Alef Hebrew">
+                    <v-row justify="center" style="font-family: Alef Hebrew">
                       <v-col
                         v-for="item in props.items"
                         :key="item.name"
@@ -590,7 +590,6 @@
 
                           <v-card-title>
                             <v-row
-                            align="right"
                             class="fill-height"
                             style="margin-top:1px; margin-right:5px;"
                           >
@@ -610,7 +609,7 @@
                             </v-col>
 
                             <v-col class="wrap-text">
-                                <v-list-item style="margin-right: -40px; max-width:400px; color: white!important;"
+                                <v-list-item style="margin-right: -20px; max-width:450px; color: white!important;"
                                   color="rgba(0, 0, 0, .4)"
                                   dark
                                 >
@@ -620,24 +619,25 @@
                                     </v-list-item-title>
                                     <p style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt">  {{ item.Role }}</p>
                                     <p class="text-wrap" class="wrap-text" style="color: #fabd1a !important; font-family: 'Open Sans', sans-serif !important; font-size:10pt">  {{ item.Organization }}</p>
-                                    <v-row style="margin-right: -40px">
-                                        <v-col cols="12"  sm="4" md="4" lg="4" xl="4">
+                                    <v-row dense>
+                                        <v-col cols="3">
                                                 <v-img
-                                                
+
+                                                max-height="85"
+                                                max-width="85"
                                                   src="https://raw.githubusercontent.com/yovavsanders/govmap/master/Dg%20Map%20Member%20Card%20In%20Icon%20png-.png"
-                                                >
+                                                > 
                                         </v-col>
-                                        <v-col cols="12"  sm="8" md="8" lg="8" xl="8" style="margin-right: -30px">
-                                            <p style="margin-top: 5px; word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt"> {{item.Email}}</p>
+                                        <v-col cols="9">
+                                            <p style="margin-top: 10px; word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt"> {{item.Email}}</p>
                                             <p style="margin-top: -10px; word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt"> {{item.Mobile}}</p>
                                         </v-col>
-                                        <v-spacer></v-spacer>
                                     </v-row>
                                   
-                                    <v-list-item style="margin-top: -25px; margin-right: -10px;">
+                                    <v-list-item style="margin-top: -20px; margin-right: -17px;">
                                         <v-list-item-content>
                                             <p style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt; font-weight:600; "> עוד עלי</p>
-                                            <a style="color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt" :href="item.Link">{{decodeURI(item.Link)}}</a>
+                                            <a style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt" :href="item.Link">{{decodeURI(item.Link)}}</a>
                                         </v-list-item-content>
                                     </v-list-item>  
                                     <v-list-item style="margin-right: -10px;">
