@@ -588,7 +588,7 @@
                         xl="3"
                        
                       >
-                        <v-card dark style="font-family: 'Open Sans', sans-serif; background-size: cover; background-image: url('https://raw.githubusercontent.com/yovavsanders/govmap/master/Dg%20Map%20Member%20Card%20BG.png');"> 
+                        <v-card height="559" dark style="font-family: 'Open Sans', sans-serif; background-size: cover; background-image: url('https://raw.githubusercontent.com/yovavsanders/govmap/master/Dg%20Map%20Member%20Card%20BG.png');"> 
 
                           <v-card-title>
                             <v-row
@@ -635,8 +635,7 @@
                                   
                                     <v-list-item style="margin-top: -30px; margin-right: -17px;">
                                         <v-list-item-content v-if="item.Link">
-                                            <p style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt; font-weight:600; "> עוד עלי</p>
-                                            <a style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt" :href="item.Link">{{decodeURI(item.Link)}}</a>
+                                            <a style="word-break: break-word !important; color: white !important;font-family: 'Open Sans', sans-serif !important; font-size:11pt" :href="item.Link">עוד עליי</a>
                                         </v-list-item-content>
                                     </v-list-item>  
                                     <v-list-item style="margin-top: -10px; margin-right: -17px">
@@ -688,7 +687,7 @@
                       class="mt-2"
                       justify="center"
                     >
-                      <span class="grey--text">Items per page</span>
+                      <span style="font-family: 'Open Sans', sans-serif !important;" class="black--text">תוצאות לעמוד</span>
                       <v-menu offset-y>
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
@@ -718,9 +717,10 @@
             
                       <span
                         class="mr-4
-                        grey--text"
+                        black--text"
+                        style="font-family: 'Open Sans', sans-serif !important;"
                       >
-                        Page {{ page }} of {{ numberOfPages }}
+                        עמוד {{ page }} מתוך {{ numberOfPages }}
                       </span>
                       <v-btn
                         fab
@@ -791,12 +791,12 @@ var appVue = new Vue({
     data () {
         return {
 
-        itemsPerPageArray: [4, 8, 12],
+        itemsPerPageArray: [20, 50, 200],
         search: '',
         filter: {},
         sortDesc: false,
         page: 1,
-        itemsPerPage: 12,
+        itemsPerPage: 20,
         sortBy: 'name',
         keys: [
             "FirstName",
