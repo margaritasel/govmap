@@ -520,6 +520,7 @@
           
           <v-container>
             <v-row style="background-color: #ECEFF1" v-if="items.length" justify="center">
+              <v-container>
                 <v-data-iterator
                   :items="items"
                   :items-per-page.sync="itemsPerPage"
@@ -742,6 +743,7 @@
                     </v-row>
                   </template>
                 </v-data-iterator>
+              </v-container>
             </v-row>
           </v-container>
 
