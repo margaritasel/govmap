@@ -1,5 +1,6 @@
 [
   {
+    "FirstName": "זאב",
     "LastName": "חיות",
     "Organization": "SWF כלכלית",
     "Role": "מנכ\"ל קרן חברתי",
@@ -11,6 +12,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f0444ea544144ad1ab6648995c5643ea~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יפעת",
     "LastName": "זמיר",
     "Organization": "עיריית הרצליה",
     "Role": "מנהלת מרכז היזמות והחדשנות של עיריית הרצליה- HICITY",
@@ -22,6 +24,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ca066fb7dbae47b18f3f09f668aa2b50~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אריאלה",
     "LastName": "שגב",
     "Organization": "משרד הרווחה והשירותים החברתיים",
     "Role": "מנהלת מחוז ת\"א והמרכז (לשעבר)",
@@ -33,6 +36,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_df66d78fd00d420db1fb5da26c9d0406~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דן",
     "LastName": "להב",
     "Organization": "משרד ראש הממשלה",
     "Role": "סמנכ״ל (פנים תכנון ופיתוח)",
@@ -44,6 +48,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ae4ce0b4db8044aaaf9f5d9d6f437a3d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מריה",
     "LastName": "ג'יריס",
     "Organization": "משרד התחבורה",
     "Role": "מנהלת תחום פיתוח כלכלי ואשכולות",
@@ -55,6 +60,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_09250efa0e1544a4aa5850c4311e3eae~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אילן",
     "LastName": "בן עדי",
     "Organization": "עיריית אשדוד",
     "Role": "מנכ\"ל",
@@ -66,6 +72,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_a3f46fff781545e08ea90ca56ed07c2b~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אלון",
     "LastName": "אופיר",
     "Organization": "עיריית נתניה",
     "Role": "מנהל אגף שירות וחדשנות",
@@ -77,6 +84,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e0adf16914fd4d0ba7b593325f225f25~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אליעזר",
     "LastName": "יעקב",
     "Organization": "אשכול נגב מזרחי",
     "Role": "מנכ\"ל",
@@ -88,6 +96,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_73cbda2f07f9458496f080a30e97e959~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אמיתי",
     "LastName": "רויטמן",
     "Organization": "מועצה אזורית שומרון",
     "Role": "מנכ\"ל",
@@ -99,6 +108,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_28f5965f3a164a588d07db87fa277d53~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אסף",
     "LastName": "אדרי",
     "Organization": "עיריית גבעתיים",
     "Role": "סמנכ\"ל מינהל ומשאבי אנוש",
@@ -110,6 +120,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c0029ba52c6640a481a543e3e954cf04~mv2.png/v1/fill/w_179,h_259,al_c,q_85,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אסתי",
     "LastName": "פילוס",
     "Organization": "עיריית אשדוד",
     "Role": "מנהלת התכנון האסטרטגי והמידע",
@@ -121,6 +132,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b9ce45f0616f43d393a4e36136364c49~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ארלט",
     "LastName": "מויאל",
     "Organization": "עיריית בני ברק",
     "Role": "מנהלת אגף שירותים חברתיים",
@@ -132,6 +144,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f1ba059d5b8041a0af3a1c120bb848b5~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ברק",
     "LastName": "כלף",
     "Organization": "מועצה אזורית שומרון",
     "Role": "מנמ\"ר",
@@ -143,6 +156,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_55cf611da1f648dda53a21e08989e7a5~mv2.png/v1/fill/w_179,h_259,al_c,q_85,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ג'מאל",
     "LastName": "פטום",
     "Organization": "מועצה מקומית נחף",
     "Role": "מנכ\"ל",
@@ -154,6 +168,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2b3b1a568fed4ba8bdce12c2c5393e66~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גבריאל",
     "LastName": "אביטל",
     "Organization": "עיריית אילת",
     "Role": "ראש מינהל תיירות, פיקוח ואכיפה וחופים",
@@ -165,6 +180,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f6817982dc99401ebd28b85d5da17dd5~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גרי (גרשון)",
     "LastName": "עמל",
     "Organization": "עריית ערד",
     "Role": "מנכ\"ל",
@@ -176,6 +192,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_156b9b0b05624f5081b42736946c2259~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דוד",
     "LastName": "מלכה",
     "Organization": "עיריית כרמיאל",
     "Role": "מנכ״ל  (לשעבר)",
@@ -187,6 +204,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ca158fddb8fc4d6b8c08112cb9a89522~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דינה",
     "LastName": "בר אולפן",
     "Organization": "עיריית אשדוד",
     "Role": "משנה למנכ\"ל",
@@ -198,6 +216,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2ba576e70c8f44b6aa177b9eca9e8e38~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "האדי",
     "LastName": "סעד",
     "Organization": "מועצה מקומית בית ג'ן",
     "Role": "גזבר",
@@ -209,6 +228,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_7c14cde646e944d388f7c16ff3cb1ee6~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חוה",
     "LastName": "ארליך רוגינסקי",
     "Organization": "מכון ירושלים למחקרי מדיניות",
     "Role": "ראש צוות עירוניות וקיימות",
@@ -220,6 +240,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f1225d1ac5554f1b9b6cc66cc1ba9c3a~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יוסי",
     "LastName": "אלימלך",
     "Organization": "מועצה אזורית חבל מודיעין",
     "Role": "מנכ\"ל",
@@ -231,6 +252,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b0e05f39ab2143238363788c1bcecaab~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יוסף",
     "LastName": "אסדי",
     "Organization": "אשכול בית הכרם",
     "Role": "מנכ\"ל מועצה מקומית דיר אל אסד",
@@ -242,6 +264,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3ce6e3a45fe744f692d623c50c82ca43~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יורם",
     "LastName": "כהן",
     "Organization": "עיריית נתניה",
     "Role": "מנכ\"ל",
@@ -253,6 +276,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_5c289f400f194ba395a4efcd1f28f377~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ירון",
     "LastName": "גנץ",
     "Organization": "החברה הכלכלית לפיתוח חבל מודיעין",
     "Role": "מנמ\"ר",
@@ -264,6 +288,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b58e0d87f05d4609a7275450b095eced~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מאיר",
     "LastName": "ארונוביץ",
     "Organization": "מועצה מקומית קרני שומרון",
     "Role": "מנכ\"ל",
@@ -275,6 +300,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_dff826476dbc44068584badbdcf9ef1f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מהנא",
     "LastName": "טאפש",
     "Organization": "מועצה מקומית בית ג'ן",
     "Role": "מנהל מחלקת החינוך",
@@ -286,6 +312,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9d366a309be24298b34c9b4f1cdd0dee~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מיכל",
     "LastName": "הירש נגרי",
     "Organization": "edunow",
     "Role": "שותפה מייסדת",
@@ -297,6 +324,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_8108e01730aa4743a5a37c4ba9444c6e~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "סאמי",
     "LastName": "תלאווי",
     "Organization": "עיריית טייבה",
     "Role": "מנכ\"ל",
@@ -308,6 +336,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f9cbdbe2c06c4d79a0caeb5787ded1db~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עינת",
     "LastName": "אנגלר שמש",
     "Organization": "מועצה אזורית קרני שומרון",
     "Role": "מנהלת המחלקה לשירותים חברתיים",
@@ -319,6 +348,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_30ba4241c4ff45169e3e13466cb51da9~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ענת",
     "LastName": "שלומוביץ",
     "Organization": "עיריית פתח תקווה",
     "Role": "מנהלת אגף מערכות מידע ומחשוב",
@@ -330,6 +360,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_0db1e7e31a0544dc8c1689ac1b9cc00b~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "פדוה",
     "LastName": "דבור",
     "Organization": "מועצה מקומית בית ג'ן",
     "Role": "מנכ\"ל",
@@ -341,6 +372,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9dd19e29d9f54d3f912d50e5b8bcfde9~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "פיליפ",
     "LastName": "אזרד",
     "Organization": "עיריית אילת",
     "Role": "מנכ\"ל",
@@ -352,6 +384,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_770950e0cf994c53adab15640af12a70~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "פרי",
     "LastName": "נתיב",
     "Organization": "עיריית רעננה",
     "Role": "סמנכ״לית (לשעבר)",
@@ -363,6 +396,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c1ed58828c1449098a7ef434839047f2~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רוני",
     "LastName": "ענבר",
     "Organization": "חבל מודיעין",
     "Role": "מנכ\"ל החברה הכלכלית",
@@ -374,6 +408,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_054daf9c511d4c88808db967c8770859~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רונית",
     "LastName": "עובדיה",
     "Organization": "אשכול בית הכרם",
     "Role": "מנכ\"לית האשכול",
@@ -385,6 +420,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2c2a748ec9b84b00825f0e2e8548b009~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רחל",
     "LastName": "שרמר",
     "Organization": "עיריית בני ברק",
     "Role": "סגנית גזבר ומנהלת אגף תקציבים",
@@ -396,6 +432,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_0db41b529f15409f869e93dab8e82c4e~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שאדי",
     "LastName": "תלי",
     "Organization": "עיריית טייבה",
     "Role": "מנהל הרשות לביטחון קהילתי ומנהל אגף חינוך בלתי פורמלי",
@@ -407,6 +444,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_97e1907594f441b58b716fe6d2d959a5~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אורנית",
     "LastName": "בן ישר",
     "Organization": "עמותת מחשבה טובה",
     "Role": "מנכ\"לית",
@@ -418,6 +456,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_6c932622902f4d9fa1881cc58a392021~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שי",
     "LastName": "רייכנר",
     "Organization": "מועצה אזורית נחל שורק",
     "Role": "ראש מועצה",
@@ -429,6 +468,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_409813a3b49b4a63a8657f4386dcd665~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אבי",
     "LastName": "פירסט",
     "Organization": "נת\"ע",
     "Role": "ראש אגף דוברות והסברה",
@@ -440,6 +480,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_757999359efa4a1283ca2edb237211dd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איתן",
     "LastName": "כהן",
     "Organization": "משרד הפנים",
     "Role": "מנהל אגף תקצוב ותשלומים בשלטון המקומי",
@@ -451,6 +492,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_76335e9d92c04f42bdc5e1432b7d3583~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אנה",
     "LastName": "סמגרינסקי",
     "Organization": "משרד הפנים",
     "Role": "מנהלת תחום פיתוח ארגוני ברשויות מקומיות",
@@ -462,6 +504,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_a816c0dd336c477581b13022212a1e32~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דקלה",
     "LastName": "רוזנשטיין-שלומי",
     "Organization": "משרד הפנים",
     "Role": "מנהלת מפעם עמק יזרעאל",
@@ -473,6 +516,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c755c3e63ca94652a43c1e99b7a8c7c6~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "לימור",
     "LastName": "בר-טל",
     "Organization": "משרד העבודה, הרווחה והשירותים החברתיים",
     "Role": "מנהלת מחוז ת״א והמרכז משרד העבודה הרווחה והשירותים החברתיים",
@@ -484,6 +528,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_6222bc4fdf6a419295af202fa1311c82~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "לירית",
     "LastName": "סרפוס",
     "Organization": "משרד ראש הממשלה",
     "Role": "מנהלת תחום בכיר חברה ושיתופי פעולה בין-מגזריים",
@@ -495,6 +540,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cf7dc22059ab49e7b3f15a4993ce368f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מורן",
     "LastName": "דיין",
     "Organization": "משרד המדע והטכנולוגיה",
     "Role": "מנהל טכנולוגיה וחדשנות",
@@ -506,6 +552,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e988f5c7654949398739d5f6465bad87~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עמליה",
     "LastName": "חגבי",
     "Organization": "משרד הפנים",
     "Role": "סגנית ממונה על מחוז מרכז",
@@ -517,6 +564,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_a118db6cdf4f40b18ae067eae31d9869~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אוהד",
     "LastName": "שגב",
     "Organization": "עיריית חיפה",
     "Role": "מנכ\"ל",
@@ -528,6 +576,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3067614a71b94debae1c8bcc36151f58~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אופירה",
     "LastName": "שגב",
     "Organization": "מועצה אזורית עמק המעיינות",
     "Role": "דוברת ומנהלת מחלקת תקשורת",
@@ -539,6 +588,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_7a3ede4a349e47f89e3229d366449c6b~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איימן",
     "LastName": "קשקוש",
     "Organization": "עיריית קלנסווה",
     "Role": "מנכ\"ל",
@@ -550,6 +600,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_847f167f7d2f4dbb9ce8a945b76e32d7~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איתן",
     "LastName": "ברזילי",
     "Organization": "לינוטק בע\"מ",
     "Role": "מנכ\"ל",
@@ -561,6 +612,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_98c6331309824aaa891061cdcbf07460~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אמנון",
     "LastName": "בוץ",
     "Organization": "עיריית יהוד מונוסון",
     "Role": "יועץ ראש מנהלת אזורי תעסוקה",
@@ -572,6 +624,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cf37265848ba419bb88f33ca92c74739~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אריאל",
     "LastName": "פינקלשטיין",
     "Organization": "המכון הישראלי לדמוקרטיה",
     "Role": "ראש פרוייקט שלטון מקומי",
@@ -583,6 +636,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_dfc51f36744945acbd7c7181cae2c707~mv2.jpeg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אריה",
     "LastName": "ברדוגו",
     "Organization": "עיריית בית שמש",
     "Role": "גזבר",
@@ -594,6 +648,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_583993544cf64b98910c26f70ba14124~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גדי",
     "LastName": "להב",
     "Organization": "מועצה אזורית גולן",
     "Role": "מנהל אגף החינוך",
@@ -605,6 +660,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_dcf3479876ac4c0caf43fa4687b7b4bd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דורון",
     "LastName": "מילברג",
     "Organization": "עיריית ראשון לציון",
     "Role": "מנכ\"ל",
@@ -616,6 +672,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_7f5adcceb0684ea4944fd05cdb296d7d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דלית",
     "LastName": "הראל",
     "Organization": "עיריית רחובות",
     "Role": "מהנדסת העיר",
@@ -627,6 +684,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b2f6335a4ff241f28320c966bcca4a92~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ואפי",
     "LastName": "ח'ורי",
     "Organization": "מועצה מקומית מג'אר",
     "Role": "מנכ\"ל (לשעבר)",
@@ -638,6 +696,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3db96808838d48ea8344e79e71aeadd7~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "זיוה",
     "LastName": "דוידי נוקראי",
     "Organization": "עיריית ירושלים",
     "Role": "מנהלת אשכול משאבי אנוש וכספים",
@@ -649,6 +708,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e9b94bbac14c4d8491d88652c5cd9462~mv2.jpeg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חיה",
     "LastName": "בנדק",
     "Organization": "מועצה אזורית משגב",
     "Role": "לשעבר מנכל\"ית המועצה",
@@ -660,6 +720,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e3fd8cd38a724172aca3d847e1e5e824~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "טל",
     "LastName": "טורן",
     "Organization": "עיריית בת ים",
     "Role": "מנכ\"ל תאגיד המים",
@@ -671,6 +732,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_eaededf60e6d4006be4360a7d0887855~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יגאל",
     "LastName": "ברכה",
     "Organization": "עיריית שדרות",
     "Role": "מנהל אגף נוער וצעירים",
@@ -682,6 +744,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_123aa5aeca5c4015ac7f211f5b82c277~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יהוד",
     "LastName": "מרסיאנו",
     "Organization": "עיריית באר שבע",
     "Role": "מנמ\"ר",
@@ -693,6 +756,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_adadd540511446ebb2d2d0163d47e0ed~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יהודה",
     "LastName": "שפיצר",
     "Organization": "עיריית ביתר עילית",
     "Role": "מנכ\"ל (לשעבר)",
@@ -704,6 +768,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_24a17feb37504c00b6c9da7d5abe6f6c~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יורם",
     "LastName": "כרמון",
     "Organization": "עיריית מודיעין מכבים רעות",
     "Role": "מנכ\"ל",
@@ -715,6 +780,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_550e7fe8dfb541d0942a9bc93aefbaf2~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יניב",
     "LastName": "אשור",
     "Organization": "עיריית עכו",
     "Role": "מנכ\"ל",
@@ -726,6 +792,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_adf34efc8032410dac51180fea71eedb~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יפה",
     "LastName": "שטרית",
     "Organization": "מועצה אזורית גוש עציון",
     "Role": "מנכ\"לית",
@@ -737,6 +804,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f8d0cb3904274d69b3fed1c29485c7bd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ירון",
     "LastName": "יהב",
     "Organization": "רמי לוי שיווק השקמה (לשעבר - עיריית רמת גן)",
     "Role": "מנהל מערכות מידע",
@@ -748,6 +816,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_172f503bee724e7d9497b49e3f3115e1~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "כאיד",
     "LastName": "סלאמה",
     "Organization": "עיריית קלנסווה",
     "Role": "יועץ משפטי",
@@ -759,6 +828,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_14ef200fa96c4725b24340806db78258~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "לימור",
     "LastName": "ברק",
     "Organization": "מועצה אזורית משגב",
     "Role": "מנהלת פרויקטים",
@@ -770,6 +840,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_1b53aa8197ec483e8641cd90c0057d33~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מיה",
     "LastName": "גומא להב",
     "Organization": "מועצה אזורית עמק המעיינות",
     "Role": "מנכ\"לית",
@@ -781,6 +852,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_0c5936bd5e9544aca0826439c08ff1c4~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מלי",
     "LastName": "כהן בן יוסף",
     "Organization": "מועצה אזורית גוש עציון",
     "Role": "מנהלת משאבי אנוש",
@@ -792,6 +864,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ad9d555acfbd4e20b3c614d2c47198bd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מתתיהו",
     "LastName": "חותה ז\"ל",
     "Organization": "עיריית בית שמש",
     "Role": "מנכ\"ל",
@@ -803,6 +876,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_7e4c5acdc8aa4a5f9a53f7b82be297b4~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עמיחי",
     "LastName": "אלבה",
     "Organization": "ממשלה",
     "Role": "פיתוח ארגוני וניהול תוכניות ממשלה",
@@ -814,6 +888,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b277548521454482ba767502fe3ab230~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עמית",
     "LastName": "ריינגולד",
     "Organization": "עיריית באר שבע",
     "Role": "מנהל אגף מינהל, לוגיסטיקה וחירום",
@@ -825,6 +900,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c5b0472b0ced402cada05e8e9cb00431~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רון",
     "LastName": "ברזני",
     "Organization": "עיריית מודיעין מכבים רעות",
     "Role": "מנכ\"ל התאגיד העירוני אופק",
@@ -836,6 +912,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_0a4ddd2a23884c54a2d64e6c4ff11f75~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "תאופיק",
     "LastName": "סתאוי",
     "Organization": "מועצה מקומית מג'אר",
     "Role": "גזבר",
@@ -847,6 +924,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_7e6aa1c88dd246b8b13d8853ff6fd03f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חיים",
     "LastName": "רוזנפלד",
     "Organization": "עיריית אלעד",
     "Role": "מנהל מדור פניות ציבור",
@@ -858,6 +936,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2c2b46cb1e314969ba070e8200d8f242~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נורית",
     "LastName": "צור רבינו",
     "Organization": "משרד הכלכלה",
     "Role": "מנכל\"ית מינהל אזורי תעשייה",
@@ -869,6 +948,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_427da67499fd4fbfb469b99c2373a5f8~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נעמה",
     "LastName": "אסרף",
     "Organization": "אשכול גליל מזרחי",
     "Role": "מנהלת תחום דיגיטציה וחדשנות",
@@ -880,6 +960,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b0933763e0324d0db1a2c56e7b60247d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מלכה",
     "LastName": "גרשון",
     "Organization": "עיריית אשקלון",
     "Role": "מנהלת אגף משאבי אנוש",
@@ -891,6 +972,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_66077719a8cf4fb0b34b1201af004b8b~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "בועז",
     "LastName": "תנעמי",
     "Organization": "עיריית אשקלון",
     "Role": "מנהל אגף מערכות מידע חדשנות וטכנולוגיה",
@@ -902,6 +984,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ebd923ad31a6496d8411bd75b7b1c381~mv2.jpeg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "זיו",
     "LastName": "חורב",
     "Organization": "עיריית בת ים",
     "Role": "סמנכ\"לית קהילה, חינוך ורווחה",
@@ -913,6 +996,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c49adf1958d5446b890bd1e1e86526e0~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מוטי",
     "LastName": "לייסט",
     "Organization": "עיריית בת ים",
     "Role": "מנהל מערכות מידע",
@@ -924,6 +1008,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_5facb7c748a141769a58207a6463baee~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חופית",
     "LastName": "צמח ישראל",
     "Organization": "עיריית גני תקווה",
     "Role": "מנהלת מערכות מידע (לשעבר)",
@@ -935,6 +1020,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_1efa1496208646018ca246bf2ce6db16~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דליה",
     "LastName": "לין",
     "Organization": "עיריית גני תקווה",
     "Role": "מנכ\"לית",
@@ -946,6 +1032,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_7692fd29570c401ab4d79c769a034365~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שוקי",
     "LastName": "קליין",
     "Organization": "עיריית דימונה",
     "Role": "מנכ\"ל",
@@ -957,6 +1044,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c2e2c01cdfe14552997cfda65153d1b7~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "טל",
     "LastName": "מגרה",
     "Organization": "מועצה אזורית בני שמעון",
     "Role": "מנהל קהילת מושבי יחדיו",
@@ -968,6 +1056,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c6510382bad945a385c3ec7f59bfc470~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אסף",
     "LastName": "לנגלבן",
     "Organization": "מועצה אזורית גליל עליון",
     "Role": "מנהל האגף המוניציפאלי וקב\"ט המועצה",
@@ -979,6 +1068,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_837ba79f3a1b402c9378f692516ae3b2~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עידית",
     "LastName": "חמל",
     "Organization": "מועצה אזורית גליל עליון",
     "Role": "מנכ\"לית",
@@ -990,6 +1080,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9e777e187c664b88acfebfdb5da4f5bd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איתי",
     "LastName": "צחר",
     "Organization": "עיריית ג'לגוליה",
     "Role": "מנכ\"ל",
@@ -1001,6 +1092,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_bda264ad1978412cbf8cec0fcda06d89~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מוטי",
     "LastName": "סרודי",
     "Organization": "עיריית כפר סבא",
     "Role": "מנהל אגף התקשוב",
@@ -1012,6 +1104,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_dd698a97390d4b1f918fd6ecf81143f6~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שורוק",
     "LastName": "מצארווה",
     "Organization": "מועצה מקומית כפר קרע",
     "Role": "מנהלת מחלקה למניעת אלימות סמים ואלכוהול",
@@ -1023,6 +1116,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_d4a7b2d9817348a4827006587d32d5dd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חיר",
     "LastName": "בדראן",
     "Organization": "מועצה מקומית מג'ד אל-כרום",
     "Role": "מנהל מערכות מידע",
@@ -1034,6 +1128,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e27fe7ac9b3e4d52970c1f3b4af79d7f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רבאח",
     "LastName": "מנאע",
     "Organization": "מועצה מקומית מג'ד אל-כרום",
     "Role": "מנכ\"ל",
@@ -1045,6 +1140,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_0ad89840f7974fab8ad888383fe18f08~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מלכי",
     "LastName": "אהרונוביץ'",
     "Organization": "עיריית מודיעין עילית",
     "Role": "מנהלת תאגיד עירוני החברה לפיתוח",
@@ -1056,6 +1152,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_be1fdafafdf5455794e15522174272a2~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אפרת",
     "LastName": "פרגא",
     "Organization": "עיריית מודיעין עילית",
     "Role": "מנהלת מערכות מידע",
@@ -1067,6 +1164,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_eab48d75bf3b46758eee50d4644fe0e0~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יריב",
     "LastName": "אביטל",
     "Organization": "מועצה מקומית קרית טבעון",
     "Role": "מנכ\"ל",
@@ -1078,6 +1176,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_6f26b06bfad34285a9bd27d526303399~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איציק",
     "LastName": "כרמלי",
     "Organization": "פריוריטי סיטי",
     "Role": "מנכ\"ל (לשעבר מנמ\"ר בעיריית ראשון לצון)",
@@ -1089,6 +1188,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cdcae849c77d4971bde96e9f36a54a69~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "תאופיק",
     "LastName": "בסול",
     "Organization": "מועצה מקומית ריינה",
     "Role": "מנכ\"ל",
@@ -1100,6 +1200,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f25d955c31504f00abdc2723e67306f2~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עלי",
     "LastName": "בסול",
     "Organization": "מועצה מקומית ריינה",
     "Role": "ממונה שירותי חירום",
@@ -1111,6 +1212,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_5c153b671d85411a8542dd7eb2622007~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מוטי",
     "LastName": "אדרי",
     "Organization": "מועצה אזורית שדות נגב",
     "Role": "מנהל מחלקת חינוך",
@@ -1122,6 +1224,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_53ddc10de75145088463d9396318f2f1~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נורית",
     "LastName": "כהן חדד",
     "Organization": "מועצה אזורית שדות נגב",
     "Role": "מנכ\"לית",
@@ -1133,6 +1236,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_362ac577c5234548829643991c7d5170~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חגי",
     "LastName": "טולדנו",
     "Organization": "הרשות להתחדשות עירונית",
     "Role": "מנהל אגף בכיר קשרי קהילה",
@@ -1144,6 +1248,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_5ca49bb415ef4c1199084a19d0cd98eb~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שרון",
     "LastName": "אפריל",
     "Organization": "משרד הפנים ומערך הדיגיטל הלאומי",
     "Role": "מובילת התוכנית הממשלתית לטרנספורמציה דיגיטלית בשלטון המקומי",
@@ -1155,6 +1260,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b0e56a59b5b943fe97f61732ee80fc8f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ליאור",
     "LastName": "אשכנזי",
     "Organization": "משרד הדתות",
     "Role": "מנהל אגף בכיר טכנולוכיות דיגיטליות, מידע וסייבר",
@@ -1166,6 +1272,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_15d41e264966494c99d58d845fdec19c~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אלי",
     "LastName": "רגב",
     "Organization": "משרד הפנים",
     "Role": "מנהל מינהל החירום",
@@ -1177,6 +1284,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_5fcd395cc63c46fdabe287c7ca6e3f2d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עוז",
     "LastName": "שנהב",
     "Organization": "משרד המשפטים",
     "Role": "מנהל מחלקת החדשנות, המחקר והמדיניות ברשות להגנת הפרטיות",
@@ -1188,6 +1296,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_bee689fd92bb42fc873c0e8dedb6e90f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "בועז",
     "LastName": "יוסף",
     "Organization": "משרד הפנים",
     "Role": "ממונה מחוז צפון",
@@ -1199,6 +1308,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3ebe46b2c07243cd81bce95e228d5db5~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דותן",
     "LastName": "סגל",
     "Organization": "אקי\"ם ישראל",
     "Role": "מנהל אגף התעסוקה והפנאי",
@@ -1210,6 +1320,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ab853038147540c9a756b340d17cbec1~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ציפי",
     "LastName": "נגל אדלשטיין",
     "Organization": "העמותה לילדים בסיכון",
     "Role": "מנכ\"לית",
@@ -1221,6 +1332,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_78c7f223039945f1b2e81eba7f6add0b~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גילה",
     "LastName": "בן הר",
     "Organization": "קרן מנדל",
     "Role": "ממונה פדגוגיה ודיגיטציה",
@@ -1232,6 +1344,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_33c6490ae5594c9ebc417ad4dd27949c~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דב",
     "LastName": "בארי",
     "Organization": "",
     "Role": "Digital Finance Expert & Manager",
@@ -1243,6 +1356,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4bb3b574237f4a83a0d1c940a8b23bb8~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דפנה",
     "LastName": "גבר ליפשיץ",
     "Organization": "קרן מנדל",
     "Role": "מנהלת חדשנות",
@@ -1254,6 +1368,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_911fd57ddf4f4348afb63cbbceab2553~mv2.png/v1/fill/w_179,h_259,al_c,q_85,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "משה",
     "LastName": "פרידמן",
     "Organization": "מיזם קמא-טק וטיק-טק",
     "Role": "מייסד ומנכ\"ל",
@@ -1265,6 +1380,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_d1b74815bbd24bffbd223877b85d2250~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אופיר",
     "LastName": "בן-אבי",
     "Organization": "המוסד לביטוח לאומי",
     "Role": "סמנכ\"ל",
@@ -1276,6 +1392,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_97b0d25b2bd0401b87b6b2e78d554bf2~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איימן",
     "LastName": "סייף",
     "Organization": "הרשות לפיתוח כלכלי של החברה הערבית",
     "Role": "מנהל ופרויקטור הקורונה בחברה הערבית",
@@ -1287,6 +1404,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_5b5bf718e8f443fa9e6a9469a8db49f4~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איל",
     "LastName": "שורצברג",
     "Organization": "Apowiser",
     "Role": "Founder & CSO",
@@ -1298,6 +1416,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2a3244b455364d75b69e8b5e3a6d9333~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איל",
     "LastName": "זנדברג",
     "Organization": "משרד המשפטים",
     "Role": "ראש תחום משפט ציבורי, מחלקת היעוץ והחקיקה",
@@ -1309,6 +1428,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_63130c955eb74df88a125d50db1ea869~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איל",
     "LastName": "רם",
     "Organization": "משרד החינוך",
     "Role": "סמנכ\"ל ומנהל מינהל עובדי ההוראה",
@@ -1320,6 +1440,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f6c91ec55b4a40b0a2412888e03a94af~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אילנה",
     "LastName": "שרייבמן",
     "Organization": "המוסד לביטוח לאומי",
     "Role": "משנה למנכל וסמנכל גימלאות וקיצבאות (לשעבר)",
@@ -1331,6 +1452,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b75cfed6159b4c4e8484ec9b654cb49d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איריס",
     "LastName": "פלורנטין",
     "Organization": "משרד העבודה והרווחה",
     "Role": "סמנכ\"לית בכירה וראש מינהל שירותים חברתיים ואישיים",
@@ -1342,6 +1464,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9e7a6690a0d34938a7912cc6add32ee6~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אלון",
     "LastName": "בכר",
     "Organization": "מיתר",
     "Role": "שותף בחברת עורכי דין",
@@ -1353,6 +1476,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_afaacb8c7193425499331b95d4a8a510~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אריאל",
     "LastName": "לוי",
     "Organization": "ג'וינט אשלים",
     "Role": "מנכ\"ל",
@@ -1364,6 +1488,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e48adf9eca2544b4a4cd970f71059312~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ודים",
     "LastName": "פרמן",
     "Organization": "The Health Care Groupe",
     "Role": "VP Novolog Hralth Division at Novolog",
@@ -1375,6 +1500,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_6efb7e9cbca14990bb2f00548283892a~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חנן",
     "LastName": "פריצקי",
     "Organization": "משרד הרווחה והשירותים החברתיים",
     "Role": "מנהל האגף הבכיר לתיקצוב וכלכלה",
@@ -1386,6 +1512,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_56911529d59446fca907b5141ae324d9~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ינון",
     "LastName": "אלרועי",
     "Organization": "הקונסוליה הכללית של ישראל בניו יורק",
     "Role": "ראש הנציגות של משרד הכלכלה והתעשייה לחוף המזרחי",
@@ -1397,6 +1524,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b754cd0fa89948c593a4d5ba39551847~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יעל",
     "LastName": "צח",
     "Organization": "The Health Care Groupe",
     "Role": "VP Novolog Hralth Division at Novolog",
@@ -1408,6 +1536,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_8146510deb1444bf91e7ed05e7c5cd11~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יפה",
     "LastName": "יעקב-ברסאנו",
     "Organization": "שירות עיבודים ממוכנים (שע\"ם)",
     "Role": "סגנית מנהל הטכנולוגיות",
@@ -1419,6 +1548,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_353af3c9b8da4de68d4c55a33b6e7dc8~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.jpg"
   },
   {
+    "FirstName": "ירדן",
     "LastName": "נבו",
     "Organization": "בית החולים סורוקה",
     "Role": "סמנכ\"ל",
@@ -1430,6 +1560,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f043495e277e480ca8c11758ef508955~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מיכל",
     "LastName": "גורן-מילר",
     "Organization": "aMoon Fund",
     "Role": "סמנכ\"ל ויועצת משפטית ראשית",
@@ -1441,6 +1572,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_87f8dae3efe441abb3cd9c5457e52c4a~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מילכה",
     "LastName": "זיו נשיאל",
     "Organization": "וועדת הבחירות המרכזית לכנסת",
     "Role": "ראש אגף בכיר טכנולוגיות דיגיטליות ומידע",
@@ -1452,6 +1584,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b430b85dc0ad423b8151fc0b4d866afd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מירב",
     "LastName": "קדם",
     "Organization": "פלגי מים",
     "Role": "סגנית בכירה (משרדים חברתיים)",
@@ -1463,6 +1596,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_40864062c30444a9a30cccd2c1db0b2e~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מירי",
     "LastName": "סביון",
     "Organization": "רשות המיסים",
     "Role": "המשנה למנהל הרשות",
@@ -1474,6 +1608,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4f25c0f081f941d3bcb2793363382fec~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ניר",
     "LastName": "קידר",
     "Organization": "משרד העבודה, הרווחה והשירותים החברתיים",
     "Role": "סמנכ\"ל בכיר לתכנון אסטרטגי וכלכלי",
@@ -1485,6 +1620,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9af07f91d59b47b991050c241eb7b077~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נירה",
     "LastName": "צימלס",
     "Organization": "עמותת בעצמי",
     "Role": "מנכ\"ל",
@@ -1496,6 +1632,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ac1d9d8cb3144e12a74a740a951a2fbc~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נעה",
     "LastName": "היימן",
     "Organization": "משרד האוצר",
     "Role": "סגנית בריאות",
@@ -1507,6 +1644,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3e1291ce0412403ca750415c586bb612~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נתנאל",
     "LastName": "מאז\"ה",
     "Organization": "משרד מורשת ירושלים",
     "Role": "ראש אגף בכיר, מורשת",
@@ -1518,6 +1656,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_87710e914c8f49888d2aac1b3bf60ea1~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עופר",
     "LastName": "רימון",
     "Organization": "משרד החינוך",
     "Role": "מנהל מינהל תקשוב, טכנולוגיה ומערכות מידע (לשעבר)",
@@ -1529,6 +1668,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_617cbd4a45ce429094f603abffbb0ee9~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עידן",
     "LastName": "פפיאר",
     "Organization": "Digital Prophecies",
     "Role": "מנכ\"ל ב לחדשנות דיגיטלית (לשעבר)",
@@ -1540,6 +1680,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_10a17ef96ba245f3b2feb9bda62a1a42~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "צופית",
     "LastName": "חי",
     "Organization": "רשות התקשוב הממשלתי",
     "Role": "מנהלת היחידה לשיפור השירות לציבור (לשעבר)",
@@ -1551,6 +1692,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_8d0d8012d2cd43ed92c4139146843756~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "קותי (יקותיאל)",
     "LastName": "צבע",
     "Organization": "משרד הרווחה והשירותים החברתיים",
     "Role": "מנהל אגף בכיר למחקר תכנון והכשרה",
@@ -1562,6 +1704,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f72a1f67b876437199d31bc3a10db81f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רביד",
     "LastName": "שמואלי",
     "Organization": "רשות מקרקעי ישראל",
     "Role": "מנהל מערכות מידע ראשי",
@@ -1573,6 +1716,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3c6e99ffe8ba428d85d8ab54bca49e5a~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רוני",
     "LastName": "ספיר",
     "Organization": "ג'וינט ישראל",
     "Role": "מנהלת טסרנספורמציה",
@@ -1584,6 +1728,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9c4d4bca8dca4c109b348758c946d16d~mv2.jpeg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רונן",
     "LastName": "שפירא",
     "Organization": "מערך הכבאות",
     "Role": "סמנכ\"ל משאבי אנוש",
@@ -1595,6 +1740,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_944420d5b37d4d788f007ad78fe9ecc0~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רועי",
     "LastName": "פרידמן",
     "Organization": "משרד ראש הממשלה",
     "Role": "ראש היחידה להזדהות וליישומים ביומטריים במערך הסייבר",
@@ -1606,6 +1752,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_81fbddc5299a4969850022d4cc471845~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רן",
     "LastName": "קויתי",
     "Organization": "משרד הכלכלה",
     "Role": "מנהל הסוכנות לעסקים קטנים ובינוניים",
@@ -1617,6 +1764,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_70a33da252d84d3c941bb4b7201aeeda~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שולמית",
     "LastName": "יעקובוביץ",
     "Organization": "משרד הרווחה והשירותים החברתיים",
     "Role": "מנהלת תחום בכיר - פיתוח מערכות תשלומים",
@@ -1628,6 +1776,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_15a1b943cc5c45cc862cd2b0430b6fdf~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "זיו",
     "LastName": "אופק",
     "Organization": "MDClone",
     "Role": "מנכ\"ל ומייסד",
@@ -1639,6 +1788,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cb075751294e4d7588e9b4ded361a5a9~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "זוהר",
     "LastName": "שרון",
     "Organization": "הכוורת - המרכז ליזמות וחדשנות חברתית של ישראל",
     "Role": "מנהל הכוורת",
@@ -1650,6 +1800,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_584b7b64ff1f4e24b9bfd8c4323a45f0~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ד\"ר אסמאא",
     "LastName": "גנאים",
     "Organization": "מרכז Inndigital",
     "Role": "מייסדת ומנכל מרכז Inndigital לקידום דיגיטציה בחברה ובחינוך",
@@ -1661,6 +1812,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e0cc3c46f9dd4614893361d0ce9b121d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אפרת",
     "LastName": "דובדבני",
     "Organization": "מרכז פרס לשלום ולחדשנות",
     "Role": "מנכ\"לית",
@@ -1672,6 +1824,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_05a27ac03dce4f679e687fb07ebbb080~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יובל",
     "LastName": "שרייבמן",
     "Organization": "אוניברסיטת בר-אילן",
     "Role": "סמנכ\"ל למידה והוראה",
@@ -1683,6 +1836,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_5b06c98b7b984e2db39153ade584b4a1~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "לילי",
     "LastName": "לוינטון",
     "Organization": "בית איזי שפירא",
     "Role": "סמנכ\"לית מקצועית",
@@ -1694,6 +1848,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_10adec62e1a94b4ca33dcdb1ab69774f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מיכל",
     "LastName": "אטינגר",
     "Organization": "ג'וינט אשלים",
     "Role": "ראש תחום ילדים",
@@ -1705,6 +1860,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_acf47daf713642f0bb27a78a83a77578~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עידו",
     "LastName": "בנימין",
     "Organization": "עמותת מט\"ב",
     "Role": "מנהל פיתוח חברתי- עסקי",
@@ -1716,6 +1872,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3a25d706daf8471f93c534667053c169~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אורן",
     "LastName": "אריאב",
     "Organization": "רשות האוכלוסין וההגירה",
     "Role": "מנהל אגף בכיר למערכות מידע",
@@ -1727,6 +1884,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_21683415257e49a9bf8ab9cf26a076b7~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אלבי",
     "LastName": "מלכה",
     "Organization": "המשרד לשיוויון חברתי",
     "Role": "מנהל אגף מערכות מידע",
@@ -1738,6 +1896,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e02eeded134247d9866effc868f47ae6~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אלדד",
     "LastName": "קנטי",
     "Organization": "משרד המשפטים",
     "Role": "סמנכ\"ל תכנון מדיניות ואסטרטגיה",
@@ -1749,6 +1908,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_15d49fabeabf45efbd45abe3bec08458~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אלי",
     "LastName": "טובול",
     "Organization": "רשות שוק ההון, ביטוח וחיסכון",
     "Role": "סגן בכיר לממונה על שוק ההון",
@@ -1760,6 +1920,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3b916554b1d741ac8dfe2c20ac533057~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אתי",
     "LastName": "סממה",
     "Organization": "משרד הבריאות",
     "Role": "ראש האגף למדיניות טכנולוגיות רפואיות",
@@ -1771,6 +1932,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c007e2bf9793470eb742969886db25a5~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גדעון",
     "LastName": "קונפינו",
     "Organization": "רשות התקשוב הממשלתי",
     "Role": "מנהל היחידה להגנת הסייבר בממשלה",
@@ -1782,6 +1944,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c353e9ada1d946fca6f02ea903b9c6b0~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גלי",
     "LastName": "בן אור",
     "Organization": "כנסת ישראל",
     "Role": "מנהלת מאגר החקיקה הלאומי",
@@ -1793,6 +1956,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_59db88e6c37a450db5874667658ca2ef~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דוד",
     "LastName": "מזרחי",
     "Organization": "רשות מקרקעי ישראל",
     "Role": "כלכלן וסמנכ\"ל משאבי אנוש",
@@ -1804,6 +1968,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_210c8c1c835046aabf7ec31845b24e84~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דודי",
     "LastName": "בבלי",
     "Organization": "בנק ישראל",
     "Role": "ראש אגף טכנולוגיה וחדשנות וסגן המפקח על הבנקים",
@@ -1815,6 +1980,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e81323c49a264c61963bf79cb3f9328b~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דורון",
     "LastName": "סמיש",
     "Organization": "Pepper",
     "Role": "מנהל מוצר שירותים בנקאיים",
@@ -1826,6 +1992,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_26d8463cda83433b999e563a84425b42~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דליה",
     "LastName": "פניג",
     "Organization": "משרד החינוך",
     "Role": "סגנית יו''ר המזכירות הפדגוגית",
@@ -1837,6 +2004,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b5733f360ba646febbb296d1cfa7436b~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דרור",
     "LastName": "מרגלית",
     "Organization": "",
     "Role": "יזם",
@@ -1848,6 +2016,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9cd34c84cb104e1aa86c16e67f97489d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "זמר",
     "LastName": "בלונדהיים",
     "Organization": "משרד המשפטים",
     "Role": "מנהל אגף מדיניות ואסטרטגיה",
@@ -1859,6 +2028,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_7ed24bd4955949d6adb6452eed47a49b~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חיה",
     "LastName": "שיטאי",
     "Organization": "משרד החינוך",
     "Role": "מנהלת מחוז תל אביב",
@@ -1870,6 +2040,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_062e6a0099da4c0abaf876fe1bec28e7~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "טל",
     "LastName": "רשף",
     "Organization": "מנהל התכנון (לשעבר)",
     "Role": "סמנכ\"ל תקציבים והון אנושי",
@@ -1881,6 +2052,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_af5b9a91d86f4ca0a30e4514219dfcac~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יניב",
     "LastName": "זוהר",
     "Organization": "משרד האוצר",
     "Role": "סגן חשב משרד הבריאות",
@@ -1892,6 +2064,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4cbcbc6c6bb648dbaeecaeedd8df4eac~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יעקב",
     "LastName": "שנרב",
     "Organization": "משרד הבינוי והשיכון",
     "Role": "משנה למנכ\"ל",
@@ -1903,6 +2076,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c6bb29f1651046d687c818cf8a554136~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ירון",
     "LastName": "פלוס",
     "Organization": "מרכז למיפוי ישראל",
     "Role": "מדען ראשי וראש חטיבת המחקר והפיתוח",
@@ -1914,6 +2088,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_806e8c2188c0438b885ad90eb37dc042~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מאיר",
     "LastName": "רכטר",
     "Organization": "הנהלת בתי המשפט",
     "Role": "סמנכ\"ל מערכות מידע ומחשוב",
@@ -1925,6 +2100,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_727cc59ccc64447ab250e69e9958e0a8~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מוטי",
     "LastName": "בן דב",
     "Organization": "מטה ישראל דיגיטלית",
     "Role": "מוביל תוכניות דיגיטליות במשרד הכלכלה",
@@ -1936,6 +2112,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_1960b0bf0fbc4f67a6a25c6e72ebf13f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מחמוד",
     "LastName": "רחמאן",
     "Organization": "משרד האוצר",
     "Role": "סגן בכיר לממונה על השכר והסכמי עבודה",
@@ -1947,6 +2124,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c91ffebd60c54b5aa492b0947c72e6bf~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מיכל",
     "LastName": "פינק",
     "Organization": "משרד הכלכלה",
     "Role": "סמנכ\"ל אסטרטגיה ותכנון מדיניות",
@@ -1958,6 +2136,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_66a05328a4b04deb991ba1f2da857935~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מיכל",
     "LastName": "נוימן",
     "Organization": "המועצה השכלה גבוהה",
     "Role": "סמנכ\"ל לעניינים אקדמיים",
@@ -1969,6 +2148,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ace9c8aeee3f4f228ce7a3005f3c4358~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "משה",
     "LastName": "וינשטוק",
     "Organization": "מכללת הרצוג, משרד התפוצות",
     "Role": "יו\"ר מזכירות פדגוגית",
@@ -1980,6 +2160,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_d7505a59dbcc4c9cb719d65274ac90bf~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ניר",
     "LastName": "ינובסקי דגן",
     "Organization": "מטה ישראל דיגיטלית",
     "Role": "מוביל תוכנית בריאות דיגיטלית כמנוע צמיחה",
@@ -1991,6 +2172,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_28a32d32b98b49169775ab0a18327187~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נעמה",
     "LastName": "הולצמן",
     "Organization": "משרד ראש הממשלה",
     "Role": "יועצת מנכ\"ל",
@@ -2002,6 +2184,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2b870575aa62481ab76204e6296414dd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נעמה",
     "LastName": "קאופמן פס",
     "Organization": "משרד החקלאות ופיתוח הכפר",
     "Role": "משנה למנכ\"ל",
@@ -2013,6 +2196,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_35b4f4e2002b4c688da4e176e98ebc7e~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נעמי",
     "LastName": "פרידמן",
     "Organization": "משרד הפנים",
     "Role": "מנהלת אגף בכיר מערכות מידע",
@@ -2024,6 +2208,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_03ab3832090d4197884c14b456134f98~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נתנאל",
     "LastName": "לוי",
     "Organization": "המשרד לשיוויון חברתי",
     "Role": "מנהל אגף בטחון, חירום, מידע וסייבר",
@@ -2035,6 +2220,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_bafdea6c7e2f49a7b0034f3656e7ff2a~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רוויטל",
     "LastName": "ויצמן",
     "Organization": "נציבות שירות המדינה",
     "Role": "מנהלת אגף בכיר מערכות מידע",
@@ -2046,6 +2232,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_be029d6c43eb4077a0d63d0f0d47e406~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רקפת",
     "LastName": "בן גיא",
     "Organization": "משרד העבודה, הרווחה והשירותים החברתיים",
     "Role": "סגנית מנהלת אגף לשירותים חברתיים ואישיים",
@@ -2057,6 +2244,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ef559ad3d718477e89cd7382717ddc00~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שמעון",
     "LastName": "ברונר",
     "Organization": "משרד הכלכלה",
     "Role": "מנהל אגף בכיר למערכות מידע",
@@ -2068,6 +2256,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_04564ecfc5714662bbc73acc0ce9d1cf~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שני",
     "LastName": "שרביט",
     "Organization": "משרד הבריאות",
     "Role": "סמנכ\"לית בכירה הון אנושי ומנהל",
@@ -2079,6 +2268,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4a4e1c60073040b49776a16fdca08c65~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.jpg"
   },
   {
+    "FirstName": "ששון",
     "LastName": "סופרי",
     "Organization": "משרד המשפטים",
     "Role": "מנהל אגף מערכות מדיע",
@@ -2090,6 +2280,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_7592c29268e54127ac8f909f341b7569~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "חנה",
     "LastName": "הרצמן",
     "Organization": "עמותת קשת",
     "Role": "מנכ״ל",
@@ -2101,6 +2292,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c308e612c42b4f0e88d6584c18ce0bc8~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "סימה",
     "LastName": "סיני",
     "Organization": "עיריית ירושלים",
     "Role": "מנהלת הרשות לאיכות השירות",
@@ -2112,6 +2304,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f67ba1d4ea4348f9b19279826eaab936~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "הלה",
     "LastName": "הדס",
     "Organization": "אנוש",
     "Role": "מנכ\"לית",
@@ -2123,6 +2316,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_25379b9aff0646f7b034d395859f6bc3~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "לירון",
     "LastName": "עזריאל",
     "Organization": "קרן רש\"י",
     "Role": "סמנכ\"ל בכיר",
@@ -2134,6 +2328,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_6885ca3e616a4666b06293e3810c721f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ציון",
     "LastName": "ניצן",
     "Organization": "המינהל לחינוך התישבותי, פנימיות ועליית הנוער- משרד החינוך",
     "Role": "מנהל מערכות מידע אגף טכנולוגיות דיגיטליות ומידע",
@@ -2145,6 +2340,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_6fd7099ced714d10ae398b803cfc91a4~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אביתר",
     "LastName": "פרץ",
     "Organization": "אגף החשב הכללי",
     "Role": "מנהל תחום בכיר חדשנות ודיגיטל",
@@ -2156,6 +2352,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3d45644a89e04bc1a47dd29e465f6e2a~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אופיר",
     "LastName": "אביב",
     "Organization": "משרד הבריאות",
     "Role": "סמנכ\"ל תכנון, תקצוב ותמחור",
@@ -2167,6 +2364,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_a281f72707c14dbb81e7cedef0c0182d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אילת",
     "LastName": "זלדין",
     "Organization": "משרד הכלכלה והתעשייה",
     "Role": "היועצת המשפטית",
@@ -2178,6 +2376,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_5942d35c7a4144e989a3361e7b50039d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איתן",
     "LastName": "פסח",
     "Organization": "רשות התקשוב",
     "Role": "מנהל היחידה לשיפור השירות הממשלתי לציבור",
@@ -2189,6 +2388,7 @@
     "Img": "https://static.wixstatic.com/media/47bb60_72c412fb1dfe4aabb02c9cc4a20d0388~mv2.jpeg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אלין",
     "LastName": "אלול",
     "Organization": "משרד העבודה, הרווחה והשירותים החברתיים",
     "Role": "סמנכ\"לית בכירה, ראש מנהל סיוע לבתי משפט ותקון (לשעבר)",
@@ -2200,6 +2400,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4f69af693499412aaede7042254554d3~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גיא",
     "LastName": "איטינגון",
     "Organization": "ישראל דיגיטלית - משרד המשפטים",
     "Role": "מנהל תחום בכיר לפרויקטים דיגיטליים",
@@ -2211,6 +2412,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_47e857386d954cc188e97cb46ee2656f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "הילה",
     "LastName": "חיים צוייג",
     "Organization": "משרד העבודה, הרווחה והשירותים החברתיים",
     "Role": "מנהלת אגף פיקוח ובקרה בקהילה",
@@ -2222,6 +2424,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_018b38d4845f4b06895c28746ed08473~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "הראל",
     "LastName": "שרעבי",
     "Organization": "לאומית שירותי בריאות",
     "Role": "סגן בכיר לממונה שוק ההון",
@@ -2233,6 +2436,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2952f69b3a4e44edb4f14bc8438d3b01~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "טל",
     "LastName": "הראל מתתיהו",
     "Organization": "בנק ישראל",
     "Role": "ראש מטה המפקחת על הבנקים ומנהלת יחידת אסטרטגיה ופרוייקטים מיוחדים",
@@ -2244,6 +2448,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_df3e916b625a4214a55caf907a729544~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יואב",
     "LastName": "כספין",
     "Organization": "Intuition robotics",
     "Role": "מנהל מוצר, לשעבר מנהל טכנולוגיות ראשי במטה ישאל דיגיטלית",
@@ -2255,6 +2460,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_98d63ecc89b7410282e9da9ee6389f26~mv2.png/v1/fill/w_179,h_259,al_c,q_85,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יוגב",
     "LastName": "שמני",
     "Organization": "רשות התקשוב הממשלתי, משרד ראש הממשלה",
     "Role": "מנהל יחידת ממשל זמין",
@@ -2266,6 +2472,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_fd82bbd5abb744b5b395e3864fbfd1de~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יוסי",
     "LastName": "אבגי",
     "Organization": "המשרד להגנת הסביבה",
     "Role": "מ\"מ מנהל אגף בכיר מערכות מידע",
@@ -2277,6 +2484,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b606dc2c04de4d378bdef66781a80911~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מאיה",
     "LastName": "גולן",
     "Organization": "משרד הבריאות",
     "Role": "יועצת בכירה למנכ\"ל",
@@ -2288,6 +2496,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_6196b38fd2a74401a562044821430170~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עפרה",
     "LastName": "פרנקל",
     "Organization": "משרד הרווחה והשירותים החברתיים",
     "Role": "מנהלת אגף טכנולוגיות דיגיטליות ומידע",
@@ -2299,6 +2508,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4244c427865d40d3b563d9babd2c1a55~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "קובי (יעקב)",
     "LastName": "הלפרן",
     "Organization": "שירות התעסוקה",
     "Role": "סמנכ\"ל שירות לקוחות ודיגיטל",
@@ -2310,6 +2520,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_42098c8ac9c147f7ac6b4917361faabd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "קרן",
     "LastName": "רבי",
     "Organization": "משרד המשפטים",
     "Role": "סמנכ\"לית השירות",
@@ -2321,6 +2532,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2a69cc15adc446e7b1111a1572394e10~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רועי",
     "LastName": "פישר",
     "Organization": "משרד הכלכלה והתעשייה",
     "Role": "סמנכ\"ל בכיר למנהל ומשאבי אנוש",
@@ -2332,6 +2544,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_478dc3dc03b14d2b8e57931f0b59b893~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רני",
     "LastName": "נויבואר",
     "Organization": "משרד המשפטים",
     "Role": "ראשת אשכול משפט אזרחי",
@@ -2343,6 +2556,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_22d172dc39de45c494fa4fa1bd2f94eb~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שלמה",
     "LastName": "אוחיון",
     "Organization": "רשות המיסים",
     "Role": "סמנכ\"ל בכיר שירות לקוחות",
@@ -2354,6 +2568,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e6fc89f5fb7541129f6013950f9c17d5~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "תמר",
     "LastName": "קליין",
     "Organization": "החשב הכללי, משרד האוצר",
     "Role": "מנהלת תחום בכירה מחשוב ומערכות מידע",
@@ -2365,6 +2580,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_35c5ae137bcf4790a3695ef3a8437bdd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שירלי",
     "LastName": "פאר-יגרמן",
     "Organization": "המשביר לצרכן",
     "Role": "המשנה למנכ\"ל",
@@ -2376,6 +2592,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cc5d150bdf484b489d983aa71b8a0ce1~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אבי",
     "LastName": "לוין",
     "Organization": "קופת חולים כללית",
     "Role": "מנהל מרכז רפואי ומתחם החיסונים, מגדל המאה",
@@ -2387,6 +2604,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e13fd0fd062d41848a88cc7a4a156dc4~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אביטל",
     "LastName": "סנדלר לף",
     "Organization": "ג'וינט עולמי",
     "Role": "מנכ\"לית המחלקה לפיתוח בינלא (GRID)",
@@ -2398,6 +2616,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_611a969ec4a4494a90fc43fa00927610~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אברהם",
     "LastName": "זרוק",
     "Organization": "מערך הסייבר הלאומי",
     "Role": "מנהל אגף בכיר פיתוח אינטגרציה ומו\"פ",
@@ -2409,6 +2628,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3170fefa85474c07a8a80ca48366072f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אורית",
     "LastName": "קוטב",
     "Organization": "משרד המשפטים",
     "Role": "המשנה לפרקליט המדינה (עניינים אזרחיים)",
@@ -2420,6 +2640,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_3440197fa49745c593c402425b276bb7~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אייל",
     "LastName": "טולדו",
     "Organization": "משרד האוצר",
     "Role": "רכז צוות ממשל ושירותים מיוחדים",
@@ -2431,6 +2652,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_07b0f820137a4d9dabb5c317517c3a21~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "איילת",
     "LastName": "גרינבאום אריזון",
     "Organization": "משרד הבריאות",
     "Role": "סמנכ\"לית בכירה לתכנון אסטרטגי וכלכלי",
@@ -2442,6 +2664,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9b3a8f6af10946e2800472f696c4a472~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אלי",
     "LastName": "קורח",
     "Organization": "רשות התקשוב",
     "Role": "ממשל זמין - מנהל מערך השירותים הדיגיטליים לאזרח",
@@ -2453,6 +2676,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cfa31a52326a48acb0285dd921bc8cdd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אמתי",
     "LastName": "קורן",
     "Organization": "כל זכות",
     "Role": "מנכ\"ל",
@@ -2464,6 +2688,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_ec3e8f31c67e4b909ba2892be604d59c~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אנה",
     "LastName": "ליפשיץ אגמון",
     "Organization": "she codes",
     "Role": "CEO",
@@ -2475,6 +2700,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_0e6ae1a274694624ad3e88266f5f1e05~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אתי",
     "LastName": "קיסוס",
     "Organization": "משרד העבודה, הרווחה והשירותים החברתיים",
     "Role": "מנהלת מחוז חיפה וצפון",
@@ -2486,6 +2712,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b6a50bd40de1400eb030d4564b9c919e~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "בנצי",
     "LastName": "פיגלסון",
     "Organization": "משרד המשפטים",
     "Role": "סגן האפוטרופסה הכללית והכונסת הרשמית",
@@ -2497,6 +2724,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_c83390fe1da54c6fb0a710f5bb022a95~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גילי",
     "LastName": "כהן",
     "Organization": "משרד התחבורה",
     "Role": "סמנכ\"ל בכיר לשירות",
@@ -2508,6 +2736,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_d9c4c55cfbca4ea4a36a079647355457~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "גל",
     "LastName": "אמיר",
     "Organization": "משרד האוצר",
     "Role": "מנהל מינהל הרכש",
@@ -2519,6 +2748,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4075e9b6f9744139be30fe12ea705c29~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "דניאל",
     "LastName": "חחיאשוילי",
     "Organization": "בנק ישראל",
     "Role": "ראש אגף טכנולוגיות וחדשנות בפיקוח על הבנקים",
@@ -2530,6 +2760,7 @@
     "Img": "https://static.wixstatic.com/media/47bb60_ccf587e368014c5b93949d25b65d6d9f~mv2.jpeg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "האני",
     "LastName": "ואקד",
     "Organization": "משרד המשפטים",
     "Role": "ממונה על החברה הערבית",
@@ -2541,6 +2772,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_e51623be864c4e989f86715b27f9e90c~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "זיוה",
     "LastName": "איגר",
     "Organization": "משרד הכלכלה והתעשייה",
     "Role": "מנכ\"לית הרשות להשקעות זרות ושת\"פ תעשיתי (לשעבר)",
@@ -2552,6 +2784,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_9a0f1bf617a74b1b81290df646d61b12~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יאיר",
     "LastName": "קירשנבאום",
     "Organization": "מודיעין עילית",
     "Role": "מנכ\"ל",
@@ -2563,6 +2796,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_8f2dd4dfadab4e79a37db7b292fc2757~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יואל",
     "LastName": "ליפובצקי",
     "Organization": "רשות האוכלוסין",
     "Role": "ראש מינהל אוכלוסין",
@@ -2574,6 +2808,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_acc8399c26c8435086234a6586a0302d~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "יערה",
     "LastName": "בן שחר תיק",
     "Organization": "רשות התקשוב",
     "Role": "יועמ\"שית",
@@ -2585,6 +2820,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4d4ce911200b4be6b119f3d0a4d1003a~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ירונה",
     "LastName": "שלום",
     "Organization": "המוסד לביטוח לאומי",
     "Role": "מנהלת אגף ועדות רפואיות",
@@ -2596,6 +2832,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_0572335e99b143c683f2706fe56f0ed7~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מאיה",
     "LastName": "דבורי יעקבסון",
     "Organization": "רשות האוכלוסין וההגירה",
     "Role": "מנהלת אגף בכיר שירות",
@@ -2607,6 +2844,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_f1add7d4fddf461786901250415e9e39~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "מיכל",
     "LastName": "עקביה",
     "Organization": "משרד האוצר",
     "Role": "משנה ליועץ המשפטי",
@@ -2618,6 +2856,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_2161de9230134fffad6e1e189c55d8fe~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "נעמה",
     "LastName": "פרי כהן",
     "Organization": "משרד הבריאות",
     "Role": "מנמ\"רית חטיבת בתי החולים הממשלתיים",
@@ -2629,6 +2868,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cf86517300ec469a9ce6f77ab682c435~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "עמיחי",
     "LastName": "פישר",
     "Organization": "משרד ראש הממשלה",
     "Role": "ראש אגף בכיר מדיניות רגולציה",
@@ -2640,6 +2880,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b3381be777ef411da706a39636bbaab2~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "ענת",
     "LastName": "אסרף חיוט",
     "Organization": "משרד הפנים",
     "Role": "המפקחת הארצית על הבחירות",
@@ -2651,6 +2892,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_38f9a94240b34583a758a67f191bb2ee~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "פזית",
     "LastName": "קלימן",
     "Organization": "רשות המסים",
     "Role": "סמנכ\"לית שומה וביקורת",
@@ -2662,6 +2904,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_1d865bee5a00484db4122d9796e3fc3a~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "צחי",
     "LastName": "דוד",
     "Organization": "משרד האוצר",
     "Role": "סגן ממונה על התקציבים בתחום הנדל\"ן",
@@ -2673,6 +2916,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_17903264a20540a9a508ac859aa18521~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "רעות",
     "LastName": "אופק",
     "Organization": "משרד המשפטים",
     "Role": "עוזרת משנה ליועמ\"ש לממשלה (אזרחי)",
@@ -2684,6 +2928,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_1f1b437d16ab4c54b1f30d48f3b3b329~mv2.jpeg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שושי",
     "LastName": "גולדברג",
     "Organization": "משרד הבריאות",
     "Role": "אחות ראשית ארצית וראשת מינהל הסיעוד",
@@ -2695,6 +2940,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cbff9eb7932a47caa852064b34bb2ccd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שרית",
     "LastName": "ארבל",
     "Organization": "ויצו ישראל",
     "Role": "מנכ\"ל",
@@ -2706,6 +2952,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_bf2fc0432eeb42069ef1ab31a492b6e1~mv2.jpeg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אשר",
     "LastName": "דולב",
     "Organization": "מערך הדיגיטל הלאומי, משרד הכלכלה",
     "Role": "ראש מטה ישראל דיגיטלית",
@@ -2717,6 +2964,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_4f882d8feb45463ab0d3e529b924d3dc~mv2.jpg/v1/crop/x_0,y_0,w_1000,h_1002/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/%D7%90%D7%A9%D7%A8%20%D7%93%D7%95%D7%9C%D7%91%20-%20%20%D7%A1%D7%92%D7%9F%20%D7%A8%D7%90%D7%A9%20%D7%9E%D7%98%D7%94%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C%20%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C%D7%99%D7%AA%2C%20.webp"
   },
   {
+    "FirstName": "מרב",
     "LastName": "חורב",
     "Organization": "מערך הדיגיטל הלאומי, משרד הכלכלה",
     "Role": "סגנית ראש מטה השכלה ויישום",
@@ -2728,6 +2976,7 @@
     "Img": "https://static.wixstatic.com/media/47bb60_ef5f78ac405c4f47a4b40782a3dec945~mv2.png/v1/crop/x_0,y_21,w_657,h_657/fill/w_240,h_240,al_c,q_85,usm_0.66_1.00_0.01/WhatsApp%20Image%202021-12-01%20at%2008_edited_edited.webp"
   },
   {
+    "FirstName": "ניר",
     "LastName": "ינובסקי דגן",
     "Organization": "מערך הדיגיטל הלאומי, משרד הכלכלה",
     "Role": "מוביל תחום דאטה ואנליטיקה- מטה ישראל דיגיטלית",
@@ -2739,6 +2988,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_28a32d32b98b49169775ab0a18327187~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "שחר",
     "LastName": "ברכה",
     "Organization": "מערך הדיגיטל הלאומי, משרד הכלכלה",
     "Role": "מ\"מ ראש רשות התקשוב הממשלתי",
@@ -2750,6 +3000,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_97994acf8fd44f559b8facf458ccae2c~mv2.jpg/v1/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/%D7%A9%D7%97%D7%A8-%D7%91%D7%A8%D7%9B%D7%94%20-%20%D7%9C%D7%90%D7%AA%D7%A8.webp"
   },
   {
+    "FirstName": "מוריה",
     "LastName": "זיסוביץ",
     "Organization": "מערך הדיגיטל הלאומי, משרד הכלכלה",
     "Role": "מנהלת חטיבת תכנון ואסטרטגיה, רשות התקשוב הממשלתית",
@@ -2761,6 +3012,7 @@
     "Img": "https://www.gov.il/BlobFolder/roleholder/moriya/he/moria.jpg"
   },
   {
+    "FirstName": "אלי",
     "LastName": "קורח",
     "Organization": "מערך הדיגיטל הלאומי, משרד הכלכלה",
     "Role": "ממשל זמין - מנהל מערך השירותים הדיגיטליים לאזרח, רשות התקשוב הממשלתית",
@@ -2772,6 +3024,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_cfa31a52326a48acb0285dd921bc8cdd~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אדית",
     "LastName": "בר",
     "Organization": "משרד הפנים",
     "Role": "מנהלת מינהל הפיתוח ויו\"ר הותמל",
@@ -2783,6 +3036,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_1b6055700c5c4756b226162ec68fc02e~mv2.jpeg/v1/crop/x_76,y_100,w_1124,h_1123/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/%D7%90%D7%93%D7%99%D7%AA%20%D7%91%D7%A8.webp"
   },
   {
+    "FirstName": "שרון",
     "LastName": "אפריל",
     "Organization": "משרד הפנים ומערך הדיגיטל הלאומי",
     "Role": "מובילת התוכנית הממשלתית לטרנספורמציה דיגיטלית בשלטון המקומי",
@@ -2794,6 +3048,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_b0e56a59b5b943fe97f61732ee80fc8f~mv2.jpg/v1/fill/w_179,h_259,al_c,q_80,usm_0.66_1.00_0.01/%D7%92%D7%91%D7%A8%D7%99%D7%90%D7%9C%20%D7%90%D7%91%D7%99%D7%98%D7%9C.webp"
   },
   {
+    "FirstName": "אורי",
     "LastName": "גיל",
     "Organization": "ג'וינט-אלכא",
     "Role": "מנכ\"ל",
@@ -2805,6 +3060,7 @@
     "Img": "https://static.wixstatic.com/media/47bb60_85d15beb12d54727b2cf40776a269d22~mv2.png/v1/crop/x_67,y_0,w_2737,h_2737/fill/w_240,h_240,al_c,q_85,usm_0.66_1.00_0.01/_MG_15ORI75-r.webp"
   },
   {
+    "FirstName": "ענבר",
     "LastName": "אלמגור",
     "Organization": "ג'וינט-אלכא",
     "Role": "ראש תחום דיגיטציה",
@@ -2816,6 +3072,7 @@
     "Img": "https://static.wixstatic.com/media/47bb60_deaeaeb6c50641d69c21859250ed4105~mv2.jpg/v1/crop/x_0,y_123,w_1066,h_1066/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/WhatsApp%20Image%202021-12-05%20at%2012_25_edited.webp"
   },
   {
+    "FirstName": "דורית",
     "LastName": "ציוני",
     "Organization": "ג'וינט-אלכא",
     "Role": "מנהלת תכניות בכירה תחום דיגיטציה",
@@ -2827,6 +3084,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_02e2a115d1da4a93802ff2c7bd934f43~mv2.jpg/v1/crop/x_0,y_0,w_1000,h_1002/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/%D7%93%D7%95%D7%A8%D7%99%D7%AA%20%D7%A6%D7%99%D7%95%D7%A0%D7%99_edited.webp"
   },
   {
+    "FirstName": "מירה זוהר",
     "LastName": "סבן",
     "Organization": "ג'וינט-אלכא",
     "Role": "מנהלת תכניות תחום דיגיטציה",
@@ -2838,6 +3096,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_059828cb52f6457c8328d814df1a479f~mv2.jpg/v1/crop/x_121,y_48,w_423,h_422/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/%D7%AA%D7%9E%D7%95%D7%A0%D7%94%20%D7%9E%D7%99%D7%A8%D7%94%20%D7%96%D7%95%D7%94%D7%A8%20%D7%A1%D7%91%D7%9F.webp"
   },
   {
+    "FirstName": "סופי",
     "LastName": "טאוב קופיאצקי",
     "Organization": "ג'וינט-אלכא",
     "Role": "מנהלת תכניות תחום דיגטציה",
@@ -2849,6 +3108,7 @@
     "Img": "https://static.wixstatic.com/media/47bb60_2fc0304c08b74af1a6c32001f70908f8~mv2.jpg/v1/crop/x_0,y_500,w_2000,h_2000/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/%D7%A1%D7%95%D7%A4%D7%99%20%D7%98%D7%90%D7%95%D7%91%20%D7%A7%D7%95%D7%A4%D7%99%D7%90%D7%A6%D7%A7%D7%99_edited.webp"
   },
   {
+    "FirstName": "נטלי",
     "LastName": "דוד שטינברג",
     "Organization": "ג'וינט-אלכא",
     "Role": "רכזת תכניות תחום דיגטציה",
@@ -2860,6 +3120,7 @@
     "Img": "https://www.thejoint.org.il/elka/wp-content/uploads/sites/3/2021/03/MG_1516-259x300.jpg"
   },
   {
+    "FirstName": "ליאורה",
     "LastName": "שטוטמן",
     "Organization": "ג'וינט-אלכא",
     "Role": "מנהלת תכניות תחום דיגיטציה",
@@ -2871,6 +3132,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_efc9a001bb9d4d2ea6a1dccaf3afc8b5~mv2.jpg/v1/crop/x_0,y_20,w_1000,h_1001/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/%D7%9C%D7%99%D7%90%D7%95%D7%A8%D7%94%20%D7%A9%D7%98%D7%95%D7%98%D7%9E%D7%9F%203_edited.webp"
   },
   {
+    "FirstName": "לילך",
     "LastName": "פירסט",
     "Organization": "ג'וינט-אלכא",
     "Role": "מנהלת תכניות תחום דיגיטציה",
@@ -2882,6 +3144,7 @@
     "Img": "https://static.wixstatic.com/media/d29746_fab32111bff3439889bc1b0116acc66c~mv2.jpeg/v1/crop/x_101,y_65,w_638,h_637/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01/%D7%9C%D7%99%D7%9C%D7%9A%20%D7%A4%D7%99%D7%A8%D7%A1%D7%98.webp"
   },
   {
+    "FirstName": "הדס",
     "LastName": "אזולאי",
     "Organization": "ג'וינט-אלכא",
     "Role": "רכזת תכניות תחום דיגטציה",
