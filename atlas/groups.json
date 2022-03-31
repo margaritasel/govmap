@@ -93,6 +93,10 @@
                   "lsymbol_field": "FUNC"
                 },
                 {
+                  "text":  "כבישים שנסללו עד 2020",
+                  "layer_name": "sites_roads_2020_all_prod"
+                },
+                {
                   "text":  "כבישים שנסללו עד 2006",
                   "layer_name": "sites_roads_1968_2006_prod"
                 },
